@@ -109,7 +109,7 @@ public class PixelScene extends Scene {
 
 			// 3x5 (6)
 			font1x = Font.colorMarked( 
-				BitmapCache.get( Assets.FONTS1X ), 0x00000000, BitmapText.Font.LATIN_FULL );
+				BitmapCache.get( Assets.FONTS1X ), 0x00000000, BitmapText.Font.FULL );
 			font1x.baseLine = 6;
 			font1x.tracking = -1;
 			
