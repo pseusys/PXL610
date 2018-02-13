@@ -17,35 +17,30 @@
  */
 package com.watabou.pixeldungeon.windows;
 
+import android.util.Log;
+
 import com.watabou.noosa.Camera;
+import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.PixelDungeon;
 import com.watabou.pixeldungeon.scenes.PixelScene;
+import com.watabou.pixeldungeon.scenes.TitleScene;
 import com.watabou.pixeldungeon.ui.CheckBox;
 import com.watabou.pixeldungeon.ui.RedButton;
 import com.watabou.pixeldungeon.ui.Toolbar;
 import com.watabou.pixeldungeon.ui.Window;
 
+import java.util.Locale;
+
 public class WndSettings extends Window {
 	
-	private static final String TXT_ZOOM_IN			= "+";
-	private static final String TXT_ZOOM_OUT		= "-";
-	private static final String TXT_ZOOM_DEFAULT	= "Default Zoom";
+	private static final String TXT_PLUS			= "+";
+	private static final String TXT_MINUS		    = "-";
 
-	private static final String TXT_SCALE_UP		= "Scale up UI";
-	private static final String TXT_IMMERSIVE		= "Immersive mode";
-	
-	private static final String TXT_MUSIC	= "Music";
-	
-	private static final String TXT_SOUND	= "Sound FX";
-	
-	private static final String TXT_BRIGHTNESS	= "Brightness";
-	
-	private static final String TXT_QUICKSLOT	= "Second quickslot";
-	
-	private static final String TXT_SWITCH_PORT	= "Switch to portrait";
-	private static final String TXT_SWITCH_LAND	= "Switch to landscape";
+	private static final String TXT_UP			    = "->";
+	private static final String TXT_BACK		    = "<-";
 	
 	private static final int WIDTH		= 112;
 	private static final int BTN_HEIGHT	= 20;
@@ -53,16 +48,19 @@ public class WndSettings extends Window {
 	
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
-	
+	private RedButton btnLocalisation;
+
 	public WndSettings( boolean inGame ) {
 		super();
 		
 		CheckBox btnImmersive = null;
+
+
 		
 		if (inGame) {
 			int w = BTN_HEIGHT;
 			
-			btnZoomOut = new RedButton( TXT_ZOOM_OUT ) {
+			btnZoomOut = new RedButton( TXT_MINUS, true ) {
 				@Override
 				protected void onClick() {
 					zoom( Camera.main.zoom - 1 );
@@ -70,7 +68,7 @@ public class WndSettings extends Window {
 			};
 			add( btnZoomOut.setRect( 0, 0, w, BTN_HEIGHT) );
 			
-			btnZoomIn = new RedButton( TXT_ZOOM_IN ) {
+			btnZoomIn = new RedButton( TXT_PLUS, true ) {
 				@Override
 				protected void onClick() {
 					zoom( Camera.main.zoom + 1 );
@@ -78,7 +76,7 @@ public class WndSettings extends Window {
 			};
 			add( btnZoomIn.setRect( WIDTH - w, 0, w, BTN_HEIGHT) );
 			
-			add( new RedButton( TXT_ZOOM_DEFAULT ) {
+			add( new RedButton("sett_default_zoom", false ) {
 				@Override
 				protected void onClick() {
 					zoom( PixelScene.defaultZoom );
@@ -88,19 +86,50 @@ public class WndSettings extends Window {
 			updateEnabled();
 			
 		} else {
-			
-			CheckBox btnScaleUp = new CheckBox( TXT_SCALE_UP ) {
+
+			int w = BTN_HEIGHT;
+
+			// Difficulty Levels
+			RedButton btnLanguageBack = new RedButton(TXT_BACK, true) {
+				@Override
+				protected void onClick() {
+					btnLocalisation.text(Babylon.get().changeLocale(-1));
+					WndSettings.this.langUpdate();
+					((TitleScene) PixelDungeon.scene()).localUpdate();
+				}
+			};
+			add( btnLanguageBack.setRect( 0, 0, w, BTN_HEIGHT) );
+
+			RedButton btnLanguageUp = new RedButton(TXT_UP, true) {
+				@Override
+				protected void onClick() {
+					btnLocalisation.text(Babylon.get().changeLocale(1));
+					WndSettings.this.langUpdate();
+					((TitleScene) PixelDungeon.scene()).localUpdate();
+				}
+			};
+			add (btnLanguageUp.setRect( WIDTH - w, 0, w, BTN_HEIGHT) );
+
+			btnLocalisation = new RedButton( Babylon.get().getLanguageName(), true ) {
+				@Override
+				protected void onClick() {
+				}
+			};
+			add(btnLocalisation.setRect(btnLanguageBack.right(), 0, WIDTH - btnLanguageBack.width() - btnLanguageBack.width(), BTN_HEIGHT) );
+
+			// Previous settings
+			CheckBox btnScaleUp = new CheckBox( "sett_scale_up", false ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
 					PixelDungeon.scaleUp( checked() );
 				}
 			};
-			btnScaleUp.setRect( 0, 0, WIDTH, BTN_HEIGHT );
+			btnScaleUp.setRect( 0, BTN_HEIGHT + GAP, WIDTH, BTN_HEIGHT );
 			btnScaleUp.checked( PixelDungeon.scaleUp() );
 			add( btnScaleUp );
 			
-			btnImmersive = new CheckBox( TXT_IMMERSIVE ) {
+			btnImmersive = new CheckBox( "sett_immersive", false ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -114,7 +143,7 @@ public class WndSettings extends Window {
 			
 		}
 		
-		CheckBox btnMusic = new CheckBox( TXT_MUSIC ) {
+		CheckBox btnMusic = new CheckBox( "sett_music", false ) {
 			@Override
 			protected void onClick() {
 				super.onClick();
@@ -125,7 +154,7 @@ public class WndSettings extends Window {
 		btnMusic.checked( PixelDungeon.music() );
 		add( btnMusic );
 		
-		CheckBox btnSound = new CheckBox( TXT_SOUND ) {
+		CheckBox btnSound = new CheckBox( "sett_sound", false ) {
 			@Override
 			protected void onClick() {
 				super.onClick();
@@ -139,7 +168,7 @@ public class WndSettings extends Window {
 		
 		if (inGame) {
 			
-			CheckBox btnBrightness = new CheckBox( TXT_BRIGHTNESS ) {
+			CheckBox btnBrightness = new CheckBox( "sett_brightness", false ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -150,7 +179,7 @@ public class WndSettings extends Window {
 			btnBrightness.checked( PixelDungeon.brightness() );
 			add( btnBrightness );
 			
-			CheckBox btnQuickslot = new CheckBox( TXT_QUICKSLOT ) {
+			CheckBox btnQuickslot = new CheckBox( "sett_quick_slot", false ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -165,7 +194,7 @@ public class WndSettings extends Window {
 			
 		} else {
 			
-			RedButton btnOrientation = new RedButton( orientationText() ) {
+			RedButton btnOrientation = new RedButton( orientationText(), false ) {
 				@Override
 				protected void onClick() {
 					PixelDungeon.landscape( !PixelDungeon.landscape() );
@@ -178,8 +207,16 @@ public class WndSettings extends Window {
 			
 		}
 	}
-	
-	private void zoom( float value ) {
+
+	public void langUpdate() {
+		for (Gizmo gizmo: WndSettings.this.members) {
+			if (gizmo instanceof RedButton) {
+				((RedButton) gizmo).localUpdate();
+			}
+		}
+	}
+
+	private void zoom(float value ) {
 
 		Camera.main.zoom( value );
 		PixelDungeon.zoom( (int)(value - PixelScene.defaultZoom) );
@@ -194,6 +231,6 @@ public class WndSettings extends Window {
 	}
 	
 	private String orientationText() {
-		return PixelDungeon.landscape() ? TXT_SWITCH_PORT : TXT_SWITCH_LAND;
+		return PixelDungeon.landscape() ? "sett_switch_port" : "sett_switch_land";
 	}
 }

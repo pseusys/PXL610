@@ -126,10 +126,6 @@ public class Weightstone extends Item {
 
 		private static final String TXT_CHOICE = "How would you like to balance your %s?";
 		
-		private static final String TXT_SPEED		= "For speed";
-		private static final String TXT_ACCURACY	= "For accuracy";
-		private static final String TXT_CANCEL		= "Never mind";
-		
 		private static final int WIDTH			= 120;
 		private static final int MARGIN 		= 2;
 		private static final int BUTTON_WIDTH	= WIDTH - MARGIN * 2;
@@ -152,7 +148,7 @@ public class Weightstone extends Item {
 			float pos = tfMesage.y + tfMesage.height();
 			
 			if (weapon.imbue != Weapon.Imbue.SPEED) {
-				RedButton btnSpeed = new RedButton( TXT_SPEED ) {
+				RedButton btnSpeed = new RedButton( "wei_speed", false ) {
 					@Override
 					protected void onClick() {
 						hide();
@@ -166,7 +162,7 @@ public class Weightstone extends Item {
 			}
 			
 			if (weapon.imbue != Weapon.Imbue.ACCURACY) {
-				RedButton btnAccuracy = new RedButton( TXT_ACCURACY ) {
+				RedButton btnAccuracy = new RedButton( "wei_acc", false ) {
 					@Override
 					protected void onClick() {
 						hide();
@@ -179,7 +175,7 @@ public class Weightstone extends Item {
 				pos = btnAccuracy.bottom();
 			}
 			
-			RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+			RedButton btnCancel = new RedButton( "wei_canc", false ) {
 				@Override
 				protected void onClick() {
 					hide();

@@ -103,10 +103,6 @@ public class PixelScene extends Scene {
 		Camera.add( uiCamera );
 		
 		if (font1x == null) {
-
-			Bitmap btf = BitmapCache.get("font1x.png");
-			Log.e("TAG", "create: " + btf.getHeight());
-
 			// 3x5 (6)
 			font1x = Font.colorMarked( 
 				BitmapCache.get( Assets.FONTS1X ), 0x00000000, BitmapText.Font.FULL );

@@ -55,7 +55,7 @@ public class WndQuest extends Window {
 				pos += GAP;
 				
 				final int index = i;
-				RedButton btn = new RedButton( options[i] ) {
+				RedButton btn = new RedButton( options[i], false ) {
 					@Override
 					protected void onClick() {
 						hide();

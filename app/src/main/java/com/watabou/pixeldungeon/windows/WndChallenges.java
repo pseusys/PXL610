@@ -56,7 +56,7 @@ public class WndChallenges extends Window {
 		float pos = TTL_HEIGHT;
 		for (int i=0; i < Challenges.NAMES.length; i++) {
 			
-			CheckBox cb = new CheckBox( Challenges.NAMES[i] );
+			CheckBox cb = new CheckBox( Challenges.NAMES[i], false );
 			cb.checked( (checked & Challenges.MASKS[i]) != 0 );
 			cb.active = editable;
 			

@@ -61,7 +61,7 @@ public class WndResurrect extends Window {
 		message.y = titlebar.bottom() + GAP;
 		add( message );
 		
-		RedButton btnYes = new RedButton( TXT_YES ) {
+		RedButton btnYes = new RedButton( "resurr_yes", false ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -75,7 +75,7 @@ public class WndResurrect extends Window {
 		btnYes.setRect( 0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT );
 		add( btnYes );
 		
-		RedButton btnNo = new RedButton( TXT_NO ) {
+		RedButton btnNo = new RedButton( "resurr_no", false ) {
 			@Override
 			protected void onClick() {
 				hide();

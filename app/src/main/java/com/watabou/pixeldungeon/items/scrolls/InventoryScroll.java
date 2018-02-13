@@ -30,10 +30,6 @@ public abstract class InventoryScroll extends Scroll {
 	protected String inventoryTitle = "Select an item";
 	protected WndBag.Mode mode = WndBag.Mode.ALL;
 	
-	private static final String TXT_WARNING	= "Do you really want to cancel this scroll usage? It will be consumed anyway.";
-	private static final String TXT_YES		= "Yes, I'm positive";
-	private static final String TXT_NO		= "No, I changed my mind";
-	
 	@Override
 	protected void doRead() {
 		
@@ -48,7 +44,7 @@ public abstract class InventoryScroll extends Scroll {
 	}
 	
 	private void confirmCancelation() {
-		GameScene.show( new WndOptions( name(), TXT_WARNING, TXT_YES, TXT_NO ) {
+		GameScene.show( new WndOptions( name(), "inv_warn", "inv_yes", "inv_no" ) {
 			@Override
 			protected void onSelect( int index ) {
 				switch (index) {

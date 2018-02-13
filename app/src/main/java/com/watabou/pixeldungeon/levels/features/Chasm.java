@@ -40,17 +40,11 @@ import com.watabou.utils.Random;
 
 public class Chasm {
 	
-	private static final String TXT_CHASM	= "Chasm";
-	private static final String TXT_YES		= "Yes, I know what I'm doing";
-	private static final String TXT_NO		= "No, I changed my mind";
-	private static final String TXT_JUMP 	= 
-		"Do you really want to jump into the chasm? You can probably die.";
-	
 	public static boolean jumpConfirmed = false;
 	
 	public static void heroJump( final Hero hero ) {
 		GameScene.show( 
-			new WndOptions( TXT_CHASM, TXT_JUMP, TXT_YES, TXT_NO ) {
+			new WndOptions( "chasm_chasm", "chasm_jump", "chasm_yes", "chasm_no" ) {
 				@Override
 				protected void onSelect( int index ) {
 					if (index == 0) {

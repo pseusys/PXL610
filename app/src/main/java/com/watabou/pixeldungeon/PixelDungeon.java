@@ -127,11 +127,18 @@ public class PixelDungeon extends Game {
 		super.onCreate( savedInstanceState );
 		
 		updateImmersiveMode();
-		
+
 		DisplayMetrics metrics = new DisplayMetrics();
 		instance.getWindowManager().getDefaultDisplay().getMetrics( metrics );
 		boolean landscape = metrics.widthPixels > metrics.heightPixels;
-		
+
+		PixelDungeon.programIntro(true);
+
+		if (PixelDungeon.programIntro()) { // PXL610: update localisation;
+			PixelDungeon.programIntro(false);
+			Babylon.get().updateLocale();
+		}
+
 		if (Preferences.INSTANCE.getBoolean( Preferences.KEY_LANDSCAPE, false ) != landscape) {
 			landscape( !landscape );
 		}
@@ -188,7 +195,7 @@ public class PixelDungeon extends Game {
 			Assets.SND_DEGRADE,
 			Assets.SND_MIMIC );
 	}
-	
+
 	@Override
 	public void onWindowFocusChanged( boolean hasFocus ) {
 		
@@ -343,12 +350,28 @@ public class PixelDungeon extends Game {
 		return Preferences.INSTANCE.getInt( Preferences.KEY_CHALLENGES, 0 );
 	}
 	
-	public static void intro( boolean value ) {
-		Preferences.INSTANCE.put( Preferences.KEY_INTRO, value );
+	public static void gameIntro( boolean value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_GAME_INTRO, value );
 	}
 	
-	public static boolean intro() {
-		return Preferences.INSTANCE.getBoolean( Preferences.KEY_INTRO, true );
+	public static boolean gameIntro() {
+		return Preferences.INSTANCE.getBoolean( Preferences.KEY_GAME_INTRO, true );
+	}
+
+	public static void programIntro( boolean value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_PROGRAM_INTRO, value );
+	}
+
+	public static boolean programIntro() {
+		return Preferences.INSTANCE.getBoolean( Preferences.KEY_PROGRAM_INTRO, true );
+	}
+
+	public static void localisation( String value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_LOCALISATION, value );
+	}
+
+	public static String localisation() {
+		return Preferences.INSTANCE.getString( Preferences.KEY_LOCALISATION, "en" );
 	}
 	
 	/*

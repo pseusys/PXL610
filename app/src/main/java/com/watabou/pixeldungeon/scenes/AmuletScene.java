@@ -30,9 +30,6 @@ import com.watabou.pixeldungeon.ui.RedButton;
 import com.watabou.utils.Random;
 
 public class AmuletScene extends PixelScene {
-
-	private static final String TXT_EXIT	= "Let's call it a day";
-	private static final String TXT_STAY	= "I'm not done yet";
 	
 	private static final int WIDTH			= 120;
 	private static final int BTN_HEIGHT		= 18;
@@ -64,7 +61,7 @@ public class AmuletScene extends PixelScene {
 		amulet = new Image( Assets.AMULET );
 		add( amulet );
 		
-		RedButton btnExit = new RedButton( TXT_EXIT ) {
+		RedButton btnExit = new RedButton( "amu_exit", false ) {
 			@Override
 			protected void onClick() {
 				Dungeon.win( ResultDescriptions.WIN );
@@ -75,7 +72,7 @@ public class AmuletScene extends PixelScene {
 		btnExit.setSize( WIDTH, BTN_HEIGHT );
 		add( btnExit );
 		
-		RedButton btnStay = new RedButton( TXT_STAY ) {
+		RedButton btnStay = new RedButton( "amu_stay", false ) {
 			@Override
 			protected void onClick() {
 				onBackPressed();

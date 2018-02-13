@@ -41,15 +41,6 @@ public class Potion extends Item {
 	
 	public static final String AC_DRINK	= "DRINK";
 	
-	private static final String TXT_HARMFUL		= "Harmful potion!";
-	private static final String TXT_BENEFICIAL	= "Beneficial potion";
-	private static final String TXT_YES			= "Yes, I know what I'm doing";
-	private static final String TXT_NO			= "No, I changed my mind";
-	private static final String TXT_R_U_SURE_DRINK = 
-		"Are you sure you want to drink it? In most cases you should throw such potions at your enemies.";
-	private static final String TXT_R_U_SURE_THROW = 
-		"Are you sure you want to throw it? In most cases it makes sense to drink it.";
-	
 	private static final float TIME_TO_DRINK = 1f;
 	
 	private static final Class<?>[] potions = {
@@ -129,7 +120,7 @@ public class Potion extends Item {
 					this instanceof PotionOfParalyticGas)) {
 				
 					GameScene.show( 
-						new WndOptions( TXT_HARMFUL, TXT_R_U_SURE_DRINK, TXT_YES, TXT_NO ) {
+						new WndOptions( "pot_harm", "pot_sure_drink", "pot_yes", "pot_no" ) {
 							@Override
 							protected void onSelect(int index) {
 								if (index == 0) {
@@ -163,7 +154,7 @@ public class Potion extends Item {
 			this instanceof PotionOfMight)) {
 		
 			GameScene.show( 
-				new WndOptions( TXT_BENEFICIAL, TXT_R_U_SURE_THROW, TXT_YES, TXT_NO ) {
+				new WndOptions( "pot_ben", "pot_sure_throw", "pot_yes", "pot_no" ) {
 					@Override
 					protected void onSelect(int index) {
 						if (index == 0) {

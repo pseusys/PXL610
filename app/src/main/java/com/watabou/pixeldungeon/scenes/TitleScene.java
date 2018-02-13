@@ -24,11 +24,13 @@ import android.opengl.GLES20;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.PixelDungeon;
 import com.watabou.pixeldungeon.effects.BannerSprites;
 import com.watabou.pixeldungeon.effects.Fireball;
@@ -90,7 +92,7 @@ public class TitleScene extends PixelScene {
 		signs.y = title.y;
 		add( signs );
 		
-		DashboardItem btnBadges = new DashboardItem( TXT_BADGES, 3 ) {
+		DashboardItem btnBadges = new DashboardItem( "title_badge", 3 ) {
 			@Override
 			protected void onClick() {
 				PixelDungeon.switchNoFade( BadgesScene.class );
@@ -98,7 +100,7 @@ public class TitleScene extends PixelScene {
 		};
 		add( btnBadges );
 		
-		DashboardItem btnAbout = new DashboardItem( TXT_ABOUT, 1 ) {
+		DashboardItem btnAbout = new DashboardItem( "title_abt", 1 ) {
 			@Override
 			protected void onClick() {
 				PixelDungeon.switchNoFade( AboutScene.class );
@@ -106,7 +108,7 @@ public class TitleScene extends PixelScene {
 		};
 		add( btnAbout );
 		
-		DashboardItem btnPlay = new DashboardItem( TXT_PLAY, 0 ) {
+		DashboardItem btnPlay = new DashboardItem( "title_play", 0 ) {
 			@Override
 			protected void onClick() {
 				PixelDungeon.switchNoFade( StartScene.class );
@@ -114,7 +116,7 @@ public class TitleScene extends PixelScene {
 		};
 		add( btnPlay );
 		
-		DashboardItem btnHighscores = new DashboardItem( TXT_HIGHSCORES, 2 ) {
+		DashboardItem btnHighscores = new DashboardItem( "title_high", 2 ) {
 			@Override
 			protected void onClick() {
 				PixelDungeon.switchNoFade( RankingsScene.class );
@@ -158,6 +160,16 @@ public class TitleScene extends PixelScene {
 		fb.setPos( x, y );
 		add( fb );
 	}
+
+	public void localUpdate() {
+		//some info about langs&banners???
+
+		for (Gizmo gizmo: TitleScene.this.members) {
+			if (gizmo instanceof DashboardItem) {
+				((DashboardItem) gizmo).text();
+			}
+		}
+	}
 	
 	private static class DashboardItem extends Button {
 		
@@ -167,15 +179,24 @@ public class TitleScene extends PixelScene {
 		
 		private Image image;
 		private BitmapText label;
+		private String textTag;
 		
 		public DashboardItem( String text, int index ) {
 			super();
 			
 			image.frame( image.texture.uvRect( index * IMAGE_SIZE, 0, (index + 1) * IMAGE_SIZE, IMAGE_SIZE ) );
-			this.label.text( text );
+			this.textTag = text;
+
+			this.label.text( Babylon.get().getFromResources(textTag) );
 			this.label.measure();
 			
 			setSize( SIZE, SIZE );
+		}
+
+		public void text() {
+			this.label.text( Babylon.get().getFromResources(textTag) );
+			this.label.measure();
+			layout();
 		}
 		
 		@Override

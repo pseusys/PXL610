@@ -54,16 +54,8 @@ public class StartScene extends PixelScene {
 	private static final float BUTTON_HEIGHT	= 24;
 	private static final float GAP				= 2;
 	
-	private static final String TXT_LOAD	= "Load Game";
-	private static final String TXT_NEW		= "New Game";
-	
 	private static final String TXT_ERASE		= "Erase current game";
 	private static final String TXT_DPTH_LVL	= "Depth: %d, level: %d";
-	
-	private static final String TXT_REALLY	= "Do you really want to start new game?";
-	private static final String TXT_WARNING	= "Your current game progress will be erased.";
-	private static final String TXT_YES		= "Yes, start new game";
-	private static final String TXT_NO		= "No, return to main menu";
 	
 	private static final String TXT_UNLOCK	= "To unlock this character class, slay the 3rd boss with any other class";
 	
@@ -126,11 +118,11 @@ public class StartScene extends PixelScene {
 		buttonX = left;
 		buttonY = bottom - BUTTON_HEIGHT;
 		
-		btnNewGame = new GameButton( TXT_NEW ) {
+		btnNewGame = new GameButton( "start_new" ) {
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.check( curClass ) != null) {
-					StartScene.this.add( new WndOptions( TXT_REALLY, TXT_WARNING, TXT_YES, TXT_NO ) {
+					StartScene.this.add( new WndOptions( "start_really", "start_warn", "start_yes", "start_no" ) {
 						@Override
 						protected void onSelect( int index ) {
 							if (index == 0) {
@@ -146,7 +138,7 @@ public class StartScene extends PixelScene {
 		};
 		add( btnNewGame );
 
-		btnLoad = new GameButton( TXT_LOAD ) {	
+		btnLoad = new GameButton( "start_load" ) {
 			@Override
 			protected void onClick() {
 				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
@@ -302,12 +294,12 @@ public class StartScene extends PixelScene {
 		Dungeon.hero = null;
 		InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 		
-		if (PixelDungeon.intro()) {
-			PixelDungeon.intro( false );
+		if (PixelDungeon.gameIntro()) {
+			PixelDungeon.gameIntro( false );
 			Game.switchScene( IntroScene.class );
 		} else {
 			Game.switchScene( InterlevelScene.class );
-		}	
+		}
 	}
 	
 	@Override
@@ -323,7 +315,7 @@ public class StartScene extends PixelScene {
 		private BitmapText secondary;
 		
 		public GameButton( String primary ) {
-			super( primary );
+			super( primary, false );
 			
 			this.secondary.text( null );
 		}

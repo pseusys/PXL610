@@ -128,7 +128,7 @@ public class Ring extends EquipableItem {
 			final Ring r2 = hero.belongings.ring2;
 			
 			PixelDungeon.scene().add( 
-				new WndOptions( TXT_UNEQUIP_TITLE, TXT_UNEQUIP_MESSAGE, 
+				new WndOptions( "rng_un_title", "rng_un_mss",
 					Utils.capitalize( r1.toString() ), 
 					Utils.capitalize( r2.toString() ) ) {
 					

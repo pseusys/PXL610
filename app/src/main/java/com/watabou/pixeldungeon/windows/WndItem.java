@@ -68,9 +68,9 @@ public class WndItem extends Window {
 		float x = 0;
 		
 		if (Dungeon.hero.isAlive() && owner != null) {
-			for (final String action:item.actions( Dungeon.hero )) {
+			for (final String action: item.actions( Dungeon.hero )) {
 				
-				RedButton btn = new RedButton( action ) {
+				RedButton btn = new RedButton( action, true ) { //FIXME
 					@Override
 					protected void onClick() {
 						item.execute( Dungeon.hero, action );

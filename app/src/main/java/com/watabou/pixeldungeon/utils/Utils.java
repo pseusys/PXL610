@@ -17,7 +17,7 @@
  */
 package com.watabou.pixeldungeon.utils;
 
-import java.util.Locale;
+import com.watabou.pixeldungeon.Babylon;
 
 public class Utils {
 
@@ -26,7 +26,7 @@ public class Utils {
 	}
 	
 	public static String format( String format, Object...args ) {
-		return String.format( Locale.ENGLISH, format, args );
+		return String.format( Babylon.get().getCurrent(), format, args );
 	}
 	
 	public static String VOWELS	= "aoeiu";

@@ -28,13 +28,13 @@ public class Challenges {
 	public static final int NO_SCROLLS			= 64;
 	
 	public static final String[] NAMES = {
-		"On diet",
-		"Faith is my armor",
-		"Pharmacophobia",
-		"Barren land",
-		"Swarm intelligence",
-		"Into darkness",
-		"Forbidden runes"
+		"chall_food",
+		"chall_arm",
+		"chall_heal",
+		"chall_herb",
+		"chall_int",
+		"chall_dark",
+		"chall_scr"
 	};
 	
 	public static final int[] MASKS = {
