@@ -19,7 +19,7 @@ package com.watabou.pixeldungeon.windows;
 
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.ui.HighlightedText;
 import com.watabou.pixeldungeon.ui.Window;
 
@@ -40,7 +40,7 @@ public class WndTitledMessage extends Window {
 		
 		super();
 		
-		int width = PixelDungeon.landscape() ? WIDTH_L : WIDTH_P;
+		int width = PXL610.landscape() ? WIDTH_L : WIDTH_P;
 		
 		titlebar.setRect( 0, 0, width, 0 );
 		add( titlebar );

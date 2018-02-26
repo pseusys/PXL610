@@ -28,7 +28,7 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
 import com.watabou.pixeldungeon.Badges;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.effects.BadgeBanner;
 import com.watabou.pixeldungeon.ui.Archs;
 import com.watabou.pixeldungeon.ui.ExitButton;
@@ -58,8 +58,8 @@ public class BadgesScene extends PixelScene {
 		archs.setSize( w, h );
 		add( archs );
 		
-		int pw = (int)Math.min( w, (PixelDungeon.landscape() ? MIN_WIDTH_L : MIN_WIDTH_P) * 3 ) - 16;
-		int ph = (int)Math.min( h, (PixelDungeon.landscape() ? MIN_HEIGHT_L : MIN_HEIGHT_P) * 3 ) - 32;
+		int pw = (int)Math.min( w, (PXL610.landscape() ? MIN_WIDTH_L : MIN_WIDTH_P) * 3 ) - 16;
+		int ph = (int)Math.min( h, (PXL610.landscape() ? MIN_HEIGHT_L : MIN_HEIGHT_P) * 3 ) - 32;
 		
 		float size = (float)Math.sqrt( pw * ph / 27f );
 		int nCols = (int)Math.ceil( pw / size );
@@ -101,7 +101,7 @@ public class BadgesScene extends PixelScene {
 			@Override
 			public void call() {
 				if (Game.scene() == BadgesScene.this) {
-					PixelDungeon.switchNoFade( BadgesScene.class );
+					PXL610.switchNoFade( BadgesScene.class );
 				}
 			}
 		};
@@ -118,7 +118,7 @@ public class BadgesScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		PixelDungeon.switchNoFade( TitleScene.class );
+		PXL610.switchNoFade( TitleScene.class );
 	}
 	
 	private static class BadgeButton extends Button {

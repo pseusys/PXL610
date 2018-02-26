@@ -22,7 +22,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.scenes.TitleScene;
 
 public class ExitButton extends Button {
@@ -68,7 +68,7 @@ public class ExitButton extends Button {
 		if (Game.scene() instanceof TitleScene) {
 			Game.instance.finish();
 		} else {
-			PixelDungeon.switchNoFade( TitleScene.class );
+			PXL610.switchNoFade( TitleScene.class );
 		}
 	}
 }

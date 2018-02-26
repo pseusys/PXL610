@@ -62,7 +62,7 @@ public class WndTradeItem extends Window {
 		
 		if (item.quantity() == 1) {
 			
-			RedButton btnSell = new RedButton( Utils.format( TXT_SELL, item.price() ), true ) { //FIXME
+			RedButton btnSell = new RedButton( Utils.format( TXT_SELL, item.price() ) ) {
 				@Override
 				protected void onClick() {
 					sell( item );
@@ -77,7 +77,7 @@ public class WndTradeItem extends Window {
 		} else {
 			
 			int priceAll= item.price();
-			RedButton btnSell1 = new RedButton( Utils.format( TXT_SELL_1, priceAll / item.quantity() ), true ) { //FIXME
+			RedButton btnSell1 = new RedButton( Utils.format( TXT_SELL_1, priceAll / item.quantity() ) ) {
 				@Override
 				protected void onClick() {
 					sellOne( item );
@@ -86,7 +86,7 @@ public class WndTradeItem extends Window {
 			};
 			btnSell1.setRect( 0, pos + GAP, WIDTH, BTN_HEIGHT );
 			add( btnSell1 );
-			RedButton btnSellAll = new RedButton( Utils.format( TXT_SELL_ALL, priceAll ), true ) { //FIXME
+			RedButton btnSellAll = new RedButton( Utils.format( TXT_SELL_ALL, priceAll ) ) {
 				@Override
 				protected void onClick() {
 					sell( item );
@@ -100,7 +100,7 @@ public class WndTradeItem extends Window {
 			
 		}
 		
-		RedButton btnCancel = new RedButton( TXT_CANCEL, true ) {//FIXME
+		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -124,19 +124,18 @@ public class WndTradeItem extends Window {
 		
 		if (canBuy) {
 			
-			RedButton btnBuy = new RedButton( Utils.format( TXT_BUY, price ), true ) { //FIXME
+			RedButton btnBuy = new RedButton( Utils.format( TXT_BUY, price ) ) {
 				@Override
 				protected void onClick() {
 					hide();
 					buy( heap );
 				}
 			};
-			btnBuy.endFormat(price);
 			btnBuy.setRect( 0, pos + GAP, WIDTH, BTN_HEIGHT );
 			btnBuy.enable( price <= Dungeon.gold );
 			add( btnBuy );
 			
-			RedButton btnCancel = new RedButton( TXT_CANCEL, true ) { //FIXME
+			RedButton btnCancel = new RedButton( TXT_CANCEL ) {
 				@Override
 				protected void onClick() {
 					hide();

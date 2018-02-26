@@ -96,7 +96,8 @@ public class Badges {
 		BOSS_SLAIN_3_ASSASSIN,
 		BOSS_SLAIN_3_SNIPER,
 		BOSS_SLAIN_3_WARDEN,
-		BOSS_SLAIN_3_ALL_SUBCLASSES("3rd boss slain by Gladiator, Berserker, Warlock, Battlemage, Freerunner, Assassin, Sniper & Warden", 33, true ),
+		BOSS_SLAIN_3_ALL_SUBCLASSES( 
+			"3rd boss slain by Gladiator, Berserker, Warlock, Battlemage, Freerunner, Assassin, Sniper & Warden", 33, true ),
 		RING_OF_HAGGLER( "Ring of Haggler obtained", 20 ),
 		RING_OF_THORNS( "Ring of Thorns obtained", 21 ),
 		STRENGTH_ATTAINED_1( "13 points of Strength attained", 40 ),

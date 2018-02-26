@@ -26,7 +26,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
 import com.watabou.pixeldungeon.Dungeon;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.actors.hero.Belongings;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.items.Gold;
@@ -100,7 +100,7 @@ public class WndBag extends WndTabbed {
 		lastMode = mode;
 		lastBag = bag;
 		
-		nCols = PixelDungeon.landscape() ? COLS_L : COLS_P;
+		nCols = PXL610.landscape() ? COLS_L : COLS_P;
 		nRows = (Belongings.BACKPACK_SIZE + 4 + 1) / nCols + ((Belongings.BACKPACK_SIZE + 4 + 1) % nCols > 0 ? 1 : 0);
 		
 		int slotsWidth = SLOT_SIZE * nCols + SLOT_MARGIN * (nCols - 1);

@@ -93,6 +93,8 @@ public class WndHero extends WndTabbed {
 	private class StatsTab extends Group {
 		
 		private static final String TXT_TITLE		= "Level %d %s";
+		private static final String TXT_CATALOGUS	= "Catalogus";
+		private static final String TXT_JOURNAL		= "Journal";
 		
 		private static final int GAP = 5;
 		
@@ -108,7 +110,7 @@ public class WndHero extends WndTabbed {
 			title.measure();
 			add( title );
 			
-			RedButton btnCatalogus = new RedButton( "stats_cat", false ) {
+			RedButton btnCatalogus = new RedButton( TXT_CATALOGUS ) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -118,7 +120,7 @@ public class WndHero extends WndTabbed {
 			btnCatalogus.setRect( 0, title.y + title.height(), btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2 );
 			add( btnCatalogus );
 			
-			RedButton btnJournal = new RedButton( "stats_jour", false ) {
+			RedButton btnJournal = new RedButton( TXT_JOURNAL ) {
 				@Override
 				protected void onClick() {
 					hide();

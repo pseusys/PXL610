@@ -19,9 +19,7 @@ package com.watabou.pixeldungeon.scenes;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import android.graphics.Bitmap;
 import android.opengl.GLES20;
-import android.util.Log;
 
 import com.watabou.input.Touchscreen;
 import com.watabou.noosa.BitmapText;
@@ -34,7 +32,7 @@ import com.watabou.noosa.Scene;
 import com.watabou.noosa.Visual;
 import com.watabou.pixeldungeon.Assets;
 import com.watabou.pixeldungeon.Badges;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.effects.BadgeBanner;
 import com.watabou.utils.BitmapCache;
 
@@ -68,7 +66,7 @@ public class PixelScene extends Scene {
 		GameScene.scene = null;
 		
 		float minWidth, minHeight;
-		if (PixelDungeon.landscape()) {
+		if (PXL610.landscape()) {
 			minWidth = MIN_WIDTH_L;
 			minHeight = MIN_HEIGHT_L;
 		} else {
@@ -85,7 +83,7 @@ public class PixelScene extends Scene {
 			defaultZoom--;
 		}
 			
-		if (PixelDungeon.scaleUp()) {
+		if (PXL610.scaleUp()) {
 			while (
 				Game.width / (defaultZoom + 1) >= minWidth && 
 				Game.height / (defaultZoom + 1) >= minHeight) {
@@ -103,9 +101,10 @@ public class PixelScene extends Scene {
 		Camera.add( uiCamera );
 		
 		if (font1x == null) {
+			
 			// 3x5 (6)
 			font1x = Font.colorMarked( 
-				BitmapCache.get( Assets.FONTS1X ), 0x00000000, BitmapText.Font.FULL );
+				BitmapCache.get( Assets.FONTS1X ), 0x00000000, BitmapText.Font.LATIN_FULL );
 			font1x.baseLine = 6;
 			font1x.tracking = -1;
 			

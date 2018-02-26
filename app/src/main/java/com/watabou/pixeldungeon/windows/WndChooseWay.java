@@ -36,10 +36,11 @@ public class WndChooseWay extends Window {
 		super();
 		
 		final String TXT_MASTERY	= "Which way will you follow?";
+		final String TXT_CANCEL		= "I'll decide later";
 		
 		float bottom = createCommonStuff( tome, way1.desc() + "\n\n" + way2.desc() + "\n\n" + TXT_MASTERY );
 		
-		RedButton btnWay1 = new RedButton( Utils.capitalize( way1.title() ), true ) { //FIXME
+		RedButton btnWay1 = new RedButton( Utils.capitalize( way1.title() ) ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -49,7 +50,7 @@ public class WndChooseWay extends Window {
 		btnWay1.setRect( 0, bottom + GAP, (WIDTH - GAP) / 2, BTN_HEIGHT );
 		add( btnWay1 );
 		
-		RedButton btnWay2 = new RedButton( Utils.capitalize( way2.title() ), true ) { //FIXME
+		RedButton btnWay2 = new RedButton( Utils.capitalize( way2.title() ) ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -59,7 +60,7 @@ public class WndChooseWay extends Window {
 		btnWay2.setRect( btnWay1.right() + GAP, btnWay1.top(), btnWay1.width(), BTN_HEIGHT );
 		add( btnWay2 );
 		
-		RedButton btnCancel = new RedButton( "choseway_canc", false ) {
+		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -77,9 +78,12 @@ public class WndChooseWay extends Window {
 		
 		final String TXT_REMASTERY	= "Do you want to respec into %s?";
 		
+		final String TXT_OK		= "Yes, I want to respec";
+		final String TXT_CANCEL	= "Maybe later";
+		
 		float bottom = createCommonStuff( tome, way.desc() + "\n\n" + Utils.format( TXT_REMASTERY, Utils.indefinite( way.title() ) ) );
 		
-		RedButton btnWay = new RedButton( "choseway_yes", false ) {
+		RedButton btnWay = new RedButton( TXT_OK ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -89,7 +93,7 @@ public class WndChooseWay extends Window {
 		btnWay.setRect( 0, bottom + GAP, WIDTH, BTN_HEIGHT );
 		add( btnWay );
 		
-		RedButton btnCancel = new RedButton( "choseway_no", false ) {
+		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
 			@Override
 			protected void onClick() {
 				hide();

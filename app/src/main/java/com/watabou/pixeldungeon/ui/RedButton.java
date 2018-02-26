@@ -17,41 +17,26 @@
  */
 package com.watabou.pixeldungeon.ui;
 
-import android.util.Log;
-
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
-import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Chrome;
 import com.watabou.pixeldungeon.scenes.PixelScene;
-import com.watabou.pixeldungeon.utils.Utils;
 
 public class RedButton extends Button {
 	
 	protected NinePatch bg;
 	protected BitmapText text;
 	protected Image icon;
-
-	String textTag;
 			
-	public RedButton( String label, boolean immutable ) {
+	public RedButton( String label ) {
 		super();
-
-		if (immutable) {
-			textTag = null;
-
-			text.text(label);
-			text.measure();
-		} else {
-			textTag = label;
-
-			text.text(Babylon.get().getFromResources(textTag));
-			text.measure();
-		}
+		
+		text.text( label );
+		text.measure();
 	}
 	
 	@Override
@@ -100,9 +85,7 @@ public class RedButton extends Button {
 	}
 	
 	public void text( String value ) {
-		textTag = value;
-
-		text.text(Babylon.get().getFromResources(textTag));
+		text.text( value );
 		text.measure();
 		layout();
 	}
@@ -128,20 +111,5 @@ public class RedButton extends Button {
 	
 	public float reqHeight() {
 		return text.baseLine() + 4;
-	}
-
-	public void localUpdate() {
-		if (textTag != null) {
-			text.text(Babylon.get().getFromResources(textTag));
-			text.measure();
-			layout();
-		}
-	}
-
-	public void endFormat(Object...args) {
-		String toss = Babylon.get().getFromResources(textTag);
-		if (toss.indexOf('%') > 0) {
-			text.text(Utils.format(toss, args));
-		}
 	}
 }

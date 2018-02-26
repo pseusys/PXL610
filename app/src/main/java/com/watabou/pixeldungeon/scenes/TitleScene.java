@@ -24,26 +24,21 @@ import android.opengl.GLES20;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
-import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
 import com.watabou.pixeldungeon.Babylon;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.effects.BannerSprites;
 import com.watabou.pixeldungeon.effects.Fireball;
 import com.watabou.pixeldungeon.ui.Archs;
 import com.watabou.pixeldungeon.ui.ExitButton;
 import com.watabou.pixeldungeon.ui.PrefsButton;
+import com.watabou.pixeldungeon.windows.WndSettings;
 
 public class TitleScene extends PixelScene {
-
-	private static final String TXT_PLAY		= "Play";
-	private static final String TXT_HIGHSCORES	= "Rankings";
-	private static final String TXT_BADGES		= "Badges";
-	private static final String TXT_ABOUT		= "About";
 	
 	@Override
 	public void create() {
@@ -54,26 +49,32 @@ public class TitleScene extends PixelScene {
 		Music.INSTANCE.volume( 1f );
 		
 		uiCamera.visible = false;
-		
+
+		addComponents();
+
+		fadeIn();
+	}
+
+	private void addComponents() {
 		int w = Camera.main.width;
 		int h = Camera.main.height;
-		
+
 		Archs archs = new Archs();
 		archs.setSize( w, h );
 		add( archs );
-		
+
 		Image title = BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON );
 		add( title );
-		
-		float height = title.height + 
-			(PixelDungeon.landscape() ? DashboardItem.SIZE : DashboardItem.SIZE * 2);
-		
+
+		float height = title.height +
+				(PXL610.landscape() ? DashboardItem.SIZE : DashboardItem.SIZE * 2);
+
 		title.x = (w - title.width()) / 2;
 		title.y = (h - height) / 2;
-		
+
 		placeTorch( title.x + 18, title.y + 20 );
 		placeTorch( title.x + title.width - 18, title.y + 20 );
-		
+
 		Image signs = new Image( BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
 			private float time = 0;
 			@Override
@@ -91,40 +92,40 @@ public class TitleScene extends PixelScene {
 		signs.x = title.x;
 		signs.y = title.y;
 		add( signs );
-		
-		DashboardItem btnBadges = new DashboardItem( "title_badge", 3 ) {
+
+		DashboardItem btnBadges = new DashboardItem( Babylon.get().getFromResources("title_badge"), 3 ) {
 			@Override
 			protected void onClick() {
-				PixelDungeon.switchNoFade( BadgesScene.class );
+				PXL610.switchNoFade( BadgesScene.class );
 			}
 		};
 		add( btnBadges );
-		
-		DashboardItem btnAbout = new DashboardItem( "title_abt", 1 ) {
+
+		DashboardItem btnAbout = new DashboardItem( Babylon.get().getFromResources("title_abt"), 1 ) {
 			@Override
 			protected void onClick() {
-				PixelDungeon.switchNoFade( AboutScene.class );
+				PXL610.switchNoFade( AboutScene.class );
 			}
 		};
 		add( btnAbout );
-		
-		DashboardItem btnPlay = new DashboardItem( "title_play", 0 ) {
+
+		DashboardItem btnPlay = new DashboardItem(Babylon.get().getFromResources("title_play"), 0 ) {
 			@Override
 			protected void onClick() {
-				PixelDungeon.switchNoFade( StartScene.class );
+				PXL610.switchNoFade( StartScene.class );
 			}
 		};
 		add( btnPlay );
-		
-		DashboardItem btnHighscores = new DashboardItem( "title_high", 2 ) {
+
+		DashboardItem btnHighscores = new DashboardItem( Babylon.get().getFromResources("title_high"), 2 ) {
 			@Override
 			protected void onClick() {
-				PixelDungeon.switchNoFade( RankingsScene.class );
+				PXL610.switchNoFade( RankingsScene.class );
 			}
 		};
 		add( btnHighscores );
-		
-		if (PixelDungeon.landscape()) {
+
+		if (PXL610.landscape()) {
 			float y = (h + height) / 2 - DashboardItem.SIZE;
 			btnHighscores	.setPos( w / 2 - btnHighscores.width(), y );
 			btnBadges		.setPos( w / 2, y );
@@ -136,39 +137,33 @@ public class TitleScene extends PixelScene {
 			btnPlay.setPos( w / 2 - btnPlay.width(), btnAbout.top() - DashboardItem.SIZE );
 			btnHighscores.setPos( w / 2, btnPlay.top() );
 		}
-		
+
 		BitmapText version = new BitmapText( "v " + Game.version, font1x );
 		version.measure();
 		version.hardlight( 0x888888 );
 		version.x = w - version.width();
 		version.y = h - version.height();
 		add( version );
-		
+
 		PrefsButton btnPrefs = new PrefsButton();
 		btnPrefs.setPos( 0, 0 );
 		add( btnPrefs );
-		
+
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos( w - btnExit.width(), 0 );
 		add( btnExit );
-		
-		fadeIn();
+	}
+
+	public void localUpdate() {
+		this.clear();
+		addComponents();
+		this.add( new WndSettings( false ) );
 	}
 	
 	private void placeTorch( float x, float y ) {
 		Fireball fb = new Fireball();
 		fb.setPos( x, y );
 		add( fb );
-	}
-
-	public void localUpdate() {
-		//some info about langs&banners???
-
-		for (Gizmo gizmo: TitleScene.this.members) {
-			if (gizmo instanceof DashboardItem) {
-				((DashboardItem) gizmo).text();
-			}
-		}
 	}
 	
 	private static class DashboardItem extends Button {
@@ -179,24 +174,15 @@ public class TitleScene extends PixelScene {
 		
 		private Image image;
 		private BitmapText label;
-		private String textTag;
 		
 		public DashboardItem( String text, int index ) {
 			super();
 			
 			image.frame( image.texture.uvRect( index * IMAGE_SIZE, 0, (index + 1) * IMAGE_SIZE, IMAGE_SIZE ) );
-			this.textTag = text;
-
-			this.label.text( Babylon.get().getFromResources(textTag) );
+			this.label.text( text );
 			this.label.measure();
 			
 			setSize( SIZE, SIZE );
-		}
-
-		public void text() {
-			this.label.text( Babylon.get().getFromResources(textTag) );
-			this.label.measure();
-			layout();
 		}
 		
 		@Override

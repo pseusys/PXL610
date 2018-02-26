@@ -98,7 +98,7 @@ public class Dungeon {
 	
 	public static void init() {
 
-		challenges = PixelDungeon.challenges();
+		challenges = PXL610.challenges();
 		
 		Actor.clear();
 		

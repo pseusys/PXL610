@@ -31,6 +31,12 @@ import com.watabou.pixeldungeon.windows.WndOptions;
 
 abstract public class MissileWeapon extends Weapon {
 
+	private static final String TXT_MISSILES	= "Missile weapon";
+	private static final String TXT_YES			= "Yes, I know what I'm doing";
+	private static final String TXT_NO			= "No, I changed my mind";
+	private static final String TXT_R_U_SURE	= 
+		"Do you really want to equip it as a melee weapon?";
+	
 	{
 		stackable = true;
 		levelKnown = true;
@@ -81,7 +87,7 @@ abstract public class MissileWeapon extends Weapon {
 	@Override
 	public boolean doEquip( final Hero hero ) {
 		GameScene.show( 
-			new WndOptions( "miss_miss", "miss_sure", "miss_yes", "miss_no" ) {
+			new WndOptions( TXT_MISSILES, TXT_R_U_SURE, TXT_YES, TXT_NO ) {
 				@Override
 				protected void onSelect(int index) {
 					if (index == 0) {

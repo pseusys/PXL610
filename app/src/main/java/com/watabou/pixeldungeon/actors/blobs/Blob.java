@@ -20,7 +20,7 @@ package com.watabou.pixeldungeon.actors.blobs;
 import java.util.Arrays;
 
 import com.watabou.pixeldungeon.Dungeon;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.effects.BlobEmitter;
 import com.watabou.pixeldungeon.levels.Level;
@@ -205,7 +205,7 @@ public class Blob extends Actor {
 			return gas;
 			
 		} catch (Exception e) {
-			PixelDungeon.reportException( e );
+			PXL610.reportException( e );
 			return null;
 		}
 	}

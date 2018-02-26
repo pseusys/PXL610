@@ -40,7 +40,7 @@ public class WndWandmaker extends WndQuest {
 	
 	public WndWandmaker( final Wandmaker wandmaker, final Item item ) {
 		
-		super( wandmaker, TXT_MESSAGE, "wandmaker_batt","wandmaker_non_batt" );
+		super( wandmaker, TXT_MESSAGE, TXT_BATTLE, TXT_NON_BATTLE );
 		
 		this.wandmaker = wandmaker;
 		questItem = item;

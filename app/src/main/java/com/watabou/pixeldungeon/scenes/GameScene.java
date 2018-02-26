@@ -33,7 +33,7 @@ import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.FogOfWar;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
@@ -118,11 +118,11 @@ public class GameScene extends PixelScene {
 	public void create() {
 		Music.INSTANCE.play( Assets.TUNE, true );
 		Music.INSTANCE.volume( 1f );
-		
-		PixelDungeon.lastClass( Dungeon.hero.heroClass.ordinal() );
+
+		PXL610.lastClass( Dungeon.hero.heroClass.ordinal() );
 		
 		super.create();
-		Camera.main.zoom( defaultZoom + PixelDungeon.zoom() );
+		Camera.main.zoom( defaultZoom + PXL610.zoom() );
 		
 		scene = this;
 
@@ -188,7 +188,7 @@ public class GameScene extends PixelScene {
 		fog.updateVisibility( Dungeon.visible, Dungeon.level.visited, Dungeon.level.mapped );
 		add( fog );
 		
-		brightness( PixelDungeon.brightness() );
+		brightness( PXL610.brightness() );
 		
 		spells = new Group();
 		add( spells );

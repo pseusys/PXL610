@@ -430,13 +430,16 @@ public class Ghost extends NPC {
 			"Please take one of these items, maybe they " +
 			"will be useful to you in your journey...";
 		
+		private static final String TXT_YES	= "Yes, I will do it for you";
+		private static final String TXT_NO	= "No, I can't help you";
+		
 		public void interact( final Ghost ghost ) {
 			if (Quest.given) {
 
 				GameScene.show( new WndSadGhost( ghost, null, Utils.format( TXT_CURSE2, Dungeon.hero.className() ) ) );
 				
 			} else {
-				GameScene.show( new WndQuest( ghost, TXT_CURSE1, "ghost_yes", "ghost_no" ) {
+				GameScene.show( new WndQuest( ghost, TXT_CURSE1, TXT_YES, TXT_NO ) {
 					protected void onSelect( int index ) {
 						if (index == 0) {
 							Quest.given = true;

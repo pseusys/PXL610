@@ -25,12 +25,15 @@ import com.watabou.pixeldungeon.utils.GLog;
 
 public class WndSadGhost extends WndQuest {
 	
+	private static final String TXT_WEAPON	= "Ghost's weapon";
+	private static final String TXT_ARMOR	= "Ghost's armor";
+	
 	private Ghost ghost;
 	private Item questItem;
 	
 	public WndSadGhost( final Ghost ghost, final Item item, String text ) {
 		
-		super( ghost, text, "ghost_weap", "ghost_arm" );
+		super( ghost, text, TXT_WEAPON, TXT_ARMOR );
 		
 		this.ghost = ghost;
 		questItem = item;

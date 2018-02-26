@@ -24,7 +24,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.scenes.PixelScene;
 import com.watabou.pixeldungeon.ui.Icons;
 import com.watabou.pixeldungeon.ui.ScrollPane;
@@ -46,7 +46,7 @@ public class WndJournal extends Window {
 	public WndJournal() {
 		
 		super();
-		resize( WIDTH, PixelDungeon.landscape() ? HEIGHT_L : HEIGHT_P );
+		resize( WIDTH, PXL610.landscape() ? HEIGHT_L : HEIGHT_P );
 		
 		txtTitle = PixelScene.createText( TXT_TITLE, 9 );
 		txtTitle.hardlight( Window.TITLE_COLOR );

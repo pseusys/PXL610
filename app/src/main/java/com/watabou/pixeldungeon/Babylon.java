@@ -1,7 +1,5 @@
 package com.watabou.pixeldungeon;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -29,7 +27,7 @@ public class Babylon{
         localisations.add(Locale.GERMAN);
         localisations.add(new Locale("la"));
 
-        String lock = PixelDungeon.localisation();
+        String lock = PXL610.localisation();
 
         for (int i = 0; i < localisations.size(); i++) {
             if (lock.equals(localisations.get(i).getLanguage())) inUse = localisations.get(i);
@@ -40,10 +38,10 @@ public class Babylon{
         Locale current = Locale.getDefault();
 
         if (localisations.contains(current)) {
-            PixelDungeon.localisation(current.getLanguage());
+            PXL610.localisation(current.getLanguage());
             inUse = current;
         } else {
-            PixelDungeon.localisation(Locale.ENGLISH.getLanguage());
+            PXL610.localisation(Locale.ENGLISH.getLanguage());
             inUse = Locale.ENGLISH;
         }
     }
@@ -59,7 +57,7 @@ public class Babylon{
         }
 
         inUse = localisations.get(current);
-        PixelDungeon.localisation(localisations.get(current).getLanguage());
+        PXL610.localisation(localisations.get(current).getLanguage());
         return "language_name";
     }
 

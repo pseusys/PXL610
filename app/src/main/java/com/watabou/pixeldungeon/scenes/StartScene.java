@@ -33,7 +33,7 @@ import com.watabou.pixeldungeon.Assets;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.GamesInProgress;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
 import com.watabou.pixeldungeon.effects.BannerSprites;
 import com.watabou.pixeldungeon.effects.Speck;
@@ -54,8 +54,16 @@ public class StartScene extends PixelScene {
 	private static final float BUTTON_HEIGHT	= 24;
 	private static final float GAP				= 2;
 	
+	private static final String TXT_LOAD	= "Load Game";
+	private static final String TXT_NEW		= "New Game";
+	
 	private static final String TXT_ERASE		= "Erase current game";
 	private static final String TXT_DPTH_LVL	= "Depth: %d, level: %d";
+	
+	private static final String TXT_REALLY	= "Do you really want to start new game?";
+	private static final String TXT_WARNING	= "Your current game progress will be erased.";
+	private static final String TXT_YES		= "Yes, start new game";
+	private static final String TXT_NO		= "No, return to main menu";
 	
 	private static final String TXT_UNLOCK	= "To unlock this character class, slay the 3rd boss with any other class";
 	
@@ -94,7 +102,7 @@ public class StartScene extends PixelScene {
 		int h = Camera.main.height;
 		
 		float width, height;
-		if (PixelDungeon.landscape()) {
+		if (PXL610.landscape()) {
 			width = WIDTH_L;
 			height = HEIGHT_L;
 		} else {
@@ -118,11 +126,11 @@ public class StartScene extends PixelScene {
 		buttonX = left;
 		buttonY = bottom - BUTTON_HEIGHT;
 		
-		btnNewGame = new GameButton( "start_new" ) {
+		btnNewGame = new GameButton( TXT_NEW ) {
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.check( curClass ) != null) {
-					StartScene.this.add( new WndOptions( "start_really", "start_warn", "start_yes", "start_no" ) {
+					StartScene.this.add( new WndOptions( TXT_REALLY, TXT_WARNING, TXT_YES, TXT_NO ) {
 						@Override
 						protected void onSelect( int index ) {
 							if (index == 0) {
@@ -138,7 +146,7 @@ public class StartScene extends PixelScene {
 		};
 		add( btnNewGame );
 
-		btnLoad = new GameButton( "start_load" ) {
+		btnLoad = new GameButton( TXT_LOAD ) {	
 			@Override
 			protected void onClick() {
 				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
@@ -157,7 +165,7 @@ public class StartScene extends PixelScene {
 			shields.put( cl, shield );
 			add( shield );
 		}
-		if (PixelDungeon.landscape()) {
+		if (PXL610.landscape()) {
 			float shieldW = width / 4;
 			float shieldH = Math.min( centralHeight, shieldW );
 			top = title.y + title.height + (centralHeight - shieldH) / 2;
@@ -217,7 +225,7 @@ public class StartScene extends PixelScene {
 		add( btnExit );
 		
 		curClass = null;
-		updateClass( HeroClass.values()[PixelDungeon.lastClass()] );
+		updateClass( HeroClass.values()[PXL610.lastClass()] );
 		
 		fadeIn();
 		
@@ -225,7 +233,7 @@ public class StartScene extends PixelScene {
 			@Override
 			public void call() {
 				if (Game.scene() == StartScene.this) {
-					PixelDungeon.switchNoFade( StartScene.class );
+					PXL610.switchNoFade( StartScene.class );
 				}
 			}
 		};
@@ -294,17 +302,17 @@ public class StartScene extends PixelScene {
 		Dungeon.hero = null;
 		InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 		
-		if (PixelDungeon.gameIntro()) {
-			PixelDungeon.gameIntro( false );
+		if (PXL610.gameIntro()) {
+			PXL610.gameIntro( false );
 			Game.switchScene( IntroScene.class );
 		} else {
 			Game.switchScene( InterlevelScene.class );
-		}
+		}	
 	}
 	
 	@Override
 	protected void onBackPressed() {
-		PixelDungeon.switchNoFade( TitleScene.class );
+		PXL610.switchNoFade( TitleScene.class );
 	}
 	
 	private static class GameButton extends RedButton {
@@ -315,7 +323,7 @@ public class StartScene extends PixelScene {
 		private BitmapText secondary;
 		
 		public GameButton( String primary ) {
-			super( primary, false );
+			super( primary );
 			
 			this.secondary.text( null );
 		}
@@ -483,7 +491,7 @@ public class StartScene extends PixelScene {
 			
 			super.createChildren();
 			
-			image = Icons.get( PixelDungeon.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF );
+			image = Icons.get( PXL610.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF );
 			add( image );
 		}
 		
@@ -499,10 +507,10 @@ public class StartScene extends PixelScene {
 		@Override
 		protected void onClick() {
 			if (Badges.isUnlocked( Badges.Badge.VICTORY )) {
-				StartScene.this.add( new WndChallenges( PixelDungeon.challenges(), true ) {
+				StartScene.this.add( new WndChallenges( PXL610.challenges(), true ) {
 					public void onBackPressed() {
 						super.onBackPressed();
-						image.copy( Icons.get( PixelDungeon.challenges() > 0 ? 
+						image.copy( Icons.get( PXL610.challenges() > 0 ?
 							Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF ) );
 					};
 				} );

@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.effects;
 
 import android.annotation.SuppressLint;
+import android.util.FloatMath;
 import android.util.SparseArray;
 
 import com.watabou.noosa.Game;
@@ -373,7 +374,7 @@ public class Speck extends Image {
 			case CHANGE:
 				am = (float) Math.sqrt( (p < 0.5f ? p : 1 - p) * 2);
 				scale.y = (1 + p) * 0.5f;
-				scale.x = (float) (scale.y * Math.cos( left * 15 ));
+				scale.x = scale.y * (float) Math.cos( left * 15 );
 				break;
 				
 			case HEART:

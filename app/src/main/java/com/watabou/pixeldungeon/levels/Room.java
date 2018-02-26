@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.levels.painters.*;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
@@ -82,7 +82,7 @@ public class Room extends Rect implements Graph.Node, Bundlable {
 			try {
 				paint.invoke( null, level, room );
 			} catch (Exception e) {
-				PixelDungeon.reportException( e );
+				PXL610.reportException( e );
 			}
 		}
 	};

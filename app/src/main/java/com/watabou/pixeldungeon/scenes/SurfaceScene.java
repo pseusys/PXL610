@@ -157,7 +157,7 @@ public class SurfaceScene extends PixelScene {
 			frame.hardlight( 0xDDEEFF );
 		}
 		
-		RedButton gameOver = new RedButton( "surf_gameover", false ) {
+		RedButton gameOver = new RedButton( "Game Over" ) {
 			protected void onClick() {
 				Game.switchScene( TitleScene.class );
 			}

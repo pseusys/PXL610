@@ -58,7 +58,7 @@ public class WndImp extends Window {
 		message.y = titlebar.bottom() + GAP;
 		add( message );
 		
-		RedButton btnReward = new RedButton( "imp_rew", false ) {
+		RedButton btnReward = new RedButton( TXT_REWARD ) {
 			@Override
 			protected void onClick() {
 				takeReward( imp, tokens, Imp.Quest.reward );

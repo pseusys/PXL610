@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.BitmapText;
 import com.watabou.pixeldungeon.Challenges;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.scenes.PixelScene;
 import com.watabou.pixeldungeon.ui.CheckBox;
 import com.watabou.pixeldungeon.ui.Window;
@@ -56,7 +56,7 @@ public class WndChallenges extends Window {
 		float pos = TTL_HEIGHT;
 		for (int i=0; i < Challenges.NAMES.length; i++) {
 			
-			CheckBox cb = new CheckBox( Challenges.NAMES[i], false );
+			CheckBox cb = new CheckBox( Challenges.NAMES[i] );
 			cb.checked( (checked & Challenges.MASKS[i]) != 0 );
 			cb.active = editable;
 			
@@ -82,8 +82,8 @@ public class WndChallenges extends Window {
 				if (boxes.get( i ).checked()) {
 					value |= Challenges.MASKS[i];
 				}
-			}	
-			PixelDungeon.challenges( value );
+			}
+			PXL610.challenges( value );
 		}
 		
 		super.onBackPressed();

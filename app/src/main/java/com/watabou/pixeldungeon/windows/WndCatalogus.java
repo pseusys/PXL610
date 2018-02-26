@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ui.Component;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.items.potions.Potion;
 import com.watabou.pixeldungeon.items.scrolls.Scroll;
@@ -59,7 +59,7 @@ public class WndCatalogus extends WndTabbed {
 		
 		super();
 		
-		if (PixelDungeon.landscape()) {
+		if (PXL610.landscape()) {
 			resize( WIDTH_L, HEIGHT_L );
 		} else {
 			resize( WIDTH_P, HEIGHT_P );

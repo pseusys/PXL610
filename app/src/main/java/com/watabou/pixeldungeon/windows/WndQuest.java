@@ -17,7 +17,7 @@
  */
 package com.watabou.pixeldungeon.windows;
 
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.actors.mobs.npcs.NPC;
 import com.watabou.pixeldungeon.ui.HighlightedText;
 import com.watabou.pixeldungeon.ui.RedButton;
@@ -36,7 +36,7 @@ public class WndQuest extends Window {
 		
 		super();
 		
-		int width = PixelDungeon.landscape() ? WIDTH_L : WIDTH_P;
+		int width = PXL610.landscape() ? WIDTH_L : WIDTH_P;
 		
 		IconTitle titlebar = new IconTitle( questgiver.sprite(), Utils.capitalize( questgiver.name ) );
 		titlebar.setRect( 0, 0, width, 0 );
@@ -55,7 +55,7 @@ public class WndQuest extends Window {
 				pos += GAP;
 				
 				final int index = i;
-				RedButton btn = new RedButton( options[i], false ) {
+				RedButton btn = new RedButton( options[i] ) {
 					@Override
 					protected void onClick() {
 						hide();

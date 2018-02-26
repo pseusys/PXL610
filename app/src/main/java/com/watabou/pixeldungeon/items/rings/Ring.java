@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -127,8 +127,8 @@ public class Ring extends EquipableItem {
 			final Ring r1 = hero.belongings.ring1;
 			final Ring r2 = hero.belongings.ring2;
 			
-			PixelDungeon.scene().add( 
-				new WndOptions( "rng_un_title", "rng_un_mss",
+			PXL610.scene().add(
+				new WndOptions( TXT_UNEQUIP_TITLE, TXT_UNEQUIP_MESSAGE, 
 					Utils.capitalize( r1.toString() ), 
 					Utils.capitalize( r2.toString() ) ) {
 					

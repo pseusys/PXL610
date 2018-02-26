@@ -23,8 +23,8 @@ public class CheckBox extends RedButton {
 
 	private boolean checked = false;
 	
-	public CheckBox( String label, boolean imutable ) {
-		super( label, imutable );
+	public CheckBox( String label ) {
+		super( label );
 		
 		icon( Icons.get( Icons.UNCHECKED ) );
 	}

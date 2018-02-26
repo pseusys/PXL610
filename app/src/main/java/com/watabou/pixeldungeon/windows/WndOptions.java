@@ -49,7 +49,7 @@ public class WndOptions extends Window {
 		
 		for (int i=0; i < options.length; i++) {
 			final int index = i;
-			RedButton btn = new RedButton( options[i], false ) {
+			RedButton btn = new RedButton( options[i] ) {
 				@Override
 				protected void onClick() {
 					hide();

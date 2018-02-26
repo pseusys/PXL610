@@ -76,7 +76,7 @@ public class InterlevelScene extends PixelScene {
 		super.create();
 		
 		String text = "";
-		switch (mode) { //PD610: why DESCEND?
+		switch (mode) {
 		case DESCEND:
 			text = TXT_DESCENDING;
 			break;

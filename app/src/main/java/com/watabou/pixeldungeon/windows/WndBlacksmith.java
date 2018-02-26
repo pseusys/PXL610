@@ -51,6 +51,8 @@ public class WndBlacksmith extends Window {
 		"2 items and turn them into one of a better quality.";
 	private static final String TXT_SELECT =
 		"Select an item to reforge";
+	private static final String TXT_REFORGE =
+		"Reforge them";
 	
 	public WndBlacksmith( Blacksmith troll, Hero hero ) {
 		
@@ -88,7 +90,7 @@ public class WndBlacksmith extends Window {
 		btnItem2.setRect( btnItem1.right() + BTN_GAP, btnItem1.top(), BTN_SIZE, BTN_SIZE );
 		add( btnItem2 );
 		
-		btnReforge = new RedButton( "blacksmith_reforge", false ) {
+		btnReforge = new RedButton( TXT_REFORGE ) {
 			@Override
 			protected void onClick() {
 				Blacksmith.upgrade( btnItem1.item, btnItem2.item );

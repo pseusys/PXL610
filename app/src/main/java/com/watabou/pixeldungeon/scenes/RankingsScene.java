@@ -24,7 +24,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
-import com.watabou.pixeldungeon.PixelDungeon;
+import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.Rankings;
 import com.watabou.pixeldungeon.effects.Flare;
 import com.watabou.pixeldungeon.sprites.ItemSprite;
@@ -76,7 +76,7 @@ public class RankingsScene extends PixelScene {
 		
 		if (Rankings.INSTANCE.records.size() > 0) {
 			
-			float rowHeight = PixelDungeon.landscape() ? ROW_HEIGHT_L : ROW_HEIGHT_P;
+			float rowHeight = PXL610.landscape() ? ROW_HEIGHT_L : ROW_HEIGHT_P;
 			
 			float left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
 			float top = align( (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2 );
@@ -143,7 +143,7 @@ public class RankingsScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		PixelDungeon.switchNoFade( TitleScene.class );
+		PXL610.switchNoFade( TitleScene.class );
 	}
 	
 	public static class Record extends Button {

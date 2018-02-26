@@ -33,9 +33,9 @@ import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.scenes.PixelScene;
 import com.watabou.pixeldungeon.scenes.TitleScene;
 
-public class PixelDungeon extends Game {
+public class PXL610 extends Game {
 	
-	public PixelDungeon() {
+	public PXL610() {
 		super( TitleScene.class );
 		
 		com.watabou.utils.Bundle.addAlias( 
@@ -132,10 +132,10 @@ public class PixelDungeon extends Game {
 		instance.getWindowManager().getDefaultDisplay().getMetrics( metrics );
 		boolean landscape = metrics.widthPixels > metrics.heightPixels;
 
-		PixelDungeon.programIntro(true);
+		PXL610.programIntro(true);
 
-		if (PixelDungeon.programIntro()) { // PXL610: update localisation;
-			PixelDungeon.programIntro(false);
+		if (PXL610.programIntro()) { // PXL610: update localisation;
+			PXL610.programIntro(false);
 			Babylon.get().updateLocale();
 		}
 
