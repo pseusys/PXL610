@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
 public class Amok extends FlavourBuff {
@@ -28,6 +29,6 @@ public class Amok extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Amok";
+		return Babylon.get().getFromResources("buff_amok");
 	}
 }

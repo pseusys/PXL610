@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
  * Created by User on 13.02.2018.
  */
 
-public class Babylon{
+public class Babylon {
     private static Babylon instance;
 
     private ArrayList<Locale> localisations = new ArrayList<>();
@@ -42,11 +42,11 @@ public class Babylon{
             inUse = current;
         } else {
             PXL610.localisation(Locale.ENGLISH.getLanguage());
-            inUse = Locale.ENGLISH; //
+            inUse = Locale.ENGLISH;
         }
     }
 
-    public String changeLocale(int loc) {
+    public void changeLocale(int loc) {
         int current = localisations.indexOf(inUse);
 
         current += loc;
@@ -58,7 +58,6 @@ public class Babylon{
 
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
-        return "language_name";
     }
 
     public String getFromResources(String tag) {
@@ -66,7 +65,7 @@ public class Babylon{
     }
 
     public String getLanguageName() {
-        return ResourceBundle.getBundle("strings", inUse).getString("language_name");
+        return getFromResources("language_name");
     }
 
     public Locale getCurrent() {

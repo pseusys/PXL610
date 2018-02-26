@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.blobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -80,7 +81,7 @@ public class ToxicGas extends Blob implements Hero.Doom {
 	
 	@Override
 	public String tileDesc() {
-		return "A greenish cloud of toxic gas is swirling here.";
+		return Babylon.get().getFromResources("desc_tox_gas");
 	}
 	
 	@Override
@@ -89,6 +90,6 @@ public class ToxicGas extends Blob implements Hero.Doom {
 		Badges.validateDeathFromGas();
 		
 		Dungeon.fail( Utils.format( ResultDescriptions.GAS, Dungeon.depth ) );
-		GLog.n( "You died from a toxic gas.." );
+		GLog.n( Babylon.get().getFromResources("death_gas") );
 	}
 }

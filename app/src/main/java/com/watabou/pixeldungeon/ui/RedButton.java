@@ -34,7 +34,7 @@ public class RedButton extends Button {
 			
 	public RedButton( String label ) {
 		super();
-		
+
 		text.text( label );
 		text.measure();
 	}

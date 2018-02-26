@@ -17,8 +17,6 @@
  */
 package com.watabou.pixeldungeon.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.watabou.noosa.BitmapText;
@@ -37,6 +35,8 @@ import com.watabou.pixeldungeon.ui.Archs;
 import com.watabou.pixeldungeon.ui.ExitButton;
 import com.watabou.pixeldungeon.ui.PrefsButton;
 import com.watabou.pixeldungeon.windows.WndSettings;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class TitleScene extends PixelScene {
 	
@@ -138,7 +138,7 @@ public class TitleScene extends PixelScene {
 			btnHighscores.setPos( w / 2, btnPlay.top() );
 		}
 
-		BitmapText version = new BitmapText( "v " + Game.version, font1x );
+		BitmapText version = new BitmapText( "версия " + Game.version, font1x );
 		version.measure();
 		version.hardlight( 0x888888 );
 		version.x = w - version.width();

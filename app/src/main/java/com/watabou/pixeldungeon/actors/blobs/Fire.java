@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.blobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -108,6 +109,6 @@ public class Fire extends Blob {
 	
 	@Override
 	public String tileDesc() {
-		return "A fire is raging here.";
+		return Babylon.get().getFromResources("desc_fire");
 	}
 }

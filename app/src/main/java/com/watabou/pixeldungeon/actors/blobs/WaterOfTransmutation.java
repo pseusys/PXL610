@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.blobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Journal;
 import com.watabou.pixeldungeon.Journal.Feature;
 import com.watabou.pixeldungeon.effects.BlobEmitter;
@@ -218,8 +219,6 @@ public class WaterOfTransmutation extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return 
-			"Power of change radiates from the water of this well. " +
-			"Throw an item into the well to turn it into something else.";
+		return Babylon.get().getFromResources("desc_wat_trans");
 	}
 }

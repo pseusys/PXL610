@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
 public class Barkskin extends Buff {
@@ -58,6 +59,6 @@ public class Barkskin extends Buff {
 	
 	@Override
 	public String toString() {
-		return "Barkskin";
+		return Babylon.get().getFromResources("buff_barkskin");
 	}
 }

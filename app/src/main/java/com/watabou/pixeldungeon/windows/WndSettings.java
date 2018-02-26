@@ -43,7 +43,6 @@ public class WndSettings extends Window {
 
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
-	private RedButton btnLocalisation;
 
 	public WndSettings( boolean inGame ) {
 		super();
@@ -71,7 +70,7 @@ public class WndSettings extends Window {
 			};
 			add( btnZoomIn.setRect( WIDTH - w, 0, w, BTN_HEIGHT) );
 
-			add( new RedButton("sett_default_zoom" ) {
+			add( new RedButton(Babylon.get().getFromResources("set_default_zoom") ) {
 				@Override
 				protected void onClick() {
 					zoom( PixelScene.defaultZoom );
@@ -84,11 +83,11 @@ public class WndSettings extends Window {
 
 			int w = BTN_HEIGHT;
 
-			// Difficulty Levels
+			// Localisation Settings
 			RedButton btnLanguageBack = new RedButton(TXT_BACK) {
 				@Override
 				protected void onClick() {
-					btnLocalisation.text(Babylon.get().changeLocale(-1));
+					Babylon.get().changeLocale(-1);
 					this.destroy();
 					((TitleScene) PXL610.scene()).localUpdate();
 				}
@@ -98,14 +97,14 @@ public class WndSettings extends Window {
 			RedButton btnLanguageUp = new RedButton(TXT_UP) {
 				@Override
 				protected void onClick() {
-					btnLocalisation.text(Babylon.get().changeLocale(1));
+					Babylon.get().changeLocale(1);
 					this.destroy();
 					((TitleScene) PXL610.scene()).localUpdate();
 				}
 			};
 			add (btnLanguageUp.setRect( WIDTH - w, 0, w, BTN_HEIGHT) );
 
-			btnLocalisation = new RedButton( Babylon.get().getLanguageName() ) {
+			RedButton btnLocalisation = new RedButton(Babylon.get().getLanguageName()) {
 				@Override
 				protected void onClick() {
 				}
@@ -113,7 +112,7 @@ public class WndSettings extends Window {
 			add(btnLocalisation.setRect(btnLanguageBack.right(), 0, WIDTH - btnLanguageBack.width() - btnLanguageBack.width(), BTN_HEIGHT) );
 
 			// Previous settings
-			CheckBox btnScaleUp = new CheckBox( "sett_scale_up" ) {
+			CheckBox btnScaleUp = new CheckBox( Babylon.get().getFromResources("sett_scale_up") ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -124,7 +123,7 @@ public class WndSettings extends Window {
 			btnScaleUp.checked( PXL610.scaleUp() );
 			add( btnScaleUp );
 
-			btnImmersive = new CheckBox( "sett_immersive" ) {
+			btnImmersive = new CheckBox( Babylon.get().getFromResources("sett_immersive") ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -138,7 +137,7 @@ public class WndSettings extends Window {
 
 		}
 
-		CheckBox btnMusic = new CheckBox( "sett_music" ) {
+		CheckBox btnMusic = new CheckBox( Babylon.get().getFromResources("sett_music") ) {
 			@Override
 			protected void onClick() {
 				super.onClick();
@@ -149,7 +148,7 @@ public class WndSettings extends Window {
 		btnMusic.checked( PXL610.music() );
 		add( btnMusic );
 
-		CheckBox btnSound = new CheckBox( "sett_sound" ) {
+		CheckBox btnSound = new CheckBox( Babylon.get().getFromResources("sett_sound") ) {
 			@Override
 			protected void onClick() {
 				super.onClick();
@@ -163,7 +162,7 @@ public class WndSettings extends Window {
 
 		if (inGame) {
 
-			CheckBox btnBrightness = new CheckBox( "sett_brightness" ) {
+			CheckBox btnBrightness = new CheckBox( Babylon.get().getFromResources("sett_brightness") ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -174,7 +173,7 @@ public class WndSettings extends Window {
 			btnBrightness.checked( PXL610.brightness() );
 			add( btnBrightness );
 
-			CheckBox btnQuickslot = new CheckBox( "sett_quick_slot" ) {
+			CheckBox btnQuickslot = new CheckBox( Babylon.get().getFromResources("sett_quick_slot") ) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -218,6 +217,6 @@ public class WndSettings extends Window {
 	}
 
 	private String orientationText() {
-		return PXL610.landscape() ? "sett_switch_port" : "sett_switch_land";
+		return PXL610.landscape() ? Babylon.get().getFromResources("sett_switch_port") : Babylon.get().getFromResources("sett_switch_land");
 	}
 }

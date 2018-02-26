@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.blobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -47,6 +48,6 @@ public class ParalyticGas extends Blob {
 	
 	@Override
 	public String tileDesc() {
-		return "A cloud of paralytic gas is swirling here.";
+		return Babylon.get().getFromResources("desc_para_gas");
 	}
 }

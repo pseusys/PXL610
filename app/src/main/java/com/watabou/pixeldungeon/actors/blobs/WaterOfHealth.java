@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.blobs;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
 import com.watabou.pixeldungeon.Journal.Feature;
@@ -34,9 +35,6 @@ import com.watabou.pixeldungeon.items.potions.PotionOfHealing;
 import com.watabou.pixeldungeon.utils.GLog;
 
 public class WaterOfHealth extends WellWater {
-
-	private static final String TXT_PROCCED =
-		"As you take a sip, you feel your wounds heal completely.";
 	
 	@Override
 	protected boolean affectHero( Hero hero ) {
@@ -51,7 +49,7 @@ public class WaterOfHealth extends WellWater {
 
 		Dungeon.hero.interrupt();
 	
-		GLog.p( TXT_PROCCED );
+		GLog.p( Babylon.get().getFromResources("aff_wat_heal") );
 		
 		Journal.remove( Feature.WELL_OF_HEALTH );
 		
@@ -77,8 +75,6 @@ public class WaterOfHealth extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return 
-			"Power of health radiates from the water of this well. " +
-			"Take a sip from it to heal your wounds and satisfy hunger.";
+		return Babylon.get().getFromResources("desc_wat_heal");
 	}
 }

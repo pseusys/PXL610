@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.blobs;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.Journal;
@@ -41,10 +42,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class SacrificialFire extends Blob {
-	
-	private static final String TXT_WORTHY		= "\"Your sacrifice is worthy...\" ";
-	private static final String TXT_UNWORTHY	= "\"Your sacrifice is unworthy...\" ";
-	private static final String TXT_REWARD		= "\"Your sacrifice is worthy and so you are!\" ";
 	
 	protected int pos;
 	
@@ -109,18 +106,18 @@ public class SacrificialFire extends Blob {
 				int volume = fire.volume - exp;
 				if (volume > 0) {
 					fire.seed( fire.pos, volume );
-					GLog.w( TXT_WORTHY );
+					GLog.w( Babylon.get().getFromResources("sacr_worth") );
 				} else {
 					fire.seed( fire.pos, 0 );
 					Journal.remove( Feature.SACRIFICIAL_FIRE );
 					
-					GLog.w( TXT_REWARD );
+					GLog.w( Babylon.get().getFromResources("sacr_rew") );
 					GameScene.effect( new Flare( 7, 32 ).color( 0x66FFFF, true ).show( ch.sprite.parent, DungeonTilemap.tileCenterToWorld( fire.pos ), 2f ) );
 					Dungeon.level.drop( new ScrollOfWipeOut(), fire.pos ).sprite.drop();
 				}
 			} else {
 				
-				GLog.w( TXT_UNWORTHY );
+				GLog.w( Babylon.get().getFromResources("sacr_unworth") );
 				
 			}
 		}
@@ -128,7 +125,7 @@ public class SacrificialFire extends Blob {
 	
 	@Override
 	public String tileDesc() {
-		return "Sacrificial fire burns here. Every creature touched by this fire is marked as an offering for the spirits of the dungeon.";
+		return Babylon.get().getFromResources("desc_sacr");
 	}
 	
 	public static class Marked extends FlavourBuff {
@@ -142,7 +139,7 @@ public class SacrificialFire extends Blob {
 		
 		@Override
 		public String toString() {
-			return "Marked for sacrifice";
+			return Babylon.get().getFromResources("sacr_mark");
 		}
 		
 		@Override

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.blobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -81,6 +82,6 @@ public class Foliage extends Blob {
 	
 	@Override
 	public String tileDesc() {
-		return "Shafts of light pierce the gloom of the underground garden.";
+		return Babylon.get().getFromResources("desc_foliage");
 	}
 }
