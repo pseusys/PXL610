@@ -42,7 +42,7 @@ public class Babylon{
             inUse = current;
         } else {
             PXL610.localisation(Locale.ENGLISH.getLanguage());
-            inUse = Locale.ENGLISH;
+            inUse = Locale.ENGLISH; //
         }
     }
 
