@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.buffs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.blobs.ToxicGas;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
@@ -33,7 +34,7 @@ public class GasesImmunity extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Immune to gases";
+		return Babylon.get().getFromResources("buff_imm_gas");
 	}
 	
 	public static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

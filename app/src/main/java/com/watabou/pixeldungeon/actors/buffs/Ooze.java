@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.levels.Level;
@@ -25,8 +26,6 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.pixeldungeon.utils.Utils;
 
 public class Ooze extends Buff {
-	
-	private static final String TXT_HERO_KILLED = "%s killed you...";
 	
 	public int damage	= 1;
 	
@@ -37,7 +36,7 @@ public class Ooze extends Buff {
 	
 	@Override
 	public String toString() {
-		return "Caustic ooze";
+		return Babylon.get().getFromResources("buff_ooze");
 	}
 	
 	@Override
@@ -46,7 +45,7 @@ public class Ooze extends Buff {
 			target.damage( damage, this );
 			if (!target.isAlive() && target == Dungeon.hero) {
 				Dungeon.fail( Utils.format( ResultDescriptions.OOZE, Dungeon.depth ) );
-				GLog.n( TXT_HERO_KILLED, toString() );
+				GLog.n( Babylon.get().getFromResources("death_ooze"), toString() );
 			}
 			spend( TICK );
 		}

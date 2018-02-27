@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.buffs;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
@@ -90,7 +91,7 @@ public class Shadows extends Invisibility {
 	
 	@Override
 	public String toString() {
-		return "Shadowmelded";
+		return Babylon.get().getFromResources("buff_shadow");
 	}
 	
 }

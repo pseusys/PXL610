@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
 public class Rage extends FlavourBuff {
@@ -28,6 +29,6 @@ public class Rage extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Blinded with rage";
+		return Babylon.get().getFromResources("buff_rage");
 	}
 }

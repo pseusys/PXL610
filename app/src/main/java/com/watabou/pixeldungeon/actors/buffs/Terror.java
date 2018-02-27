@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
@@ -49,7 +50,7 @@ public class Terror extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Terror";
+		return Babylon.get().getFromResources("buff_terror");
 	}
 	
 	public static void recover( Char target ) {

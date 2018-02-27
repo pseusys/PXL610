@@ -25,6 +25,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Bones;
 import com.watabou.pixeldungeon.Dungeon;
@@ -111,22 +112,7 @@ import com.watabou.utils.Random;
 
 public class Hero extends Char {
 	
-	private static final String TXT_LEAVE = "One does not simply leave Pixel Dungeon.";
-	
-	private static final String TXT_LEVEL_UP = "level up!";
-	private static final String TXT_NEW_LEVEL = 
-		"Welcome to level %d! Now you are healthier and more focused. " +
-		"It's easier for you to hit enemies and dodge their attacks.";
-	
-	public static final String TXT_YOU_NOW_HAVE	= "You now have %s";
-	
-	private static final String TXT_SOMETHING_ELSE	= "There is something else here";
-	private static final String TXT_LOCKED_CHEST	= "This chest is locked and you don't have matching key";
-	private static final String TXT_LOCKED_DOOR		= "You don't have a matching key";
-	private static final String TXT_NOTICED_SMTH	= "You noticed something";
-	
 	private static final String TXT_WAIT	= "...";
-	private static final String TXT_SEARCH	= "search";
 	
 	public static final int STARTING_STR = 10;
 	
@@ -168,7 +154,7 @@ public class Hero extends Char {
 	
 	public Hero() {
 		super();
-		name = "you";
+		name = Babylon.get().getFromResources("hero_name");
 		
 		HP = HT = 20;
 		STR = STARTING_STR;
@@ -581,14 +567,14 @@ public class Hero extends Char {
 							((item instanceof ScrollOfUpgrade || item instanceof ScrollOfEnchantment) && ((Scroll)item).isKnown()) ||
 							((item instanceof PotionOfStrength || item instanceof PotionOfMight) && ((Potion)item).isKnown());
 						if (important) {
-							GLog.p( TXT_YOU_NOW_HAVE, item.name() );
+							GLog.p( Babylon.get().getFromResources("hero_you_have"), item.name() );
 						} else {
-							GLog.i( TXT_YOU_NOW_HAVE, item.name() );
+							GLog.i( Babylon.get().getFromResources("hero_you_have"), item.name() );
 						}
 					}
 					
 					if (!heap.isEmpty()) {
-						GLog.i( TXT_SOMETHING_ELSE );
+						GLog.i(Babylon.get().getFromResources("hero_smth_else"));
 					}
 					curAction = null;
 				} else {
@@ -625,7 +611,7 @@ public class Hero extends Char {
 					theKey = belongings.getKey( GoldenKey.class, Dungeon.depth );
 					
 					if (theKey == null) {
-						GLog.w( TXT_LOCKED_CHEST );
+						GLog.w(Babylon.get().getFromResources("hero_chest_locked"));
 						ready();
 						return false;
 					}
@@ -686,7 +672,7 @@ public class Hero extends Char {
 				Sample.INSTANCE.play( Assets.SND_UNLOCK );
 				
 			} else {
-				GLog.w( TXT_LOCKED_DOOR );
+				GLog.w(Babylon.get().getFromResources("hero_door_locked"));
 				ready();
 			}
 			
@@ -735,7 +721,7 @@ public class Hero extends Char {
 			if (Dungeon.depth == 1) {
 				
 				if (belongings.getItem( Amulet.class ) == null) {
-					GameScene.show( new WndMessage( TXT_LEAVE ) );
+					GameScene.show( new WndMessage(Babylon.get().getFromResources("hero_no_leave")) );
 					ready();
 				} else {
 					Dungeon.win( ResultDescriptions.WIN );
@@ -1039,8 +1025,8 @@ public class Hero extends Char {
 		
 		if (levelUp) {
 			
-			GLog.p( TXT_NEW_LEVEL, lvl );
-			sprite.showStatus( CharSprite.POSITIVE, TXT_LEVEL_UP );
+			GLog.p( Babylon.get().getFromResources("hero_lvl_up_desc"), lvl );
+			sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("hero_lvl_up"));
 			Sample.INSTANCE.play( Assets.SND_LEVELUP );
 			
 			Badges.validateLevelReached();
@@ -1079,33 +1065,33 @@ public class Hero extends Char {
 		
 		if (sprite != null) {
 			if (buff instanceof Burning) {
-				GLog.w( "You catch fire!" );
+				GLog.w(Babylon.get().getFromResources("hero_fire"));
 				interrupt();
 			} else if (buff instanceof Paralysis) {
-				GLog.w( "You are paralysed!" );
+				GLog.w(Babylon.get().getFromResources("hero_paralysed"));
 				interrupt();
 			} else if (buff instanceof Poison) {
-				GLog.w( "You are poisoned!" );
+				GLog.w(Babylon.get().getFromResources("hero_poisoned"));
 				interrupt();
 			} else if (buff instanceof Ooze) {
-				GLog.w( "Caustic ooze eats your flesh. Wash away it!" );
+				GLog.w(Babylon.get().getFromResources("hero_ooze"));
 			} else if (buff instanceof Roots) {
-				GLog.w( "You can't move!" );
+				GLog.w(Babylon.get().getFromResources("hero_roots"));
 			} else if (buff instanceof Weakness) {
-				GLog.w( "You feel weakened!" );
+				GLog.w(Babylon.get().getFromResources("hero_weak"));
 			} else if (buff instanceof Blindness) {
-				GLog.w( "You are blinded!" );
+				GLog.w(Babylon.get().getFromResources("hero_blind"));
 			} else if (buff instanceof Fury) {
-				GLog.w( "You become furious!" );
-				sprite.showStatus( CharSprite.POSITIVE, "furious" );
+				GLog.w(Babylon.get().getFromResources("hero_furious"));
+				sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("hero_furious_title"));
 			} else if (buff instanceof Charm) {
-				GLog.w( "You are charmed!" );
+				GLog.w(Babylon.get().getFromResources("hero_charmed"));
 			}  else if (buff instanceof Cripple) {
-				GLog.w( "You are crippled!" );
+				GLog.w(Babylon.get().getFromResources("hero_crip"));
 			} else if (buff instanceof Bleeding) {
-				GLog.w( "You are bleeding!" );
+				GLog.w(Babylon.get().getFromResources("hero_bleed"));
 			} else if (buff instanceof Vertigo) {
-				GLog.w( "Everything is spinning around you!" );
+				GLog.w(Babylon.get().getFromResources("hero_vertigo"));
 				interrupt();
 			}
 			
@@ -1370,7 +1356,7 @@ public class Hero extends Char {
 
 		
 		if (intentional) {
-			sprite.showStatus( CharSprite.DEFAULT, TXT_SEARCH );
+			sprite.showStatus( CharSprite.DEFAULT, Babylon.get().getFromResources("hero_search"));
 			sprite.operate( pos );
 			if (smthFound) {
 				spendAndNext( Random.Float() < level ? TIME_TO_SEARCH : TIME_TO_SEARCH * 2 );
@@ -1381,7 +1367,7 @@ public class Hero extends Char {
 		}
 		
 		if (smthFound) {
-			GLog.w( TXT_NOTICED_SMTH );
+			GLog.w(Babylon.get().getFromResources("hero_noticed"));
 			Sample.INSTANCE.play( Assets.SND_SECRET );
 			interrupt();
 		}

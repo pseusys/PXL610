@@ -17,14 +17,13 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.pixeldungeon.utils.GLog;
 
 public class Combo extends Buff {
-	
-	private static String TXT_COMBO = "%d hit combo!";
 	
 	public int count = 0;
 	
@@ -35,7 +34,7 @@ public class Combo extends Buff {
 	
 	@Override
 	public String toString() {
-		return "Combo";
+		return Babylon.get().getFromResources("buff_combo");
 	}
 	
 	public int hit( Char enemy, int damage ) {
@@ -46,7 +45,7 @@ public class Combo extends Buff {
 			
 			Badges.validateMasteryCombo( count );
 			
-			GLog.p( TXT_COMBO, count );
+			GLog.p( Babylon.get().getFromResources("combo_hit"), count );
 			postpone( 1.41f - count / 10f );
 			return (int)(damage * (count - 2) / 5f);
 			

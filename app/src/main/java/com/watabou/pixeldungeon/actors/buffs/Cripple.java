@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
 public class Cripple extends FlavourBuff {
@@ -30,6 +31,6 @@ public class Cripple extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Crippled";
+		return Babylon.get().getFromResources("buff_crip");
 	}
 }

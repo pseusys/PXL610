@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.actors.hero;
 
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.items.TomeOfMastery;
 import com.watabou.pixeldungeon.items.armor.ClothArmor;
@@ -38,7 +39,10 @@ import com.watabou.utils.Bundle;
 
 public enum HeroClass {
 
-	WARRIOR( "warrior" ), MAGE( "mage" ), ROGUE( "rogue" ), HUNTRESS( "huntress" );
+	WARRIOR(Babylon.get().getFromResources("hero_cl_warrior")),
+	MAGE(Babylon.get().getFromResources("hero_cl_mage")),
+	ROGUE(Babylon.get().getFromResources("hero_cl_rogue")),
+	HUNTRESS(Babylon.get().getFromResources("hero_cl_huntress"));
 	
 	private String title;
 	
@@ -47,36 +51,36 @@ public enum HeroClass {
 	}
 	
 	public static final String[] WAR_PERKS = {
-		"Warriors start with 11 points of Strength.",
-		"Warriors start with a unique short sword. This sword can be later \"reforged\" to upgrade another melee weapon.",
-		"Warriors are less proficient with missile weapons.",
-		"Any piece of food restores some health when eaten.",
-		"Potions of Strength are identified from the beginning.",
+			Babylon.get().getFromResources("hero_cl_war_0"),
+			Babylon.get().getFromResources("hero_cl_war_1"),
+			Babylon.get().getFromResources("hero_cl_war_2"),
+			Babylon.get().getFromResources("hero_cl_war_3"),
+			Babylon.get().getFromResources("hero_cl_war_4"),
 	};
 	
 	public static final String[] MAG_PERKS = {
-		"Mages start with a unique Wand of Magic Missile. This wand can be later \"disenchanted\" to upgrade another wand.",
-		"Mages recharge their wands faster.",
-		"When eaten, any piece of food restores 1 charge for all wands in the inventory.",
-		"Mages can use wands as a melee weapon.",
-		"Scrolls of Identify are identified from the beginning."
+			Babylon.get().getFromResources("hero_cl_mag_0"),
+			Babylon.get().getFromResources("hero_cl_mag_1"),
+			Babylon.get().getFromResources("hero_cl_mag_2"),
+			Babylon.get().getFromResources("hero_cl_mag_3"),
+			Babylon.get().getFromResources("hero_cl_mag_4")
 	};
 	
 	public static final String[] ROG_PERKS = {
-		"Rogues start with a Ring of Shadows+1.",
-		"Rogues identify a type of a ring on equipping it.",
-		"Rogues are proficient with light armor, dodging better while wearing one.",
-		"Rogues are proficient in detecting hidden doors and traps.",
-		"Rogues can go without food longer.",
-		"Scrolls of Magic Mapping are identified from the beginning."
+			Babylon.get().getFromResources("hero_cl_rog_0"),
+			Babylon.get().getFromResources("hero_cl_rog_1"),
+			Babylon.get().getFromResources("hero_cl_rog_2"),
+			Babylon.get().getFromResources("hero_cl_rog_3"),
+			Babylon.get().getFromResources("hero_cl_rog_4"),
+			Babylon.get().getFromResources("hero_cl_rog_5")
 	};
 	
 	public static final String[] HUN_PERKS = {
-		"Huntresses start with 15 points of Health.",
-		"Huntresses start with a unique upgradeable boomerang.",
-		"Huntresses are proficient with missile weapons and get a damage bonus for excessive strength when using them.",
-		"Huntresses gain more health from dewdrops.",
-		"Huntresses sense neighbouring monsters even if they are hidden behind obstacles."
+			Babylon.get().getFromResources("hero_cl_hun_0"),
+			Babylon.get().getFromResources("hero_cl_hun_1"),
+			Babylon.get().getFromResources("hero_cl_hun_2"),
+			Babylon.get().getFromResources("hero_cl_hun_3"),
+			Babylon.get().getFromResources("hero_cl_hun_4")
 	};
 	
 	public void initHero( Hero hero ) {

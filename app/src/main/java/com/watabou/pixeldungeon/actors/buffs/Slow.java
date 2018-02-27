@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.items.rings.RingOfElements.Resistance;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
@@ -32,7 +33,7 @@ public class Slow extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Slowed";
+		return Babylon.get().getFromResources("buff_slow");
 	}
 
 	public static float duration( Char ch ) {

@@ -18,6 +18,8 @@
 package com.watabou.pixeldungeon.ui;
 
 
+import android.util.Log;
+
 import com.watabou.input.Keys;
 import com.watabou.input.Keys.Key;
 import com.watabou.input.Touchscreen.Touch;

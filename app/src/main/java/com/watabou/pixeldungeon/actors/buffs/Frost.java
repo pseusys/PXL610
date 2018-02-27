@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -69,7 +70,7 @@ public class Frost extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Frozen";
+		return Babylon.get().getFromResources("buff_frozen");
 	}
 	
 	public static float duration( Char ch ) {

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -41,9 +42,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Burning extends Buff implements Hero.Doom {
-
-	private static final String TXT_BURNS_UP		= "%s burns up!";
-	private static final String TXT_BURNED_TO_DEATH	= "You burned to death...";
 	
 	private static final float DURATION = 8f;
 	
@@ -80,7 +78,7 @@ public class Burning extends Buff implements Hero.Doom {
 				if (item instanceof Scroll) {
 					
 					item = item.detach( ((Hero)target).belongings.backpack );
-					GLog.w( TXT_BURNS_UP, item.toString() );
+					GLog.w( Babylon.get().getFromResources("burns_up"), item.toString() );
 					
 					Heap.burnFX( target.pos );
 					
@@ -91,7 +89,7 @@ public class Burning extends Buff implements Hero.Doom {
 					if (!steak.collect( ((Hero)target).belongings.backpack )) {
 						Dungeon.level.drop( steak, target.pos ).sprite.drop();
 					}
-					GLog.w( TXT_BURNS_UP, item.toString() );
+					GLog.w( Babylon.get().getFromResources("burns_up"), item.toString() );
 					
 					Heap.burnFX( target.pos );
 					
@@ -135,7 +133,7 @@ public class Burning extends Buff implements Hero.Doom {
 	
 	@Override
 	public String toString() {
-		return "Burning";
+		return Babylon.get().getFromResources("buff_burn");
 	}
 
 	public static float duration( Char ch ) {
@@ -149,6 +147,6 @@ public class Burning extends Buff implements Hero.Doom {
 		Badges.validateDeathFromFire();
 		
 		Dungeon.fail( Utils.format( ResultDescriptions.BURNING, Dungeon.depth ) );
-		GLog.n( TXT_BURNED_TO_DEATH );
+		GLog.n( Babylon.get().getFromResources("death_burn") );
 	}
 }

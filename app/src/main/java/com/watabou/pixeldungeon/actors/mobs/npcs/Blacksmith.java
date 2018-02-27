@@ -21,6 +21,7 @@ import java.util.Collection;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
@@ -43,32 +44,11 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Blacksmith extends NPC {
-
-	private static final String TXT_GOLD_1 =
-		"Hey human! Wanna be useful, eh? Take dis pickaxe and mine me some _dark gold ore_, _15 pieces_ should be enough. " +
-		"What do you mean, how am I gonna pay? You greedy...\n" +
-		"Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, " +
-		"I'm the only blacksmith around.";
-	private static final String TXT_BLOOD_1 =
-		"Hey human! Wanna be useful, eh? Take dis pickaxe and _kill a bat_ wit' it, I need its blood on the head. " +
-		"What do you mean, how am I gonna pay? You greedy...\n" +
-		"Ok, ok, I don't have money to pay, but I can do some smithin' for you. Consider yourself lucky, " +
-		"I'm the only blacksmith around.";
-	private static final String TXT2 =
-		"Are you kiddin' me? Where is my pickaxe?!";
-	private static final String TXT3 =
-		"Dark gold ore. 15 pieces. Seriously, is it dat hard?";
-	private static final String TXT4 =
-		"I said I need bat blood on the pickaxe. Chop chop!";
-	private static final String TXT_COMPLETED =
-		"Oh, you have returned... Better late dan never.";
-	private static final String TXT_GET_LOST =
-		"I'm busy. Get lost!";
 	
-	private static final String TXT_LOOKS_BETTER	= "your %s certainly looks better now";
+	private static final String TXT_LOOKS_BETTER	= Babylon.get().getFromResources("mob_blacksmith_looksbetter");
 	
 	{
-		name = "troll blacksmith";
+		name = Babylon.get().getFromResources("mob_blacksmith");
 		spriteClass = BlacksmithSprite.class;
 	}
 	
@@ -86,7 +66,7 @@ public class Blacksmith extends NPC {
 		if (!Quest.given) {
 			
 			GameScene.show( new WndQuest( this, 
-				Quest.alternative ? TXT_BLOOD_1 : TXT_GOLD_1 ) {
+				Quest.alternative ? Babylon.get().getFromResources("mob_blacksmith_quest1") : Babylon.get().getFromResources("mob_blacksmith_quest0") ) {
 				
 				@Override
 				public void onBackPressed() {
@@ -97,7 +77,7 @@ public class Blacksmith extends NPC {
 					
 					Pickaxe pick = new Pickaxe();
 					if (pick.doPickUp( Dungeon.hero )) {
-						GLog.i( Hero.TXT_YOU_NOW_HAVE, pick.name() );
+						GLog.i( Babylon.get().getFromResources("hero_you_have"), pick.name() );
 					} else {
 						Dungeon.level.drop( pick, Dungeon.hero.pos ).sprite.drop();
 					}
@@ -111,15 +91,15 @@ public class Blacksmith extends NPC {
 				
 				Pickaxe pick = Dungeon.hero.belongings.getItem( Pickaxe.class );
 				if (pick == null) {
-					tell( TXT2 );
+					tell( Babylon.get().getFromResources("mob_blacksmith_supp0") );
 				} else if (!pick.bloodStained) {
-					tell( TXT4 );
+					tell( Babylon.get().getFromResources("mob_blacksmith_supp2") );
 				} else {
 					if (pick.isEquipped( Dungeon.hero )) {
 						pick.doUnequip( Dungeon.hero, false );
 					}
 					pick.detach( Dungeon.hero.belongings.backpack );
-					tell( TXT_COMPLETED );
+					tell( Babylon.get().getFromResources("mob_blacksmith_completed") );
 					
 					Quest.completed = true;
 					Quest.reforged = false;
@@ -130,16 +110,16 @@ public class Blacksmith extends NPC {
 				Pickaxe pick = Dungeon.hero.belongings.getItem( Pickaxe.class );
 				DarkGold gold = Dungeon.hero.belongings.getItem( DarkGold.class );
 				if (pick == null) {
-					tell( TXT2 );
+					tell( Babylon.get().getFromResources("mob_blacksmith_supp0") );
 				} else if (gold == null || gold.quantity() < 15) {
-					tell( TXT3 );
+					tell( Babylon.get().getFromResources("mob_blacksmith_supp1") );
 				} else {
 					if (pick.isEquipped( Dungeon.hero )) {
 						pick.doUnequip( Dungeon.hero, false );
 					}
 					pick.detach( Dungeon.hero.belongings.backpack );
 					gold.detachAll( Dungeon.hero.belongings.backpack );
-					tell( TXT_COMPLETED );
+					tell( Babylon.get().getFromResources("mob_blacksmith_completed") );
 					
 					Quest.completed = true;
 					Quest.reforged = false;
@@ -152,7 +132,7 @@ public class Blacksmith extends NPC {
 			
 		} else {
 			
-			tell( TXT_GET_LOST );
+			tell( Babylon.get().getFromResources("mob_blacksmith_idle") );
 			
 		}
 	}
@@ -164,27 +144,27 @@ public class Blacksmith extends NPC {
 	public static String verify( Item item1, Item item2 ) {
 		
 		if (item1 == item2) {
-			return "Select 2 different items, not the same item twice!";
+			return Babylon.get().getFromResources("mob_blacksmith_err0");
 		}
 		
 		if (item1.getClass() != item2.getClass()) {
-			return "Select 2 items of the same type!";
+			return Babylon.get().getFromResources("mob_blacksmith_err1");
 		}
 		
 		if (!item1.isIdentified() || !item2.isIdentified()) {
-			return "I need to know what I'm working with, identify them first!";
+			return Babylon.get().getFromResources("mob_blacksmith_err2");
 		}
 		
 		if (item1.cursed || item2.cursed) {
-			return "I don't work with cursed items!";
+			return Babylon.get().getFromResources("mob_blacksmith_err3");
 		}
 		
 		if (item1.level() < 0 || item2.level() < 0) {
-			return "It's a junk, the quality is too poor!";
+			return Babylon.get().getFromResources("mob_blacksmith_err4");
 		}
 		
 		if (!item1.isUpgradable() || !item2.isUpgradable()) {
-			return "I can't reforge these items!";
+			return Babylon.get().getFromResources("mob_blacksmith_err5");
 		}
 		
 		return null;
@@ -243,9 +223,8 @@ public class Blacksmith extends NPC {
 	
 	@Override
 	public String description() {
-		return 
-			"This troll blacksmith looks like all trolls look: he is tall and lean, and his skin resembles stone " +
-			"in both color and texture. The troll blacksmith is tinkering with unproportionally small tools.";
+		return
+				Babylon.get().getFromResources("mob_blacksmith_desc");
 	}
 
 	public static class Quest {

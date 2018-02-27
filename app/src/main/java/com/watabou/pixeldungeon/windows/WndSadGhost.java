@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.windows;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Ghost;
@@ -48,7 +49,7 @@ public class WndSadGhost extends WndQuest {
 		
 		Item reward = index == 0 ? Ghost.Quest.weapon : Ghost.Quest.armor;
 		if (reward.doPickUp( Dungeon.hero )) {
-			GLog.i( Hero.TXT_YOU_NOW_HAVE, reward.name() );
+			GLog.i( Babylon.get().getFromResources("hero_you_have"), reward.name() );
 		} else {
 			Dungeon.level.drop( reward, ghost.pos ).sprite.drop();
 		}

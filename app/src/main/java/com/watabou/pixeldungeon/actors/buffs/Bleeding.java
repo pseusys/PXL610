@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.effects.Splash;
@@ -57,7 +58,7 @@ public class Bleeding extends Buff {
 	
 	@Override
 	public String toString() {
-		return "Bleeding";
+		return Babylon.get().getFromResources("buff_bleeding");
 	}
 	
 	@Override
@@ -74,7 +75,7 @@ public class Bleeding extends Buff {
 				
 				if (target == Dungeon.hero && !target.isAlive()) {
 					Dungeon.fail( Utils.format( ResultDescriptions.BLEEDING, Dungeon.depth ) );
-					GLog.n( "You bled to death..." );
+					GLog.n( Babylon.get().getFromResources("death_bled") );
 				}
 				
 				spend( TICK );

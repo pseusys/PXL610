@@ -17,38 +17,32 @@
  */
 package com.watabou.pixeldungeon.actors.hero;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.utils.Bundle;
 
 public enum HeroSubClass {
 
 	NONE( null, null ),
 	
-	GLADIATOR( "gladiator", 
-		"A successful attack with a melee weapon allows the _Gladiator_ to start a combo, " +
-		"in which every next successful hit inflicts more damage." ),
-	BERSERKER( "berserker", 
-		"When severely wounded, the _Berserker_ enters a state of wild fury " +
-		"significantly increasing his damage output." ),
+	GLADIATOR(Babylon.get().getFromResources("hero_scl_glad"),
+			Babylon.get().getFromResources("hero_scl_glad_desc")),
+	BERSERKER(Babylon.get().getFromResources("hero_scl_bers"),
+			Babylon.get().getFromResources("hero_scl_bers_desc")),
 	
-	WARLOCK( "warlock", 
-		"After killing an enemy the _Warlock_ consumes its soul. " +
-		"It heals his wounds and satisfies his hunger." ),
-	BATTLEMAGE( "battlemage", 
-		"When fighting with a wand in his hands, the _Battlemage_ inflicts additional damage depending " +
-		"on the current number of charges. Every successful hit restores 1 charge to this wand." ),
+	WARLOCK(Babylon.get().getFromResources("hero_scl_warl"),
+			Babylon.get().getFromResources("hero_scl_warl_desc")),
+	BATTLEMAGE(Babylon.get().getFromResources("hero_scl_batt"),
+			Babylon.get().getFromResources("hero_scl_batt_desc")),
 	
-	ASSASSIN( "assassin", 
-		"When performing a surprise attack, the _Assassin_ inflicts additional damage to his target." ),
-	FREERUNNER( "freerunner", 
-		"The _Freerunner_ can move almost twice faster, than most of the monsters. When he " +
-		"is running, the Freerunner is much harder to hit. For that he must be unencumbered and not starving." ),
+	ASSASSIN(Babylon.get().getFromResources("hero_scl_ass"),
+			Babylon.get().getFromResources("hero_scl_ass_desc")),
+	FREERUNNER(Babylon.get().getFromResources("hero_scl_free"),
+			Babylon.get().getFromResources("hero_scl_free_desc")),
 		
-	SNIPER( "sniper", 
-		"_Snipers_ are able to detect weak points in an enemy's armor, " +
-		"effectively ignoring it when using a missile weapon." ),
-	WARDEN( "warden", 
-		"Having a strong connection with forces of nature gives _Wardens_ an ability to gather dewdrops and " +
-		"seeds from plants. Also trampling a high grass grants them a temporary armor buff." );
+	SNIPER(Babylon.get().getFromResources("hero_scl_snip"),
+			Babylon.get().getFromResources("hero_scl_snip_desc")),
+	WARDEN(Babylon.get().getFromResources("hero_scl_ward"),
+			Babylon.get().getFromResources("hero_scl_ward_desc"));
 	
 	private String title;
 	private String desc;

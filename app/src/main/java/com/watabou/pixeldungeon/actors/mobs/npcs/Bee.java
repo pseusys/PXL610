@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs.npcs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Poison;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 public class Bee extends NPC {
 	
 	{
-		name = "golden bee";
+		name = Babylon.get().getFromResources("mob_bee");
 		spriteClass = BeeSprite.class;
 		
 		viewDistance = 4;
@@ -117,8 +118,7 @@ public class Bee extends NPC {
 	@Override
 	public String description() {
 		return
-			"Despite their small size, golden bees tend " +
-			"to protect their master fiercely. They don't live long though.";
+				Babylon.get().getFromResources("mob_bee_desc");
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class Bee extends NPC {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is wandering", name );
+			return Utils.format(Babylon.get().getFromResources("mob_bee_stats"), name );
 		}
 	}
 }

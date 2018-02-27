@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.items.rings.RingOfElements.Resistance;
@@ -33,7 +34,7 @@ public class Weakness extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Weakened";
+		return Babylon.get().getFromResources("buff_weak");
 	}
 	
 	@Override

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
@@ -46,6 +47,6 @@ public int object = 0;
 	
 	@Override
 	public String toString() {
-		return "Zeroed in";
+		return Babylon.get().getFromResources("buff_sniper");
 	}
 }

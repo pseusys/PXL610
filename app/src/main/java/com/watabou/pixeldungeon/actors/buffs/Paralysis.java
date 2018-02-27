@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.items.rings.RingOfElements.Resistance;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
@@ -48,7 +49,7 @@ public class Paralysis extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return "Paralysed";
+		return Babylon.get().getFromResources("buff_paralyse");
 	}
 	
 	public static float duration( Char ch ) {

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.BuffIndicator;
 
 public class Fury extends Buff {
@@ -41,6 +42,6 @@ public class Fury extends Buff {
 	
 	@Override
 	public String toString() {
-		return "Fury";
+		return Babylon.get().getFromResources("buff_fury");
 	}
 }

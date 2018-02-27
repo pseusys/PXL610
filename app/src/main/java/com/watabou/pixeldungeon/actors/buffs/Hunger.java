@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.buffs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -35,10 +36,6 @@ public class Hunger extends Buff implements Hero.Doom {
 	
 	public static final float HUNGRY	= 260f;
 	public static final float STARVING	= 360f;
-	
-	private static final String TXT_HUNGRY		= "You are hungry.";
-	private static final String TXT_STARVING	= "You are starving!";
-	private static final String TXT_DEATH		= "You starved to death...";
 	
 	private float level;
 
@@ -65,7 +62,7 @@ public class Hunger extends Buff implements Hero.Doom {
 			if (isStarving()) {
 				if (Random.Float() < 0.3f && (target.HP > 1 || !target.paralysed)) {
 					
-					GLog.n( TXT_STARVING );
+					GLog.n( Babylon.get().getFromResources("are_starving") );
 					hero.damage( 1, this );
 					
 					hero.interrupt();
@@ -81,14 +78,14 @@ public class Hunger extends Buff implements Hero.Doom {
 				boolean statusUpdated = false;
 				if (newLevel >= STARVING) {
 					
-					GLog.n( TXT_STARVING );
+					GLog.n( Babylon.get().getFromResources("are_starving") );
 					statusUpdated = true;
 					
 					hero.interrupt();
 					
 				} else if (newLevel >= HUNGRY && level < HUNGRY) {
 					
-					GLog.w( TXT_HUNGRY );
+					GLog.w( Babylon.get().getFromResources("are_hungry") );
 					statusUpdated = true;
 					
 				}
@@ -141,9 +138,9 @@ public class Hunger extends Buff implements Hero.Doom {
 	@Override
 	public String toString() {
 		if (level < STARVING) {
-			return "Hungry";
+			return Babylon.get().getFromResources("buff_hungry");
 		} else {
-			return "Starving";
+			return Babylon.get().getFromResources("buff_starving");
 		}
 	}
 
@@ -153,6 +150,6 @@ public class Hunger extends Buff implements Hero.Doom {
 		Badges.validateDeathFromHunger();
 		
 		Dungeon.fail( Utils.format( ResultDescriptions.HUNGER, Dungeon.depth ) );
-		GLog.n( TXT_DEATH );
+		GLog.n( Babylon.get().getFromResources("death_starve") );
 	}
 }
