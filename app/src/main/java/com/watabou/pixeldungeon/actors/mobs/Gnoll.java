@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Ghost;
 import com.watabou.pixeldungeon.items.Gold;
@@ -26,7 +27,7 @@ import com.watabou.utils.Random;
 public class Gnoll extends Mob {
 	
 	{
-		name = "gnoll scout";
+		name = Babylon.get().getFromResources("mob_gnoll");
 		spriteClass = GnollSprite.class;
 		
 		HP = HT = 12;
@@ -63,7 +64,6 @@ public class Gnoll extends Mob {
 	@Override
 	public String description() {
 		return
-			"Gnolls are hyena-like humanoids. They dwell in sewers and dungeons, venturing up to raid the surface from time to time. " +
-			"Gnoll scouts are regular members of their pack, they are not as strong as brutes and not as intelligent as shamans.";
+				Babylon.get().getFromResources("mob_gnoll_desc");
 	}
 }

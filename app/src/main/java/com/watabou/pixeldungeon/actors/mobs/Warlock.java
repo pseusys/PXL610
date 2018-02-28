@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Char;
@@ -39,10 +40,10 @@ public class Warlock extends Mob implements Callback {
 	
 	private static final float TIME_TO_ZAP	= 1f;
 	
-	private static final String TXT_SHADOWBOLT_KILLED = "%s's shadow bolt killed you...";
+	private static final String TXT_SHADOWBOLT_KILLED = Babylon.get().getFromResources("mob_warlock_lills");
 	
 	{
-		name = "dwarf warlock";
+		name = Babylon.get().getFromResources("mob_warlock");
 		spriteClass = WarlockSprite.class;
 		
 		HP = HT = 70;
@@ -128,9 +129,7 @@ public class Warlock extends Mob implements Callback {
 	@Override
 	public String description() {
 		return
-			"When dwarves' interests have shifted from engineering to arcane arts, " +
-			"warlocks have come to power in the city. They started with elemental magic, " +
-			"but soon switched to demonology and necromancy.";
+				Babylon.get().getFromResources("mob_warlock_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

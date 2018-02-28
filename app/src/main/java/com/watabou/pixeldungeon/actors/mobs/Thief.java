@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Terror;
@@ -32,14 +33,11 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Thief extends Mob {
-
-	protected static final String TXT_STOLE	= "%s stole %s from you!";
-	protected static final String TXT_CARRIES	= "\n\n%s is carrying a _%s_. Stolen obviously.";
 	
 	public Item item;
 	
 	{
-		name = "crazy thief";
+		name = Babylon.get().getFromResources("mob_thief");
 		spriteClass = ThiefSprite.class;
 		
 		HP = HT = 20;
@@ -121,7 +119,7 @@ public class Thief extends Mob {
 		Item item = hero.belongings.randomUnequipped();
 		if (item != null) {
 			
-			GLog.w( TXT_STOLE, this.name, item.name() );
+			GLog.w( Babylon.get().getFromResources("mob_thief_stolen"), this.name, item.name() );
 			
 			item.detachAll( hero.belongings.backpack );
 			this.item = item;
@@ -135,12 +133,10 @@ public class Thief extends Mob {
 	@Override
 	public String description() {
 		String desc =
-			"Deeper levels of the dungeon have always been a hiding place for all kinds of criminals. " +
-			"Not all of them could keep a clear mind during their extended periods so far from daylight. Long ago, " +
-			"these crazy thieves and bandits have forgotten who they are and why they steal.";
+				Babylon.get().getFromResources("mob_thief_desc");
 		
 		if (item != null) {
-			desc += String.format( TXT_CARRIES, Utils.capitalize( this.name ), item.name() );
+			desc += String.format( Babylon.get().getFromResources("mob_thief_carries"), Utils.capitalize( this.name ), item.name() );
 		}
 		
 		return desc;

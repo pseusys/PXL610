@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Challenges;
 import com.watabou.pixeldungeon.Dungeon;
@@ -43,8 +44,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public abstract class Mob extends Char {
-	
-	private static final String	TXT_DIED	= "You hear something died in the distance";
 	
 	protected static final String	TXT_ECHO	= "echo of ";
 	
@@ -364,7 +363,7 @@ public abstract class Mob extends Char {
 		}
 
 		if (Dungeon.hero.isAlive() && !Dungeon.visible[pos]) {	
-			GLog.i( TXT_DIED );
+			GLog.i( Babylon.get().getFromResources("mob_death") );
 		}
 	}
 	
@@ -407,7 +406,7 @@ public abstract class Mob extends Char {
 	}
 	
 	public String description() {
-		return "Real description is coming soon!";
+		return Babylon.get().getFromResources("mob_desc");
 	}
 	
 	public void notice() {
@@ -459,7 +458,7 @@ public abstract class Mob extends Char {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is sleeping", name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_sleeping"), name );
 		}
 	}
 	
@@ -496,7 +495,7 @@ public abstract class Mob extends Char {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is wandering", name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_wandering"), name );
 		}
 	}
 	
@@ -535,7 +534,7 @@ public abstract class Mob extends Char {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is hunting", name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_hunting"), name );
 		}
 	}
 	
@@ -570,7 +569,7 @@ public abstract class Mob extends Char {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is fleeing", name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_fleeing"), name );
 		}
 	}
 	
@@ -587,7 +586,7 @@ public abstract class Mob extends Char {
 		
 		@Override
 		public String status() {
-			return Utils.format( "This %s is passive", name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_passive"), name );
 		}
 	}
 }

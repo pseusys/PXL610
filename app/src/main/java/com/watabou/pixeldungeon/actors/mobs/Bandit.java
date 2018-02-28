@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Blindness;
@@ -31,7 +32,7 @@ public class Bandit extends Thief {
 	public Item item;
 	
 	{
-		name = "crazy bandit";
+		name = Babylon.get().getFromResources("mob_bandit");
 		spriteClass = BanditSprite.class;
 	}
 	

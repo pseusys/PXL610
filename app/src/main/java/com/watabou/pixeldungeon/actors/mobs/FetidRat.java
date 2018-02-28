@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 public class FetidRat extends Mob {
 
 	{
-		name = "fetid rat";
+		name = Babylon.get().getFromResources("mob_fethid");
 		spriteClass = FetidRatSprite.class;
 		
 		HP = HT = 15;
@@ -61,7 +62,7 @@ public class FetidRat extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Babylon.get().getFromResources("defmod_evade");
 	}
 	
 	@Override
@@ -82,7 +83,7 @@ public class FetidRat extends Mob {
 	@Override
 	public String description() {
 		return
-			"This marsupial rat is much larger than a regular one. It is surrounded by a foul cloud.";
+				Babylon.get().getFromResources("mob_fethid_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -48,7 +49,7 @@ import com.watabou.utils.Random;
 public class DM300 extends Mob {
 	
 	{
-		name = Dungeon.depth == Statistics.deepestFloor ? "DM-300" : "DM-350";
+		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_DM300") : Babylon.get().getFromResources("mob_DM350");
 		spriteClass = DM300Sprite.class;
 		
 		HP = HT = 200;
@@ -90,7 +91,7 @@ public class DM300 extends Mob {
 			sprite.emitter().burst( ElmoParticle.FACTORY, 5 );
 			
 			if (Dungeon.visible[step] && Dungeon.hero.isAlive()) {
-				GLog.n( "DM-300 repairs itself!" );
+				GLog.n(Babylon.get().getFromResources("mod_DM300_repairs"));
 			}
 		}
 
@@ -132,21 +133,19 @@ public class DM300 extends Mob {
 		
 		Badges.validateBossSlain();
 		
-		yell( "Mission failed. Shutting down." );
+		yell(Babylon.get().getFromResources("mob_DM300_death"));
 	}
 	
 	@Override
 	public void notice() {
 		super.notice();
-		yell( "Unauthorised personnel detected." );
+		yell(Babylon.get().getFromResources("mob_DM300_notice"));
 	}
 	
 	@Override
 	public String description() {
 		return
-			"This machine was created by the Dwarves several centuries ago. Later, Dwarves started to replace machines with " +
-			"golems, elementals and even demons. Eventually it led their civilization to the decline. The DM-300 and similar " +
-			"machines were typically used for construction and mining, and in some cases, for city defense.";
+				Babylon.get().getFromResources("mob_DM300_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

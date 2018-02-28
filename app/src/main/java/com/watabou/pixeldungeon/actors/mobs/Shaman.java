@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 import java.util.HashSet;
 
 import com.watabou.noosa.Camera;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Char;
@@ -39,10 +40,8 @@ public class Shaman extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP	= 2f;
 	
-	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
-	
 	{
-		name = "gnoll shaman";
+		name = Babylon.get().getFromResources("mob_shaman");
 		spriteClass = ShamanSprite.class;
 		
 		HP = HT = 18;
@@ -108,7 +107,7 @@ public class Shaman extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail( Utils.format( ResultDescriptions.MOB, 
 							Utils.indefinite( name ), Dungeon.depth ) );
-						GLog.n( TXT_LIGHTNING_KILLED, name );
+						GLog.n( Babylon.get().getFromResources("mob_shaman_kills"), name );
 					}
 				}
 			} else {
@@ -127,9 +126,7 @@ public class Shaman extends Mob implements Callback {
 	@Override
 	public String description() {
 		return
-			"The most intelligent gnolls can master shamanistic magic. Gnoll shamans prefer " +
-			"battle spells to compensate for lack of might, not hesitating to use them " +
-			"on those who question their status in a tribe.";
+				Babylon.get().getFromResources("mob_shaman_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

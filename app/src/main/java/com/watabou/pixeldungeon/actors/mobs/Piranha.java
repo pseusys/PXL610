@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class Piranha extends Mob {
 	
 	{
-		name = "giant piranha";
+		name = Babylon.get().getFromResources("mob_piranha");
 		spriteClass = PiranhaSprite.class;
 
 		baseSpeed = 2f;
@@ -124,8 +125,7 @@ public class Piranha extends Mob {
 	@Override
 	public String description() {
 		return
-			"These carnivorous fish are not natural inhabitants of underground pools. " +
-			"They were bred specifically to protect flooded treasure vaults.";
+				Babylon.get().getFromResources("mob_piranha_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

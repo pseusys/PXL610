@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs.npcs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.effects.CellEmitter;
 import com.watabou.pixeldungeon.effects.Speck;
@@ -26,11 +27,9 @@ import com.watabou.pixeldungeon.sprites.ImpSprite;
 import com.watabou.pixeldungeon.utils.Utils;
 
 public class ImpShopkeeper extends Shopkeeper {
-
-	private static final String TXT_GREETINGS = "Hello, friend!";
 	
 	{
-		name = "ambitious imp";
+		name = Babylon.get().getFromResources("mob_shopimp");
 		spriteClass = ImpSprite.class;
 	}
 	
@@ -40,7 +39,7 @@ public class ImpShopkeeper extends Shopkeeper {
 	protected boolean act() {
 
 		if (!seenBefore && Dungeon.visible[pos]) {
-			yell( Utils.format( TXT_GREETINGS ) );
+			yell( Utils.format( Babylon.get().getFromResources("mob_shopimp_grat" ) ) );
 			seenBefore = true;
 		}
 		
@@ -64,8 +63,7 @@ public class ImpShopkeeper extends Shopkeeper {
 	
 	@Override
 	public String description() {
-		return 
-			"Imps are lesser demons. They are notable for neither their strength nor their magic talent. " +
-			"But they are quite smart and sociable, and many of imps prefer to live and do business among non-demons.";
+		return
+				Babylon.get().getFromResources("mob_shopimp_desc");
 	}
 }

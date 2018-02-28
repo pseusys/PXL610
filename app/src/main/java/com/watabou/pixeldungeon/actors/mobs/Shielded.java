@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.sprites.ShieldedSprite;
 
 public class Shielded extends Brute {
 
 	{
-		name = "shielded brute";
+		name = Babylon.get().getFromResources("mob_shielded");
 		spriteClass = ShieldedSprite.class;
 		
 		defenseSkill = 20;
@@ -36,7 +37,7 @@ public class Shielded extends Brute {
 	
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Babylon.get().getFromResources("defmod_block");
 	}
 	
 	@Override

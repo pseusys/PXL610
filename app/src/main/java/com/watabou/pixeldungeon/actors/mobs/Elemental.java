@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Burning;
@@ -34,7 +35,7 @@ import com.watabou.utils.Random;
 public class Elemental extends Mob {
 
 	{
-		name = "fire elemental";
+		name = Babylon.get().getFromResources("mob_elemental");
 		spriteClass = ElementalSprite.class;
 		
 		HP = HT = 65;
@@ -91,8 +92,7 @@ public class Elemental extends Mob {
 	@Override
 	public String description() {
 		return
-			"Wandering fire elementals are a byproduct of summoning greater entities. " +
-			"They are too chaotic in their nature to be controlled by even the most powerful demonologist.";
+				Babylon.get().getFromResources("mob_elemental_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

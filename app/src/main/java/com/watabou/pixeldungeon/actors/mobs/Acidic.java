@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.sprites.AcidicSprite;
@@ -25,7 +26,7 @@ import com.watabou.utils.Random;
 public class Acidic extends Scorpio {
 
 	{
-		name = "acidic scorpio";
+		name = Babylon.get().getFromResources("mob_acidic");
 		spriteClass = AcidicSprite.class;
 	}
 	

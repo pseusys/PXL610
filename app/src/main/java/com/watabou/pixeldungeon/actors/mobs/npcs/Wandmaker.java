@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs.npcs;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -55,7 +56,7 @@ import com.watabou.utils.Random;
 public class Wandmaker extends NPC {
 
 	{	
-		name = "old wandmaker";
+		name = Babylon.get().getFromResources("mob_wandmaker");
 		spriteClass = WandmakerSprite.class;
 	}
 	
@@ -72,7 +73,7 @@ public class Wandmaker extends NPC {
 	
 	@Override
 	public String defenseVerb() {
-		return "absorbed";
+		return Babylon.get().getFromResources("defmod_absorb");
 	}
 	
 	@Override
@@ -100,9 +101,8 @@ public class Wandmaker extends NPC {
 	
 	@Override
 	public String description() {
-		return 
-			"This old but hale gentleman wears a slightly confused " +
-			"expression. He is protected by a magic shield.";
+		return
+				Babylon.get().getFromResources("mob_wandmaker_desc");
 	}
 	
 	public static class Quest {
@@ -292,13 +292,10 @@ public class Wandmaker extends NPC {
 	
 	private static final QuestHandler berryQuest = new QuestHandler() {
 		{
-			txtQuest1 = 
-				"Oh, what a pleasant surprise to meet a decent person in such place! I came here for a rare ingredient - " +
-				"a _Rotberry seed_. Being a magic user, I'm quite able to defend myself against local monsters, " +
-				"but I'm getting lost in no time, it's very embarrassing. Probably you could help me? I would be " +
-				"happy to pay for your service with one of my best wands.";
-			txtQuest2 = 
-				"Any luck with a _Rotberry seed_, %s? No? Don't worry, I'm not in a hurry.";
+			txtQuest1 =
+					Babylon.get().getFromResources("mob_wandmaker_quest0");
+			txtQuest2 =
+					Babylon.get().getFromResources("mob_wandmaker_supp0");
 		}
 
 		@Override
@@ -318,13 +315,10 @@ public class Wandmaker extends NPC {
 	
 	private static final QuestHandler dustQuest = new QuestHandler() {
 		{
-			txtQuest1 = 
-				"Oh, what a pleasant surprise to meet a decent person in such place! I came here for a rare ingredient - " +
-				"_corpse dust_. It can be gathered from skeletal remains and there is an ample number of them in the dungeon. " +
-				"Being a magic user, I'm quite able to defend myself against local monsters, but I'm getting lost in no time, " +
-				"it's very embarrassing. Probably you could help me? I would be happy to pay for your service with one of my best wands.";
-			txtQuest2 = 
-				"Any luck with _corpse dust_, %s? Bone piles are the most obvious places to look.";
+			txtQuest1 =
+					Babylon.get().getFromResources("mob_wandmaker_quest1");
+			txtQuest2 =
+					Babylon.get().getFromResources("mob_wandmaker_supp1");
 		}
 		
 		@Override
@@ -358,13 +352,10 @@ public class Wandmaker extends NPC {
 	
 	private static final QuestHandler fishQuest = new QuestHandler() {
 		{
-			txtQuest1 = 
-				"Oh, what a pleasant surprise to meet a decent person in such place! I came here for a rare ingredient: " +
-				"a _phantom fish_. You can catch it with your bare hands, but it's very hard to notice in the water. " +
-				"Being a magic user, I'm quite able to defend myself against local monsters, but I'm getting lost in no time, " +
-				"it's very embarrassing. Probably you could help me? I would be happy to pay for your service with one of my best wands.";
-			txtQuest2 = 
-				"Any luck with a _phantom fish_, %s? You may want to try searching for it in one of the local pools.";
+			txtQuest1 =
+					Babylon.get().getFromResources("mob_wandmaker_quest2");
+			txtQuest2 =
+					Babylon.get().getFromResources("mob_wandmaker_supp2");
 		}
 		
 		@Override

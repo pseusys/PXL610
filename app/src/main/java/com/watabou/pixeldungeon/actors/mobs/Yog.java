@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.Statistics;
@@ -57,7 +58,7 @@ import com.watabou.utils.Random;
 public class Yog extends Mob {
 	
 	{
-		name = Dungeon.depth == Statistics.deepestFloor ? "Yog-Dzewa" : "echo of Yog-Dzewa";
+		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_yog") : Babylon.get().getFromResources("mob_yogecho");
 		spriteClass = YogSprite.class;
 		
 		HP = HT = 300;
@@ -66,11 +67,6 @@ public class Yog extends Mob {
 		
 		state = PASSIVE;
 	}
-	
-	private static final String TXT_DESC =
-		"Yog-Dzewa is an Old God, a powerful entity from the realms of chaos. A century ago, the ancient dwarves " +
-		"barely won the war against its army of demons, but were unable to kill the god itself. Instead, they then " +
-		"imprisoned it in the halls below their city, believing it to be too weak to rise ever again.";	
 	
 	private static int fistsCount = 0;
 	
@@ -149,18 +145,18 @@ public class Yog extends Mob {
 		Dungeon.level.drop( new SkeletonKey(), pos ).sprite.drop();
 		super.die( cause );
 		
-		yell( "..." );
+		yell( Babylon.get().getFromResources("mob_yog_death") );
 	}
 	
 	@Override
 	public void notice() {
 		super.notice();
-		yell( "Hope is an illusion..." );
+		yell(Babylon.get().getFromResources("mob_yog_notice"));
 	}
 	
 	@Override
 	public String description() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("mob_yog_desc");
 			
 	}
 	
@@ -187,7 +183,7 @@ public class Yog extends Mob {
 		private static final int REGENERATION	= 4;
 		
 		{
-			name = "rotting fist";
+			name = Babylon.get().getFromResources("mob_yog_rottingfist");
 			spriteClass = RottingFistSprite.class;
 			
 			HP = HT = 300;
@@ -247,7 +243,7 @@ public class Yog extends Mob {
 		
 		@Override
 		public String description() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("mob_yog_desc");
 				
 		}
 		
@@ -281,7 +277,7 @@ public class Yog extends Mob {
 	public static class BurningFist extends Mob {
 		
 		{
-			name = "burning fist";
+			name = Babylon.get().getFromResources("mob_yog_burningfist");
 			spriteClass = BurningFistSprite.class;
 			
 			HP = HT = 200;
@@ -339,7 +335,7 @@ public class Yog extends Mob {
 					
 					if (!enemy.isAlive() && enemy == Dungeon.hero) {
 						Dungeon.fail( Utils.format( ResultDescriptions.BOSS, name, Dungeon.depth ) );
-						GLog.n( TXT_KILL, name );
+						GLog.n( Babylon.get().getFromResources("char_kill"), name );
 					}
 					return true;
 					
@@ -364,7 +360,7 @@ public class Yog extends Mob {
 		
 		@Override
 		public String description() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("mob_yog_desc");
 				
 		}
 		
@@ -397,7 +393,7 @@ public class Yog extends Mob {
 	public static class Larva extends Mob {
 		
 		{
-			name = "god's larva";
+			name = Babylon.get().getFromResources("mob_yog_larva");
 			spriteClass = LarvaSprite.class;
 			
 			HP = HT = 25;
@@ -425,7 +421,7 @@ public class Yog extends Mob {
 		
 		@Override
 		public String description() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("mob_yog_desc");
 				
 		}
 	}

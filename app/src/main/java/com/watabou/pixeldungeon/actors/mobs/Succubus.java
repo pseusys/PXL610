@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -43,7 +44,7 @@ public class Succubus extends Mob {
 	private int delay = 0;
 	
 	{
-		name = "succubus";
+		name = Babylon.get().getFromResources("mob_succubus");
 		spriteClass = SuccubusSprite.class;
 		
 		HP = HT = 80;
@@ -115,9 +116,7 @@ public class Succubus extends Mob {
 	
 	@Override
 	public String description() {
-		return
-			"The succubi are demons that look like seductive (in a slightly gothic way) girls. Using its magic, the succubus " +
-			"can charm a hero, who will become unable to attack anything until the charm wears off.";
+		return Babylon.get().getFromResources("mob_succubus_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

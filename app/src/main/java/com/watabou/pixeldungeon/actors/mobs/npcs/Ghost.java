@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Challenges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
@@ -56,7 +57,7 @@ import com.watabou.utils.Random;
 public class Ghost extends NPC {
 
 	{
-		name = "sad ghost";
+		name = Babylon.get().getFromResources("mob_ghost");
 		spriteClass = GhostSprite.class;
 		
 		flying = true;
@@ -77,7 +78,7 @@ public class Ghost extends NPC {
 	
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Babylon.get().getFromResources("defmod_evade");
 	}
 	
 	@Override
@@ -113,9 +114,8 @@ public class Ghost extends NPC {
 	
 	@Override
 	public String description() {
-		return 
-			"The ghost is barely visible. It looks like a shapeless " +
-			"spot of faint light with a sorrowful face.";
+		return
+				Babylon.get().getFromResources("mob_ghost_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
@@ -353,32 +353,20 @@ public class Ghost extends NPC {
 	}
 	
 	private static final QuestHandler roseQuest = new QuestHandler() {
-		private static final String TXT_ROSE1	=
-			"Hello adventurer... Once I was like you - strong and confident... " +
-			"And now I'm dead... But I can't leave this place... Not until I have my _dried rose_... " +
-			"It's very important to me... Some monster stole it from my body...";
-		
-		private static final String TXT_ROSE2	=
-			"Please... Help me... _Find the rose_...";
-		
-		private static final String TXT_ROSE3	= 
-			"Yes! Yes!!! This is it! Please give it to me! " +
-			"And you can take one of these items, maybe they " +
-			"will be useful to you in your journey...";
 
 		public void interact( Ghost ghost ) {
 			if (Quest.given) {
 
 				Item item = Dungeon.hero.belongings.getItem( DriedRose.class );	
 				if (item != null) {
-					GameScene.show( new WndSadGhost( ghost, item, TXT_ROSE3 ) );
+					GameScene.show( new WndSadGhost( ghost, item, Babylon.get().getFromResources("mob_ghost_completed0") ) );
 				} else {
-					GameScene.show( new WndQuest( ghost, TXT_ROSE2 ) );
+					GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest1") ) );
 					relocate( ghost );
 				}
 				
 			} else {
-				GameScene.show( new WndQuest( ghost, TXT_ROSE1 ) );
+				GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest0") ) );
 				Quest.given = true;
 				
 				Journal.add( Journal.Feature.GHOST );
@@ -387,32 +375,20 @@ public class Ghost extends NPC {
 	};
 	
 	private static final QuestHandler ratQuest = new QuestHandler() {
-		private static final String TXT_RAT1	=
-			"Hello adventurer... Once I was like you - strong and confident... " +
-			"And now I'm dead... But I can't leave this place... Not until I have my revenge... " +
-			"Slay the _fetid rat_, that has taken my life...";
-			
-		private static final String TXT_RAT2	=
-			"Please... Help me... _Slay the abomination_...";
-		
-		private static final String TXT_RAT3	= 
-			"Yes! The ugly creature is slain and I can finally rest... " +
-			"Please take one of these items, maybe they " +
-			"will be useful to you in your journey...";
 		
 		public void interact( Ghost ghost ) {
 			if (Quest.given) {
 
 				Item item = Dungeon.hero.belongings.getItem( RatSkull.class );	
 				if (item != null) {
-					GameScene.show( new WndSadGhost( ghost, item, TXT_RAT3 ) );
+					GameScene.show( new WndSadGhost( ghost, item, Babylon.get().getFromResources("mob_ghost_completed1") ) );
 				} else {
-					GameScene.show( new WndQuest( ghost, TXT_RAT2 ) );
+					GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest3") ) );
 					relocate( ghost );
 				}
 				
 			} else {
-				GameScene.show( new WndQuest( ghost, TXT_RAT1 ) );
+				GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest2") ) );
 				Quest.given = true;
 				
 				Journal.add( Journal.Feature.GHOST );
@@ -421,25 +397,15 @@ public class Ghost extends NPC {
 	};
 	
 	private static final QuestHandler curseQuest = new QuestHandler() {
-		private static final String TXT_CURSE1 =
-			"Hello adventurer... Once I was like you - strong and confident... " +
-			"And now I'm dead... But I can't leave this place, as I am bound by a horrid curse... " +
-			"Please... Help me... _Destroy the curse_...";
-		private static final String TXT_CURSE2 =
-			"Thank you, %s! The curse is broken and I can finally rest... " +
-			"Please take one of these items, maybe they " +
-			"will be useful to you in your journey...";
-		
-		private static final String TXT_YES	= "Yes, I will do it for you";
-		private static final String TXT_NO	= "No, I can't help you";
 		
 		public void interact( final Ghost ghost ) {
 			if (Quest.given) {
 
-				GameScene.show( new WndSadGhost( ghost, null, Utils.format( TXT_CURSE2, Dungeon.hero.className() ) ) );
+				GameScene.show( new WndSadGhost( ghost, null, Utils.format( Babylon.get().getFromResources("mob_ghost_quest5"), Dungeon.hero.className() ) ) );
 				
 			} else {
-				GameScene.show( new WndQuest( ghost, TXT_CURSE1, TXT_YES, TXT_NO ) {
+				GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest4"),
+						Babylon.get().getFromResources("mob_ghost_quest_yes"), Babylon.get().getFromResources("mob_ghost_quest_no") ) {
 					protected void onSelect( int index ) {
 						if (index == 0) {
 							Quest.given = true;

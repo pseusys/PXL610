@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Amok;
@@ -33,11 +34,9 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Monk extends Mob {
-
-	public static final String TXT_DISARM	= "%s has knocked the %s from your hands!";
 	
 	{
-		name = "dwarf monk";
+		name = Babylon.get().getFromResources("mob_monk");
 		spriteClass = MonkSprite.class;
 		
 		HP = HT = 70;
@@ -72,7 +71,7 @@ public class Monk extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Babylon.get().getFromResources("defmod_parried");
 	}
 	
 	@Override
@@ -93,7 +92,7 @@ public class Monk extends Mob {
 			if (weapon != null && !(weapon instanceof Knuckles) && !weapon.cursed) {
 				hero.belongings.weapon = null;
 				Dungeon.level.drop( weapon, hero.pos ).sprite.drop();
-				GLog.w( TXT_DISARM, name, weapon.name() );
+				GLog.w( Babylon.get().getFromResources("mob_monk_disarm"), name, weapon.name() );
 			}
 		}
 		
@@ -103,8 +102,7 @@ public class Monk extends Mob {
 	@Override
 	public String description() {
 		return
-			"These monks are fanatics, who devoted themselves to protecting their city's secrets from all aliens. " +
-			"They don't use any armor or weapons, relying solely on the art of hand-to-hand combat.";
+				Babylon.get().getFromResources("mob_monk_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

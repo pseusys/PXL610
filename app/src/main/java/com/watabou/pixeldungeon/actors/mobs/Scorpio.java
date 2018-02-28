@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class Scorpio extends Mob {
 	
 	{
-		name = "scorpio";
+		name = Babylon.get().getFromResources("mob_scorpio");
 		spriteClass = ScorpioSprite.class;
 		
 		HP = HT = 95;
@@ -100,8 +101,7 @@ public class Scorpio extends Mob {
 	@Override
 	public String description() {
 		return
-			"These huge arachnid-like demonic creatures avoid close combat by all means, " +
-			"firing crippling serrated spikes from long distances.";
+				Babylon.get().getFromResources("mob_scorpio_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

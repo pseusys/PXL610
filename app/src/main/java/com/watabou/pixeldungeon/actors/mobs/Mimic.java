@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -44,7 +45,7 @@ public class Mimic extends Mob {
 	private int level;
 	
 	{
-		name = "mimic";
+		name = Babylon.get().getFromResources("mob_mimic");
 		spriteClass = MimicSprite.class;
 	}
 	
@@ -121,8 +122,7 @@ public class Mimic extends Mob {
 	@Override
 	public String description() {
 		return
-			"Mimics are magical creatures which can take any shape they wish. In dungeons they almost always " +
-			"choose a shape of a treasure chest, because they know how to beckon an adventurer.";
+				Babylon.get().getFromResources("mob_mimic_desc");
 	}
 	
 	public static Mimic spawnAt( int pos, List<Item> items ) {

@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
 import com.watabou.pixeldungeon.actors.blobs.Web;
@@ -34,7 +35,7 @@ import com.watabou.utils.Random;
 public class Spinner extends Mob {
 	
 	{
-		name = "cave spinner";
+		name = Babylon.get().getFromResources("mob_spinner");
 		spriteClass = SpinnerSprite.class;
 		
 		HP = HT = 50;
@@ -96,9 +97,8 @@ public class Spinner extends Mob {
 	
 	@Override
 	public String description() {		
-		return 
-			"These greenish furry cave spiders try to avoid direct combat, preferring to wait in the distance " +
-			"while their victim, entangled in the spinner's excreted cobweb, slowly dies from their poisonous bite.";
+		return
+				Babylon.get().getFromResources("mob_spinner_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

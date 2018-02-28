@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Ghost;
 import com.watabou.pixeldungeon.items.food.MysteryMeat;
@@ -26,7 +27,7 @@ import com.watabou.utils.Random;
 public class Crab extends Mob {
 
 	{
-		name = "sewer crab";
+		name = Babylon.get().getFromResources("mob_crab");
 		spriteClass = CrabSprite.class;
 		
 		HP = HT = 15;
@@ -57,7 +58,7 @@ public class Crab extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Babylon.get().getFromResources("defmod_parried");
 	}
 	
 	@Override
@@ -69,8 +70,6 @@ public class Crab extends Mob {
 	@Override
 	public String description() {
 		return
-			"These huge crabs are at the top of the food chain in the sewers. " +
-			"They are extremely fast and their thick exoskeleton can withstand " +
-			"heavy blows.";
+				Babylon.get().getFromResources("mob_crab_desc");
 	}
 }

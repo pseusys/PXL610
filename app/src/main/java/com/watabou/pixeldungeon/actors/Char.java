@@ -22,6 +22,7 @@ import java.util.HashSet;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.buffs.Amok;
@@ -62,15 +63,6 @@ import com.watabou.utils.Random;
 
 public abstract class Char extends Actor {
 
-	protected static final String TXT_HIT		= "%s hit %s";
-	protected static final String TXT_KILL		= "%s killed you...";
-	protected static final String TXT_DEFEAT	= "%s defeated %s";
-	
-	private static final String TXT_YOU_MISSED	= "%s %s your attack";
-	private static final String TXT_SMB_MISSED	= "%s %s %s's attack";
-	
-	private static final String TXT_OUT_OF_PARALYSIS	= "The pain snapped %s out of paralysis";
-	
 	public int pos = 0;
 	
 	public CharSprite sprite;
@@ -136,7 +128,7 @@ public abstract class Char extends Actor {
 		if (hit( this, enemy, false )) {
 			
 			if (visibleFight) {
-				GLog.i( TXT_HIT, name, enemy.name );
+				GLog.i( Babylon.get().getFromResources("char_hit"), name, enemy.name );
 			}
 			
 			// FIXME
@@ -181,11 +173,11 @@ public abstract class Char extends Actor {
 								Utils.indefinite( name ), Dungeon.depth ) );
 						}
 						
-						GLog.n( TXT_KILL, name );
+						GLog.n( Babylon.get().getFromResources("char_kill"), name );
 					}
 					
 				} else {
-					GLog.i( TXT_DEFEAT, name, enemy.name );
+					GLog.i( Babylon.get().getFromResources("char_defeat"), name, enemy.name );
 				}
 			}
 			
@@ -197,9 +189,9 @@ public abstract class Char extends Actor {
 				String defense = enemy.defenseVerb();
 				enemy.sprite.showStatus( CharSprite.NEUTRAL, defense );
 				if (this == Dungeon.hero) {
-					GLog.i( TXT_YOU_MISSED, enemy.name, defense );
+					GLog.i( Babylon.get().getFromResources("char_you_miss"), enemy.name, defense );
 				} else {
-					GLog.i( TXT_SMB_MISSED, enemy.name, defense, name );
+					GLog.i( Babylon.get().getFromResources("char_enemy_miss"), enemy.name, defense, name );
 				}
 				
 				Sample.INSTANCE.play( Assets.SND_MISS );
@@ -225,7 +217,7 @@ public abstract class Char extends Actor {
 	}
 	
 	public String defenseVerb() {
-		return "dodged";
+		return Babylon.get().getFromResources("defmod_dodged");
 	}
 	
 	public int dr() {
@@ -267,7 +259,7 @@ public abstract class Char extends Actor {
 			if (Random.Int( dmg ) >= Random.Int( HP )) {
 				Buff.detach( this, Paralysis.class );
 				if (Dungeon.visible[pos]) {
-					GLog.i( TXT_OUT_OF_PARALYSIS, name );
+					GLog.i( Babylon.get().getFromResources("char_paralyse"), name );
 				}
 			}
 		}
@@ -357,45 +349,45 @@ public abstract class Char extends Actor {
 			if (buff instanceof Poison) {
 				
 				CellEmitter.center( pos ).burst( PoisonParticle.SPLASH, 5 );
-				sprite.showStatus( CharSprite.NEGATIVE, "poisoned" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_poisoned"));
 				
 			} else if (buff instanceof Amok) {
 				
-				sprite.showStatus( CharSprite.NEGATIVE, "amok" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_akok"));
 
 			} else if (buff instanceof Slow) {
 
-				sprite.showStatus( CharSprite.NEGATIVE, "slowed" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_slowed"));
 				
 			} else if (buff instanceof MindVision) {
 				
-				sprite.showStatus( CharSprite.POSITIVE, "mind" );
-				sprite.showStatus( CharSprite.POSITIVE, "vision" );
+				sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("char_mindvision0"));
+				sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("char_mindvision1"));
 				
 			} else if (buff instanceof Paralysis) {
 
 				sprite.add( CharSprite.State.PARALYSED );
-				sprite.showStatus( CharSprite.NEGATIVE, "paralysed" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_paralysed"));
 				
 			} else if (buff instanceof Terror) {
 				
-				sprite.showStatus( CharSprite.NEGATIVE, "frightened" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_frightened"));
 				
 			} else if (buff instanceof Roots) {
 				
-				sprite.showStatus( CharSprite.NEGATIVE, "rooted" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_rooted"));
 				
 			} else if (buff instanceof Cripple) {
 
-				sprite.showStatus( CharSprite.NEGATIVE, "crippled" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_crippled"));
 				
 			} else if (buff instanceof Bleeding) {
 
-				sprite.showStatus( CharSprite.NEGATIVE, "bleeding" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_bleeding"));
 				
 			} else if (buff instanceof Vertigo) {
 
-				sprite.showStatus( CharSprite.NEGATIVE, "dizzy" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("char_dizzy"));
 				
 			} else if (buff instanceof Sleep) {
 				sprite.idle();
@@ -409,7 +401,7 @@ public abstract class Char extends Actor {
 				sprite.add( CharSprite.State.FROZEN );
 			} else if (buff instanceof Invisibility) {
 				if (!(buff instanceof Shadows)) {
-					sprite.showStatus( CharSprite.POSITIVE, "invisible" );
+					sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("char_invisible"));
 				}
 				sprite.add( CharSprite.State.INVISIBLE );
 			}

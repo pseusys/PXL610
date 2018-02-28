@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Amok;
 import com.watabou.pixeldungeon.actors.buffs.Sleep;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 public class Golem extends Mob {
 	
 	{
-		name = "golem";
+		name = Babylon.get().getFromResources("mob_golem");
 		spriteClass = GolemSprite.class;
 		
 		HP = HT = 85;
@@ -63,7 +64,7 @@ public class Golem extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Babylon.get().getFromResources("defmod_block");
 	}
 	
 	@Override
@@ -76,9 +77,7 @@ public class Golem extends Mob {
 	@Override
 	public String description() {
 		return
-			"The Dwarves tried to combine their knowledge of mechanisms with their newfound power of elemental binding. " +
-			"They used spirits of earth as the \"soul\" for the mechanical bodies of golems, which were believed to be " +
-			"most controllable of all. Despite this, the tiniest mistake in the ritual could cause an outbreak.";
+				Babylon.get().getFromResources("mob_golem_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

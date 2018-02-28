@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Ghost;
 import com.watabou.pixeldungeon.sprites.RatSprite;
@@ -25,7 +26,7 @@ import com.watabou.utils.Random;
 public class Rat extends Mob {
 
 	{
-		name = "marsupial rat";
+		name = Babylon.get().getFromResources("mob_rat");
 		spriteClass = RatSprite.class;
 		
 		HP = HT = 8;
@@ -59,7 +60,6 @@ public class Rat extends Mob {
 	@Override
 	public String description() {
 		return
-			"Marsupial rats are aggressive, but rather weak denizens " +
-			"of the sewers. They can be dangerous only in big numbers.";
+				Babylon.get().getFromResources("mob_rat_desc");
 	}
 }

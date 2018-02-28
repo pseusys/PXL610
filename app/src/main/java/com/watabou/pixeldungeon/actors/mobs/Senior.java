@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Senior extends Monk {
 
 	{
-		name = "senior monk";
+		name = Babylon.get().getFromResources("mob_senior");
 		spriteClass = SeniorSprite.class;
 	}
 	

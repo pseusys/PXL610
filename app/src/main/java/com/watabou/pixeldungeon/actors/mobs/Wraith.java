@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 import java.util.HashSet;
 
 import com.watabou.noosa.tweeners.AlphaTweener;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -39,7 +40,7 @@ public class Wraith extends Mob {
 	private int level;
 	
 	{
-		name = "wraith";
+		name = Babylon.get().getFromResources("mob_wraith");
 		spriteClass = WraithSprite.class;
 		
 		HP = HT = 1;
@@ -81,7 +82,7 @@ public class Wraith extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Babylon.get().getFromResources("defmod_evade");
 	}
 	
 	@Override
@@ -93,8 +94,7 @@ public class Wraith extends Mob {
 	@Override
 	public String description() {
 		return
-			"A wraith is a vengeful spirit of a sinner, whose grave or tomb was disturbed. " +
-			"Being an ethereal entity, it is very hard to hit with a regular weapon.";
+				Babylon.get().getFromResources("mob_wraith_desc");
 	}
 	
 	public static void spawnAround( int pos ) {

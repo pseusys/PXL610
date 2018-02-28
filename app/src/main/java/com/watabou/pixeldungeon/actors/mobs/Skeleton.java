@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Char;
@@ -34,11 +35,9 @@ import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Random;
 
 public class Skeleton extends Mob {
-
-	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
 	
 	{
-		name = "skeleton";
+		name = Babylon.get().getFromResources("mob_skeleton");
 		spriteClass = SkeletonSprite.class;
 		
 		HP = HT = 25;
@@ -76,7 +75,7 @@ public class Skeleton extends Mob {
 		
 		if (heroKilled) {
 			Dungeon.fail( Utils.format( ResultDescriptions.MOB, Utils.indefinite( name ), Dungeon.depth ) );
-			GLog.n( TXT_HERO_KILLED );
+			GLog.n( Babylon.get().getFromResources("mob_skeleton_kills") );
 		}
 	}
 	
@@ -112,9 +111,7 @@ public class Skeleton extends Mob {
 	@Override
 	public String description() {
 		return
-			"Skeletons are composed of corpses bones from unlucky adventurers and inhabitants of the dungeon, " +
-			"animated by emanations of evil magic from the depths below. After they have been " +
-			"damaged enough, they disintegrate in an explosion of bones.";
+				Babylon.get().getFromResources("mob_skeleton_desc");
 	}
 	
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

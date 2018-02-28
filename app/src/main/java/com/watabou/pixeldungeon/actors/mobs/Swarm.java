@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -38,7 +39,7 @@ import com.watabou.utils.Random;
 public class Swarm extends Mob {
 
 	{
-		name = "swarm of flies";
+		name = Babylon.get().getFromResources("mob_swarm");
 		spriteClass = SwarmSprite.class;
 		
 		HP = HT = 80;
@@ -114,7 +115,7 @@ public class Swarm extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Babylon.get().getFromResources("defmod_evade");
 	}
 	
 	private Swarm split() {
@@ -139,7 +140,6 @@ public class Swarm extends Mob {
 	@Override
 	public String description() {
 		return
-			"The deadly swarm of flies buzzes angrily. Every non-magical attack " +
-			"will split it into two smaller but equally dangerous swarms.";
+				Babylon.get().getFromResources("mob_swarm_desc");
 	}
 }

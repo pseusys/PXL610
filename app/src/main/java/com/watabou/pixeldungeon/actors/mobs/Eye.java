@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -40,10 +41,8 @@ import com.watabou.utils.Random;
 
 public class Eye extends Mob {
 	
-	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
-	
 	{
-		name = "evil eye";
+		name = Babylon.get().getFromResources("mob_eye");
 		spriteClass = EyeSprite.class;
 		
 		HP = HT = 100;
@@ -133,7 +132,7 @@ public class Eye extends Mob {
 				
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail( Utils.format( ResultDescriptions.MOB, Utils.indefinite( name ), Dungeon.depth ) );
-					GLog.n( TXT_DEATHGAZE_KILLED, name );
+					GLog.n( Babylon.get().getFromResources("mob_eye_kills"), name );
 				}
 			} else {
 				ch.sprite.showStatus( CharSprite.NEUTRAL,  ch.defenseVerb() );
@@ -146,8 +145,7 @@ public class Eye extends Mob {
 	@Override
 	public String description() {
 		return
-			"One of this demon's other names is \"orb of hatred\", because when it sees an enemy, " +
-			"it uses its deathgaze recklessly, often ignoring its allies and wounding them.";
+				Babylon.get().getFromResources("mob_eye_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

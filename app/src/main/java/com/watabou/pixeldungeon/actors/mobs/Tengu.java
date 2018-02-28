@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.Badges.Badge;
@@ -42,6 +43,7 @@ import com.watabou.pixeldungeon.levels.Terrain;
 import com.watabou.pixeldungeon.mechanics.Ballistica;
 import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.TenguSprite;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Random;
 
 public class Tengu extends Mob {
@@ -49,7 +51,7 @@ public class Tengu extends Mob {
 	private static final int JUMP_DELAY = 5;
 	
 	{
-		name = Dungeon.depth == Statistics.deepestFloor ? "Tengu" : "memory of Tengu";
+		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_tengu") : Babylon.get().getFromResources("mob_tengumemory");
 		spriteClass = TenguSprite.class;
 		
 		HP = HT = 120;
@@ -102,7 +104,7 @@ public class Tengu extends Mob {
 		
 		Badges.validateBossSlain();
 		
-		yell( "Free at last..." );
+		yell(Babylon.get().getFromResources("mob_tengu_death"));
 	}
 	
 	@Override
@@ -170,14 +172,13 @@ public class Tengu extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell( "Gotcha, " + Dungeon.hero.heroClass.title() + "!" );
+		yell(Utils.format(Babylon.get().getFromResources("mob_tengu_notice"), Dungeon.hero.heroClass.title()) );
 	}
 	
 	@Override
 	public String description() {
 		return
-			"Tengu are members of the ancient assassins clan, which is also called Tengu. " +
-			"These assassins are noted for extensive use of shuriken and traps.";
+				Babylon.get().getFromResources("mob_tengu_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

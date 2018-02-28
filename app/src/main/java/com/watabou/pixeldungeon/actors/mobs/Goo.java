@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.actors.mobs;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -46,7 +47,7 @@ public class Goo extends Mob {
 	private static final float PUMP_UP_DELAY	= 2f;
 	
 	{
-		name = Dungeon.depth == Statistics.deepestFloor ? "Goo" : "spawn of Goo";
+		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_goo") : Babylon.get().getFromResources("mob_goospawn");
 		
 		HP = HT = 80;
 		EXP = 10;
@@ -165,7 +166,7 @@ public class Goo extends Mob {
 			
 			if (Dungeon.visible[pos]) {
 				sprite.showStatus( CharSprite.NEGATIVE, "!!!" );
-				GLog.n( "Goo is pumping itself up!" );
+				GLog.n(Babylon.get().getFromResources("mob_goo_pumps"));
 			}
 				
 			return true;
@@ -203,20 +204,19 @@ public class Goo extends Mob {
 		
 		Badges.validateBossSlain();
 		
-		yell( "glurp... glurp..." );
+		yell(Babylon.get().getFromResources("mob_goo_death"));
 	}
 	
 	@Override
 	public void notice() {
 		super.notice();
-		yell( "GLURP-GLURP!" );
+		yell(Babylon.get().getFromResources("mob_goo_noitice"));
 	}
 	
 	@Override
 	public String description() {
 		return
-			"Little known about The Goo. It's quite possible that it is not even a creature, but rather a " +
-			"conglomerate of substances from the sewers that gained rudiments of free will.";
+				Babylon.get().getFromResources("mob_goo_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.actors.mobs.npcs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.effects.CellEmitter;
@@ -31,7 +32,7 @@ import com.watabou.pixeldungeon.windows.WndTradeItem;
 public class Shopkeeper extends NPC {
 
 	{
-		name = "shopkeeper";
+		name = Babylon.get().getFromResources("mob_shopkeeper");
 		spriteClass = ShopkeeperSprite.class;
 	}
 	
@@ -76,13 +77,12 @@ public class Shopkeeper extends NPC {
 	
 	@Override
 	public String description() {
-		return 
-			"This stout guy looks more appropriate for a trade district in some large city " +
-			"than for a dungeon. His prices explain why he prefers to do business here.";
+		return
+				Babylon.get().getFromResources("mob_shopkeeper_desc");
 	}
 	
 	public static WndBag sell() {
-		return GameScene.selectItem( itemSelector, WndBag.Mode.FOR_SALE, "Select an item to sell" );
+		return GameScene.selectItem( itemSelector, WndBag.Mode.FOR_SALE, Babylon.get().getFromResources("mod_shopkeeper_dialog"));
 	}
 	
 	private static WndBag.Listener itemSelector = new WndBag.Listener() {

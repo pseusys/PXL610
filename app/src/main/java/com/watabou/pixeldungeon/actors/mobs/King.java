@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -43,6 +44,7 @@ import com.watabou.pixeldungeon.levels.Level;
 import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.KingSprite;
 import com.watabou.pixeldungeon.sprites.UndeadSprite;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -52,7 +54,7 @@ public class King extends Mob {
 	private static final int MAX_ARMY_SIZE	= 5;
 	
 	{
-		name = Dungeon.depth == Statistics.deepestFloor ? "King of Dwarves" : "undead King of Dwarves";
+		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_king") : Babylon.get().getFromResources("mob_kingundead");
 		spriteClass = KingSprite.class;
 		
 		HP = HT = 300;
@@ -95,7 +97,7 @@ public class King extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Babylon.get().getFromResources("defmod_parried");
 	}
 	
 	@Override
@@ -144,7 +146,7 @@ public class King extends Mob {
 		
 		Badges.validateBossSlain();
 		
-		yell( "You cannot kill me, " + Dungeon.hero.heroClass.title() + "... I am... immortal..." );
+		yell( Utils.format(Babylon.get().getFromResources("mob_king_death"), Dungeon.hero.heroClass.title()) );
 	}
 	
 	private int maxArmySize() {
@@ -192,22 +194,19 @@ public class King extends Mob {
 			} while (dist < undeadsToSummon);
 		}
 		
-		yell( "Arise, slaves!" );
+		yell(Babylon.get().getFromResources("mob_king_summon"));
 	}
 	
 	@Override
 	public void notice() {
 		super.notice();
-		yell( "How dare you!" );
+		yell(Babylon.get().getFromResources("mob_king_notice"));
 	}
 	
 	@Override
 	public String description() {
 		return
-			"The last king of dwarves was known for his deep understanding of processes of life and death. " +
-			"He has persuaded members of his court to participate in a ritual, that should have granted them " +
-			"eternal youthfulness. In the end he was the only one, who got it - and an army of undead " +
-			"as a bonus.";
+				Babylon.get().getFromResources("mob_king_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
@@ -239,7 +238,7 @@ public class King extends Mob {
 		public static int count = 0;
 		
 		{
-			name = "undead dwarf";
+			name = Babylon.get().getFromResources("mob_kings_dwarf");
 			spriteClass = UndeadSprite.class;
 			
 			HP = HT = 28;
@@ -305,14 +304,13 @@ public class King extends Mob {
 		
 		@Override
 		public String defenseVerb() {
-			return "blocked";
+			return Babylon.get().getFromResources("defmod_block");
 		}
 		
 		@Override
 		public String description() {
 			return
-				"These undead dwarves, risen by the will of the King of Dwarves, were members of his court. " +
-				"They appear as skeletons with a stunning amount of facial hair.";
+					Babylon.get().getFromResources("mob_kings_dwarf_desc");
 		}
 		
 		private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();
