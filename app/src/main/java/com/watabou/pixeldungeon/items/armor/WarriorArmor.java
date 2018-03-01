@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.items.armor;
 
 import com.watabou.noosa.Camera;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -43,18 +44,14 @@ public class WarriorArmor extends ClassArmor {
 	private static int LEAP_TIME	= 1;
 	private static int SHOCK_TIME	= 3;
 	
-	private static final String AC_SPECIAL = "HEROIC LEAP"; 
-	
-	private static final String TXT_NOT_WARRIOR	= "Only warriors can use this armor!";
-	
 	{
-		name = "warrior suit of armor";
+		name = Babylon.get().getFromResources("armor_warrior");
 		image = ItemSpriteSheet.ARMOR_WARRIOR;
 	}
 	
 	@Override
 	public String special() {
-		return AC_SPECIAL;
+		return Babylon.get().getFromResources("armor_warrior_buff");
 	}
 	
 	@Override
@@ -67,16 +64,14 @@ public class WarriorArmor extends ClassArmor {
 		if (hero.heroClass == HeroClass.WARRIOR) {
 			return super.doEquip( hero );
 		} else {
-			GLog.w( TXT_NOT_WARRIOR );
+			GLog.w( Babylon.get().getFromResources("armor_notawarrior") );
 			return false;
 		}
 	}
 	
 	@Override
 	public String desc() {
-		return
-			"While this armor looks heavy, it allows a warrior to perform heroic leap towards " +
-			"a targeted location, slamming down to stun all neighbouring enemies.";
+		return Babylon.get().getFromResources("armor_warrior_desc");
 	}
 	
 	protected static CellSelector.Listener leaper = new  CellSelector.Listener() {
@@ -124,7 +119,7 @@ public class WarriorArmor extends ClassArmor {
 		
 		@Override
 		public String prompt() {
-			return "Choose direction to leap";
+			return Babylon.get().getFromResources("armor_warrior_prompt");
 		}
 	};
 }

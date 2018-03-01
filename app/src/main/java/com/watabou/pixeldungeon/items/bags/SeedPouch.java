@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.bags;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.plants.Plant;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
@@ -24,7 +25,7 @@ import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 public class SeedPouch extends Bag {
 
 	{
-		name = "seed pouch";
+		name = Babylon.get().getFromResources("item_seedpouch");
 		image = ItemSpriteSheet.POUCH;
 		
 		size = 8;
@@ -42,7 +43,6 @@ public class SeedPouch extends Bag {
 	
 	@Override
 	public String info() {
-		return
-			"This small velvet pouch allows you to store any number of seeds in it. Very convenient.";
+		return Babylon.get().getFromResources("item_seedpouch_desc");
 	}
 }

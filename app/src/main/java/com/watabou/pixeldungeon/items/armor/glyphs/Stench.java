@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
 import com.watabou.pixeldungeon.actors.blobs.ToxicGas;
@@ -29,8 +30,6 @@ import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class Stench extends Glyph {
-
-	private static final String TXT_STENCH	= "%s of stench";
 	
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x22CC44 );
 	
@@ -50,7 +49,7 @@ public class Stench extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_STENCH, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_stench"), weaponName );
 	}
 	
 	@Override

@@ -19,14 +19,12 @@ package com.watabou.pixeldungeon.items.armor;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 
 abstract public class ClassArmor extends Armor {
-	
-	private static final String TXT_LOW_HEALTH		= "Your health is too low!";
-	private static final String TXT_NOT_EQUIPPED	= "You need to be wearing this armor to use its special power!";
 	
 	private int DR;
 	
@@ -98,9 +96,9 @@ abstract public class ClassArmor extends Armor {
 		if (action == special()) {
 			
 			if (hero.HP < 3) {
-				GLog.w( TXT_LOW_HEALTH );
+				GLog.w( Babylon.get().getFromResources("armor_health_toolow") );
 			} else if (!isEquipped( hero )) {
-				GLog.w( TXT_NOT_EQUIPPED );
+				GLog.w( Babylon.get().getFromResources("armor_notequipped") );
 			} else {
 				curUser = hero;
 				doSpecial();
@@ -136,6 +134,6 @@ abstract public class ClassArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return "The thing looks awesome!";
+		return Babylon.get().getFromResources("armor_looks_awesome");
 	}
 }

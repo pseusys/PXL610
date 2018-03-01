@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
 import com.watabou.noosa.Camera;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Roots;
@@ -31,8 +32,6 @@ import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class Entanglement extends Glyph {
-
-	private static final String TXT_ENTANGLEMENT	= "%s of entanglement";
 	
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x448822 );
 	
@@ -55,7 +54,7 @@ public class Entanglement extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_ENTANGLEMENT, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_entanglement"), weaponName );
 	}
 
 	@Override

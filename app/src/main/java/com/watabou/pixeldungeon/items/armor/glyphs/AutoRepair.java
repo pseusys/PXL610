@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -25,8 +26,6 @@ import com.watabou.pixeldungeon.items.armor.Armor.Glyph;
 import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 
 public class AutoRepair extends Glyph {
-
-	private static final String TXT_AUTO_REPAIR	= "%s of auto-repair";
 
 	private static Glowing GRAY = new Glowing( 0xCC8888 );
 	
@@ -41,7 +40,7 @@ public class AutoRepair extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_AUTO_REPAIR, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_autorep"), weaponName );
 	}
 	
 	@Override

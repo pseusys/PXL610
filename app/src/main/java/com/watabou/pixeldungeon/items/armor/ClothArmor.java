@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.items.armor;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 
 public class ClothArmor extends Armor {
 
 	{	
-		name = "cloth armor";
+		name = Babylon.get().getFromResources("armor_cloth");
 		image = ItemSpriteSheet.ARMOR_CLOTH;
 	}
 	
@@ -33,6 +34,6 @@ public class ClothArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return "This lightweight armor offers basic protection.";
+		return Babylon.get().getFromResources("armor_cloth_desc");
 	}
 }

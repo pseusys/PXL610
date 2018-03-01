@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -34,8 +35,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Viscosity extends Glyph {
-
-	private static final String TXT_VISCOSITY	= "%s of viscosity";
 	
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing( 0x8844CC );
 	
@@ -57,7 +56,7 @@ public class Viscosity extends Glyph {
 			}
 			debuff.prolong( damage );
 			
-			defender.sprite.showStatus( CharSprite.WARNING, "deferred %d", damage );
+			defender.sprite.showStatus( CharSprite.WARNING, Babylon.get().getFromResources("glyph_viscosity_deferred"), damage );
 			
 			return 0;
 			
@@ -68,7 +67,7 @@ public class Viscosity extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_VISCOSITY, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_viscosity"), weaponName );
 	}
 
 	@Override
@@ -116,7 +115,7 @@ public class Viscosity extends Glyph {
 		
 		@Override
 		public String toString() {
-			return Utils.format( "Defered damage (%d)", damage );
+			return Utils.format(Babylon.get().getFromResources("glyph_viscosity_def"), damage );
 		}
 		
 		@Override
@@ -126,8 +125,8 @@ public class Viscosity extends Glyph {
 				target.damage( 1, this );
 				if (target == Dungeon.hero && !target.isAlive()) {
 					// FIXME
-					Dungeon.fail( Utils.format( ResultDescriptions.GLYPH, "enchantment of viscosity", Dungeon.depth ) );
-					GLog.n( "The enchantment of viscosity killed you..." );
+					Dungeon.fail( Utils.format( ResultDescriptions.GLYPH, Babylon.get().getFromResources("glyph_viscosity_name"), Dungeon.depth ) );
+					GLog.n(Babylon.get().getFromResources("glyph_viscosity_killed"));
 					
 					Badges.validateDeathFromGlyph();
 				}

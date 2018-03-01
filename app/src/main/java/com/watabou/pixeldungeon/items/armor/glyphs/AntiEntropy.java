@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Burning;
@@ -32,8 +33,6 @@ import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class AntiEntropy extends Glyph {
-
-	private static final String TXT_ANTI_ENTROPY	= "%s of anti-entropy";
 	
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing( 0x0000FF );
 	
@@ -57,7 +56,7 @@ public class AntiEntropy extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_ANTI_ENTROPY, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_antien"), weaponName );
 	}
 
 	@Override

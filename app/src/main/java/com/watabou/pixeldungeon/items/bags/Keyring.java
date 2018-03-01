@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.bags;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.items.keys.Key;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
@@ -24,7 +25,7 @@ import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 public class Keyring extends Bag {
 
 	{
-		name = "key ring";
+		name = Babylon.get().getFromResources("item_keyring");
 		image = ItemSpriteSheet.KEYRING;
 		
 		size = 12;
@@ -42,8 +43,6 @@ public class Keyring extends Bag {
 	
 	@Override
 	public String info() {
-		return
-			"This is a copper key ring, that lets you keep all your keys " +
-			"separately from the rest of your belongings.";
+		return Babylon.get().getFromResources("item_keyring_desc");
 	}
 }

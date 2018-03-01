@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.armor;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -32,27 +33,22 @@ import com.watabou.pixeldungeon.levels.Level;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.pixeldungeon.utils.GLog;
 
-public class MageArmor extends ClassArmor {	
-	
-	private static final String AC_SPECIAL = "MOLTEN EARTH"; 
-	
-	private static final String TXT_NOT_MAGE	= "Only mages can use this armor!";
+public class MageArmor extends ClassArmor {
 	
 	{
-		name = "mage robe";
+		name = Babylon.get().getFromResources("armor_mage");
 		image = ItemSpriteSheet.ARMOR_MAGE;
 	}
 	
 	@Override
 	public String special() {
-		return AC_SPECIAL;
+		return Babylon.get().getFromResources("armor_mage_buff");
 	}
 	
 	@Override
 	public String desc() {
 		return
-			"Wearing this gorgeous robe, a mage can cast a spell of molten earth: all the enemies " +
-			"in his field of view will be set on fire and unable to move at the same time.";
+				Babylon.get().getFromResources("armor_mage_desc");
 	}
 	
 	@Override
@@ -80,7 +76,7 @@ public class MageArmor extends ClassArmor {
 		if (hero.heroClass == HeroClass.MAGE) {
 			return super.doEquip( hero );
 		} else {
-			GLog.w( TXT_NOT_MAGE );
+			GLog.w( Babylon.get().getFromResources("armor_notamage") );
 			return false;
 		}
 	}

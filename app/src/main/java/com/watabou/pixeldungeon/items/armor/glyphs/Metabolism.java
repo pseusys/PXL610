@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Hunger;
 import com.watabou.pixeldungeon.effects.Speck;
@@ -29,8 +30,6 @@ import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Random;
 
 public class Metabolism extends Glyph {
-
-	private static final String TXT_METABOLISM	= "%s of metabolism";
 	
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing( 0xCC0000 );
 	
@@ -63,7 +62,7 @@ public class Metabolism extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_METABOLISM, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_metabolism"), weaponName );
 	}
 
 	@Override

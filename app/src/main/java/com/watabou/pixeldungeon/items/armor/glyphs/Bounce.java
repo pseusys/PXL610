@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -28,8 +29,6 @@ import com.watabou.pixeldungeon.levels.Level;
 import com.watabou.utils.Random;
 
 public class Bounce extends Glyph {
-
-	private static final String TXT_BOUNCE	= "%s of bounce";
 	
 	@Override
 	public int proc( Armor armor, Char attacker, Char defender, int damage) {
@@ -66,7 +65,7 @@ public class Bounce extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_BOUNCE, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_bounce"), weaponName );
 	}
 
 }

@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.armor;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.buffs.Blindness;
@@ -37,19 +38,14 @@ import com.watabou.pixeldungeon.utils.GLog;
 
 public class RogueArmor extends ClassArmor {
 	
-	private static final String TXT_FOV 		= "You can only jump to an empty location in your field of view";
-	private static final String TXT_NOT_ROGUE	= "Only rogues can use this armor!";
-	
-	private static final String AC_SPECIAL = "SMOKE BOMB"; 
-	
 	{
-		name = "rogue garb";
+		name = Babylon.get().getFromResources("armor_rogue");
 		image = ItemSpriteSheet.ARMOR_ROGUE;
 	}
 	
 	@Override
 	public String special() {
-		return AC_SPECIAL;
+		return Babylon.get().getFromResources("armor_rogue_buff");
 	}
 	
 	@Override
@@ -62,16 +58,14 @@ public class RogueArmor extends ClassArmor {
 		if (hero.heroClass == HeroClass.ROGUE) {
 			return super.doEquip( hero );
 		} else {
-			GLog.w( TXT_NOT_ROGUE );
+			GLog.w( Babylon.get().getFromResources("armor_notarogue") );
 			return false;
 		}
 	}
 	
 	@Override
 	public String desc() {
-		return 
-			"Wearing this dark garb, a rogue can perform a trick, that is called \"smoke bomb\" " +
-			"(though no real explosives are used): he blinds enemies who could see him and jumps aside.";
+		return Babylon.get().getFromResources("armor_rogue_desc");
 	}
 	
 	protected static CellSelector.Listener teleporter = new  CellSelector.Listener() {
@@ -84,7 +78,7 @@ public class RogueArmor extends ClassArmor {
 					!(Level.passable[target] || Level.avoid[target]) || 
 					Actor.findChar( target ) != null) {
 					
-					GLog.w( TXT_FOV );
+					GLog.w( Babylon.get().getFromResources("armor_rogue_error") );
 					return;
 				}
 				
@@ -110,7 +104,7 @@ public class RogueArmor extends ClassArmor {
 		
 		@Override
 		public String prompt() {
-			return "Choose a location to jump to";
+			return Babylon.get().getFromResources("armor_rogue_prompt");
 		}
 	};
 }

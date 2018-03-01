@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.armor.glyphs;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -33,8 +34,6 @@ import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class Multiplicity extends Glyph {
-
-	private static final String TXT_MULTIPLICITY	= "%s of multiplicity";
 	
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xCCAA88 );
 	
@@ -71,7 +70,7 @@ public class Multiplicity extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_MULTIPLICITY, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_multiplicity"), weaponName );
 	}
 
 	@Override

@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.armor;
 
 import java.util.HashMap;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
@@ -33,13 +34,8 @@ import com.watabou.utils.Callback;
 
 public class HuntressArmor extends ClassArmor {
 	
-	private static final String TXT_NO_ENEMIES 		= "No enemies in sight";
-	private static final String TXT_NOT_HUNTRESS	= "Only huntresses can use this armor!";
-	
-	private static final String AC_SPECIAL = "SPECTRAL BLADES"; 
-	
 	{
-		name = "huntress cloak";
+		name = Babylon.get().getFromResources("armor_huntress");
 		image = ItemSpriteSheet.ARMOR_HUNTRESS;
 	}
 	
@@ -47,7 +43,7 @@ public class HuntressArmor extends ClassArmor {
 	
 	@Override
 	public String special() {
-		return AC_SPECIAL;
+		return Babylon.get().getFromResources("armor_huntress_buff");
 	}
 	
 	@Override
@@ -77,7 +73,7 @@ public class HuntressArmor extends ClassArmor {
 		}
 		
 		if (targets.size() == 0) {
-			GLog.w( TXT_NO_ENEMIES );
+			GLog.w( Babylon.get().getFromResources("armor_huntress_error") );
 			return;
 		}
 		
@@ -92,16 +88,13 @@ public class HuntressArmor extends ClassArmor {
 		if (hero.heroClass == HeroClass.HUNTRESS) {
 			return super.doEquip( hero );
 		} else {
-			GLog.w( TXT_NOT_HUNTRESS );
+			GLog.w( Babylon.get().getFromResources("armor_notahuntress") );
 			return false;
 		}
 	}
 	
 	@Override
 	public String desc() {
-		return
-			"A huntress in such cloak can create a fan of spectral blades. Each of these blades " +
-			"will target a single enemy in the huntress's field of view, inflicting damage depending " +
-			"on her currently equipped melee weapon.";
+		return Babylon.get().getFromResources("armor_huntress_desc");
 	}
 }

@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.items.armor;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 
 public class MailArmor extends Armor {
 
 	{
-		name = "mail armor";
+		name = Babylon.get().getFromResources("armor_mail");
 		image = ItemSpriteSheet.ARMOR_MAIL;
 	}
 	
@@ -33,7 +34,6 @@ public class MailArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return 
-			"Interlocking metal links make for a tough but flexible suit of armor.";
+		return Babylon.get().getFromResources("armor_mail_desc");
 	}
 }

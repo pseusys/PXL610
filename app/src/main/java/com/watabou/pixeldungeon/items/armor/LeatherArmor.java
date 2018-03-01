@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.items.armor;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 
 public class LeatherArmor extends Armor {
 
 	{	
-		name = "leather armor";
+		name = Babylon.get().getFromResources("armor_leather");
 		image = ItemSpriteSheet.ARMOR_LEATHER;
 	}
 	
@@ -33,6 +34,6 @@ public class LeatherArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return "Armor made from tanned monster hide. Not as light as cloth armor but provides better protection.";
+		return Babylon.get().getFromResources("armor_leatrher_desc");
 	}
 }

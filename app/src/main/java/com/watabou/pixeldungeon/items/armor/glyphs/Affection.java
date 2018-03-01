@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.armor.glyphs;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Charm;
@@ -30,8 +31,6 @@ import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
 public class Affection extends Glyph {
-
-	private static final String TXT_AFFECTION	= "%s of affection";
 	
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing( 0xFF4488 );
 	
@@ -58,7 +57,7 @@ public class Affection extends Glyph {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_AFFECTION, weaponName );
+		return String.format( Babylon.get().getFromResources("glyph_affection"), weaponName );
 	}
 
 	@Override
