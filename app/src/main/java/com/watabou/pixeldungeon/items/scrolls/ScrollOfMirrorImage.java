@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
 import com.watabou.pixeldungeon.actors.mobs.npcs.MirrorImage;
@@ -34,7 +35,7 @@ public class ScrollOfMirrorImage extends Scroll {
 	private static final int NIMAGES	= 3;
 	
 	{
-		name = "Scroll of Mirror Image";
+		name = Babylon.get().getFromResources("scroll_image");
 	}
 	
 	@Override
@@ -74,7 +75,6 @@ public class ScrollOfMirrorImage extends Scroll {
 	
 	@Override
 	public String desc() {
-		return 
-			"The incantation on this scroll will create illusionary twins of the reader, which will chase his enemies.";
+		return Babylon.get().getFromResources("scroll_image_desc");
 	}
 }

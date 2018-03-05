@@ -42,21 +42,17 @@ import com.watabou.utils.Callback;
 
 public class Pickaxe extends Weapon {
 	
-	public static final String AC_MINE	= "MINE";
-	
 	public static final float TIME_TO_MINE = 2;
-	
-	private static final String TXT_NO_VEIN = "There is no dark gold vein near you to mine";
 	
 	private static final Glowing BLOODY = new Glowing( 0x550000 );
 	
 	{
-		name = "pickaxe";
+		name = Babylon.get().getFromResources("quest_pickaxe");
 		image = ItemSpriteSheet.PICKAXE;
 		
 		unique = true;
 		
-		defaultAction = AC_MINE;
+		defaultAction = Babylon.get().getFromResources("quest_pickaxe_action");
 		
 		STR = 14;
 	}
@@ -76,17 +72,17 @@ public class Pickaxe extends Weapon {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_MINE );
+		actions.add( Babylon.get().getFromResources("quest_pickaxe_action") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( final Hero hero, String action ) {
 		
-		if (action == AC_MINE) {
+		if (action == Babylon.get().getFromResources("quest_pickaxe_action")) {
 			
 			if (Dungeon.depth < 11 || Dungeon.depth > 15) {
-				GLog.w( TXT_NO_VEIN );
+				GLog.w( Babylon.get().getFromResources("quest_pickaxe_error") );
 				return;
 			}
 			
@@ -130,7 +126,7 @@ public class Pickaxe extends Weapon {
 				}
 			}
 			
-			GLog.w( TXT_NO_VEIN );
+			GLog.w( Babylon.get().getFromResources("quest_pickaxe_error") );
 			
 		} else {
 			
@@ -180,7 +176,6 @@ public class Pickaxe extends Weapon {
 	
 	@Override
 	public String info() {
-		return
-			"This is a large and sturdy tool for breaking rocks. Probably it can be used as a weapon.";
+		return Babylon.get().getFromResources("quest_pickaxe_desc");
 	}
 }

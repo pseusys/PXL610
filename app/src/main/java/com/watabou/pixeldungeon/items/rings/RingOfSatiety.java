@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfSatiety extends Ring {
 
 	{
-		name = "Ring of Satiety";
+		name = Babylon.get().getFromResources("ring_satiety");
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class RingOfSatiety extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"Wearing this ring you can go without food longer. Degraded rings of satiety will cause the opposite effect." :
+				Babylon.get().getFromResources("ring_satiety_desc") :
 			super.desc();
 	}
 	

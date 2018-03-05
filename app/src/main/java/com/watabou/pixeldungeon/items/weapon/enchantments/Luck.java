@@ -17,14 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.enchantments;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.items.weapon.Weapon;
 import com.watabou.pixeldungeon.sprites.ItemSprite;
 import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 
 public class Luck extends Weapon.Enchantment {
-
-	private static final String TXT_LUCKY	= "lucky %s";
 	
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x00FF00 );
 	
@@ -47,7 +46,7 @@ public class Luck extends Weapon.Enchantment {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_LUCKY, weaponName );
+		return String.format( Babylon.get().getFromResources("enchantment_lucky"), weaponName );
 	}
 
 	@Override

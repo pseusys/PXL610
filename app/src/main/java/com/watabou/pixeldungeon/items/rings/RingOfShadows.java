@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfShadows extends Ring {
 
 	{
-		name = "Ring of Shadows";
+		name = Babylon.get().getFromResources("ring_shadows");
 	}
 	
 	@Override
@@ -31,8 +33,7 @@ public class RingOfShadows extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"Enemies will be less likely to notice you if you wear this ring. Degraded rings " +
-			"of shadows will alert enemies who might otherwise not have noticed your presence." :
+				Babylon.get().getFromResources("ring_shadows_desc") :
 			super.desc();
 	}
 	

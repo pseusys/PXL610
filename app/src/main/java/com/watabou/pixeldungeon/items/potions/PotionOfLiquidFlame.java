@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.potions;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
 import com.watabou.pixeldungeon.actors.blobs.Fire;
@@ -27,7 +28,7 @@ import com.watabou.pixeldungeon.scenes.GameScene;
 public class PotionOfLiquidFlame extends Potion {
 
 	{
-		name = "Potion of Liquid Flame";
+		name = Babylon.get().getFromResources("potion_flame");
 	}
 	
 	@Override
@@ -45,9 +46,7 @@ public class PotionOfLiquidFlame extends Potion {
 	
 	@Override
 	public String desc() {
-		return
-			"This flask contains an unstable compound which will burst " +
-			"violently into flame upon exposure to open air.";
+		return Babylon.get().getFromResources("potion_flame_desc");
 	}
 	
 	@Override

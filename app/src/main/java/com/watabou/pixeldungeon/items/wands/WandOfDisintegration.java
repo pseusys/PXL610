@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class WandOfDisintegration extends Wand {
 
 	{
-		name = "Wand of Disintegration";
+		name = Babylon.get().getFromResources("wand_desint");
 		hitChars = false;
 	}
 	
@@ -107,8 +108,6 @@ public class WandOfDisintegration extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"This wand emits a beam of destructive energy, which pierces all creatures in its way. " +
-			"The more targets it hits, the more damage it inflicts to each of them.";
+		return Babylon.get().getFromResources("wand_desint_desc");
 	}
 }

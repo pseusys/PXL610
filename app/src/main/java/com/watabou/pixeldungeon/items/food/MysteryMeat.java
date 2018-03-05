@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.food;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Burning;
 import com.watabou.pixeldungeon.actors.buffs.Hunger;
@@ -32,10 +33,10 @@ import com.watabou.utils.Random;
 public class MysteryMeat extends Food {
 
 	{
-		name = "mystery meat";
+		name = Babylon.get().getFromResources("food_meat");
 		image = ItemSpriteSheet.MEAT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food tasted... strange.";
+		message = Babylon.get().getFromResources("food_meat_message");
 	}
 	
 	@Override
@@ -43,23 +44,23 @@ public class MysteryMeat extends Food {
 		
 		super.execute( hero, action );
 		
-		if (action.equals( AC_EAT )) {
+		if (action.equals( Babylon.get().getFromResources("food_action") )) {
 			
 			switch (Random.Int( 5 )) {
 			case 0:
-				GLog.w( "Oh it's hot!" );
+				GLog.w(Babylon.get().getFromResources("food_meat_eff0"));
 				Buff.affect( hero, Burning.class ).reignite( hero );
 				break;
 			case 1:
-				GLog.w( "You can't feel your legs!" );
+				GLog.w(Babylon.get().getFromResources("food_meat_eff1"));
 				Buff.prolong( hero, Roots.class, Paralysis.duration( hero ) );
 				break;
 			case 2:
-				GLog.w( "You are not feeling well." );
+				GLog.w(Babylon.get().getFromResources("food_meat_eff2"));
 				Buff.affect( hero, Poison.class ).set( Poison.durationFactor( hero ) * hero.HT / 5 );
 				break;
 			case 3:
-				GLog.w( "You are stuffed." );
+				GLog.w(Babylon.get().getFromResources("food_meat_eff3"));
 				Buff.prolong( hero, Slow.class, Slow.duration( hero ) );
 				break;
 			}
@@ -68,7 +69,7 @@ public class MysteryMeat extends Food {
 	
 	@Override
 	public String info() {
-		return "Eat at your own risk!";
+		return Babylon.get().getFromResources("food_meat_desc");
 	}
 	
 	public int price() {

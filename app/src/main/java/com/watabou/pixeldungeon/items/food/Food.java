@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.buffs.Hunger;
@@ -36,27 +37,25 @@ public class Food extends Item {
 
 	private static final float TIME_TO_EAT	= 3f;
 	
-	public static final String AC_EAT	= "EAT";
-	
 	public float energy = Hunger.HUNGRY;
-	public String message = "That food tasted delicious!";
+	public String message = Babylon.get().getFromResources("food_message");
 	
 	{
 		stackable = true;
-		name = "ration of food";
+		name = Babylon.get().getFromResources("food_name");
 		image = ItemSpriteSheet.RATION;
 	}
 	
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_EAT );
+		actions.add( Babylon.get().getFromResources("food_action") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_EAT )) {
+		if (action.equals( Babylon.get().getFromResources("food_action") )) {
 			
 			detach( hero.belongings.backpack );
 			
@@ -98,9 +97,7 @@ public class Food extends Item {
 	
 	@Override
 	public String info() {
-		return 
-			"Nothing fancy here: dried meat, " +
-			"some biscuits - things like that.";
+		return Babylon.get().getFromResources("food_desc");
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
@@ -31,7 +32,7 @@ import com.watabou.pixeldungeon.utils.GLog;
 public class ScrollOfTerror extends Scroll {
 
 	{
-		name = "Scroll of Terror";
+		name = Babylon.get().getFromResources("scroll_terror");
 	}
 	
 	@Override
@@ -54,13 +55,13 @@ public class ScrollOfTerror extends Scroll {
 		
 		switch (count) {
 		case 0:
-			GLog.i( "The scroll emits a brilliant flash of red light" );
+			GLog.i(Babylon.get().getFromResources("scroll_terror_aff0"));
 			break;
 		case 1:
-			GLog.i( "The scroll emits a brilliant flash of red light and the " + affected.name + " flees!" );
+			GLog.i(Babylon.get().getFromResources("scroll_terror_aff1"), affected.name );
 			break;
 		default:
-			GLog.i( "The scroll emits a brilliant flash of red light and the monsters flee!" );
+			GLog.i(Babylon.get().getFromResources("scroll_terror_affmany"));
 		}
 		setKnown();
 		
@@ -69,9 +70,7 @@ public class ScrollOfTerror extends Scroll {
 	
 	@Override
 	public String desc() {
-		return
-			"A flash of red light will overwhelm all creatures in your field of view with terror, " +
-			"and they will turn and flee. Attacking a fleeing enemy will dispel the effect.";
+		return Babylon.get().getFromResources("scroll_terror_desc");
 	}
 	
 	@Override

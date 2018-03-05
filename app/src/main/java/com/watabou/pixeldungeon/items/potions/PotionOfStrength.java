@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.potions;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.sprites.CharSprite;
@@ -25,7 +26,7 @@ import com.watabou.pixeldungeon.utils.GLog;
 public class PotionOfStrength extends Potion {
 
 	{
-		name = "Potion of Strength";
+		name = Babylon.get().getFromResources("potion_strength");
 	}
 	
 	@Override
@@ -33,17 +34,15 @@ public class PotionOfStrength extends Potion {
 		setKnown();
 		
 		hero.STR++;
-		hero.sprite.showStatus( CharSprite.POSITIVE, "+1 str" );
-		GLog.p( "Newfound strength surges through your body." );
+		hero.sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("potion_strength_bonus"));
+		GLog.p(Babylon.get().getFromResources("potion_strength_apply"));
 		
 		Badges.validateStrengthAttained();
 	}
 	
 	@Override
 	public String desc() {
-		return
-			"This powerful liquid will course through your muscles, " +
-			"permanently increasing your strength by one point.";
+		return Babylon.get().getFromResources("potion_strength_desc");
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.potions;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.blobs.Fire;
 import com.watabou.pixeldungeon.actors.blobs.Freezing;
@@ -31,7 +32,7 @@ public class PotionOfFrost extends Potion {
 	private static final int DISTANCE	= 2;
 	
 	{
-		name = "Potion of Frost";
+		name = Babylon.get().getFromResources("potion_frost");
 	}
 	
 	@Override
@@ -58,9 +59,7 @@ public class PotionOfFrost extends Potion {
 	
 	@Override
 	public String desc() {
-		return 
-			"Upon exposure to open air, this chemical will evaporate into a freezing cloud, causing " +
-			"any creature that contacts it to be frozen in place, unable to act and move.";
+		return Babylon.get().getFromResources("potion_frost_desc");
 	}
 	
 	@Override

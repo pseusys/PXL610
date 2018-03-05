@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.scrolls;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -26,12 +27,10 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.pixeldungeon.windows.WndBag;
 
 public class ScrollOfUpgrade extends InventoryScroll {
-
-	private static final String TXT_LOOKS_BETTER	= "your %s certainly looks better now";
 	
 	{
-		name = "Scroll of Upgrade";
-		inventoryTitle = "Select an item to upgrade";
+		name = Babylon.get().getFromResources("scroll_upgrade");
+		inventoryTitle = Babylon.get().getFromResources("scroll_upgrade_title");
 		mode = WndBag.Mode.UPGRADEABLE;
 	}
 	
@@ -46,7 +45,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 		}
 		
 		upgrade( curUser );
-		GLog.p( TXT_LOOKS_BETTER, item.name() );
+		GLog.p( Babylon.get().getFromResources("scroll_upgrade_looksbetter"), item.name() );
 		
 		Badges.validateItemLevelAquired( item );
 	}
@@ -57,11 +56,6 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	
 	@Override
 	public String desc() {
-		return
-			"This scroll will upgrade a single item, improving its quality. A wand will " +
-			"increase in power and in number of charges; a weapon will inflict more damage " +
-			"or find its mark more frequently; a suit of armor will deflect additional blows; " +
-			"the effect of a ring on its wearer will intensify. Weapons and armor will also " +
-			"require less strength to use, and any curses on the item will be lifted.";
+		return Babylon.get().getFromResources("scroll_upgrade_desc");
 	}
 }

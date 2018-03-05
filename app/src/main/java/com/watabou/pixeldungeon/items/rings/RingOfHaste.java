@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfHaste extends Ring {
 
 	{
-		name = "Ring of Haste";
+		name = Babylon.get().getFromResources("ring_haste");
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class RingOfHaste extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"This ring accelerates the wearer's flow of time, allowing one to perform all actions a little faster." :
+				Babylon.get().getFromResources("ring_haste_desc") :
 			super.desc();
 	}
 	

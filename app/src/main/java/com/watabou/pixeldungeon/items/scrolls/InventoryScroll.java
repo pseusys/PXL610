@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.scenes.GameScene;
@@ -27,12 +28,9 @@ import com.watabou.pixeldungeon.windows.WndOptions;
 
 public abstract class InventoryScroll extends Scroll {
 
-	protected String inventoryTitle = "Select an item";
 	protected WndBag.Mode mode = WndBag.Mode.ALL;
-	
-	private static final String TXT_WARNING	= "Do you really want to cancel this scroll usage? It will be consumed anyway.";
-	private static final String TXT_YES		= "Yes, I'm positive";
-	private static final String TXT_NO		= "No, I changed my mind";
+
+	protected static String inventoryTitle = Babylon.get().getFromResources("scroll_itemselect");
 	
 	@Override
 	protected void doRead() {
@@ -48,7 +46,8 @@ public abstract class InventoryScroll extends Scroll {
 	}
 	
 	private void confirmCancelation() {
-		GameScene.show( new WndOptions( name(), TXT_WARNING, TXT_YES, TXT_NO ) {
+		GameScene.show( new WndOptions( name(), Babylon.get().getFromResources("scroll_warning"),
+				Babylon.get().getFromResources("scroll_yes"), Babylon.get().getFromResources("scroll_no") ) {
 			@Override
 			protected void onSelect( int index ) {
 				switch (index) {

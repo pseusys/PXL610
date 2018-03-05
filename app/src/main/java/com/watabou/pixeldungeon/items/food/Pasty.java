@@ -17,20 +17,21 @@
  */
 package com.watabou.pixeldungeon.items.food;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Hunger;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Pasty extends Food {
 
 	{
-		name = "pasty";
+		name = Babylon.get().getFromResources("food_pasty");
 		image = ItemSpriteSheet.PASTY;
 		energy = Hunger.STARVING;
 	}
 	
 	@Override
 	public String info() {
-		return "This is authentic Cornish pasty with traditional filling of beef and potato.";
+		return Babylon.get().getFromResources("food_pasty_desc");
 	}
 	
 	@Override

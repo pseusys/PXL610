@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfPower extends Ring {
 	
 	{
-		name = "Ring of Power";
+		name = Babylon.get().getFromResources("ring_power");
 	}
 	
 	@Override
@@ -31,8 +33,7 @@ public class RingOfPower extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"Your wands will become more powerful in the energy field " +
-			"that radiates from this ring. Degraded rings of power will instead weaken your wands." :
+				Babylon.get().getFromResources("ring_power_desc") :
 			super.desc();
 	}
 	

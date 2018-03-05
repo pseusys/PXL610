@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.rings;
 
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.blobs.ToxicGas;
 import com.watabou.pixeldungeon.actors.buffs.Burning;
 import com.watabou.pixeldungeon.actors.buffs.Poison;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 public class RingOfElements extends Ring {
 
 	{
-		name = "Ring of Elements";
+		name = Babylon.get().getFromResources("ring_elements");
 	}
 	
 	@Override
@@ -42,8 +43,7 @@ public class RingOfElements extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"This ring provides resistance to different elements, such as fire, " +
-			"electricity, gases etc. Also it decreases duration of negative effects." :
+				Babylon.get().getFromResources("ring_elements_desc") :
 			super.desc();
 	}
 

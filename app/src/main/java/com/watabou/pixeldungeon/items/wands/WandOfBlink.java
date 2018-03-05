@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.items.wands;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -31,7 +32,7 @@ import com.watabou.utils.Callback;
 public class WandOfBlink extends Wand {
 
 	{
-		name = "Wand of Blink";
+		name = Babylon.get().getFromResources("wand_blink");
 	}
 	
 	@Override
@@ -75,8 +76,6 @@ public class WandOfBlink extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"This wand will allow you to teleport in the chosen direction. " +
-			"Creatures and inanimate obstructions will block the teleportation.";
+		return Babylon.get().getFromResources("wand_blink_desc");
 	}
 }

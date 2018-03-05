@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfMending extends Ring {
 	
 	{
-		name = "Ring of Mending";
+		name = Babylon.get().getFromResources("ring_mending");
 	}
 	
 	@Override
@@ -31,9 +33,7 @@ public class RingOfMending extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"This ring increases the body's regenerative properties, allowing " +
-			"one to recover lost health at an accelerated rate. Degraded rings will " +
-			"decrease or even halt one's natural regeneration." :
+				Babylon.get().getFromResources("ring_mending_desc") :
 			super.desc();
 	}
 	

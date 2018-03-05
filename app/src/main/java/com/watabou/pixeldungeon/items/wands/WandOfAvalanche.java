@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.items.wands;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -43,7 +44,7 @@ import com.watabou.utils.Random;
 public class WandOfAvalanche extends Wand {
 
 	{
-		name = "Wand of Avalanche";
+		name = Babylon.get().getFromResources("wand_avalance");
 		hitChars = false;
 	}
 
@@ -103,7 +104,7 @@ public class WandOfAvalanche extends Wand {
 
 		if (!curUser.isAlive()) {
 			Dungeon.fail( Utils.format( ResultDescriptions.WAND, name, Dungeon.depth ) );
-			GLog.n( "You killed yourself with your own Wand of Avalanche..." );
+			GLog.n(Babylon.get().getFromResources("wand_avalance_suicide"));
 		}
 	}
 
@@ -114,8 +115,6 @@ public class WandOfAvalanche extends Wand {
 
 	@Override
 	public String desc() {
-		return
-				"When a discharge of this wand hits a wall (or any other solid obstacle) it causes " +
-						"an avalanche of stones, damaging and stunning all creatures in the affected area.";
+		return Babylon.get().getFromResources("wand_avalance_desc");
 	}
 }

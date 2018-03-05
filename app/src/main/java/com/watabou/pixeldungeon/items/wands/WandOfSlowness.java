@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -30,7 +31,7 @@ import com.watabou.utils.Callback;
 public class WandOfSlowness extends Wand {
 
 	{
-		name = "Wand of Slowness";
+		name = Babylon.get().getFromResources("wand_slowness");
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class WandOfSlowness extends Wand {
 
 		} else {
 			
-			GLog.i( "nothing happened" );
+			GLog.i(Babylon.get().getFromResources("wand_slowness_nothing"));
 			
 		}
 	}
@@ -54,8 +55,7 @@ public class WandOfSlowness extends Wand {
 	
 	@Override
 	public String desc() {
-		return 
-			"This wand will cause a creature to move and attack " +
-			"at half its ordinary speed until the effect ends";
+		return
+				Babylon.get().getFromResources("wand_slowness_desc");
 	}
 }

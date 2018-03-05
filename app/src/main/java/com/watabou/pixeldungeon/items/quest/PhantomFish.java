@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -30,12 +31,10 @@ import com.watabou.pixeldungeon.utils.GLog;
 
 public class PhantomFish extends Item {
 	
-	private static final String AC_EAT	= "EAT";
-	
 	private static final float TIME_TO_EAT	= 2f;
 	
 	{
-		name = "phantom fish";
+		name = Babylon.get().getFromResources("quest_phantomfish");
 		image = ItemSpriteSheet.PHANTOM;
 
 		unique = true;
@@ -44,13 +43,13 @@ public class PhantomFish extends Item {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_EAT );
+		actions.add( Babylon.get().getFromResources("food_action") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( final Hero hero, String action ) {
-		if (action.equals( AC_EAT )) {
+		if (action.equals( Babylon.get().getFromResources("food_action") )) {
 			
 			detach( hero.belongings.backpack );
 			
@@ -59,7 +58,7 @@ public class PhantomFish extends Item {
 			Sample.INSTANCE.play( Assets.SND_EAT );
 			Sample.INSTANCE.play( Assets.SND_MELD );
 			
-			GLog.i( "You see your hands turn invisible!" );
+			GLog.i(Babylon.get().getFromResources("quest_phantomfish_exec"));
 			Buff.affect( hero, Invisibility.class, Invisibility.DURATION );
 			
 			hero.spend( TIME_TO_EAT );
@@ -83,8 +82,6 @@ public class PhantomFish extends Item {
 	
 	@Override
 	public String info() {
-		return
-			"You can barely see this tiny translucent fish in the air. " +
-			"In the water it becomes effectively invisible.";
+		return Babylon.get().getFromResources("quest_phantomfish_desc");
 	}
 }

@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.potions;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 
 public class PotionOfExperience extends Potion {
 
 	{
-		name = "Potion of Experience";
+		name = Babylon.get().getFromResources("potion_experience");
 	}
 	
 	@Override
@@ -33,9 +34,7 @@ public class PotionOfExperience extends Potion {
 	
 	@Override
 	public String desc() {
-		return
-			"The storied experiences of multitudes of battles reduced to liquid form, " +
-			"this draught will instantly raise your experience level.";
+		return Babylon.get().getFromResources("potion_experience_desc");
 	}
 	
 	@Override

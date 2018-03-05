@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -32,7 +33,7 @@ import com.watabou.utils.Callback;
 public class WandOfAmok extends Wand {
 
 	{
-		name = "Wand of Amok";
+		name = Babylon.get().getFromResources("wand_amok");
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class WandOfAmok extends Wand {
 
 		} else {
 			
-			GLog.i( "nothing happened" );
+			GLog.i(Babylon.get().getFromResources("wand_amok_nothing"));
 			
 		}
 	}
@@ -60,8 +61,6 @@ public class WandOfAmok extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"The purple light from this wand will make the target run amok " +
-			"attacking random creatures in its vicinity.";
+		return Babylon.get().getFromResources("wand_amok_desc");
 	}
 }

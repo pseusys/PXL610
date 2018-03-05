@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfHerbalism extends Ring {
 
 	{
-		name = "Ring of Herbalism";
+		name = Babylon.get().getFromResources("ring_herbalism");
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class RingOfHerbalism extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"This ring increases your chance to gather dew and seeds from trampled grass." :
+				Babylon.get().getFromResources("ring_herbalism_desc") :
 			super.desc();
 	}
 	

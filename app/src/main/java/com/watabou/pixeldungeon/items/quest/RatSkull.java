@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.items.quest;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class RatSkull extends Item {
 	
 	{
-		name = "giant rat skull";
+		name = Babylon.get().getFromResources("quest_ratskull");
 		image = ItemSpriteSheet.SKULL;
 		
 		unique = true;
@@ -41,8 +42,7 @@ public class RatSkull extends Item {
 	
 	@Override
 	public String info() {
-		return
-			"It could be a nice hunting trophy, but it smells too bad to place it on a wall.";
+		return Babylon.get().getFromResources("quest_ratskull_desc");
 	}
 	
 	@Override

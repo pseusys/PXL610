@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
@@ -31,7 +32,7 @@ import com.watabou.pixeldungeon.utils.GLog;
 public class ScrollOfLullaby extends Scroll {
 
 	{
-		name = "Scroll of Lullaby";
+		name = Babylon.get().getFromResources("scroll_lullaby");
 	}
 	
 	@Override
@@ -55,13 +56,13 @@ public class ScrollOfLullaby extends Scroll {
 		
 		switch (count) {
 		case 0:
-			GLog.i( "The scroll utters a soothing melody." );
+			GLog.i(Babylon.get().getFromResources("scroll_lullaby_aff0"));
 			break;
 		case 1:
-			GLog.i( "The scroll utters a soothing melody and the " + affected.name + " falls asleep!" );
+			GLog.i(Babylon.get().getFromResources("scroll_lullaby_aff1"), affected.name );
 			break;
 		default:
-			GLog.i( "The scroll utters a soothing melody and the monsters fall asleep!" );
+			GLog.i(Babylon.get().getFromResources("scroll_lullaby_affmany"));
 		}
 		setKnown();
 		
@@ -70,9 +71,7 @@ public class ScrollOfLullaby extends Scroll {
 	
 	@Override
 	public String desc() {
-		return
-			"A soothing melody will put all creatures in your field of view into a deep sleep, " +
-			"giving you a chance to flee or make a surprise attack on them.";
+		return Babylon.get().getFromResources("scroll_lullaby_desc");
 	}
 	
 	@Override

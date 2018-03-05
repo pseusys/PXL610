@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.items.Item;
@@ -24,7 +25,7 @@ import com.watabou.pixeldungeon.items.Item;
 public class RingOfThorns extends Ring {
 
 	{
-		name = "Ring of Thorns";
+		name = Babylon.get().getFromResources("ring_thorns");
 	}
 	
 	@Override
@@ -59,9 +60,7 @@ public class RingOfThorns extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"Though this ring doesn't provide real thorns, an enemy that attacks you " +
-			"will itself be wounded by a fraction of the damage that it inflicts. " +
-			"Upgrading this ring won't give any additional bonuses." :
+				Babylon.get().getFromResources("ring_thorns_desc") :
 			super.desc();
 	}
 	

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.potions;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Bleeding;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -30,14 +31,14 @@ import com.watabou.pixeldungeon.utils.GLog;
 public class PotionOfHealing extends Potion {
 
 	{
-		name = "Potion of Healing";
+		name = Babylon.get().getFromResources("potion_healing");
 	}
 	
 	@Override
 	protected void apply( Hero hero ) {
 		setKnown();
 		heal( Dungeon.hero );
-		GLog.p( "Your wounds heal completely." );
+		GLog.p(Babylon.get().getFromResources("potion_healing_apply"));
 	}
 	
 	public static void heal( Hero hero ) {
@@ -53,8 +54,7 @@ public class PotionOfHealing extends Potion {
 	
 	@Override
 	public String desc() {
-		return
-			"An elixir that will instantly return you to full health and cure poison.";
+		return Babylon.get().getFromResources("potion_healing_desc");
 	}
 	
 	@Override

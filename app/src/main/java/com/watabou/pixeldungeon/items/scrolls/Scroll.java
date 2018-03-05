@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.buffs.Blindness;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -28,13 +29,10 @@ import com.watabou.pixeldungeon.items.ItemStatusHandler;
 import com.watabou.pixeldungeon.sprites.HeroSprite;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.pixeldungeon.utils.GLog;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Bundle;
 
 public abstract class Scroll extends Item {
-
-	private static final String TXT_BLINDED	= "You can't read a scroll while blinded";
-	
-	public static final String AC_READ	= "READ";
 	
 	protected static final float TIME_TO_READ	= 1f;
 	
@@ -53,7 +51,18 @@ public abstract class Scroll extends Item {
 		ScrollOfEnchantment.class
 	};
 	private static final String[] runes = 
-		{"KAUNAN", "SOWILO", "LAGUZ", "YNGVI", "GYFU", "RAIDO", "ISAZ", "MANNAZ", "NAUDIZ", "BERKANAN", "ODAL", "TIWAZ"};
+		{Babylon.get().getFromResources("scroll_kaunan"),
+				Babylon.get().getFromResources("scroll_sowilo"),
+				Babylon.get().getFromResources("scroll_laguz"),
+				Babylon.get().getFromResources("scroll_yngvi"),
+				Babylon.get().getFromResources("scroll_gyfu"),
+				Babylon.get().getFromResources("scroll_raido"),
+				Babylon.get().getFromResources("scroll_isaz"),
+				Babylon.get().getFromResources("scroll_mannaz"),
+				Babylon.get().getFromResources("scroll_naudiz"),
+				Babylon.get().getFromResources("scroll_berkanan"),
+				Babylon.get().getFromResources("scroll_odal"),
+				Babylon.get().getFromResources("scroll_tiwaz")};
 	private static final Integer[] images = {
 		ItemSpriteSheet.SCROLL_KAUNAN, 
 		ItemSpriteSheet.SCROLL_SOWILO, 
@@ -74,7 +83,7 @@ public abstract class Scroll extends Item {
 	
 	{
 		stackable = true;		
-		defaultAction = AC_READ;
+		defaultAction = Babylon.get().getFromResources("scroll_read");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -100,16 +109,16 @@ public abstract class Scroll extends Item {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_READ );
+		actions.add( Babylon.get().getFromResources("scroll_read") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_READ )) {
+		if (action.equals( Babylon.get().getFromResources("scroll_read") )) {
 			
 			if (hero.buff( Blindness.class ) != null) {
-				GLog.w( TXT_BLINDED );
+				GLog.w( Babylon.get().getFromResources("scroll_blinded") );
 			} else {
 				curUser = hero;
 				curItem = detach( hero.belongings.backpack );
@@ -151,15 +160,13 @@ public abstract class Scroll extends Item {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : "scroll \"" + rune + "\"";
+		return isKnown() ? name : Babylon.get().getFromResources("scroll_scroll") + " \"" + rune + "\"";
 	}
 	
 	@Override
 	public String info() {
 		return isKnown() ?
-			desc() :
-			"This parchment is covered with indecipherable writing, and bears a title " +
-			"of rune " + rune + ". Who knows what it will do when read aloud?";
+			desc() : Utils.format(Babylon.get().getFromResources("scroll_desc"), rune);
 	}
 	
 	@Override

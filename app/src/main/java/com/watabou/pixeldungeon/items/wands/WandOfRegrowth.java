@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
 import com.watabou.pixeldungeon.actors.blobs.Regrowth;
@@ -33,7 +34,7 @@ import com.watabou.utils.Callback;
 public class WandOfRegrowth extends Wand {
 
 	{
-		name = "Wand of Regrowth";
+		name = Babylon.get().getFromResources("wand_regrowth");
 	}
 	
 	@Override
@@ -66,7 +67,7 @@ public class WandOfRegrowth extends Wand {
 			
 		} else {
 			
-			GLog.i( "nothing happened" );
+			GLog.i(Babylon.get().getFromResources("wand_regrowth_nothing"));
 			
 		}
 	}
@@ -78,7 +79,6 @@ public class WandOfRegrowth extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"\"When life ceases new life always begins to grow... The eternal cycle always remains!\"";
+		return Babylon.get().getFromResources("wand_regrowth_desc");
 	}
 }

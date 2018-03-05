@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -37,20 +38,13 @@ import com.watabou.pixeldungeon.windows.WndBag;
 import com.watabou.utils.Random;
 
 public class WandOfMagicMissile extends Wand {
-
-	public static final String AC_DISENCHANT	= "DISENCHANT";
-	
-	private static final String TXT_SELECT_WAND	= "Select a wand to upgrade";
-	
-	private static final String TXT_DISENCHANTED = 
-		"you disenchanted the Wand of Magic Missile and used its essence to upgrade your %s";
 	
 	private static final float TIME_TO_DISENCHANT	= 2f;
 	
 	private boolean disenchantEquipped;
 	
 	{
-		name = "Wand of Magic Missile";
+		name = Babylon.get().getFromResources("wand_magicmissle");
 		image = ItemSpriteSheet.WAND_MAGIC_MISSILE;
 	}
 	
@@ -58,7 +52,7 @@ public class WandOfMagicMissile extends Wand {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		if (level() > 0) {
-			actions.add( AC_DISENCHANT );
+			actions.add( Babylon.get().getFromResources("wand_magicmissle_disenchant") );
 		}
 		return actions;
 	}
@@ -76,14 +70,14 @@ public class WandOfMagicMissile extends Wand {
 			
 			if (ch == curUser && !ch.isAlive()) {
 				Dungeon.fail( Utils.format( ResultDescriptions.WAND, name, Dungeon.depth ) );
-				GLog.n( "You killed yourself with your own Wand of Magic Missile..." );
+				GLog.n(Babylon.get().getFromResources("wand_magicmissle_suicide"));
 			}
 		}
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_DISENCHANT )) {
+		if (action.equals( Babylon.get().getFromResources("wand_magicmissle_disenchant") )) {
 			
 			if (hero.belongings.weapon == this) {
 				disenchantEquipped = true;
@@ -95,7 +89,7 @@ public class WandOfMagicMissile extends Wand {
 			}
 			
 			curUser = hero;
-			GameScene.selectItem( itemSelector, WndBag.Mode.WAND, TXT_SELECT_WAND );
+			GameScene.selectItem( itemSelector, WndBag.Mode.WAND, Babylon.get().getFromResources("wand_magicmissle_upgrade") );
 			
 		} else {
 		
@@ -119,8 +113,7 @@ public class WandOfMagicMissile extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"This wand launches missiles of pure magical energy, dealing moderate damage to a target creature.";
+		return Babylon.get().getFromResources("wand_migicmissle_desc");
 	}
 	
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -132,7 +125,7 @@ public class WandOfMagicMissile extends Wand {
 				ScrollOfUpgrade.upgrade( curUser );
 				evoke( curUser );
 				
-				GLog.w( TXT_DISENCHANTED, item.name() );
+				GLog.w( Babylon.get().getFromResources("wand_magicmissle_upgraded"), item.name() );
 				
 				item.upgrade();
 				curUser.spendAndNext( TIME_TO_DISENCHANT );

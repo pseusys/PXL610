@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.keys;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.items.bags.Bag;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
@@ -24,12 +25,10 @@ import com.watabou.pixeldungeon.utils.Utils;
 
 public class IronKey extends Key {
 
-	private static final String TXT_FROM_DEPTH = "iron key from depth %d";
-
 	public static int curDepthQuantity = 0;
 	
 	{
-		name = "iron key";
+		name = Babylon.get().getFromResources("key_iron");
 		image = ItemSpriteSheet.IRON_KEY;
 	}
 	
@@ -51,13 +50,11 @@ public class IronKey extends Key {
 	
 	@Override
 	public String toString() {
-		return Utils.format( TXT_FROM_DEPTH, depth );
+		return Utils.format( Babylon.get().getFromResources("key_iron_from"), depth );
 	}
 	
 	@Override
 	public String info() {
-		return 
-			"The notches on this ancient iron key are well worn; its leather lanyard " +
-			"is battered by age. What door might it open?";
+		return Babylon.get().getFromResources("key_desc");
 	}
 }

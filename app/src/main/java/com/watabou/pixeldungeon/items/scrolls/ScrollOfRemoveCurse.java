@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
 import com.watabou.pixeldungeon.actors.buffs.Weakness;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -28,14 +29,9 @@ import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.utils.GLog;
 
 public class ScrollOfRemoveCurse extends Scroll {
-
-	private static final String TXT_PROCCED	= 
-		"Your pack glows with a cleansing light, and a malevolent energy disperses.";
-	private static final String TXT_NOT_PROCCED	= 
-		"Your pack glows with a cleansing light, but nothing happens.";
 	
 	{
-		name = "Scroll of Remove Curse";
+		name = Babylon.get().getFromResources("scroll_removecurse");
 	}
 	
 	@Override
@@ -55,9 +51,9 @@ public class ScrollOfRemoveCurse extends Scroll {
 		Weakness.detach( curUser, Weakness.class );
 		
 		if (procced) {
-			GLog.p( TXT_PROCCED );			
+			GLog.p( Babylon.get().getFromResources("scroll_removecurse_proceed") );
 		} else {		
-			GLog.i( TXT_NOT_PROCCED );		
+			GLog.i( Babylon.get().getFromResources("scroll_removecurse_nothing") );
 		}
 		
 		setKnown();
@@ -67,10 +63,7 @@ public class ScrollOfRemoveCurse extends Scroll {
 	
 	@Override
 	public String desc() {
-		return
-			"The incantation on this scroll will instantly strip from " +
-			"the reader's weapon, armor, rings and carried items any evil " +
-			"enchantments that might prevent the wearer from removing them.";
+		return Babylon.get().getFromResources("scroll_removecurse_desc");
 	}
 	
 	public static boolean uncurse( Hero hero, Item... items ) {

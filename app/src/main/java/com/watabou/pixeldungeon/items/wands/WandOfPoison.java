@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -30,7 +31,7 @@ import com.watabou.utils.Callback;
 public class WandOfPoison extends Wand {
 
 	{
-		name = "Wand of Poison";
+		name = Babylon.get().getFromResources("wand_poison");
 	}
 	
 	@Override
@@ -42,7 +43,7 @@ public class WandOfPoison extends Wand {
 			
 		} else {
 			
-			GLog.i( "nothing happened" );
+			GLog.i(Babylon.get().getFromResources("wand_poison_nothing"));
 			
 		}
 	}
@@ -54,10 +55,6 @@ public class WandOfPoison extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"The vile blast of this twisted bit of wood will imbue its target " +
-			"with a deadly venom. A creature that is poisoned will suffer periodic " +
-			"damage until the effect ends. The duration of the effect increases " +
-			"with the level of the staff.";
+		return Babylon.get().getFromResources("wand_poison_desc");
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.enchantments;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.items.weapon.Weapon;
@@ -25,8 +26,6 @@ import com.watabou.pixeldungeon.sprites.ItemSprite.Glowing;
 import com.watabou.utils.Random;
 
 public class Poison extends Weapon.Enchantment {
-
-	private static final String TXT_VENOMOUS	= "venomous %s";
 	
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing( 0x4400AA );
 	
@@ -55,7 +54,7 @@ public class Poison extends Weapon.Enchantment {
 	
 	@Override
 	public String name( String weaponName) {
-		return String.format( TXT_VENOMOUS, weaponName );
+		return String.format( Babylon.get().getFromResources("enchantment_venomous"), weaponName );
 	}
 
 }

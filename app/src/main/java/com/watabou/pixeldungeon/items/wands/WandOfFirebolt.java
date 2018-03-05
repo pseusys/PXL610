@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -40,7 +41,7 @@ import com.watabou.utils.Random;
 public class WandOfFirebolt extends Wand {
 
 	{
-		name = "Wand of Firebolt";
+		name = Babylon.get().getFromResources("wand_firebolt");
 	}
 	
 	@Override
@@ -67,7 +68,7 @@ public class WandOfFirebolt extends Wand {
 			
 			if (ch == curUser && !ch.isAlive()) {
 				Dungeon.fail( Utils.format( ResultDescriptions.WAND, name, Dungeon.depth ) );
-				GLog.n( "You killed yourself with your own Wand of Firebolt..." );
+				GLog.n(Babylon.get().getFromResources("wand_firebolt_suicide"));
 			}
 		}
 	}
@@ -79,8 +80,6 @@ public class WandOfFirebolt extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"This wand unleashes bursts of magical fire. It will ignite " +
-			"flammable terrain, and will damage and burn a creature it hits.";
+		return Babylon.get().getFromResources("wand_firebolt_desc");
 	}
 }

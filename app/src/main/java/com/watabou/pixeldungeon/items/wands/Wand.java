@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -48,18 +49,7 @@ import com.watabou.utils.Random;
 public abstract class Wand extends KindOfWeapon {
 
 	private static final int USAGES_TO_KNOW	= 40;
-	
-	public static final String AC_ZAP	= "ZAP";
-	
-	private static final String TXT_WOOD	= "This thin %s wand is warm to the touch. Who knows what it will do when used?";
-	private static final String TXT_DAMAGE	= "When this wand is used as a melee weapon, its average damage is %d points per hit.";
-	private static final String TXT_WEAPON	= "You can use this wand as a melee weapon.";
-			
-	private static final String TXT_FIZZLES		= "your wand fizzles; it must be out of charges for now";
-	private static final String TXT_SELF_TARGET	= "You can't target yourself";
-	
-	private static final String TXT_IDENTIFY	= "You are now familiar enough with your %s.";
-	
+
 	private static final float TIME_TO_ZAP	= 1f;
 	
 	public int maxCharges = initialCharges();
@@ -88,7 +78,18 @@ public abstract class Wand extends KindOfWeapon {
 		WandOfAvalanche.class
 	};
 	private static final String[] woods = 
-		{"holly", "yew", "ebony", "cherry", "teak", "rowan", "willow", "mahogany", "bamboo", "purpleheart", "oak", "birch"};
+		{Babylon.get().getFromResources("wand_holly"),
+				Babylon.get().getFromResources("wand_yew"),
+				Babylon.get().getFromResources("wand_ebony"),
+				Babylon.get().getFromResources("wand_cherry"),
+				Babylon.get().getFromResources("wand_teak"),
+				Babylon.get().getFromResources("wand_rowan"),
+				Babylon.get().getFromResources("wand_willow"),
+				Babylon.get().getFromResources("wand_mahogany"),
+				Babylon.get().getFromResources("wand_bamboo"),
+				Babylon.get().getFromResources("wand_purpleheart"),
+				Babylon.get().getFromResources("wand_oak"),
+				Babylon.get().getFromResources("wand_birch")};
 	private static final Integer[] images = {
 		ItemSpriteSheet.WAND_HOLLY, 
 		ItemSpriteSheet.WAND_YEW, 
@@ -108,7 +109,7 @@ public abstract class Wand extends KindOfWeapon {
 	private String wood;
 	
 	{
-		defaultAction = AC_ZAP;
+		defaultAction =  Babylon.get().getFromResources("wand_zap");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -140,7 +141,7 @@ public abstract class Wand extends KindOfWeapon {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		if (curCharges > 0 || !curChargeKnown) {
-			actions.add( AC_ZAP );
+			actions.add(  Babylon.get().getFromResources("wand_zap") );
 		}
 		if (hero.heroClass != HeroClass.MAGE) {
 			actions.remove( AC_EQUIP );
@@ -162,7 +163,7 @@ public abstract class Wand extends KindOfWeapon {
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_ZAP )) {
+		if (action.equals(  Babylon.get().getFromResources("wand_zap") )) {
 			
 			curUser = hero;
 			curItem = this;
@@ -252,7 +253,7 @@ public abstract class Wand extends KindOfWeapon {
 		}
 		
 		if (isBroken()) {
-			sb.insert( 0, "broken " );
+			sb.insert( 0, Babylon.get().getFromResources("wand_broken"));
 		}
 		
 		return sb.toString();
@@ -260,19 +261,19 @@ public abstract class Wand extends KindOfWeapon {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : wood + " wand";
+		return isKnown() ? name : wood + Babylon.get().getFromResources("wand_name");
 	}
 	
 	@Override
 	public String info() {
-		StringBuilder info = new StringBuilder( isKnown() ? desc() : String.format( TXT_WOOD, wood ) );
+		StringBuilder info = new StringBuilder( isKnown() ? desc() : String.format( Babylon.get().getFromResources("wand_wood"), wood ) );
 		if (Dungeon.hero.heroClass == HeroClass.MAGE) {
 			info.append( "\n\n" );
 			if (levelKnown) {
 				int min = min();
-				info.append( String.format( TXT_DAMAGE, min + (max() - min) / 2 ) );
+				info.append( String.format( Babylon.get().getFromResources("wand_melee"), min + (max() - min) / 2 ) );
 			} else {
-				info.append(  String.format( TXT_WEAPON ) );
+				info.append(  String.format( Babylon.get().getFromResources("wand_weapon") ) );
 			}
 		}
 		return info.toString();
@@ -351,7 +352,7 @@ public abstract class Wand extends KindOfWeapon {
 		curCharges--;
 		if (!isIdentified() && --usagesToKnow <= 0) {
 			identify();
-			GLog.w( TXT_IDENTIFY, name() );
+			GLog.w( Babylon.get().getFromResources("wand_autoid"), name() );
 		} else {
 			updateQuickslot();
 		}
@@ -415,7 +416,7 @@ public abstract class Wand extends KindOfWeapon {
 			if (target != null) {
 				
 				if (target == curUser.pos) {
-					GLog.i( TXT_SELF_TARGET );
+					GLog.i( Babylon.get().getFromResources("wand_selftarget") );
 					return;
 				}
 				
@@ -445,7 +446,7 @@ public abstract class Wand extends KindOfWeapon {
 				} else {
 					
 					curUser.spendAndNext( TIME_TO_ZAP );
-					GLog.w( TXT_FIZZLES );
+					GLog.w( Babylon.get().getFromResources("wand_outofcharges") );
 					curWand.levelKnown = true;
 					
 					curWand.updateQuickslot();
@@ -456,7 +457,7 @@ public abstract class Wand extends KindOfWeapon {
 		
 		@Override
 		public String prompt() {
-			return "Choose direction to zap";
+			return Babylon.get().getFromResources("wand_choosedir");
 		}
 	};
 	

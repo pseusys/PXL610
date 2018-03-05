@@ -17,13 +17,14 @@
  */
 package com.watabou.pixeldungeon.items.quest;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class DarkGold extends Item {
 	
 	{
-		name = "dark gold ore";
+		name = Babylon.get().getFromResources("quest_darkgold");
 		image = ItemSpriteSheet.ORE;
 		
 		stackable = true;
@@ -43,8 +44,7 @@ public class DarkGold extends Item {
 	@Override
 	public String info() {
 		return
-			"This metal is called dark not because of its color (it doesn't differ from the normal gold), " +
-			"but because it melts under the daylight, making it useless on the surface.";
+				Babylon.get().getFromResources("quest_darkgold_desc");
 	}
 	
 	@Override

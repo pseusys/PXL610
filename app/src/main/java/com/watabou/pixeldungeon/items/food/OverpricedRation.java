@@ -17,21 +17,22 @@
  */
 package com.watabou.pixeldungeon.items.food;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Hunger;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class OverpricedRation extends Food {
 
 	{
-		name = "overpriced food ration";
+		name = Babylon.get().getFromResources("food_op");
 		image = ItemSpriteSheet.OVERPRICED;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food tasted ok.";
+		message = Babylon.get().getFromResources("food_op_message");
 	}
 	
 	@Override
 	public String info() {
-		return "It looks exactly like a standard ration of food but smaller.";
+		return Babylon.get().getFromResources("food_op_desc");
 	}
 	
 	@Override

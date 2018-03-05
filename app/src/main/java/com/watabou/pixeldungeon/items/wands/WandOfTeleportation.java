@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -30,7 +31,7 @@ import com.watabou.utils.Callback;
 public class WandOfTeleportation extends Wand {
 
 	{
-		name = "Wand of Teleportation";
+		name = Babylon.get().getFromResources("wand_teleportation");
 	}
 
 	@Override
@@ -56,20 +57,20 @@ public class WandOfTeleportation extends Wand {
 			
 			if (pos == -1) {
 				
-				GLog.w( ScrollOfTeleportation.TXT_NO_TELEPORT );
+				GLog.w( Babylon.get().getFromResources("scroll_teleportation_nothing") );
 				
 			} else {
 			
 				ch.pos = pos;
 				ch.sprite.place( ch.pos );
 				ch.sprite.visible = Dungeon.visible[pos];
-				GLog.i( curUser.name + " teleported " + ch.name + " to somewhere" );
+				GLog.i(Babylon.get().getFromResources("wand_teleportation_zap"), curUser.name, ch.name );
 				
 			}
 
 		} else {
 			
-			GLog.i( "nothing happened" );
+			GLog.i(Babylon.get().getFromResources("wand_teleportation_nothing"));
 			
 		}
 	}
@@ -81,8 +82,6 @@ public class WandOfTeleportation extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"A blast from this wand will teleport a creature against " +
-			"its will to a random place on the current level.";
+		return Babylon.get().getFromResources("wand_teleportation_desc");
 	}
 }

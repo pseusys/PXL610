@@ -17,19 +17,18 @@
  */
 package com.watabou.pixeldungeon.items.keys;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class SkeletonKey extends Key {
 	
 	{
-		name = "skeleton key";
+		name = Babylon.get().getFromResources("key_skeleton");
 		image = ItemSpriteSheet.SKELETON_KEY;
 	}
 	
 	@Override
 	public String info() {
-		return 
-			"This key looks serious: its head is shaped like a skull. " +
-			"Probably it can open some serious door.";
+		return Babylon.get().getFromResources("key_sceleton_desc");
 	}
 }

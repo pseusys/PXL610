@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.scrolls;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.effects.SpellSprite;
@@ -28,7 +29,7 @@ import com.watabou.pixeldungeon.utils.GLog;
 public class ScrollOfRecharging extends Scroll {
 
 	{
-		name = "Scroll of Recharging";
+		name = Babylon.get().getFromResources("scroll_recharging");
 	}
 	
 	@Override
@@ -41,10 +42,10 @@ public class ScrollOfRecharging extends Scroll {
 		Invisibility.dispel();
 		
 		if (count > 0) {
-			GLog.i( "a surge of energy courses through your pack, recharging your wand" + (count > 1 ? "s" : "") );
+			GLog.i(Babylon.get().getFromResources("scroll_recharging_recharge") + (count > 1 ? "s" : "") );
 			SpellSprite.show( curUser, SpellSprite.CHARGE );
 		} else {
-			GLog.i( "a surge of energy courses through your pack, but nothing happens" );
+			GLog.i(Babylon.get().getFromResources("scroll_recharging_nothing"));
 		}
 		setKnown();
 		
@@ -53,9 +54,7 @@ public class ScrollOfRecharging extends Scroll {
 	
 	@Override
 	public String desc() {
-		return
-			"The raw magical power bound up in this parchment will, when released, " +
-			"recharge all of the reader's wands to full power.";
+		return Babylon.get().getFromResources("scroll_recharging_desc");
 	}
 	
 	public static void charge( Hero hero ) {

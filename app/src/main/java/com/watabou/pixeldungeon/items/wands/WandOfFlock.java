@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -38,7 +39,7 @@ import com.watabou.utils.Random;
 public class WandOfFlock extends Wand {
 
 	{
-		name = "Wand of Flock";
+		name = Babylon.get().getFromResources("wand_flock");
 	}
 	
 	@Override
@@ -100,16 +101,18 @@ public class WandOfFlock extends Wand {
 	
 	@Override
 	public String desc() {
-		return 
-			"A flick of this wand summons a flock of magic sheep, creating temporary impenetrable obstacle.";
+		return Babylon.get().getFromResources("wand_flock_desc");
 	}
 	
 	public static class Sheep extends NPC {
 		
-		private static final String[] QUOTES = {"Baa!", "Baa?", "Baa.", "Baa..."};
+		private static final String[] QUOTES = {Babylon.get().getFromResources("mob_sheep_quote0"),
+				Babylon.get().getFromResources("mob_sheep_quote1"),
+				Babylon.get().getFromResources("mob_sheep_quote2"),
+				Babylon.get().getFromResources("mob_sheep_quote3")};
 		
 		{
-			name = "sheep";
+			name = Babylon.get().getFromResources("mob_sheep");
 			spriteClass = SheepSprite.class;
 		}
 		
@@ -138,9 +141,7 @@ public class WandOfFlock extends Wand {
 		
 		@Override
 		public String description() {
-			return 
-				"This is a magic sheep. What's so magical about it? You can't kill it. " +
-				"It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
+			return Babylon.get().getFromResources("mob_sheep_desc");
 		}
 
 		@Override

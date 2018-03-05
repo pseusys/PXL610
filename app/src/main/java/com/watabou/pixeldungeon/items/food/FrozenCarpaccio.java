@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.food;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.buffs.Barkskin;
 import com.watabou.pixeldungeon.actors.buffs.Bleeding;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -34,7 +35,7 @@ import com.watabou.utils.Random;
 public class FrozenCarpaccio extends Food {
 
 	{
-		name = "frozen carpaccio";
+		name = Babylon.get().getFromResources("food_carpaccio");
 		image = ItemSpriteSheet.CARPACCIO;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
 	}
@@ -44,26 +45,26 @@ public class FrozenCarpaccio extends Food {
 		
 		super.execute( hero, action );
 		
-		if (action.equals( AC_EAT )) {
+		if (action.equals( Babylon.get().getFromResources("food_action") )) {
 			
 			switch (Random.Int( 5 )) {
 			case 0:
-				GLog.i( "You see your hands turn invisible!" );
+				GLog.i(Babylon.get().getFromResources("food_carpaccio_eff0"));
 				Buff.affect( hero, Invisibility.class, Invisibility.DURATION );
 				break;
 			case 1:
-				GLog.i( "You feel your skin hardens!" );
+				GLog.i(Babylon.get().getFromResources("food_carpaccio_eff1"));
 				Buff.affect( hero, Barkskin.class ).level( hero.HT / 4 );
 				break;
 			case 2:
-				GLog.i( "Refreshing!" );
+				GLog.i(Babylon.get().getFromResources("food_carpaccio_eff2"));
 				Buff.detach( hero, Poison.class );
 				Buff.detach( hero, Cripple.class );
 				Buff.detach( hero, Weakness.class );
 				Buff.detach( hero, Bleeding.class );
 				break;
 			case 3:
-				GLog.i( "You feel better!" );
+				GLog.i(Babylon.get().getFromResources("food_carpaccio_eff3"));
 				if (hero.HP < hero.HT) {
 					hero.HP = Math.min( hero.HP + hero.HT / 4, hero.HT );
 					hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
@@ -75,9 +76,7 @@ public class FrozenCarpaccio extends Food {
 	
 	@Override
 	public String info() {
-		return 
-			"It's a piece of frozen raw meat. The only way to eat it is " +
-			"by cutting thin slices of it. And this way it's suprisingly good.";
+		return Babylon.get().getFromResources("food_carpaccio_desc");
 	}
 	
 	public int price() {

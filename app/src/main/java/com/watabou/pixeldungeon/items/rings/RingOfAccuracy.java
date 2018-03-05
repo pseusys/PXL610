@@ -17,10 +17,12 @@
  */
 package com.watabou.pixeldungeon.items.rings;
 
+import com.watabou.pixeldungeon.Babylon;
+
 public class RingOfAccuracy extends Ring {
 
 	{
-		name = "Ring of Accuracy";
+		name = Babylon.get().getFromResources("ring_accuracy");
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class RingOfAccuracy extends Ring {
 	@Override
 	public String desc() {
 		return isKnown() ?
-			"This ring increases your chance to hit the enemy." :
+				Babylon.get().getFromResources("ring_accuracy_desc") :
 			super.desc();
 	}
 	

@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -34,21 +35,11 @@ import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.ItemSprite;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.pixeldungeon.utils.GLog;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.pixeldungeon.windows.WndOptions;
 import com.watabou.utils.Bundle;
 
 public class Potion extends Item {
-	
-	public static final String AC_DRINK	= "DRINK";
-	
-	private static final String TXT_HARMFUL		= "Harmful potion!";
-	private static final String TXT_BENEFICIAL	= "Beneficial potion";
-	private static final String TXT_YES			= "Yes, I know what I'm doing";
-	private static final String TXT_NO			= "No, I changed my mind";
-	private static final String TXT_R_U_SURE_DRINK = 
-		"Are you sure you want to drink it? In most cases you should throw such potions at your enemies.";
-	private static final String TXT_R_U_SURE_THROW = 
-		"Are you sure you want to throw it? In most cases it makes sense to drink it.";
 	
 	private static final float TIME_TO_DRINK = 1f;
 	
@@ -67,8 +58,18 @@ public class Potion extends Item {
 		PotionOfFrost.class
 	};
 	private static final String[] colors = {
-		"turquoise", "crimson", "azure", "jade", "golden", "magenta", 
-		"charcoal", "ivory", "amber", "bistre", "indigo", "silver"};
+			Babylon.get().getFromResources("potion_turquoise"),
+			Babylon.get().getFromResources("potion_crimson"),
+			Babylon.get().getFromResources("potion_azure"),
+			Babylon.get().getFromResources("potion_jade"),
+			Babylon.get().getFromResources("potion_golden"),
+			Babylon.get().getFromResources("potion_magenta"),
+			Babylon.get().getFromResources("potion_charcoal"),
+			Babylon.get().getFromResources("potion_ivory"),
+			Babylon.get().getFromResources("potion_amber"),
+			Babylon.get().getFromResources("potion_bistre"),
+			Babylon.get().getFromResources("potion_indigo"),
+			Babylon.get().getFromResources("potion_silver")};
 	private static final Integer[] images = {
 		ItemSpriteSheet.POTION_TURQUOISE, 
 		ItemSpriteSheet.POTION_CRIMSON, 
@@ -89,7 +90,7 @@ public class Potion extends Item {
 	
 	{	
 		stackable = true;		
-		defaultAction = AC_DRINK;
+		defaultAction = Babylon.get().getFromResources("potion_action");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -115,13 +116,13 @@ public class Potion extends Item {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_DRINK );
+		actions.add( Babylon.get().getFromResources("potion_action") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( final Hero hero, String action ) {
-		if (action.equals( AC_DRINK )) {
+		if (action.equals( Babylon.get().getFromResources("potion_action") )) {
 			
 			if (isKnown() && (
 					this instanceof PotionOfLiquidFlame || 
@@ -129,7 +130,8 @@ public class Potion extends Item {
 					this instanceof PotionOfParalyticGas)) {
 				
 					GameScene.show( 
-						new WndOptions( TXT_HARMFUL, TXT_R_U_SURE_DRINK, TXT_YES, TXT_NO ) {
+						new WndOptions( Babylon.get().getFromResources("potion_harmful"), Babylon.get().getFromResources("potion_sure_drink"),
+								Babylon.get().getFromResources("potion_yes"), Babylon.get().getFromResources("potion_no") ) {
 							@Override
 							protected void onSelect(int index) {
 								if (index == 0) {
@@ -163,7 +165,8 @@ public class Potion extends Item {
 			this instanceof PotionOfMight)) {
 		
 			GameScene.show( 
-				new WndOptions( TXT_BENEFICIAL, TXT_R_U_SURE_THROW, TXT_YES, TXT_NO ) {
+				new WndOptions( Babylon.get().getFromResources("potion_beneficial"), Babylon.get().getFromResources("potion_sure_throw"),
+						Babylon.get().getFromResources("potion_yes"), Babylon.get().getFromResources("potion_no") ) {
 					@Override
 					protected void onSelect(int index) {
 						if (index == 0) {
@@ -214,7 +217,7 @@ public class Potion extends Item {
 	
 	public void shatter( int cell ) {
 		if (Dungeon.visible[cell]) {
-			GLog.i( "The flask shatters and " + color() + " liquid splashes harmlessly" );
+			GLog.i(Babylon.get().getFromResources("potion_shatter"), color() );
 			Sample.INSTANCE.play( Assets.SND_SHATTER );
 			splash( cell );
 		}
@@ -244,15 +247,12 @@ public class Potion extends Item {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : color + " potion";
+		return isKnown() ? name : color + Babylon.get().getFromResources("potion_potion");
 	}
 	
 	@Override
 	public String info() {
-		return isKnown() ?
-			desc() :
-			"This flask contains a swirling " + color + " liquid. " +
-			"Who knows what it will do when drunk or thrown?";
+		return isKnown() ? desc() : Utils.format(Babylon.get().getFromResources("potion_info"), color);
 	}
 	
 	@Override

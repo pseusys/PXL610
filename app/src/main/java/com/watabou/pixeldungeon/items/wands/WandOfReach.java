@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.wands;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -41,11 +42,9 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.utils.Callback;
 
 public class WandOfReach extends Wand {
-
-	private static final String TXT_YOU_NOW_HAVE	= "You have magically transported %s into your backpack"; 
 	
 	{
-		name = "Wand of Reach";
+		name = Babylon.get().getFromResources("wand_reach");
 		hitChars = false;
 	}
 	
@@ -110,9 +109,9 @@ public class WandOfReach extends Wand {
 			} else {
 				if (((item instanceof ScrollOfUpgrade || item instanceof ScrollOfEnchantment) && ((Scroll)item).isKnown()) ||
 					((item instanceof PotionOfStrength || item instanceof PotionOfMight) && ((Potion)item).isKnown())) {
-					GLog.p( TXT_YOU_NOW_HAVE, item.name() );
+					GLog.p( Babylon.get().getFromResources("wand_reach_nowyouhave"), item.name() );
 				} else {
-					GLog.i( TXT_YOU_NOW_HAVE, item.name() );
+					GLog.i( Babylon.get().getFromResources("wand_reach_nowyouhave"), item.name() );
 				}
 			}
 
@@ -128,9 +127,6 @@ public class WandOfReach extends Wand {
 	
 	@Override
 	public String desc() {
-		return
-			"This utility wand can be used to grab objects from a distance and to switch places with enemies. " +
-			"Waves of magic force radiated from it will affect all cells on their way triggering traps, " +
-			"trampling high vegetation, opening closed doors and closing open ones.";
+		return Babylon.get().getFromResources("wand_reach_desc");
 	}
 }

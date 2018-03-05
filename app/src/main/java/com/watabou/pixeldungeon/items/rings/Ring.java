@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.rings;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.PXL610;
@@ -42,14 +43,6 @@ public class Ring extends EquipableItem {
 	
 	private static final float TIME_TO_EQUIP = 1f;
 	
-	private static final String TXT_IDENTIFY = 
-		"you are now familiar enough with your %s to identify it. It is %s.";
-	
-	private static final String TXT_UNEQUIP_TITLE = "Unequip one ring";
-	private static final String TXT_UNEQUIP_MESSAGE = 
-		"You can only wear two rings at a time. " +
-		"Unequip one of your equipped rings.";
-	
 	protected Buff buff;
 	
 	private static final Class<?>[] rings = { 
@@ -67,7 +60,18 @@ public class Ring extends EquipableItem {
 		RingOfThorns.class
 	};
 	private static final String[] gems = 
-		{"diamond", "opal", "garnet", "ruby", "amethyst", "topaz", "onyx", "tourmaline", "emerald", "sapphire", "quartz", "agate"};
+		{Babylon.get().getFromResources("ring_diamond"),
+				Babylon.get().getFromResources("ring_opal"),
+				Babylon.get().getFromResources("ring_garnet"),
+				Babylon.get().getFromResources("ring_ruby"),
+				Babylon.get().getFromResources("ring_amethyst"),
+				Babylon.get().getFromResources("ring_topaz"),
+				Babylon.get().getFromResources("ring_onyx"),
+				Babylon.get().getFromResources("ring_tourmaline"),
+				Babylon.get().getFromResources("ring_emerald"),
+				Babylon.get().getFromResources("ring_sapphire"),
+				Babylon.get().getFromResources("ring_quartz"),
+				Babylon.get().getFromResources("ring_agate")};
 	private static final Integer[] images = {
 		ItemSpriteSheet.RING_DIAMOND, 
 		ItemSpriteSheet.RING_OPAL, 
@@ -128,7 +132,7 @@ public class Ring extends EquipableItem {
 			final Ring r2 = hero.belongings.ring2;
 			
 			PXL610.scene().add(
-				new WndOptions( TXT_UNEQUIP_TITLE, TXT_UNEQUIP_MESSAGE, 
+				new WndOptions( Babylon.get().getFromResources("ring_unequip"), Babylon.get().getFromResources("ring_unequip_message"),
 					Utils.capitalize( r1.toString() ), 
 					Utils.capitalize( r2.toString() ) ) {
 					
@@ -163,7 +167,7 @@ public class Ring extends EquipableItem {
 			cursedKnown = true;
 			if (cursed) {
 				equipCursed( hero );
-				GLog.n( "your " + this + " tightens around your finger painfully" );
+				GLog.n(Babylon.get().getFromResources("ring_cursed"), this );
 			}
 			
 			hero.spendAndNext( TIME_TO_EQUIP );
@@ -263,26 +267,23 @@ public class Ring extends EquipableItem {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : gem + " ring";
+		return isKnown() ? name : gem + Babylon.get().getFromResources("ring_ring");
 	}
 	
 	@Override
 	public String desc() {
-		return 
-			"This metal band is adorned with a large " + gem + " gem " +
-			"that glitters in the darkness. Who knows what effect it has when worn?";
+		return Utils.format(Babylon.get().getFromResources("ring_desc"), gem);
 	}
 	
 	@Override
 	public String info() {
 		if (isEquipped( Dungeon.hero )) {
-			
-			return desc() + "\n\n" + "The " + name() + " is on your finger" + 
-				(cursed ? ", and because it is cursed, you are powerless to remove it." : "." );
+
+			return desc() + "\n\n" + Utils.format(Babylon.get().getFromResources("ring_onfinger"), name()) + (cursed ? Babylon.get().getFromResources("ring_ifcursed") : "." );
 			
 		} else if (cursed && cursedKnown) {
 			
-			return desc() + "\n\nYou can feel a malevolent magic lurking within the " + name() + ".";
+			return desc() + Babylon.get().getFromResources("ring_cursedknown") + name() + ".";
 			
 		} else {
 			
@@ -345,8 +346,6 @@ public class Ring extends EquipableItem {
 	
 	public class RingBuff extends Buff {
 		
-		private static final String TXT_KNOWN = "This is a %s"; 
-		
 		public int level;
 		public RingBuff() {
 			level = Ring.this.effectiveLevel();
@@ -357,7 +356,7 @@ public class Ring extends EquipableItem {
 
 			if (target instanceof Hero && ((Hero)target).heroClass == HeroClass.ROGUE && !isKnown()) {
 				setKnown();
-				GLog.i( TXT_KNOWN, name() );
+				GLog.i( Babylon.get().getFromResources("ring_known"), name() );
 				Badges.validateItemLevelAquired( Ring.this );
 			}
 			
@@ -370,7 +369,7 @@ public class Ring extends EquipableItem {
 			if (!isIdentified() && --ticksToKnow <= 0) {
 				String gemName = name();
 				identify();
-				GLog.w( TXT_IDENTIFY, gemName, Ring.this.toString() );
+				GLog.w( Babylon.get().getFromResources("armor_autoid"), gemName, Ring.this.toString() );
 				Badges.validateItemLevelAquired( Ring.this );
 			}
 			

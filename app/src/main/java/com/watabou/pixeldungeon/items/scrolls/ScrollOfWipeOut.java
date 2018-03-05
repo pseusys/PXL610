@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Blindness;
 import com.watabou.pixeldungeon.actors.buffs.Invisibility;
@@ -39,34 +40,30 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
 
 public class ScrollOfWipeOut extends Item {
-
-	private static final String TXT_BLINDED	= "You can't read a scroll while blinded";
-	
-	public static final String AC_READ	= "READ";
 	
 	protected static final float TIME_TO_READ	= 1f;
 	
 	{
-		name = "Scroll of Wipe Out";
+		name = Babylon.get().getFromResources("scroll_wipeout");
 		image = ItemSpriteSheet.SCROLL_WIPE_OUT;
 		
 		stackable = true;		
-		defaultAction = AC_READ;
+		defaultAction = Babylon.get().getFromResources("scroll_read");
 	}
 	
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_READ );
+		actions.add( Babylon.get().getFromResources("scroll_read") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_READ )) {
+		if (action.equals( Babylon.get().getFromResources("scroll_read") )) {
 			
 			if (hero.buff( Blindness.class ) != null) {
-				GLog.w( TXT_BLINDED );
+				GLog.w( Babylon.get().getFromResources("scroll_blinded") );
 			} else {
 				curUser = hero;
 				curItem = detach( hero.belongings.backpack );
@@ -126,9 +123,7 @@ public class ScrollOfWipeOut extends Item {
 
 	@Override
 	public String desc() {
-		return
-			"Read this scroll to unleash the wrath of the dungeon spirits, killing everything on the current level. " +
-			"Well, almost everything. Some of the more powerful creatures may be not affected.";
+		return Babylon.get().getFromResources("scroll_wipeout_desc");
 	}
 	
 	@Override

@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.items.weapon.enchantments;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.effects.Lightning;
@@ -30,8 +31,6 @@ import com.watabou.pixeldungeon.levels.traps.LightningTrap;
 import com.watabou.utils.Random;
 
 public class Shock extends Weapon.Enchantment {
-
-	private static final String TXT_SHOCKING	= "shocking %s";
 	
 	@Override
 	public boolean proc( Weapon weapon, Char attacker, Char defender, int damage ) {
@@ -63,7 +62,7 @@ public class Shock extends Weapon.Enchantment {
 	
 	@Override
 	public String name( String weaponName ) {
-		return String.format( TXT_SHOCKING, weaponName );
+		return String.format( Babylon.get().getFromResources("enchantment_shocking"), weaponName );
 	}
 
 	private ArrayList<Char> affected = new ArrayList<Char>();
