@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -33,14 +34,9 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Gold extends Item {
-
-	private static final String TXT_COLLECT	= "Collect gold coins to spend them later in a shop.";
-	private static final String TXT_INFO	= "A pile of %d gold coins. " + TXT_COLLECT;
-	private static final String TXT_INFO_1	= "One gold coin. " + TXT_COLLECT;
-	private static final String TXT_VALUE	= "%+d";
 	
 	{
-		name = "gold";
+		name = Babylon.get().getFromResources("item_gold");
 		image = ItemSpriteSheet.GOLD;
 		stackable = true;
 	}
@@ -66,7 +62,7 @@ public class Gold extends Item {
 		Badges.validateGoldCollected();
 		
 		GameScene.pickUp( this );
-		hero.sprite.showStatus( CharSprite.NEUTRAL, TXT_VALUE, quantity );
+		hero.sprite.showStatus( CharSprite.NEUTRAL, Babylon.get().getFromResources("item_gold_value"), quantity );
 		hero.spendAndNext( TIME_TO_PICK_UP );
 		
 		Sample.INSTANCE.play( Assets.SND_GOLD, 1, 1, Random.Float( 0.9f, 1.1f ) );
@@ -88,11 +84,11 @@ public class Gold extends Item {
 	public String info() {
 		switch (quantity) {
 		case 0:
-			return TXT_COLLECT;
+			return Babylon.get().getFromResources("item_gold_collect");
 		case 1:
-			return TXT_INFO_1;
+			return Babylon.get().getFromResources("item_gold_infoone") + Babylon.get().getFromResources("item_gold_collect");
 		default:
-			return Utils.format( TXT_INFO, quantity );
+			return Utils.format( Babylon.get().getFromResources("item_gold_info") + Babylon.get().getFromResources("item_gold_collect"), quantity );
 		}
 	}
 	

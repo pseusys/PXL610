@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -38,9 +39,9 @@ import com.watabou.utils.Random;
 public class Bomb extends Item {
 	
 	{
-		name = "bomb";
+		name = Babylon.get().getFromResources("item_bomb");
 		image = ItemSpriteSheet.BOMB;
-		defaultAction = AC_THROW;
+		defaultAction = Babylon.get().getFromResources("item_acthrow");
 		stackable = true;
 	}
 	
@@ -78,7 +79,7 @@ public class Bomb extends Item {
 								Buff.prolong( ch, Paralysis.class, 2 );
 							} else if (ch == Dungeon.hero) {
 								Dungeon.fail( Utils.format( ResultDescriptions.BOMB, Dungeon.depth ) );
-								GLog.n( "You killed yourself with a bomb..." );
+								GLog.n(Babylon.get().getFromResources("item_bomb_suicide"));
 							}
 						}
 					}
@@ -114,7 +115,6 @@ public class Bomb extends Item {
 	
 	@Override
 	public String info() {
-		return
-			"This is a relatively small bomb, filled with black powder. Conveniently, its fuse is lit automatically when the bomb is thrown.";
+		return Babylon.get().getFromResources("item_bomb_desc");
 	}
 }

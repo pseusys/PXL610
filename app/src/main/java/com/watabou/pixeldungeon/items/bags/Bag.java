@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.items.bags;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -30,13 +31,11 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
 public class Bag extends Item implements Iterable<Item> {
-
-	public static final String AC_OPEN	= "OPEN";
 	
 	{
 		image = 11;
 		
-		defaultAction = AC_OPEN;
+		defaultAction = Babylon.get().getFromResources("bag_acopen");
 	}
 	
 	public Char owner;
@@ -53,7 +52,7 @@ public class Bag extends Item implements Iterable<Item> {
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_OPEN )) {
+		if (action.equals( Babylon.get().getFromResources("bag_acopen") )) {
 			
 			GameScene.show( new WndBag( this, null, WndBag.Mode.ALL, null ) );
 			

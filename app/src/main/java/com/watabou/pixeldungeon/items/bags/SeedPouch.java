@@ -25,7 +25,7 @@ import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 public class SeedPouch extends Bag {
 
 	{
-		name = Babylon.get().getFromResources("item_seedpouch");
+		name = Babylon.get().getFromResources("bag_seedpouch");
 		image = ItemSpriteSheet.POUCH;
 		
 		size = 8;
@@ -43,6 +43,6 @@ public class SeedPouch extends Bag {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("item_seedpouch_desc");
+		return Babylon.get().getFromResources("bag_seedpouch_desc");
 	}
 }

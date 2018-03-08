@@ -144,8 +144,8 @@ public abstract class Wand extends KindOfWeapon {
 			actions.add(  Babylon.get().getFromResources("wand_zap") );
 		}
 		if (hero.heroClass != HeroClass.MAGE) {
-			actions.remove( AC_EQUIP );
-			actions.remove( AC_UNEQUIP );
+			actions.remove( Babylon.get().getFromResources("item_acequip") );
+			actions.remove( Babylon.get().getFromResources("item_acunequip") );
 		}
 		return actions;
 	}

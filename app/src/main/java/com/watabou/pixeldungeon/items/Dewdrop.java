@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
@@ -27,11 +28,9 @@ import com.watabou.pixeldungeon.sprites.CharSprite;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Dewdrop extends Item {
-
-	private static final String TXT_VALUE	= "%+dHP";
 	
 	{
-		name = "dewdrop";
+		name = Babylon.get().getFromResources("item_dewdrop");
 		image = ItemSpriteSheet.DEWDROP;
 		
 		stackable = true;
@@ -53,7 +52,7 @@ public class Dewdrop extends Item {
 			if (effect > 0) {
 				hero.HP += effect;
 				hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
-				hero.sprite.showStatus( CharSprite.POSITIVE, TXT_VALUE, effect );
+				hero.sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("item_dewdrop_value"), effect );
 			}
 			
 		} else if (vial != null) {
@@ -70,6 +69,6 @@ public class Dewdrop extends Item {
 	
 	@Override
 	public String info() {
-		return "A crystal clear dewdrop.";
+		return Babylon.get().getFromResources("item_dewdrop_desc");
 	}
 }

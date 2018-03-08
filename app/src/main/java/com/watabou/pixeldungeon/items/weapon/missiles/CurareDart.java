@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Paralysis;
@@ -29,7 +30,7 @@ public class CurareDart extends MissileWeapon {
 	public static final float DURATION	= 3f;
 	
 	{
-		name = "curare dart";
+		name = Babylon.get().getFromResources("weapon_curaredart");
 		image = ItemSpriteSheet.CURARE_DART;
 		
 		STR = 14;
@@ -62,9 +63,7 @@ public class CurareDart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"These little evil darts don't do much damage but they can paralyze " +
-			"the target leaving it helpless and motionless for some time.";
+		return Babylon.get().getFromResources("weapon_curaredart_desc");
 	}
 	
 	@Override

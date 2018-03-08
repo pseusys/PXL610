@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.ui.QuickSlot;
@@ -34,7 +35,7 @@ abstract public class KindOfWeapon extends EquipableItem {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( isEquipped( hero ) ? AC_UNEQUIP : AC_EQUIP );
+		actions.add( isEquipped( hero ) ? Babylon.get().getFromResources("item_acunequip") : Babylon.get().getFromResources("item_acequip") );
 		return actions;
 	}
 	

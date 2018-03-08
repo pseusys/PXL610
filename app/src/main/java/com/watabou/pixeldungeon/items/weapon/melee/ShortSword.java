@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.items.Item;
@@ -32,22 +33,13 @@ import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.pixeldungeon.windows.WndBag;
 
 public class ShortSword extends MeleeWeapon {
-	
-	public static final String AC_REFORGE	= "REFORGE";
-	
-	private static final String TXT_SELECT_WEAPON	= "Select a weapon to upgrade";
-	
-	private static final String TXT_REFORGED = 
-		"you reforged the short sword to upgrade your %s";
-	private static final String TXT_NOT_BOOMERANG = 
-		"you can't upgrade a boomerang this way";
-	
+
 	private static final float TIME_TO_REFORGE	= 2f;
 	
 	private boolean  equipped;
-	
+
 	{
-		name = "short sword";
+		name = Babylon.get().getFromResources("weapon_shortsword");
 		image = ItemSpriteSheet.SHORT_SWORD;
 	}
 	
@@ -66,14 +58,14 @@ public class ShortSword extends MeleeWeapon {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		if (level() > 0) {
-			actions.add( AC_REFORGE );
+			actions.add( Babylon.get().getFromResources("weapon_shortsword_ac_reforge") );
 		}
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action == AC_REFORGE) {
+		if (action == Babylon.get().getFromResources("weapon_shortsword_ac_reforge")) {
 			
 			if (hero.belongings.weapon == this) {
 				equipped = true;
@@ -85,7 +77,7 @@ public class ShortSword extends MeleeWeapon {
 			
 			curUser = hero;
 			
-			GameScene.selectItem( itemSelector, WndBag.Mode.WEAPON, TXT_SELECT_WEAPON );
+			GameScene.selectItem( itemSelector, WndBag.Mode.WEAPON, Babylon.get().getFromResources("weapon_shortsword_weaponselect") );
 			
 		} else {
 			
@@ -96,8 +88,7 @@ public class ShortSword extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"It is indeed quite short, just a few inches longer, than a dagger.";
+		return Babylon.get().getFromResources("weapon_shortsword_desc");
 	}
 	
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -109,7 +100,7 @@ public class ShortSword extends MeleeWeapon {
 				ScrollOfUpgrade.upgrade( curUser );
 				evoke( curUser );
 				
-				GLog.w( TXT_REFORGED, item.name() );
+				GLog.w( Babylon.get().getFromResources("weapon_shortsword_reforged"), item.name() );
 				
 				((MeleeWeapon)item).safeUpgrade();
 				curUser.spendAndNext( TIME_TO_REFORGE );
@@ -119,7 +110,7 @@ public class ShortSword extends MeleeWeapon {
 			} else {
 				
 				if (item instanceof Boomerang) {
-					GLog.w( TXT_NOT_BOOMERANG );
+					GLog.w( Babylon.get().getFromResources("weapon_shortsword_notaboomerang") );
 				}
 				
 				if (equipped) {

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.effects.Speck;
 import com.watabou.pixeldungeon.effects.particles.ShaftParticle;
@@ -35,23 +36,13 @@ public class DewVial extends Item {
 
 	private static final int MAX_VOLUME	= 10;
 	
-	private static final String AC_DRINK	= "DRINK";
-	
 	private static final float TIME_TO_DRINK = 1f;
 	
-	private static final String TXT_VALUE	= "%+dHP";
-	private static final String TXT_STATUS	= "%d/%d";
-	
-	private static final String TXT_AUTO_DRINK	= "The dew vial was emptied to heal your wounds.";
-	private static final String TXT_COLLECTED	= "You collected a dewdrop into your dew vial.";
-	private static final String TXT_FULL		= "Your dew vial is full!";
-	private static final String TXT_EMPTY		= "Your dew vial is empty!";
-	
 	{
-		name = "dew vial";
+		name = Babylon.get().getFromResources("item_dewvial");
 		image = ItemSpriteSheet.VIAL;
 		
-		defaultAction = AC_DRINK;
+		defaultAction = Babylon.get().getFromResources("item_dewvial_acdrink");
 		
 		unique = true;
 	}
@@ -76,7 +67,7 @@ public class DewVial extends Item {
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		if (volume > 0) {
-			actions.add( AC_DRINK );
+			actions.add( Babylon.get().getFromResources("potion_action") );
 		}
 		return actions;
 	}
@@ -86,7 +77,7 @@ public class DewVial extends Item {
 	
 	@Override
 	public void execute( final Hero hero, String action ) {
-		if (action.equals( AC_DRINK )) {
+		if (action.equals( Babylon.get().getFromResources("potion_action") )) {
 			
 			if (volume > 0) {
 
@@ -95,7 +86,7 @@ public class DewVial extends Item {
 				if (effect > 0) {
 					hero.HP += effect;
 					hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), volume > 5 ? 2 : 1 );
-					hero.sprite.showStatus( CharSprite.POSITIVE, TXT_VALUE, effect );
+					hero.sprite.showStatus( CharSprite.POSITIVE, Babylon.get().getFromResources("item_dewvial_value"), effect );
 				}
 				
 				volume = 0;
@@ -109,7 +100,7 @@ public class DewVial extends Item {
 				updateQuickslot();
 				
 			} else {
-				GLog.w( TXT_EMPTY );
+				GLog.w( Babylon.get().getFromResources("item_dewvial_empty") );
 			}
 			
 		} else {
@@ -135,11 +126,11 @@ public class DewVial extends Item {
 	
 	public void collectDew( Dewdrop dew ) {
 		
-		GLog.i( TXT_COLLECTED );
+		GLog.i( Babylon.get().getFromResources("item_dewvial_collected") );
 		volume += dew.quantity;
 		if (volume >= MAX_VOLUME) {
 			volume = MAX_VOLUME;
-			GLog.p( TXT_FULL );
+			GLog.p( Babylon.get().getFromResources("item_dewvial_full") );
 		}
 		
 		updateQuickslot();
@@ -156,7 +147,7 @@ public class DewVial extends Item {
 			vial.execute( hero );
 			hero.sprite.emitter().start( ShaftParticle.FACTORY, 0.2f, 3 );
 			
-			GLog.w( TXT_AUTO_DRINK );
+			GLog.w( Babylon.get().getFromResources("item_dewvial_autodrink") );
 		}
 	}
 	
@@ -169,15 +160,12 @@ public class DewVial extends Item {
 	
 	@Override
 	public String status() {
-		return Utils.format( TXT_STATUS, volume, MAX_VOLUME );
+		return Utils.format( Babylon.get().getFromResources("item_dewvial_status"), volume, MAX_VOLUME );
 	}
 	
 	@Override
 	public String info() {
-		return 
-			"You can store excess dew in this tiny vessel for drinking it later. " +
-			"If the vial is full, in a moment of deadly peril the dew will be " +
-			"consumed automatically.";
+		return Babylon.get().getFromResources("item_dewvial_desc");
 	}
 	
 	@Override

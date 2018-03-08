@@ -25,7 +25,7 @@ import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 public class Keyring extends Bag {
 
 	{
-		name = Babylon.get().getFromResources("item_keyring");
+		name = Babylon.get().getFromResources("bag_keyring");
 		image = ItemSpriteSheet.KEYRING;
 		
 		size = 12;
@@ -43,6 +43,6 @@ public class Keyring extends Bag {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("item_keyring_desc");
+		return Babylon.get().getFromResources("bag_keyring_desc");
 	}
 }

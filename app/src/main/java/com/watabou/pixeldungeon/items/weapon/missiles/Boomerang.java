@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -27,7 +28,7 @@ import com.watabou.pixeldungeon.sprites.MissileSprite;
 public class Boomerang extends MissileWeapon {
 
 	{
-		name = "boomerang";
+		name = Babylon.get().getFromResources("weapon_boomerang");
 		image = ItemSpriteSheet.BOOMERANG;
 		
 		STR = 10;
@@ -106,7 +107,7 @@ public class Boomerang extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"Thrown to the enemy this flat curved wooden missile will return to the hands of its thrower.";
+		return
+				Babylon.get().getFromResources("weapon_boomerang_desc");
 	}
 }

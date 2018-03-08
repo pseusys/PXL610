@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Longsword extends MeleeWeapon {
 	
 	{
-		name = "longsword";
+		name = Babylon.get().getFromResources("weapon_longsword");
 		image = ItemSpriteSheet.LONG_SWORD;
 	}
 	
@@ -32,6 +33,6 @@ public class Longsword extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "This towering blade inflicts heavy damage by investing its heft into every cut.";
+		return Babylon.get().getFromResources("weapon_longsword_desc");
 	}
 }

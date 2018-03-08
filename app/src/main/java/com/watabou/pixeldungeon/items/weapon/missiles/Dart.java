@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -24,7 +25,7 @@ import com.watabou.utils.Random;
 public class Dart extends MissileWeapon {
 
 	{
-		name = "dart";
+		name = Babylon.get().getFromResources("weapon_dart");
 		image = ItemSpriteSheet.DART;
 	}
 	
@@ -49,9 +50,7 @@ public class Dart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"These simple metal spikes are weighted to fly true and " +
-			"sting their prey with a flick of the wrist.";
+		return Babylon.get().getFromResources("weapon_dart_desc");
 	}
 	
 	@Override

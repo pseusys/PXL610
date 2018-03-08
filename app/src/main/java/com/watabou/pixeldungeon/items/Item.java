@@ -23,6 +23,7 @@ import java.util.Comparator;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -52,16 +53,6 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.PointF;
 
 public class Item implements Bundlable {
-
-	private static final String TXT_PACK_FULL	= "Your pack is too full for the %s";
-	
-	private static final String TXT_BROKEN		= "Because of frequent use, your %s has broken.";
-	private static final String TXT_GONNA_BREAK	= "Because of frequent use, your %s is going to break soon.";
-	
-	private static final String TXT_TO_STRING		= "%s";
-	private static final String TXT_TO_STRING_X		= "%s x%d";
-	private static final String TXT_TO_STRING_LVL	= "%s%+d";
-	private static final String TXT_TO_STRING_LVL_X	= "%s%+d x%d";
 	
 	private static final float DURABILITY_WARNING_LEVEL	= 1/6f;
 	
@@ -69,12 +60,9 @@ public class Item implements Bundlable {
 	protected static final float TIME_TO_PICK_UP	= 1.0f;
 	protected static final float TIME_TO_DROP		= 0.5f;
 	
-	public static final String AC_DROP		= "DROP";
-	public static final String AC_THROW		= "THROW";
-	
 	public String defaultAction;
 	
-	protected String name = "smth";
+	protected String name = Babylon.get().getFromResources("item_name");
 	protected int image = 0;
 	
 
@@ -99,8 +87,8 @@ public class Item implements Bundlable {
 	
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = new ArrayList<String>();
-		actions.add( AC_DROP );
-		actions.add( AC_THROW );
+		actions.add( Babylon.get().getFromResources("item_acdrop") );
+		actions.add( Babylon.get().getFromResources("item_acthrow") );
 		return actions;
 	}
 	
@@ -131,11 +119,11 @@ public class Item implements Bundlable {
 		curUser = hero;
 		curItem = this;
 		
-		if (action.equals( AC_DROP )) {
+		if (action.equals( Babylon.get().getFromResources("item_acdrop") )) {
 			
 			doDrop( hero );
 			
-		} else if (action.equals( AC_THROW )) {
+		} else if (action.equals( Babylon.get().getFromResources("item_acthrow") )) {
 			
 			doThrow( hero );
 			
@@ -192,7 +180,7 @@ public class Item implements Bundlable {
 			
 		} else {
 			
-			GLog.n( TXT_PACK_FULL, name() );
+			GLog.n( Babylon.get().getFromResources("item_packfull"), name() );
 			return false;
 			
 		}
@@ -301,12 +289,12 @@ public class Item implements Bundlable {
 		if (level > 0 && !isBroken()) {
 			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
 			if (durability-- >= threshold && threshold > durability && levelKnown) {
-				GLog.w( TXT_GONNA_BREAK, name() );
+				GLog.w( Babylon.get().getFromResources("item_gonnabreak"), name() );
 			}
 			if (isBroken()) {
 				getBroken();
 				if (levelKnown) {
-					GLog.n( TXT_BROKEN, name() );
+					GLog.n( Babylon.get().getFromResources("item_broken"), name() );
 					Dungeon.hero.interrupt();
 					
 					CharSprite sprite = Dungeon.hero.sprite;
@@ -396,15 +384,15 @@ public class Item implements Bundlable {
 		
 		if (levelKnown && level != 0) {
 			if (quantity > 1) {
-				return Utils.format( TXT_TO_STRING_LVL_X, name(), level, quantity );
+				return Utils.format( Babylon.get().getFromResources("item_levelx"), name(), level, quantity );
 			} else {
-				return Utils.format( TXT_TO_STRING_LVL, name(), level );
+				return Utils.format( Babylon.get().getFromResources("item_level"), name(), level );
 			}
 		} else {
 			if (quantity > 1) {
-				return Utils.format( TXT_TO_STRING_X, name(), quantity );
+				return Utils.format( Babylon.get().getFromResources("item_whatisx"), name(), quantity );
 			} else {
-				return Utils.format( TXT_TO_STRING, name() );
+				return Utils.format( Babylon.get().getFromResources("item_whatis"), name() );
 			}
 		}
 	}
@@ -588,7 +576,7 @@ public class Item implements Bundlable {
 		}
 		@Override
 		public String prompt() {
-			return "Choose direction of throw";
+			return Babylon.get().getFromResources("item_choosethrough");
 		}
 	};
 }

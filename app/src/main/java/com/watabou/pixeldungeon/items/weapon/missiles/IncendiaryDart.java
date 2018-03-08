@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -33,7 +34,7 @@ import com.watabou.utils.Random;
 public class IncendiaryDart extends MissileWeapon {
 
 	{
-		name = "incendiary dart";
+		name = Babylon.get().getFromResources("weapon_incendiarydart");
 		image = ItemSpriteSheet.INCENDIARY_DART;
 		
 		STR = 12;
@@ -82,9 +83,7 @@ public class IncendiaryDart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"The spike on each of these darts is designed to pin it to its target " +
-			"while the unstable compounds strapped to its length burst into brilliant flames.";
+		return Babylon.get().getFromResources("weapon_incendiarydart_desc");
 	}
 	
 	@Override

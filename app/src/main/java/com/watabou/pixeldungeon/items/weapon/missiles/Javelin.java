@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
 import com.watabou.pixeldungeon.actors.buffs.Cripple;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Javelin extends MissileWeapon {
 
 	{
-		name = "javelin";
+		name = Babylon.get().getFromResources("weapon_javelin");
 		image = ItemSpriteSheet.JAVELIN;
 		
 		STR = 15;
@@ -60,9 +61,7 @@ public class Javelin extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"This length of metal is weighted to keep the spike " +
-			"at its tip foremost as it sails through the air.";
+		return Babylon.get().getFromResources("weapon_javelin_desc");
 	}
 	
 	@Override

@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Glaive extends MeleeWeapon {
 
 	{
-		name = "glaive";
+		name = Babylon.get().getFromResources("weapon_glaive");
 		image = ItemSpriteSheet.GLAIVE;
 	}
 	
@@ -32,6 +33,6 @@ public class Glaive extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "A polearm consisting of a sword blade on the end of a pole.";
+		return Babylon.get().getFromResources("weapon_glavie_desc");
 	}
 }

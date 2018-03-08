@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Dagger extends MeleeWeapon {
 	
 	{
-		name = "dagger";
+		name = Babylon.get().getFromResources("weapon_dagger");
 		image = ItemSpriteSheet.DAGGER;
 	}
 	
@@ -32,6 +33,6 @@ public class Dagger extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "A simple iron dagger with a well worn wooden handle.";
+		return Babylon.get().getFromResources("weapon_dagger_desc");
 	}
 }

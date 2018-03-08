@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -51,8 +52,6 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class Heap implements Bundlable {
-
-	private static final String TXT_MIMIC = "This is a mimic!";
 	
 	private static final int SEEDS_TO_POTION = 3;
 	
@@ -108,7 +107,7 @@ public class Heap implements Bundlable {
 		switch (type) {
 		case MIMIC:
 			if (Mimic.spawnAt( pos, items ) != null) {
-				GLog.n( TXT_MIMIC );
+				GLog.n( Babylon.get().getFromResources("item_heap_mimic") );
 				destroy();
 			} else {
 				type = Type.CHEST;

@@ -25,7 +25,7 @@ import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 public class ScrollHolder extends Bag {
 
 	{
-		name = Babylon.get().getFromResources("item_scrollholder");
+		name = Babylon.get().getFromResources("bag_scrollholder");
 		image = ItemSpriteSheet.HOLDER;
 		
 		size = 12;
@@ -43,6 +43,6 @@ public class ScrollHolder extends Bag {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("item_scrollholder_desc");
+		return Babylon.get().getFromResources("bag_scrollholder_desc");
 	}
 }

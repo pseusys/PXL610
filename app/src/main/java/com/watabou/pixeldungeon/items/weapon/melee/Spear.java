@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Spear extends MeleeWeapon {
 
 	{
-		name = "spear";
+		name = Babylon.get().getFromResources("weapon_spear");
 		image = ItemSpriteSheet.SPEAR;
 	}
 	
@@ -32,6 +33,6 @@ public class Spear extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "A slender wooden rod tipped with sharpened iron.";
+		return Babylon.get().getFromResources("weapon_spear_desc");
 	}
 }

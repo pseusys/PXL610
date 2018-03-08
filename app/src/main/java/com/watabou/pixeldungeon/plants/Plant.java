@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Barkskin;
@@ -102,7 +103,7 @@ public class Plant implements Bundlable {
 		
 		{
 			stackable = true;	
-			defaultAction = AC_THROW;
+			defaultAction = Babylon.get().getFromResources("item_acthrow");
 		}
 		
 		protected Class<? extends Plant> plantClass;

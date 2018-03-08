@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class BattleAxe extends MeleeWeapon {
 
 	{
-		name = "battle axe";
+		name = Babylon.get().getFromResources("weapon_axe");
 		image = ItemSpriteSheet.BATTLE_AXE;
 	}
 	
@@ -32,6 +33,6 @@ public class BattleAxe extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "The enormous steel head of this battle axe puts considerable heft behind each stroke.";
+		return Babylon.get().getFromResources("weapon_axe_desc");
 	}
 }

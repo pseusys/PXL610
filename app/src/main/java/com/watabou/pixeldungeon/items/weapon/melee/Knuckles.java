@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Knuckles extends MeleeWeapon {
 
 	{
-		name = "knuckleduster";
+		name = Babylon.get().getFromResources("weapon_knuckles");
 		image = ItemSpriteSheet.KNUCKLEDUSTER;
 	}
 	
@@ -32,6 +33,6 @@ public class Knuckles extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "A piece of iron shaped to fit around the knuckles.";
+		return Babylon.get().getFromResources("weapon_knuckles_desc");
 	}
 }

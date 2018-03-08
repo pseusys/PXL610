@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.items.weapon.Weapon;
@@ -90,79 +91,74 @@ public class MeleeWeapon extends Weapon {
 		int lvl = visiblyUpgraded();
 		String quality = lvl != 0 ? 
 			(lvl > 0 ? 
-				(isBroken() ? "broken" : "upgraded") : 
-				"degraded") : 
+				(isBroken() ? Babylon.get().getFromResources("weapon_melee_level0") : Babylon.get().getFromResources("weapon_melee_level1")) :
+					Babylon.get().getFromResources("weapon_melee_level2")) :
 			"";
 		info.append( p );
-		info.append( "This " + name + " is " + Utils.indefinite( quality ) );
-		info.append( " tier-" + tier + " melee weapon. " );
+		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc0") + Utils.indefinite( quality ), name) );
+		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc1"), tier) );
 		
 		if (levelKnown) {
 			int min = min();
 			int max = max();
-			info.append( "Its average damage is " + (min + (max - min) / 2) + " points per hit. " );
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known0"), (min + (max - min) / 2)) );
 		} else {
 			int min = min0();
 			int max = max0();
-			info.append( 
-				"Its typical average damage is " + (min + (max - min) / 2) + " points per hit " +
-				"and usually it requires " + typicalSTR() + " points of strength. " );
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known1"), (min + (max - min) / 2), typicalSTR()) );
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append( "Probably this weapon is too heavy for you. " );
+				info.append(Babylon.get().getFromResources("weapon_melee_known2"));
 			}
 		}
 		
 		if (DLY != 1f) {
-			info.append( "This is a rather " + (DLY < 1f ? "fast" : "slow") );
+			info.append(Babylon.get().getFromResources("weapon_melee_add0") + (DLY < 1f ? Babylon.get().getFromResources("weapon_melee_add1") :
+					Babylon.get().getFromResources("weapon_melee_add2")) );
 			if (ACU != 1f) {
 				if ((ACU > 1f) == (DLY < 1f)) {
-					info.append( " and ");
+					info.append(Babylon.get().getFromResources("weapon_melee_add3"));
 				} else {
-					info.append( " but ");
+					info.append(Babylon.get().getFromResources("weapon_melee_add4"));
 				}
-				info.append( ACU > 1f ? "accurate" : "inaccurate" );
+				info.append( ACU > 1f ? Babylon.get().getFromResources("weapon_melee_add5") : Babylon.get().getFromResources("weapon_melee_add6"));
 			}
-			info.append( " weapon. ");
+			info.append(Babylon.get().getFromResources("weapon_melee_add7"));
 		} else if (ACU != 1f) {
-			info.append( "This is a rather " + (ACU > 1f ? "accurate" : "inaccurate") + " weapon. " );
+			info.append(Babylon.get().getFromResources("weapon_melee_add8") + (ACU > 1f ? Babylon.get().getFromResources("weapon_melee_add9") :
+					Babylon.get().getFromResources("weapon_melee_add10")) + Babylon.get().getFromResources("weapon_melee_add11"));
 		}
 		switch (imbue) {
 		case SPEED:
-			info.append( "It was balanced to make it faster. " );
+			info.append(Babylon.get().getFromResources("weapon_melee_add12"));
 			break;
 		case ACCURACY:
-			info.append( "It was balanced to make it more accurate. " );
+			info.append(Babylon.get().getFromResources("weapon_melee_add13"));
 			break;
 		case NONE:
 		}
 		
 		if (enchantment != null) {
-			info.append( "It is enchanted." );
+			info.append(Babylon.get().getFromResources("weapon_melee_enchanted"));
 		}
 		
 		if (levelKnown && Dungeon.hero.belongings.backpack.items.contains( this )) {
 			if (STR > Dungeon.hero.STR()) {
 				info.append( p );
-				info.append( 
-					"Because of your inadequate strength the accuracy and speed " +
-					"of your attack with this " + name + " is decreased." );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_fin0"), name) );
 			}
 			if (STR < Dungeon.hero.STR()) {
 				info.append( p );
-				info.append( 
-					"Because of your excess strength the damage " +
-					"of your attack with this " + name + " is increased." );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_fin1"), name) );
 			}
 		}
 		
 		if (isEquipped( Dungeon.hero )) {
 			info.append( p );
-			info.append( "You hold the " + name + " at the ready" + 
-				(cursed ? ", and because it is cursed, you are powerless to let go." : ".") ); 
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_fin2") + (cursed ? Babylon.get().getFromResources("weapon_melee_fin3") : "."), name) );
 		} else {
 			if (cursedKnown && cursed) {
 				info.append( p );
-				info.append( "You can feel a malevolent magic lurking within " + name +"." );
+				info.append(Babylon.get().getFromResources("weapon_melee_fin4") + name + "." );
 			}
 		}
 		

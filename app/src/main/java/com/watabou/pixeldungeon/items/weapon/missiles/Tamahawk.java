@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon.missiles;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Bleeding;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Tamahawk extends MissileWeapon {
 
 	{
-		name = "tomahawk";
+		name = Babylon.get().getFromResources("weapon_tomahawk");
 		image = ItemSpriteSheet.TOMAHAWK;
 		
 		STR = 17;
@@ -60,9 +61,7 @@ public class Tamahawk extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return 
-			"This throwing axe is not that heavy, but it still " +
-			"requires significant strength to be used effectively.";
+		return Babylon.get().getFromResources("weapon_tomahawk_desc");
 	}
 	
 	@Override

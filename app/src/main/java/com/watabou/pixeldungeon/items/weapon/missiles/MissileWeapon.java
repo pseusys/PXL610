@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.items.weapon.missiles;
 
 import java.util.ArrayList;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.Char;
@@ -27,28 +28,23 @@ import com.watabou.pixeldungeon.actors.hero.HeroClass;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.items.weapon.Weapon;
 import com.watabou.pixeldungeon.scenes.GameScene;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.pixeldungeon.windows.WndOptions;
 
 abstract public class MissileWeapon extends Weapon {
 
-	private static final String TXT_MISSILES	= "Missile weapon";
-	private static final String TXT_YES			= "Yes, I know what I'm doing";
-	private static final String TXT_NO			= "No, I changed my mind";
-	private static final String TXT_R_U_SURE	= 
-		"Do you really want to equip it as a melee weapon?";
-	
 	{
 		stackable = true;
 		levelKnown = true;
-		defaultAction = AC_THROW;
+		defaultAction = Babylon.get().getFromResources("item_acthrow");
 	}
 	
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
 		if (hero.heroClass != HeroClass.HUNTRESS && hero.heroClass != HeroClass.ROGUE) {
-			actions.remove( AC_EQUIP );
-			actions.remove( AC_UNEQUIP );
+			actions.remove( Babylon.get().getFromResources("item_acequip") );
+			actions.remove( Babylon.get().getFromResources("item_acunequip") );
 		}
 		return actions;
 	}
@@ -87,7 +83,8 @@ abstract public class MissileWeapon extends Weapon {
 	@Override
 	public boolean doEquip( final Hero hero ) {
 		GameScene.show( 
-			new WndOptions( TXT_MISSILES, TXT_R_U_SURE, TXT_YES, TXT_NO ) {
+			new WndOptions( Babylon.get().getFromResources("weapon_missle"), Babylon.get().getFromResources("weapon_missle_sure"),
+					Babylon.get().getFromResources("weapon_missle_yes"), Babylon.get().getFromResources("weapon_missle_no") ) {
 				@Override
 				protected void onSelect(int index) {
 					if (index == 0) {
@@ -122,23 +119,19 @@ abstract public class MissileWeapon extends Weapon {
 		
 		int min = min();
 		int max = max();
-		info.append( "\n\nAverage damage of this weapon equals to " + (min + (max - min) / 2) + " points per hit. " );
+		info.append(Utils.format(Babylon.get().getFromResources("weapon_missle_info0"), (min + (max - min) / 2)) );
 		
 		if (Dungeon.hero.belongings.backpack.items.contains( this )) {
 			if (STR > Dungeon.hero.STR()) {
-				info.append( 
-					"Because of your inadequate strength the accuracy and speed " +
-					"of your attack with this " + name + " is decreased." );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info1"), name) );
 			}
 			if (STR < Dungeon.hero.STR()) {
-				info.append( 
-					"Because of your excess strength the damage " +
-					"of your attack with this " + name + " is increased." );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info2"), name) );
 			}
 		}
 		
 		if (isEquipped( Dungeon.hero )) {
-			info.append( "\n\nYou hold the " + name + " at the ready." ); 
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info3"), name) );
 		}
 		
 		return info.toString();

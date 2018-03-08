@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.items.weapon;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -35,14 +36,6 @@ import com.watabou.utils.Random;
 abstract public class Weapon extends KindOfWeapon {
 
 	private static final int HITS_TO_KNOW	= 20;
-	
-	private static final String TXT_IDENTIFY		= 
-		"You are now familiar enough with your %s to identify it. It is %s.";
-	private static final String TXT_INCOMPATIBLE	= 
-		"Interaction of different types of magic has negated the enchantment on this weapon!";
-	
-	private static final String TXT_TO_STRING	= "%s :%d";
-	private static final String TXT_BROKEN		= "broken %s :%d";
 	
 	public int		STR	= 10;
 	public float	ACU	= 1;
@@ -67,7 +60,7 @@ abstract public class Weapon extends KindOfWeapon {
 		if (!levelKnown) {
 			if (--hitsToKnow <= 0) {
 				levelKnown = true;
-				GLog.i( TXT_IDENTIFY, name(), toString() );
+				GLog.i( Babylon.get().getFromResources("weapon_id"), name(), toString() );
 				Badges.validateItemLevelAquired( this );
 			}
 		}
@@ -150,7 +143,7 @@ abstract public class Weapon extends KindOfWeapon {
 	public Item upgrade( boolean enchant ) {		
 		if (enchantment != null) {
 			if (!enchant && Random.Int( level() ) > 0) {
-				GLog.w( TXT_INCOMPATIBLE );
+				GLog.w( Babylon.get().getFromResources("weapon_incompare") );
 				enchant( null );
 			}
 		} else {
@@ -169,7 +162,8 @@ abstract public class Weapon extends KindOfWeapon {
 	
 	@Override
 	public String toString() {
-		return levelKnown ? Utils.format( isBroken() ? TXT_BROKEN : TXT_TO_STRING, super.toString(), STR ) : super.toString();
+		return levelKnown ? Utils.format( isBroken() ? Babylon.get().getFromResources("weapon_broken") :
+				Babylon.get().getFromResources("to_string"), super.toString(), STR ) : super.toString();
 	}
 	
 	@Override

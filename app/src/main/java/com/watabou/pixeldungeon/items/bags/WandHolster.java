@@ -26,7 +26,7 @@ import com.watabou.pixeldungeon.utils.Utils;
 public class WandHolster extends Bag {
 
 	{
-		name = Babylon.get().getFromResources("item_wandholder");
+		name = Babylon.get().getFromResources("bag_wandholder");
 		image = ItemSpriteSheet.HOLSTER;
 		
 		size = 12;
@@ -65,6 +65,6 @@ public class WandHolster extends Bag {
 	
 	@Override
 	public String info() {
-		return Utils.format(Babylon.get().getFromResources("item_wandholder_info"), size);
+		return Utils.format(Babylon.get().getFromResources("bag_wandholder_info"), size);
 	}
 }

@@ -17,12 +17,13 @@
  */
 package com.watabou.pixeldungeon.items.weapon.melee;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Mace extends MeleeWeapon {
 
 	{
-		name = "mace";
+		name = Babylon.get().getFromResources("weapon_mace");
 		image = ItemSpriteSheet.MACE;
 	}
 	
@@ -32,6 +33,6 @@ public class Mace extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return "The iron head of this weapon inflicts substantial damage.";
+		return Babylon.get().getFromResources("weapon_mace_desc");
 	}
 }

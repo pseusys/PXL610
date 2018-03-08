@@ -39,8 +39,6 @@ public class Armor extends EquipableItem {
 	
 	private static final int HITS_TO_KNOW	= 10;
 	
-	private static final String TXT_TO_STRING	= "%s :%d";
-	
 	public int tier;
 	public int STR;
 	
@@ -77,7 +75,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( isEquipped( hero ) ? AC_UNEQUIP : AC_EQUIP );
+		actions.add( isEquipped( hero ) ? Babylon.get().getFromResources("item_acunequip") : Babylon.get().getFromResources("item_acequip") );
 		return actions;
 	}
 	
@@ -198,7 +196,8 @@ public class Armor extends EquipableItem {
 	
 	@Override
 	public String toString() {
-		return levelKnown ? Utils.format( isBroken() ? Babylon.get().getFromResources("armor_broken") : TXT_TO_STRING, super.toString(), STR ) : super.toString();
+		return levelKnown ? Utils.format( isBroken() ? Babylon.get().getFromResources("armor_broken") :
+				Babylon.get().getFromResources("to_string"), super.toString(), STR ) : super.toString();
 	}
 	
 	@Override
