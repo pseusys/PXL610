@@ -27,6 +27,7 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.effects.BadgeBanner;
@@ -38,8 +39,6 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class BadgesScene extends PixelScene {
-	
-	private static final String TXT_TITLE = "Your Badges";
 	
 	@Override
 	public void create() {
@@ -69,7 +68,7 @@ public class BadgesScene extends PixelScene {
 		float left = (w - size * nCols) / 2;
 		float top = (h - size * nRows) / 2;
 		
-		BitmapText title = PixelScene.createText( TXT_TITLE, 9 );
+		BitmapText title = PixelScene.createText( Babylon.get().getFromResources("badgescene_title"), 9 );
 		title.hardlight( Window.TITLE_COLOR );
 		title.measure();
 		title.x = align( (w - title.width()) / 2 );

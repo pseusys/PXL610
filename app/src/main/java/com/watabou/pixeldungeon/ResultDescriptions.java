@@ -20,25 +20,25 @@ package com.watabou.pixeldungeon;
 public class ResultDescriptions {
 
 	// Mobs 
-	public static final String MOB	= "Killed by %s on level %d";
-	public static final String BOSS	= "Killed by the %s on level %d";
+	public static final String MOB	= Babylon.get().getFromResources("results_mob");
+	public static final String BOSS	= Babylon.get().getFromResources("results_boss");
 	
 	// Items
-	public static final String WAND		= "Killed by your own %s on level %d";
-	public static final String GLYPH	= "Killed by the %s on level %d";
-	public static final String BOMB		= "Killed by an explosion of a bomb on level %d";
+	public static final String WAND		= Babylon.get().getFromResources("results_wand");
+	public static final String GLYPH	= Babylon.get().getFromResources("results_glyph");
+	public static final String BOMB		= Babylon.get().getFromResources("results_bomb");
 	
 	// Dungeon features
-	public static final String TRAP	= "Killed by discharge of %s on level %d";
+	public static final String TRAP	= Babylon.get().getFromResources("results_trap");
 	
 	// Debuffs & blobs
-	public static final String BURNING	= "Burned to death on level %d";
-	public static final String HUNGER	= "Starved to death on level %d";
-	public static final String POISON	= "Died from poison on level %d";
-	public static final String GAS		= "Died from toxic gas on level %d";
-	public static final String BLEEDING	= "Bled to death on level %d";
-	public static final String OOZE		= "Killed by a caustic ooze on level %d";
-	public static final String FALL		= "Fell to death on level %d";
+	public static final String BURNING	= Babylon.get().getFromResources("results_burning");
+	public static final String HUNGER	= Babylon.get().getFromResources("results_hunger");
+	public static final String POISON	= Babylon.get().getFromResources("results_poison");
+	public static final String GAS		= Babylon.get().getFromResources("results_gas");
+	public static final String BLEEDING	= Babylon.get().getFromResources("results_bled");
+	public static final String OOZE		= Babylon.get().getFromResources("results_ooze");
+	public static final String FALL		= Babylon.get().getFromResources("results_fall");
 	
-	public static final String WIN	= "Obtained the Amulet of Yendor";
+	public static final String WIN	= Babylon.get().getFromResources("results_win");
 }

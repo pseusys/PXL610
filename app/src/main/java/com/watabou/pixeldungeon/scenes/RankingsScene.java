@@ -24,6 +24,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.Rankings;
 import com.watabou.pixeldungeon.effects.Flare;
@@ -39,12 +40,6 @@ import com.watabou.pixeldungeon.windows.WndRanking;
 public class RankingsScene extends PixelScene {
 	
 	private static final int DEFAULT_COLOR	= 0xCCCCCC;
-	
-	private static final String TXT_TITLE		= "Top Rankings";
-	private static final String TXT_TOTAL		= "Games played: ";
-	private static final String TXT_NO_GAMES	= "No games have been played yet.";
-	
-	private static final String TXT_NO_INFO	= "No additional information";
 	
 	private static final float ROW_HEIGHT_L	= 22;
 	private static final float ROW_HEIGHT_P	= 28;
@@ -81,7 +76,7 @@ public class RankingsScene extends PixelScene {
 			float left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
 			float top = align( (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2 );
 			
-			BitmapText title = PixelScene.createText( TXT_TITLE, 9 );
+			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingscene_toprankings"), 9 );
 			title.hardlight( Window.TITLE_COLOR );
 			title.measure();
 			title.x = align( (w - title.width()) / 2 );
@@ -99,7 +94,7 @@ public class RankingsScene extends PixelScene {
 			}
 			
 			if (Rankings.INSTANCE.totalNumber >= Rankings.TABLE_SIZE) {
-				BitmapText label = PixelScene.createText( TXT_TOTAL, 8 );
+				BitmapText label = PixelScene.createText( Babylon.get().getFromResources("rankingscene_total"), 8 );
 				label.hardlight( DEFAULT_COLOR );
 				label.measure();
 				add( label );
@@ -125,7 +120,7 @@ public class RankingsScene extends PixelScene {
 			
 		} else {
 			
-			BitmapText title = PixelScene.createText( TXT_NO_GAMES, 8 );
+			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingsscene_nogames"), 8 );
 			title.hardlight( DEFAULT_COLOR );
 			title.measure();
 			title.x = align( (w - title.width()) / 2 );
@@ -240,7 +235,7 @@ public class RankingsScene extends PixelScene {
 			if (rec.gameFile.length() > 0) {
 				parent.add( new WndRanking( rec.gameFile ) );
 			} else {
-				parent.add( new WndError( TXT_NO_INFO ) );
+				parent.add( new WndError( Babylon.get().getFromResources("rankingsscene_noinfo") ) );
 			}
 		}
 	}

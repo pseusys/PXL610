@@ -26,6 +26,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TouchArea;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.effects.Flare;
 import com.watabou.pixeldungeon.ui.Archs;
@@ -34,13 +35,6 @@ import com.watabou.pixeldungeon.ui.Icons;
 import com.watabou.pixeldungeon.ui.Window;
 
 public class AboutScene extends PixelScene {
-
-	private static final String TXT = 
-		"Code & graphics: Watabou\n" +
-		"Music: Cube_Code\n\n" + 
-		"This game is inspired by Brian Walker's Brogue. " +
-		"Try it on Windows, Mac OS or Linux - it's awesome! ;)\n\n" +
-		"Please visit official website for additional info:";
 	
 	private static final String LNK = "pixeldungeon.watabou.ru";
 	
@@ -48,7 +42,7 @@ public class AboutScene extends PixelScene {
 	public void create() {
 		super.create();
 		
-		BitmapTextMultiline text = createMultiline( TXT, 8 );
+		BitmapTextMultiline text = createMultiline( Babylon.get().getFromResources("aboutscene_titles"), 8 );
 		text.maxWidth = Math.min( Camera.main.width, 120 );
 		text.measure();
 		add( text );

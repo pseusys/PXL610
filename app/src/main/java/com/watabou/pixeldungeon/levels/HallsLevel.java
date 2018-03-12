@@ -26,6 +26,7 @@ import com.watabou.noosa.Group;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.items.Torch;
@@ -107,14 +108,14 @@ public class HallsLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Cold lava";
+			return Babylon.get().getFromResources("levels_halls_water");
 		case Terrain.GRASS:
-			return "Embermoss";
+			return Babylon.get().getFromResources("levels_halls_grass");
 		case Terrain.HIGH_GRASS:
-			return "Emberfungi";
+			return Babylon.get().getFromResources("levels_halls_highgrass");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "Pillar";
+			return Babylon.get().getFromResources("levels_halls_statue");
 		default:
 			return super.tileName( tile );
 		}
@@ -124,12 +125,12 @@ public class HallsLevel extends RegularLevel {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "It looks like lava, but it's cold and probably safe to touch.";
+			return Babylon.get().getFromResources("levels_halls_eater_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "The pillar is made of real humanoid skulls. Awesome."; 
+			return Babylon.get().getFromResources("levels_halls_statue_desc");
 		case Terrain.BOOKSHELF:
-			return "Books in ancient languages smoulder in the bookshelf.";
+			return Babylon.get().getFromResources("levels_halls_books_desc");
 		default:
 			return super.tileDesc( tile );
 		}

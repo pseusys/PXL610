@@ -22,6 +22,7 @@ import java.util.Collections;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Journal;
 import com.watabou.pixeldungeon.PXL610;
@@ -38,8 +39,6 @@ public class WndJournal extends Window {
 	
 	private static final int ITEM_HEIGHT	= 18;
 	
-	private static final String TXT_TITLE	= "Journal";
-	
 	private BitmapText txtTitle;
 	private ScrollPane list;
 	
@@ -48,7 +47,7 @@ public class WndJournal extends Window {
 		super();
 		resize( WIDTH, PXL610.landscape() ? HEIGHT_L : HEIGHT_P );
 		
-		txtTitle = PixelScene.createText( TXT_TITLE, 9 );
+		txtTitle = PixelScene.createText( Babylon.get().getFromResources("wnd_hero_journal"), 9 );
 		txtTitle.hardlight( Window.TITLE_COLOR );
 		txtTitle.measure();
 		txtTitle.x = PixelScene.align( PixelScene.uiCamera, (WIDTH - txtTitle.width()) / 2 );

@@ -26,6 +26,7 @@ import java.util.HashSet;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Challenges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
@@ -90,8 +91,6 @@ public abstract class Level implements Bundlable {
 	public static final int[] NEIGHBOURS9 = {0, +1, -1, +WIDTH, -WIDTH, +1+WIDTH, +1-WIDTH, -1+WIDTH, -1-WIDTH};
 	
 	protected static final float TIME_TO_RESPAWN	= 50;
-	
-	private static final String TXT_HIDDEN_PLATE_CLICKS = "A hidden pressure plate clicks!";
 	
 	public static boolean resizingNeeded;
 	public static int loadedMapSize;
@@ -631,56 +630,56 @@ public abstract class Level implements Bundlable {
 		switch (map[cell]) {
 		
 		case Terrain.SECRET_TOXIC_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.TOXIC_TRAP:
 			trap = true;
 			ToxicTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_FIRE_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.FIRE_TRAP:
 			trap = true;
 			FireTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_PARALYTIC_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.PARALYTIC_TRAP:
 			trap = true;
 			ParalyticTrap.trigger( cell,  ch );
 			break;
 			
 		case Terrain.SECRET_POISON_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.POISON_TRAP:
 			trap = true;
 			PoisonTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_ALARM_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.ALARM_TRAP:
 			trap = true;
 			AlarmTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_LIGHTNING_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.LIGHTNING_TRAP:
 			trap = true;
 			LightningTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_GRIPPING_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.GRIPPING_TRAP:
 			trap = true;
 			GrippingTrap.trigger( cell, ch );
 			break;
 			
 		case Terrain.SECRET_SUMMONING_TRAP:
-			GLog.i( TXT_HIDDEN_PLATE_CLICKS );
+			GLog.i( Babylon.get().getFromResources("levels_trap") );
 		case Terrain.SUMMONING_TRAP:
 			trap = true;
 			SummoningTrap.trigger( cell, ch );
@@ -896,7 +895,7 @@ public abstract class Level implements Bundlable {
 		
 		switch (tile) {
 		case Terrain.CHASM:
-			return "Chasm";
+			return Babylon.get().getFromResources("feature_chasm");
 		case Terrain.EMPTY:
 		case Terrain.EMPTY_SP:
 		case Terrain.EMPTY_DECO:
@@ -906,68 +905,68 @@ public abstract class Level implements Bundlable {
 		case Terrain.SECRET_POISON_TRAP:
 		case Terrain.SECRET_ALARM_TRAP:
 		case Terrain.SECRET_LIGHTNING_TRAP:
-			return "Floor";
+			return Babylon.get().getFromResources("levels_desc_floor");
 		case Terrain.GRASS:
-			return "Grass";
+			return Babylon.get().getFromResources("levels_desc_grass");
 		case Terrain.WATER:
-			return "Water";
+			return Babylon.get().getFromResources("levels_desc_water");
 		case Terrain.WALL:
 		case Terrain.WALL_DECO:
 		case Terrain.SECRET_DOOR:
-			return "Wall";
+			return Babylon.get().getFromResources("levels_desc_wall");
 		case Terrain.DOOR:
-			return "Closed door";
+			return Babylon.get().getFromResources("levels_desc_closeddoor");
 		case Terrain.OPEN_DOOR:
-			return "Open door";
+			return Babylon.get().getFromResources("levels_desc_opendoor");
 		case Terrain.ENTRANCE:
-			return "Depth entrance";
+			return Babylon.get().getFromResources("levels_desc_depthentrance");
 		case Terrain.EXIT:
-			return "Depth exit";
+			return Babylon.get().getFromResources("levels_desc_depthexit");
 		case Terrain.EMBERS:
-			return "Embers";
+			return Babylon.get().getFromResources("levels_desc_embers");
 		case Terrain.LOCKED_DOOR:
-			return "Locked door";
+			return Babylon.get().getFromResources("levels_desc_lockeddoor");
 		case Terrain.PEDESTAL:
-			return "Pedestal";
+			return Babylon.get().getFromResources("levels_desc_pedestal");
 		case Terrain.BARRICADE:
-			return "Barricade";
+			return Babylon.get().getFromResources("levels_desc_barricade");
 		case Terrain.HIGH_GRASS:
-			return "High grass";
+			return Babylon.get().getFromResources("levels_desc_highgrass");
 		case Terrain.LOCKED_EXIT:
-			return "Locked depth exit";
+			return Babylon.get().getFromResources("levels_desc_lockeddepthexit");
 		case Terrain.UNLOCKED_EXIT:
-			return "Unlocked depth exit";
+			return Babylon.get().getFromResources("levels_desc_unlockeddepthexit");
 		case Terrain.SIGN:
-			return "Sign";
+			return Babylon.get().getFromResources("levels_desc_sign");
 		case Terrain.WELL:
-			return "Well";
+			return Babylon.get().getFromResources("levels_desc_well");
 		case Terrain.EMPTY_WELL:
-			return "Empty well";
+			return Babylon.get().getFromResources("levels_desc_emptywell");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "Statue";
+			return Babylon.get().getFromResources("levels_desc_statue");
 		case Terrain.TOXIC_TRAP:
-			return "Toxic gas trap";
+			return Babylon.get().getFromResources("levels_desc_toxicgastrap");
 		case Terrain.FIRE_TRAP:
-			return "Fire trap";
+			return Babylon.get().getFromResources("levels_desc_firetrap");
 		case Terrain.PARALYTIC_TRAP:
-			return "Paralytic gas trap";
+			return Babylon.get().getFromResources("levels_desc_paralyticgastrap");
 		case Terrain.POISON_TRAP:
-			return "Poison dart trap";
+			return Babylon.get().getFromResources("levels_desc_poisondarttrap");
 		case Terrain.ALARM_TRAP:
-			return "Alarm trap";
+			return Babylon.get().getFromResources("levels_desc_alarmtrap");
 		case Terrain.LIGHTNING_TRAP:
-			return "Lightning trap";
+			return Babylon.get().getFromResources("levels_desc_lightningtrap");
 		case Terrain.GRIPPING_TRAP:
-			return "Gripping trap";
+			return Babylon.get().getFromResources("levels_desc_grippingtrap");
 		case Terrain.SUMMONING_TRAP:
-			return "Summoning trap";
+			return Babylon.get().getFromResources("levels_desc_summoningtrap");
 		case Terrain.INACTIVE_TRAP:
-			return "Triggered trap";
+			return Babylon.get().getFromResources("levels_desc_triggeredtrap");
 		case Terrain.BOOKSHELF:
-			return "Bookshelf";
+			return Babylon.get().getFromResources("levels_desc_bookshelf");
 		case Terrain.ALCHEMY:
-			return "Alchemy pot";
+			return Babylon.get().getFromResources("levels_desc_alchemypot");
 		default:
 			return "???";
 		}
@@ -977,26 +976,26 @@ public abstract class Level implements Bundlable {
 		
 		switch (tile) {
 		case Terrain.CHASM:
-			return "You can't see the bottom.";
+			return Babylon.get().getFromResources("levels_desc_chasm_desc");
 		case Terrain.WATER:
-			return "In case of burning step into the water to extinguish the fire.";
+			return Babylon.get().getFromResources("levels_desc_water_desc");
 		case Terrain.ENTRANCE:
-			return "Stairs lead up to the upper depth.";
+			return Babylon.get().getFromResources("levels_desc_entrance_desc");
 		case Terrain.EXIT:
 		case Terrain.UNLOCKED_EXIT:
-			return "Stairs lead down to the lower depth.";
+			return Babylon.get().getFromResources("levels_desc_exit_desc");
 		case Terrain.EMBERS:
-			return "Embers cover the floor.";
+			return Babylon.get().getFromResources("levels_desc_embers_desc");
 		case Terrain.HIGH_GRASS:
-			return "Dense vegetation blocks the view.";
+			return Babylon.get().getFromResources("levels_desc_highgrass_desc");
 		case Terrain.LOCKED_DOOR:
-			return "This door is locked, you need a matching key to unlock it.";
+			return Babylon.get().getFromResources("levels_desc_lockeddoor_desc");
 		case Terrain.LOCKED_EXIT:
-			return "Heavy bars block the stairs leading down.";
+			return Babylon.get().getFromResources("levels_desc_lockeddepthexit_desc");
 		case Terrain.BARRICADE:
-			return "The wooden barricade is firmly set but has dried over the years. Might it burn?";
+			return Babylon.get().getFromResources("levels_desc_barricade_desc");
 		case Terrain.SIGN:
-			return "You can't read the text from here.";
+			return Babylon.get().getFromResources("levels_desc_sign_desc");
 		case Terrain.TOXIC_TRAP:
 		case Terrain.FIRE_TRAP:
 		case Terrain.PARALYTIC_TRAP:
@@ -1005,16 +1004,16 @@ public abstract class Level implements Bundlable {
 		case Terrain.LIGHTNING_TRAP:
 		case Terrain.GRIPPING_TRAP:
 		case Terrain.SUMMONING_TRAP:
-			return "Stepping onto a hidden pressure plate will activate the trap.";
+			return Babylon.get().getFromResources("levels_desc_traps_desc");
 		case Terrain.INACTIVE_TRAP:
-			return "The trap has been triggered before and it's not dangerous anymore.";
+			return Babylon.get().getFromResources("levels_desc_triggeredtrap_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "Someone wanted to adorn this place, but failed, obviously.";
+			return Babylon.get().getFromResources("levels_desc_staatue_desc");
 		case Terrain.ALCHEMY:
-			return "Drop some seeds here to cook a potion.";
+			return Babylon.get().getFromResources("levels_desc_alchemypot_desc");
 		case Terrain.EMPTY_WELL:
-			return "The well has run dry.";
+			return Babylon.get().getFromResources("levels_desc_emptywell_desc");
 		default:
 			if (tile >= Terrain.WATER_TILES) {
 				return tileDesc( Terrain.WATER );

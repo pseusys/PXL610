@@ -22,6 +22,7 @@ import com.watabou.noosa.Group;
 import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Blacksmith;
@@ -186,11 +187,11 @@ public class CavesLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.GRASS:
-			return "Fluorescent moss";
+			return Babylon.get().getFromResources("levels_caves_grass");
 		case Terrain.HIGH_GRASS:
-			return "Fluorescent mushrooms";
+			return Babylon.get().getFromResources("levels_caves_highgrass");
 		case Terrain.WATER:
-			return "Freezing cold water.";
+			return Babylon.get().getFromResources("levels_caves_water");
 		default:
 			return super.tileName( tile );
 		}
@@ -200,15 +201,15 @@ public class CavesLevel extends RegularLevel {
 	public String tileDesc( int tile ) {
 		switch (tile) {
 		case Terrain.ENTRANCE:
-			return "The ladder leads up to the upper depth.";
+			return Babylon.get().getFromResources("levels_caves_entrance_desc");
 		case Terrain.EXIT:
-			return "The ladder leads down to the lower depth.";
+			return Babylon.get().getFromResources("levels_caves_exit_desc");
 		case Terrain.HIGH_GRASS:
-			return "Huge mushrooms block the view.";
+			return Babylon.get().getFromResources("levels_caves_highgrass_desc");
 		case Terrain.WALL_DECO:
-			return "A vein of some ore is visible on the wall. Gold?";
+			return Babylon.get().getFromResources("levels_caves_walls_deco");
 		case Terrain.BOOKSHELF:
-			return "Who would need a bookshelf in a cave?";
+			return Babylon.get().getFromResources("levels_caves_books_desc");
 		default:
 			return super.tileDesc( tile );
 		}

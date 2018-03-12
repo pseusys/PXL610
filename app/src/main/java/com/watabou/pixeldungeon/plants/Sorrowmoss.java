@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -27,13 +28,10 @@ import com.watabou.pixeldungeon.items.potions.PotionOfToxicGas;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Sorrowmoss extends Plant {
-
-	private static final String TXT_DESC = 
-		"A Sorrowmoss is a flower (not a moss) with razor-sharp petals, coated with a deadly venom.";
 	
 	{
 		image = 2;
-		plantName = "Sorrowmoss";
+		plantName = Babylon.get().getFromResources("plants_sorrowmoss");
 	}
 	
 	@Override
@@ -51,14 +49,14 @@ public class Sorrowmoss extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_sorrowmoss_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Sorrowmoss";
+			plantName = Babylon.get().getFromResources("plants_sorrowmoss");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_SORROWMOSS;
 			
 			plantClass = Sorrowmoss.class;
@@ -67,7 +65,7 @@ public class Sorrowmoss extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_sorrowmoss_desc");
 		}
 	}
 }

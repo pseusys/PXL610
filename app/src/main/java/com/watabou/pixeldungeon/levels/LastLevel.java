@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 import com.watabou.noosa.Scene;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Amulet;
 import com.watabou.pixeldungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
@@ -96,14 +97,14 @@ public class LastLevel extends Level {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Cold lava";
+			return Babylon.get().getFromResources("levels_halls_water");
 		case Terrain.GRASS:
-			return "Embermoss";
+			return Babylon.get().getFromResources("levels_halls_grass");
 		case Terrain.HIGH_GRASS:
-			return "Emberfungi";
+			return Babylon.get().getFromResources("levels_halls_highgrass");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "Pillar";
+			return Babylon.get().getFromResources("levels_halls_statue");
 		default:
 			return super.tileName( tile );
 		}
@@ -113,10 +114,10 @@ public class LastLevel extends Level {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "It looks like lava, but it's cold and probably safe to touch.";
+			return Babylon.get().getFromResources("levels_halls_eater_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "The pillar is made of real humanoid skulls. Awesome."; 
+			return Babylon.get().getFromResources("levels_halls_statue_desc");
 		default:
 			return super.tileDesc( tile );
 		}

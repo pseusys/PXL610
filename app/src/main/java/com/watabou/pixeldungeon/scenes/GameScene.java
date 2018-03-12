@@ -29,6 +29,7 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
@@ -76,15 +77,6 @@ import com.watabou.pixeldungeon.windows.WndStory;
 import com.watabou.utils.Random;
 
 public class GameScene extends PixelScene {
-	
-	private static final String TXT_WELCOME			= "Welcome to the level %d of Pixel Dungeon!";
-	private static final String TXT_WELCOME_BACK	= "Welcome back to the level %d of Pixel Dungeon!";
-	private static final String TXT_NIGHT_MODE		= "Be cautious, since the dungeon is even more dangerous at night!";
-	
-	private static final String TXT_CHASM	= "Your steps echo across the dungeon.";
-	private static final String TXT_WATER	= "You hear the water splashing around you.";
-	private static final String TXT_GRASS	= "The smell of vegetation is thick in the air.";
-	private static final String TXT_SECRETS	= "The atmosphere hints that this floor hides many secrets.";
 	
 	static GameScene scene;
 	
@@ -290,29 +282,29 @@ public class GameScene extends PixelScene {
 
 		if (InterlevelScene.mode != InterlevelScene.Mode.NONE) {
 			if (Dungeon.depth < Statistics.deepestFloor) {
-				GLog.h( TXT_WELCOME_BACK, Dungeon.depth );
+				GLog.h( Babylon.get().getFromResources("gamescene_welcomeback"), Dungeon.depth );
 			} else {
-				GLog.h( TXT_WELCOME, Dungeon.depth );
+				GLog.h( Babylon.get().getFromResources("gamescene_welcome"), Dungeon.depth );
 				Sample.INSTANCE.play( Assets.SND_DESCEND );
 			}
 			switch (Dungeon.level.feeling) {
 				case CHASM:
-					GLog.w( TXT_CHASM );
+					GLog.w( Babylon.get().getFromResources("gamescene_chasm") );
 					break;
 				case WATER:
-					GLog.w( TXT_WATER );
+					GLog.w( Babylon.get().getFromResources("gamescene_water") );
 					break;
 				case GRASS:
-					GLog.w( TXT_GRASS );
+					GLog.w( Babylon.get().getFromResources("gamescene_grass") );
 					break;
 				default:
 			}
 			if (Dungeon.level instanceof RegularLevel &&
 					((RegularLevel) Dungeon.level).secretDoors > Random.IntRange( 3, 4 )) {
-				GLog.w( TXT_SECRETS );
+				GLog.w( Babylon.get().getFromResources("gamescene_secrets") );
 			}
 			if (Dungeon.nightMode && !Dungeon.bossLevel()) {
-				GLog.w( TXT_NIGHT_MODE );
+				GLog.w( Babylon.get().getFromResources("gamescene_nightmode") );
 			}
 
 			InterlevelScene.mode = InterlevelScene.Mode.NONE;

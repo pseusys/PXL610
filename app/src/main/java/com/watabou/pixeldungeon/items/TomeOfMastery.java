@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.buffs.Blindness;
@@ -37,16 +38,13 @@ import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.pixeldungeon.windows.WndChooseWay;
 
 public class TomeOfMastery extends Item {
-
-	private static final String TXT_BLINDED	= "You can't read while blinded";
 	
 	public static final float TIME_TO_READ = 10;
 	
-	public static final String AC_READ	= "READ";
-	
 	{
 		stackable = false;
-		name = Dungeon.hero != null && Dungeon.hero.subClass != HeroSubClass.NONE ? "Tome of Remastery" : "Tome of Mastery";
+		name = Dungeon.hero != null && Dungeon.hero.subClass != HeroSubClass.NONE ? Babylon.get().getFromResources("tome_mastery") :
+				Babylon.get().getFromResources("tome_remastery");
 		image = ItemSpriteSheet.MASTERY;
 		
 		unique = true;
@@ -55,16 +53,16 @@ public class TomeOfMastery extends Item {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_READ );
+		actions.add( Babylon.get().getFromResources("scroll_read") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action.equals( AC_READ )) {
+		if (action.equals( Babylon.get().getFromResources("scroll_read") )) {
 			
 			if (hero.buff( Blindness.class ) != null) {
-				GLog.w( TXT_BLINDED );
+				GLog.w( Babylon.get().getFromResources("tome_blinded") );
 				return;
 			}
 			
@@ -108,10 +106,7 @@ public class TomeOfMastery extends Item {
 	
 	@Override
 	public String info() {
-		return 
-			"This worn leather book is not that thick, but you feel somehow, " +
-			"that you can gather a lot from it. Remember though that reading " +
-			"this tome may require some time.";
+		return Babylon.get().getFromResources("tome_info");
 	}
 	
 	private void read( Hero hero, HeroSubClass sc1, HeroSubClass sc2 ) {
@@ -138,7 +133,7 @@ public class TomeOfMastery extends Item {
 		
 		SpellSprite.show( curUser, SpellSprite.MASTERY );
 		curUser.sprite.emitter().burst( Speck.factory( Speck.MASTERY ), 12 );
-		GLog.w( "You have chosen the way of the %s!", Utils.capitalize( way.title() ) );
+		GLog.w(Babylon.get().getFromResources("tome_waychosen"), Utils.capitalize( way.title() ) );
 		
 		if (way == HeroSubClass.BERSERKER && curUser.HP <= curUser.HT * Fury.LEVEL) {
 			Buff.affect( curUser, Fury.class );

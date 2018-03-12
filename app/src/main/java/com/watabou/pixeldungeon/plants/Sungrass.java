@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -29,12 +30,10 @@ import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
 public class Sungrass extends Plant {
-
-	private static final String TXT_DESC = "Sungrass is renowned for its sap's healing properties.";
 	
 	{
 		image = 4;
-		plantName = "Sungrass";
+		plantName = Babylon.get().getFromResources("plants_sungrass");
 	}
 	
 	@Override
@@ -52,14 +51,14 @@ public class Sungrass extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_sungrass_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Sungrass";
+			plantName = Babylon.get().getFromResources("plants_sungrass");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_SUNGRASS;
 			
 			plantClass = Sungrass.class;
@@ -68,7 +67,7 @@ public class Sungrass extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_sungrass_desc");
 		}
 	}
 	
@@ -103,7 +102,7 @@ public class Sungrass extends Plant {
 		
 		@Override
 		public String toString() {
-			return "Herbal healing";
+			return Babylon.get().getFromResources("plants_sungrass_herbalhealing");
 		}
 		
 		private static final String POS	= "pos";

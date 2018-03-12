@@ -138,7 +138,7 @@ public class TitleScene extends PixelScene {
 			btnHighscores.setPos( w / 2, btnPlay.top() );
 		}
 
-		BitmapText version = new BitmapText( "версия " + Game.version, font1x );
+		BitmapText version = new BitmapText(Babylon.get().getFromResources("titlescene_version") + Game.version, font1x );
 		version.measure();
 		version.hardlight( 0x888888 );
 		version.x = w - version.width();

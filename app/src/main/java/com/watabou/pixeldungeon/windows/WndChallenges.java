@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.windows;
 import java.util.ArrayList;
 
 import com.watabou.noosa.BitmapText;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Challenges;
 import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.scenes.PixelScene;
@@ -33,8 +34,6 @@ public class WndChallenges extends Window {
 	private static final int BTN_HEIGHT	= 18;
 	private static final int GAP		= 1;
 	
-	private static final String TITLE	= "Challenges";
-	
 	private boolean editable;
 	private ArrayList<CheckBox> boxes;	
 	
@@ -44,7 +43,7 @@ public class WndChallenges extends Window {
 		
 		this.editable = editable;
 		
-		BitmapText title = PixelScene.createText( TITLE, 9 );
+		BitmapText title = PixelScene.createText( Babylon.get().getFromResources("challenges"), 9 );
 		title.hardlight( TITLE_COLOR );
 		title.measure();
 		title.x = PixelScene.align( camera, (WIDTH - title.width()) / 2 );

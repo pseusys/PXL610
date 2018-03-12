@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Fire;
@@ -28,12 +29,10 @@ import com.watabou.pixeldungeon.utils.BArray;
 import com.watabou.utils.PathFinder;
 
 public class Icecap extends Plant {
-
-	private static final String TXT_DESC = "Upon touching an Icecap excretes a pollen, which freezes everything in its vicinity.";
 	
 	{
 		image = 1;
-		plantName = "Icecap";
+		plantName = Babylon.get().getFromResources("plants_icecap");
 	}
 	
 	@Override
@@ -53,14 +52,14 @@ public class Icecap extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_icecap_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Icecap";
+			plantName = Babylon.get().getFromResources("plants_icecap");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_ICECAP;
 			
 			plantClass = Icecap.class;
@@ -69,7 +68,7 @@ public class Icecap extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_icecap_desc");
 		}
 	}
 }

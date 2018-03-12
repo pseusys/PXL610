@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.levels.traps;
 
 import com.watabou.noosa.Camera;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.actors.Char;
@@ -31,8 +32,6 @@ import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Random;
 
 public class LightningTrap {
-
-	private static final String name	= "lightning trap";
 	
 	// 00x66CCEE
 	
@@ -45,8 +44,8 @@ public class LightningTrap {
 				Camera.main.shake( 2, 0.3f );
 				
 				if (!ch.isAlive()) {
-					Dungeon.fail( Utils.format( ResultDescriptions.TRAP, name, Dungeon.depth ) );
-					GLog.n( "You were killed by a discharge of a lightning trap..." );
+					Dungeon.fail( Utils.format( ResultDescriptions.TRAP, Babylon.get().getFromResources("feature_trap_lightning"), Dungeon.depth ) );
+					GLog.n(Babylon.get().getFromResources("feature_trap_lightning_killed"));
 				} else {
 					((Hero)ch).belongings.charge( false );
 				}

@@ -27,21 +27,14 @@ import com.watabou.pixeldungeon.utils.Utils;
 
 public class WndWandmaker extends WndQuest {
 	
-	private static final String TXT_MESSAGE	= 
-		"Oh, I see you have succeeded! I do hope it hasn't troubled you too much. " +
-		"As I promised, you can choose one of my high quality wands.";
-	private static final String TXT_BATTLE		= "Battle wand";
-	private static final String TXT_NON_BATTLE	= "Non-battle wand";
-	
-	private static final String TXT_FARAWELL	= "Good luck in your quest, %s!";
-	
 	private Wandmaker wandmaker;
 	private Item questItem;
 	
 	
 	public WndWandmaker( final Wandmaker wandmaker, final Item item ) {
 		
-		super( wandmaker, TXT_MESSAGE, TXT_BATTLE, TXT_NON_BATTLE );
+		super( wandmaker, Babylon.get().getFromResources("wnd_wandmaker_message"),
+				Babylon.get().getFromResources("wnd_wandmaker_battle"), Babylon.get().getFromResources("wnd_wandmaker_nonbattle") );
 		
 		this.wandmaker = wandmaker;
 		questItem = item;
@@ -60,7 +53,7 @@ public class WndWandmaker extends WndQuest {
 			Dungeon.level.drop( reward, wandmaker.pos ).sprite.drop();
 		}
 		
-		wandmaker.yell( Utils.format( TXT_FARAWELL, Dungeon.hero.className() ) );
+		wandmaker.yell( Utils.format( Babylon.get().getFromResources("wnd_wandmaker_farewell"), Dungeon.hero.className() ) );
 		wandmaker.destroy();
 		
 		wandmaker.sprite.die();

@@ -23,6 +23,7 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Button;
 import com.watabou.noosa.ui.Component;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -184,7 +185,7 @@ public class Toolbar extends Component {
 			}
 			
 			if (cell < 0 || cell > Level.LENGTH || (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell])) {
-				GameScene.show( new WndMessage( "You don't know what is there." ) ) ;
+				GameScene.show( new WndMessage(Babylon.get().getFromResources("toolbar_dontknow")) ) ;
 				return;
 			}
 			
@@ -224,7 +225,7 @@ public class Toolbar extends Component {
 		}	
 		@Override
 		public String prompt() {
-			return "Select a cell to examine";
+			return Babylon.get().getFromResources("toolbar_examine");
 		}
 	};
 	

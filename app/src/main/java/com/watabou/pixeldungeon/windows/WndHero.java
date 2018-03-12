@@ -26,6 +26,7 @@ import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -37,15 +38,6 @@ import com.watabou.pixeldungeon.ui.RedButton;
 import com.watabou.pixeldungeon.utils.Utils;
 
 public class WndHero extends WndTabbed {
-	
-	private static final String TXT_STATS	= "Stats";
-	private static final String TXT_BUFFS	= "Buffs";
-	
-	private static final String TXT_EXP		= "Experience";
-	private static final String TXT_STR		= "Strength";
-	private static final String TXT_HEALTH	= "Health";
-	private static final String TXT_GOLD	= "Gold Collected";
-	private static final String TXT_DEPTH	= "Maximum Depth";
 	
 	private static final int WIDTH		= 100;
 	private static final int TAB_WIDTH	= 40;
@@ -69,13 +61,13 @@ public class WndHero extends WndTabbed {
 		buffs = new BuffsTab();
 		add( buffs );
 		
-		add( new LabeledTab( TXT_STATS ) {
+		add( new LabeledTab( Babylon.get().getFromResources("wnd_hero_stats") ) {
 			protected void select( boolean value ) {
 				super.select( value );
 				stats.visible = stats.active = selected;
 			};
 		} );
-		add( new LabeledTab( TXT_BUFFS ) {
+		add( new LabeledTab( Babylon.get().getFromResources("wnd_hero_buffs") ) {
 			protected void select( boolean value ) {
 				super.select( value );
 				buffs.visible = buffs.active = selected;
@@ -92,10 +84,6 @@ public class WndHero extends WndTabbed {
 	
 	private class StatsTab extends Group {
 		
-		private static final String TXT_TITLE		= "Level %d %s";
-		private static final String TXT_CATALOGUS	= "Catalogus";
-		private static final String TXT_JOURNAL		= "Journal";
-		
 		private static final int GAP = 5;
 		
 		private float pos;
@@ -105,12 +93,12 @@ public class WndHero extends WndTabbed {
 			Hero hero = Dungeon.hero; 
 
 			BitmapText title = PixelScene.createText( 
-				Utils.format( TXT_TITLE, hero.lvl, hero.className() ).toUpperCase( Locale.ENGLISH ), 9 );
+				Utils.format( Babylon.get().getFromResources("wnd_hero_title"), hero.lvl, hero.className() ).toUpperCase( Locale.ENGLISH ), 9 );
 			title.hardlight( TITLE_COLOR );
 			title.measure();
 			add( title );
 			
-			RedButton btnCatalogus = new RedButton( TXT_CATALOGUS ) {
+			RedButton btnCatalogus = new RedButton( Babylon.get().getFromResources("wnd_hero_catologus") ) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -120,7 +108,7 @@ public class WndHero extends WndTabbed {
 			btnCatalogus.setRect( 0, title.y + title.height(), btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2 );
 			add( btnCatalogus );
 			
-			RedButton btnJournal = new RedButton( TXT_JOURNAL ) {
+			RedButton btnJournal = new RedButton( Babylon.get().getFromResources("wnd_hero_journal") ) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -134,14 +122,14 @@ public class WndHero extends WndTabbed {
 			
 			pos = btnCatalogus.bottom() + GAP;
 			
-			statSlot( TXT_STR, hero.STR() );
-			statSlot( TXT_HEALTH, hero.HP + "/" + hero.HT );
-			statSlot( TXT_EXP, hero.exp + "/" + hero.maxExp() );
+			statSlot( Babylon.get().getFromResources("wnd_hero_strength"), hero.STR() );
+			statSlot( Babylon.get().getFromResources("wnd_hero_health"), hero.HP + "/" + hero.HT );
+			statSlot( Babylon.get().getFromResources("wnd_hero_experience"), hero.exp + "/" + hero.maxExp() );
 
 			pos += GAP;
 			
-			statSlot( TXT_GOLD, Statistics.goldCollected );
-			statSlot( TXT_DEPTH, Statistics.deepestFloor );
+			statSlot( Babylon.get().getFromResources("wnd_hero_gold"), Statistics.goldCollected );
+			statSlot( Babylon.get().getFromResources("wnd_hero_depth"), Statistics.deepestFloor );
 			
 			pos += GAP;
 		}

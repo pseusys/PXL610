@@ -28,13 +28,13 @@ public class Challenges {
 	public static final int NO_SCROLLS			= 64;
 	
 	public static final String[] NAMES = {
-		"On diet",
-		"Faith is my armor",
-		"Pharmacophobia",
-		"Barren land",
-		"Swarm intelligence",
-		"Into darkness",
-		"Forbidden runes"
+			Babylon.get().getFromResources("challenges_nofood"),
+			Babylon.get().getFromResources("challenges_noarmor"),
+			Babylon.get().getFromResources("challenges_noheal"),
+			Babylon.get().getFromResources("challenges_noherbs"),
+			Babylon.get().getFromResources("challenges_swarm"),
+			Babylon.get().getFromResources("challenges_darkness"),
+			Babylon.get().getFromResources("challenges_noscrolls")
 	};
 	
 	public static final int[] MASKS = {

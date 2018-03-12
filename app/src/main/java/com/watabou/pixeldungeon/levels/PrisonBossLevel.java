@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.watabou.noosa.Scene;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Bones;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -351,7 +352,7 @@ public class PrisonBossLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Dark cold water.";
+			return Babylon.get().getFromResources("levels_prison_water");
 		default:
 			return super.tileName( tile );
 		}
@@ -361,7 +362,7 @@ public class PrisonBossLevel extends RegularLevel {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.EMPTY_DECO:
-			return "There are old blood stains on the floor.";
+			return Babylon.get().getFromResources("levels_prison_empty");
 		default:
 			return super.tileDesc( tile );
 		}

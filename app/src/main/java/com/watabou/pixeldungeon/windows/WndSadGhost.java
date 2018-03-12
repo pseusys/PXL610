@@ -26,15 +26,12 @@ import com.watabou.pixeldungeon.utils.GLog;
 
 public class WndSadGhost extends WndQuest {
 	
-	private static final String TXT_WEAPON	= "Ghost's weapon";
-	private static final String TXT_ARMOR	= "Ghost's armor";
-	
 	private Ghost ghost;
 	private Item questItem;
 	
 	public WndSadGhost( final Ghost ghost, final Item item, String text ) {
 		
-		super( ghost, text, TXT_WEAPON, TXT_ARMOR );
+		super( ghost, text, Babylon.get().getFromResources("wnd_ghost_weapon"), Babylon.get().getFromResources("wnd_ghost_armor") );
 		
 		this.ghost = ghost;
 		questItem = item;
@@ -54,7 +51,7 @@ public class WndSadGhost extends WndQuest {
 			Dungeon.level.drop( reward, ghost.pos ).sprite.drop();
 		}
 		
-		ghost.yell( "Farewell, adventurer!" );
+		ghost.yell(Babylon.get().getFromResources("wnd_ghost_farewell"));
 		ghost.die( null );
 		
 		Ghost.Quest.complete();

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
@@ -28,12 +29,10 @@ import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Firebloom extends Plant {
-
-	private static final String TXT_DESC = "When something touches a Firebloom, it bursts into flames.";
 	
 	{
 		image = 0;
-		plantName = "Firebloom";
+		plantName = Babylon.get().getFromResources("plants_firebloom");
 	}
 	
 	@Override
@@ -49,14 +48,14 @@ public class Firebloom extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_firebloom_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Firebloom";
+			plantName = Babylon.get().getFromResources("plants_firebloom");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_FIREBLOOM;
 			
 			plantClass = Firebloom.class;
@@ -65,7 +64,7 @@ public class Firebloom extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_firebloom_desc");
 		}
 	}
 }

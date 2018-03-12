@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.windows;
 
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
@@ -32,8 +33,6 @@ public class WndInfoCell extends Window {
 	private static final float GAP	= 2;
 	
 	private static final int WIDTH = 120;
-	
-	private static final String TXT_NOTHING	= "There is nothing here.";
 	
 	public WndInfoCell( int cell ) {
 		
@@ -73,7 +72,7 @@ public class WndInfoCell extends Window {
 			}
 		}
 		
-		info.text( desc.length() > 0 ? desc.toString() : TXT_NOTHING );
+		info.text( desc.length() > 0 ? desc.toString() : Babylon.get().getFromResources("wnd_cell_nothing") );
 		info.maxWidth = WIDTH;
 		info.measure();
 		info.x = titlebar.left();

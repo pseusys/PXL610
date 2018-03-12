@@ -2,6 +2,7 @@ package com.watabou.pixeldungeon.plants;
 
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
@@ -19,12 +20,9 @@ import com.watabou.pixeldungeon.utils.GLog;
 
 public class Rotberry extends Plant {
 	
-	private static final String TXT_DESC = 
-		"Berries of this shrub taste like sweet, sweet death.";
-	
 	{
 		image = 7;
-		plantName = "Rotberry";
+		plantName = Babylon.get().getFromResources("plants_rotberry");
 	}
 	
 	@Override
@@ -42,14 +40,14 @@ public class Rotberry extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_rotberry_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Rotberry";
+			plantName = Babylon.get().getFromResources("plants_rotberry");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_ROTBERRY;
 			
 			plantClass = Rotberry.class;
@@ -65,7 +63,7 @@ public class Rotberry extends Plant {
 						mob.beckon( Dungeon.hero.pos );
 					}
 					
-					GLog.w( "The seed emits a roar that echoes throughout the dungeon!" );
+					GLog.w(Babylon.get().getFromResources("plants_rotberry_seedroar"));
 					CellEmitter.center( Dungeon.hero.pos ).start( Speck.factory( Speck.SCREAM ), 0.3f, 3 );
 					Sample.INSTANCE.play( Assets.SND_CHALLENGE );
 				}
@@ -78,7 +76,7 @@ public class Rotberry extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_rotberry_desc");
 		}
 	}
 }

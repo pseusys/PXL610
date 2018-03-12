@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.windows;
 
 import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.items.Heap;
 import com.watabou.pixeldungeon.items.Heap.Type;
 import com.watabou.pixeldungeon.items.Item;
@@ -28,21 +29,6 @@ import com.watabou.pixeldungeon.ui.Window;
 import com.watabou.pixeldungeon.utils.Utils;
 
 public class WndInfoItem extends Window {
-	
-	private static final String TXT_CHEST			= "Chest";
-	private static final String TXT_LOCKED_CHEST	= "Locked chest";
-	private static final String TXT_CRYSTAL_CHEST	= "Crystal chest";
-	private static final String TXT_TOMB			= "Tomb";
-	private static final String TXT_SKELETON		= "Skeletal remains";
-	private static final String TXT_WONT_KNOW		= "You won't know what's inside until you open it!";
-	private static final String TXT_NEED_KEY		= TXT_WONT_KNOW + " But to open it you need a golden key.";
-	private static final String TXT_INSIDE			= "You can see %s inside, but to open the chest you need a golden key.";
-	private static final String TXT_OWNER	= 
-		"This ancient tomb may contain something useful, " +
-		"but its owner will most certainly object to checking.";
-	private static final String TXT_REMAINS	= 
-		"This is all that's left from one of your predecessors. " +
-		"Maybe it's worth checking for any valuables.";
 	
 	private static final float GAP	= 2;
 	
@@ -72,20 +58,20 @@ public class WndInfoItem extends Window {
 			String info;
 			
 			if (heap.type == Type.CHEST || heap.type == Type.MIMIC) {
-				title = TXT_CHEST;
-				info = TXT_WONT_KNOW;
+				title = Babylon.get().getFromResources("wnd_infoitem_chest");
+				info = Babylon.get().getFromResources("wnd_infoitem_wontknow");
 			} else if (heap.type == Type.TOMB) {
-				title = TXT_TOMB;
-				info = TXT_OWNER;
+				title = Babylon.get().getFromResources("wnd_infoitem_tomb");
+				info = Babylon.get().getFromResources("wnd_infoitem_owner");
 			} else if (heap.type == Type.SKELETON) {
-				title = TXT_SKELETON;
-				info = TXT_REMAINS;
+				title = Babylon.get().getFromResources("wnd_infoitem_skeletalremains");
+				info = Babylon.get().getFromResources("wnd_infoitem_remains");
 			} else if (heap.type == Type.CRYSTAL_CHEST) {
-				title = TXT_CRYSTAL_CHEST;
-				info = Utils.format( TXT_INSIDE, Utils.indefinite( heap.peek().name() ) );
+				title = Babylon.get().getFromResources("wnd_infoitem_crystalchest");
+				info = Utils.format( Babylon.get().getFromResources("wnd_infoitem_inside"), Utils.indefinite( heap.peek().name() ) );
 			} else {
-				title = TXT_LOCKED_CHEST;
-				info = TXT_NEED_KEY;
+				title = Babylon.get().getFromResources("wnd_infoitem_lockedchest");
+				info = Babylon.get().getFromResources("wnd_infoitem_needkey");
 			}
 			
 			fillFields( heap.image(), heap.glowing(), TITLE_COLOR, title, info );

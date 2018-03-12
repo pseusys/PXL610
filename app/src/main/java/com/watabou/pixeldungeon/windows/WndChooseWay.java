@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.windows;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.hero.HeroSubClass;
 import com.watabou.pixeldungeon.items.TomeOfMastery;
 import com.watabou.pixeldungeon.sprites.ItemSprite;
@@ -35,10 +36,7 @@ public class WndChooseWay extends Window {
 		
 		super();
 		
-		final String TXT_MASTERY	= "Which way will you follow?";
-		final String TXT_CANCEL		= "I'll decide later";
-		
-		float bottom = createCommonStuff( tome, way1.desc() + "\n\n" + way2.desc() + "\n\n" + TXT_MASTERY );
+		float bottom = createCommonStuff( tome, way1.desc() + "\n\n" + way2.desc() + "\n\n" + Babylon.get().getFromResources("wnd_chooseway_mastery") );
 		
 		RedButton btnWay1 = new RedButton( Utils.capitalize( way1.title() ) ) {
 			@Override
@@ -60,7 +58,7 @@ public class WndChooseWay extends Window {
 		btnWay2.setRect( btnWay1.right() + GAP, btnWay1.top(), btnWay1.width(), BTN_HEIGHT );
 		add( btnWay2 );
 		
-		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+		RedButton btnCancel = new RedButton( Babylon.get().getFromResources("wnd_chooseway_cancel") ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -76,14 +74,9 @@ public class WndChooseWay extends Window {
 		
 		super();
 		
-		final String TXT_REMASTERY	= "Do you want to respec into %s?";
+		float bottom = createCommonStuff( tome, way.desc() + "\n\n" + Utils.format( Babylon.get().getFromResources("wnd_chooseway_remastery"), Utils.indefinite( way.title() ) ) );
 		
-		final String TXT_OK		= "Yes, I want to respec";
-		final String TXT_CANCEL	= "Maybe later";
-		
-		float bottom = createCommonStuff( tome, way.desc() + "\n\n" + Utils.format( TXT_REMASTERY, Utils.indefinite( way.title() ) ) );
-		
-		RedButton btnWay = new RedButton( TXT_OK ) {
+		RedButton btnWay = new RedButton( Babylon.get().getFromResources("wnd_chooseway_yes") ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -93,7 +86,7 @@ public class WndChooseWay extends Window {
 		btnWay.setRect( 0, bottom + GAP, WIDTH, BTN_HEIGHT );
 		add( btnWay );
 		
-		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+		RedButton btnCancel = new RedButton( Babylon.get().getFromResources("wnd_chooseway_no") ) {
 			@Override
 			protected void onClick() {
 				hide();

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.items.weapon.Weapon;
 import com.watabou.pixeldungeon.scenes.GameScene;
@@ -36,16 +37,10 @@ import com.watabou.pixeldungeon.windows.WndBag;
 
 public class Weightstone extends Item {
 	
-	private static final String TXT_SELECT_WEAPON	= "Select a weapon to balance";
-	private static final String TXT_FAST			= "you balanced your %s to make it faster";
-	private static final String TXT_ACCURATE		= "you balanced your %s to make it more accurate";
-	
 	private static final float TIME_TO_APPLY = 2;
 	
-	private static final String AC_APPLY = "APPLY";
-	
 	{
-		name = "weightstone";
+		name = Babylon.get().getFromResources("weightstone_name");
 		image = ItemSpriteSheet.WEIGHT;
 		
 		stackable = true;
@@ -54,16 +49,16 @@ public class Weightstone extends Item {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		actions.add( AC_APPLY );
+		actions.add( Babylon.get().getFromResources("weightstone_acapply") );
 		return actions;
 	}
 	
 	@Override
 	public void execute( Hero hero, String action ) {
-		if (action == AC_APPLY) {
+		if (action == Babylon.get().getFromResources("weightstone_acapply")) {
 
 			curUser = hero;
-			GameScene.selectItem( itemSelector, WndBag.Mode.WEAPON, TXT_SELECT_WEAPON );
+			GameScene.selectItem( itemSelector, WndBag.Mode.WEAPON, Babylon.get().getFromResources("weightstone_selectweapon") );
 			
 		} else {
 			
@@ -89,10 +84,10 @@ public class Weightstone extends Item {
 		weapon.fix();
 		if (forSpeed) {
 			weapon.imbue = Weapon.Imbue.SPEED;
-			GLog.p( TXT_FAST, weapon.name() );
+			GLog.p( Babylon.get().getFromResources("weightstone_fast"), weapon.name() );
 		} else {
 			weapon.imbue = Weapon.Imbue.ACCURACY;
-			GLog.p( TXT_ACCURATE, weapon.name() );
+			GLog.p( Babylon.get().getFromResources("weightstone_accurate"), weapon.name() );
 		}
 		
 		curUser.sprite.operate( curUser.pos );
@@ -109,8 +104,7 @@ public class Weightstone extends Item {
 	
 	@Override
 	public String info() {
-		return
-			"Using a weightstone, you can balance your melee weapon to increase its speed or accuracy.";
+		return Babylon.get().getFromResources("weightstone_info");
 	}
 	
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -123,12 +117,6 @@ public class Weightstone extends Item {
 	};
 	
 	public class WndBalance extends Window {
-
-		private static final String TXT_CHOICE = "How would you like to balance your %s?";
-		
-		private static final String TXT_SPEED		= "For speed";
-		private static final String TXT_ACCURACY	= "For accuracy";
-		private static final String TXT_CANCEL		= "Never mind";
 		
 		private static final int WIDTH			= 120;
 		private static final int MARGIN 		= 2;
@@ -142,7 +130,7 @@ public class Weightstone extends Item {
 			titlebar.setRect( 0, 0, WIDTH, 0 );
 			add( titlebar );
 			
-			BitmapTextMultiline tfMesage = PixelScene.createMultiline( Utils.format( TXT_CHOICE, weapon.name() ), 8 );
+			BitmapTextMultiline tfMesage = PixelScene.createMultiline( Utils.format( Babylon.get().getFromResources("weightstone_wnd_choice"), weapon.name() ), 8 );
 			tfMesage.maxWidth = WIDTH - MARGIN * 2;
 			tfMesage.measure();
 			tfMesage.x = MARGIN;
@@ -152,7 +140,7 @@ public class Weightstone extends Item {
 			float pos = tfMesage.y + tfMesage.height();
 			
 			if (weapon.imbue != Weapon.Imbue.SPEED) {
-				RedButton btnSpeed = new RedButton( TXT_SPEED ) {
+				RedButton btnSpeed = new RedButton( Babylon.get().getFromResources("weightstone_wnd_speed") ) {
 					@Override
 					protected void onClick() {
 						hide();
@@ -166,7 +154,7 @@ public class Weightstone extends Item {
 			}
 			
 			if (weapon.imbue != Weapon.Imbue.ACCURACY) {
-				RedButton btnAccuracy = new RedButton( TXT_ACCURACY ) {
+				RedButton btnAccuracy = new RedButton( Babylon.get().getFromResources("weightstone_wnd_accuracy") ) {
 					@Override
 					protected void onClick() {
 						hide();
@@ -179,7 +167,7 @@ public class Weightstone extends Item {
 				pos = btnAccuracy.bottom();
 			}
 			
-			RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+			RedButton btnCancel = new RedButton( Babylon.get().getFromResources("weightstone_wnd_nevermind") ) {
 				@Override
 				protected void onClick() {
 					hide();

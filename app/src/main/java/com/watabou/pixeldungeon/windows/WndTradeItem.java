@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.windows;
 
 import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.Hero;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Shopkeeper;
@@ -40,16 +41,6 @@ public class WndTradeItem extends Window {
 	private static final int WIDTH		= 120;
 	private static final int BTN_HEIGHT	= 16;
 	
-	private static final String TXT_SALE		= "FOR SALE: %s - %dg";
-	private static final String TXT_BUY			= "Buy for %dg";
-	private static final String TXT_SELL		= "Sell for %dg";
-	private static final String TXT_SELL_1		= "Sell 1 for %dg";
-	private static final String TXT_SELL_ALL	= "Sell all for %dg";
-	private static final String TXT_CANCEL		= "Never mind";
-	
-	private static final String TXT_SOLD	= "You've sold your %s for %dg";
-	private static final String TXT_BOUGHT	= "You've bought %s for %dg";
-	
 	private WndBag owner;
 	
 	public WndTradeItem( final Item item, WndBag owner ) {
@@ -62,7 +53,7 @@ public class WndTradeItem extends Window {
 		
 		if (item.quantity() == 1) {
 			
-			RedButton btnSell = new RedButton( Utils.format( TXT_SELL, item.price() ) ) {
+			RedButton btnSell = new RedButton( Utils.format( Babylon.get().getFromResources("wnd_trade_sell"), item.price() ) ) {
 				@Override
 				protected void onClick() {
 					sell( item );
@@ -77,7 +68,7 @@ public class WndTradeItem extends Window {
 		} else {
 			
 			int priceAll= item.price();
-			RedButton btnSell1 = new RedButton( Utils.format( TXT_SELL_1, priceAll / item.quantity() ) ) {
+			RedButton btnSell1 = new RedButton( Utils.format( Babylon.get().getFromResources("wnd_trade_sellone"), priceAll / item.quantity() ) ) {
 				@Override
 				protected void onClick() {
 					sellOne( item );
@@ -86,7 +77,7 @@ public class WndTradeItem extends Window {
 			};
 			btnSell1.setRect( 0, pos + GAP, WIDTH, BTN_HEIGHT );
 			add( btnSell1 );
-			RedButton btnSellAll = new RedButton( Utils.format( TXT_SELL_ALL, priceAll ) ) {
+			RedButton btnSellAll = new RedButton( Utils.format( Babylon.get().getFromResources("wnd_trade_sellall"), priceAll ) ) {
 				@Override
 				protected void onClick() {
 					sell( item );
@@ -100,7 +91,7 @@ public class WndTradeItem extends Window {
 			
 		}
 		
-		RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+		RedButton btnCancel = new RedButton( Babylon.get().getFromResources("wnd_trade_cancel") ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -124,7 +115,7 @@ public class WndTradeItem extends Window {
 		
 		if (canBuy) {
 			
-			RedButton btnBuy = new RedButton( Utils.format( TXT_BUY, price ) ) {
+			RedButton btnBuy = new RedButton( Utils.format( Babylon.get().getFromResources("wnd_trade_buy"), price ) ) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -135,7 +126,7 @@ public class WndTradeItem extends Window {
 			btnBuy.enable( price <= Dungeon.gold );
 			add( btnBuy );
 			
-			RedButton btnCancel = new RedButton( TXT_CANCEL ) {
+			RedButton btnCancel = new RedButton( Babylon.get().getFromResources("wnd_trade_cancel") ) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -169,7 +160,7 @@ public class WndTradeItem extends Window {
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon( new ItemSprite( item.image(), item.glowing() ) );
 		titlebar.label( forSale ? 
-			Utils.format( TXT_SALE, item.toString(), price( item ) ) : 
+			Utils.format( Babylon.get().getFromResources("wnd_trade_sale"), item.toString(), price( item ) ) :
 			Utils.capitalize( item.toString() ) );
 		titlebar.setRect( 0, 0, WIDTH, 0 );
 		add( titlebar );
@@ -204,7 +195,7 @@ public class WndTradeItem extends Window {
 		int price = item.price();
 		
 		new Gold( price ).doPickUp( hero );
-		GLog.i( TXT_SOLD, item.name(), price );
+		GLog.i( Babylon.get().getFromResources("wnd_trade_sold"), item.name(), price );
 	}
 	
 	private void sellOne( Item item ) {
@@ -219,7 +210,7 @@ public class WndTradeItem extends Window {
 			int price = item.price();
 			
 			new Gold( price ).doPickUp( hero );
-			GLog.i( TXT_SOLD, item.name(), price );
+			GLog.i( Babylon.get().getFromResources("wnd_trade_sold"), item.name(), price );
 		}
 	}
 	
@@ -240,7 +231,7 @@ public class WndTradeItem extends Window {
 		int price = price( item );
 		Dungeon.gold -= price;
 		
-		GLog.i( TXT_BOUGHT, item.name(), price );
+		GLog.i( Babylon.get().getFromResources("wnd_trade_bought"), item.name(), price );
 		
 		if (!item.doPickUp( hero )) {
 			Dungeon.level.drop( item, heap.pos ).sprite.drop();

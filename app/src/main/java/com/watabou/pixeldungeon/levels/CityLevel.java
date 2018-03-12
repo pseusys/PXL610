@@ -21,6 +21,7 @@ import com.watabou.noosa.Scene;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.PixelParticle;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.mobs.npcs.Imp;
@@ -95,9 +96,9 @@ public class CityLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Suspiciously colored water";
+			return Babylon.get().getFromResources("levels_city_water");
 		case Terrain.HIGH_GRASS:
-			return "High blooming flowers";
+			return Babylon.get().getFromResources("levels_city_highgrass");
 		default:
 			return super.tileName( tile );
 		}
@@ -107,19 +108,19 @@ public class CityLevel extends RegularLevel {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.ENTRANCE:
-			return "A ramp leads up to the upper depth.";
+			return Babylon.get().getFromResources("levels_city_entrance_desc");
 		case Terrain.EXIT:
-			return "A ramp leads down to the lower depth.";
+			return Babylon.get().getFromResources("levels_city_exit_desc");
 		case Terrain.WALL_DECO:
 		case Terrain.EMPTY_DECO:
-			return "Several tiles are missing here.";
+			return Babylon.get().getFromResources("levels_city_walls_deco");
 		case Terrain.EMPTY_SP:
-			return "Thick carpet covers the floor.";
+			return Babylon.get().getFromResources("levels_city_empty");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return "The statue depicts some dwarf standing in a heroic stance.";
+			return Babylon.get().getFromResources("levels_city_statue");
 		case Terrain.BOOKSHELF:
-			return "The rows of books on different disciplines fill the bookshelf.";
+			return Babylon.get().getFromResources("levels_city_books");
 		default:
 			return super.tileDesc( tile );
 		}

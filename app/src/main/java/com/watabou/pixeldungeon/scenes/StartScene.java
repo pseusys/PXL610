@@ -30,6 +30,7 @@ import com.watabou.noosa.particles.BitmaskEmitter;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.ui.Button;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.GamesInProgress;
@@ -53,22 +54,6 @@ public class StartScene extends PixelScene {
 
 	private static final float BUTTON_HEIGHT	= 24;
 	private static final float GAP				= 2;
-	
-	private static final String TXT_LOAD	= "Load Game";
-	private static final String TXT_NEW		= "New Game";
-	
-	private static final String TXT_ERASE		= "Erase current game";
-	private static final String TXT_DPTH_LVL	= "Depth: %d, level: %d";
-	
-	private static final String TXT_REALLY	= "Do you really want to start new game?";
-	private static final String TXT_WARNING	= "Your current game progress will be erased.";
-	private static final String TXT_YES		= "Yes, start new game";
-	private static final String TXT_NO		= "No, return to main menu";
-	
-	private static final String TXT_UNLOCK	= "To unlock this character class, slay the 3rd boss with any other class";
-	
-	private static final String TXT_WIN_THE_GAME = 
-		"To unlock \"Challenges\", win the game with any character class.";
 	
 	private static final float WIDTH_P	= 116;
 	private static final float HEIGHT_P	= 220;
@@ -126,11 +111,12 @@ public class StartScene extends PixelScene {
 		buttonX = left;
 		buttonY = bottom - BUTTON_HEIGHT;
 		
-		btnNewGame = new GameButton( TXT_NEW ) {
+		btnNewGame = new GameButton( Babylon.get().getFromResources("startscene_new") ) {
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.check( curClass ) != null) {
-					StartScene.this.add( new WndOptions( TXT_REALLY, TXT_WARNING, TXT_YES, TXT_NO ) {
+					StartScene.this.add( new WndOptions( Babylon.get().getFromResources("startscene_really"), Babylon.get().getFromResources("startscene_warning"),
+							Babylon.get().getFromResources("startscene_yes"), Babylon.get().getFromResources("startscene_no") ) {
 						@Override
 						protected void onSelect( int index ) {
 							if (index == 0) {
@@ -146,7 +132,7 @@ public class StartScene extends PixelScene {
 		};
 		add( btnNewGame );
 
-		btnLoad = new GameButton( TXT_LOAD ) {	
+		btnLoad = new GameButton( Babylon.get().getFromResources("startscene_load") ) {
 			@Override
 			protected void onClick() {
 				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
@@ -204,7 +190,7 @@ public class StartScene extends PixelScene {
 		
 		if (!(huntressUnlocked = Badges.isUnlocked( Badges.Badge.BOSS_SLAIN_3 ))) {
 		
-			BitmapTextMultiline text = PixelScene.createMultiline( TXT_UNLOCK, 9 );
+			BitmapTextMultiline text = PixelScene.createMultiline( Babylon.get().getFromResources("startscene_unlock"), 9 );
 			text.maxWidth = (int)width;
 			text.measure();
 			
@@ -268,10 +254,10 @@ public class StartScene extends PixelScene {
 			if (info != null) {
 				
 				btnLoad.visible = true;
-				btnLoad.secondary( Utils.format( TXT_DPTH_LVL, info.depth, info.level ), info.challenges );
+				btnLoad.secondary( Utils.format( Babylon.get().getFromResources("startscene_depth"), info.depth, info.level ), info.challenges );
 				
 				btnNewGame.visible = true;
-				btnNewGame.secondary( TXT_ERASE, false );
+				btnNewGame.secondary( Babylon.get().getFromResources("startscene_erase"), false );
 				
 				float w = (Camera.main.width - GAP) / 2 - buttonX;
 				
@@ -515,7 +501,7 @@ public class StartScene extends PixelScene {
 					};
 				} );
 			} else {
-				StartScene.this.add( new WndMessage( TXT_WIN_THE_GAME ) );
+				StartScene.this.add( new WndMessage( Babylon.get().getFromResources("startscene_game") ) );
 			}
 		}
 		

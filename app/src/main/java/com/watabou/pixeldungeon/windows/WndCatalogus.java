@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ui.Component;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.PXL610;
 import com.watabou.pixeldungeon.items.Item;
 import com.watabou.pixeldungeon.items.potions.Potion;
@@ -44,9 +45,9 @@ public class WndCatalogus extends WndTabbed {
 	
 	private static final int TAB_WIDTH		= 50;
 	
-	private static final String TXT_POTIONS	= "Potions";
-	private static final String TXT_SCROLLS	= "Scrolls";
-	private static final String TXT_TITLE	= "Catalogus";
+	private static final String TXT_POTIONS	= Babylon.get().getFromResources("catologus_potions");
+	private static final String TXT_SCROLLS	= Babylon.get().getFromResources("catologus_scrolls");
+	private static final String TXT_TITLE	= Babylon.get().getFromResources("catologus");
 	
 	private BitmapText txtTitle;
 	private ScrollPane list;
@@ -65,7 +66,7 @@ public class WndCatalogus extends WndTabbed {
 			resize( WIDTH_P, HEIGHT_P );
 		}
 		
-		txtTitle = PixelScene.createText( TXT_TITLE, 9 );
+		txtTitle = PixelScene.createText( Babylon.get().getFromResources("catologus"), 9 );
 		txtTitle.hardlight( Window.TITLE_COLOR );
 		txtTitle.measure();
 		add( txtTitle );
@@ -86,14 +87,14 @@ public class WndCatalogus extends WndTabbed {
 		
 		boolean showPotions = WndCatalogus.showPotions;
 		Tab[] tabs = {
-			new LabeledTab( TXT_POTIONS ) {
+			new LabeledTab( Babylon.get().getFromResources("catologus_potions") ) {
 				protected void select( boolean value ) {
 					super.select( value );
 					WndCatalogus.showPotions = value;
 					updateList();
 				};
 			},
-			new LabeledTab( TXT_SCROLLS ) {
+			new LabeledTab( Babylon.get().getFromResources("catologus_scrolls" ) ) {
 				protected void select( boolean value ) {
 					super.select( value );
 					WndCatalogus.showPotions = !value;
@@ -111,7 +112,8 @@ public class WndCatalogus extends WndTabbed {
 	
 	private void updateList() {
 		
-		txtTitle.text( Utils.format( TXT_TITLE, showPotions ? TXT_POTIONS : TXT_SCROLLS ) );
+		txtTitle.text( Utils.format( Babylon.get().getFromResources("catologus"), showPotions ?
+				Babylon.get().getFromResources("catologus_potions") : Babylon.get().getFromResources("catologus_scrolls" ) ) );
 		txtTitle.measure();
 		txtTitle.x = PixelScene.align( PixelScene.uiCamera, (width - txtTitle.width()) / 2 );
 		

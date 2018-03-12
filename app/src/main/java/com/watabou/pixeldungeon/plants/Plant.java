@@ -95,10 +95,6 @@ public class Plant implements Bundlable {
 	
 	public static class Seed extends Item {
 		
-		public static final String AC_PLANT	= "PLANT";
-		
-		private static final String TXT_INFO = "Throw this seed to the place where you want to grow %s.\n\n%s";
-		
 		private static final float TIME_TO_PLANT = 1f;
 		
 		{
@@ -114,7 +110,7 @@ public class Plant implements Bundlable {
 		@Override
 		public ArrayList<String> actions( Hero hero ) {
 			ArrayList<String> actions = super.actions( hero );
-			actions.add( AC_PLANT );
+			actions.add( Babylon.get().getFromResources("plants_acplant") );
 			return actions;
 		}
 		
@@ -129,7 +125,7 @@ public class Plant implements Bundlable {
 		
 		@Override
 		public void execute( Hero hero, String action ) {
-			if (action.equals( AC_PLANT )) {
+			if (action.equals( Babylon.get().getFromResources("plants_acplant") )) {
 							
 				hero.spend( TIME_TO_PLANT );
 				hero.busy();
@@ -174,7 +170,7 @@ public class Plant implements Bundlable {
 		
 		@Override
 		public String info() { 
-			return String.format( TXT_INFO, Utils.indefinite( plantName ), desc() );
+			return String.format( Babylon.get().getFromResources("plants_seed"), Utils.indefinite( plantName ), desc() );
 		}
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -28,14 +29,10 @@ import com.watabou.pixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Fadeleaf extends Plant {
-
-	private static final String TXT_DESC = 
-		"Touching a Fadeleaf will teleport any creature " +
-		"to a random place on the current level.";
 	
 	{
 		image = 6;
-		plantName = "Fadeleaf";
+		plantName = Babylon.get().getFromResources("plants_fadeleaf");
 	}
 	
 	@Override
@@ -75,14 +72,14 @@ public class Fadeleaf extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_fadeleaf_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Fadeleaf";
+			plantName = Babylon.get().getFromResources("plants_fadeleaf");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_FADELEAF;
 			
 			plantClass = Fadeleaf.class;
@@ -91,7 +88,7 @@ public class Fadeleaf extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_fadeleaf_desc");
 		}
 	}
 }

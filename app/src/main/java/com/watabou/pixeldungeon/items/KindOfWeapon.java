@@ -28,8 +28,6 @@ import com.watabou.utils.Random;
 
 abstract public class KindOfWeapon extends EquipableItem {
 
-	private static final String TXT_EQUIP_CURSED	= "you wince as your grip involuntarily tightens around your %s";
-	
 	protected static final float TIME_TO_EQUIP = 1f;
 	
 	@Override
@@ -59,7 +57,7 @@ abstract public class KindOfWeapon extends EquipableItem {
 			cursedKnown = true;
 			if (cursed) {
 				equipCursed( hero );
-				GLog.n( TXT_EQUIP_CURSED, name() );
+				GLog.n( Babylon.get().getFromResources("weapon_cursed"), name() );
 			}
 			
 			hero.spendAndNext( TIME_TO_EQUIP );

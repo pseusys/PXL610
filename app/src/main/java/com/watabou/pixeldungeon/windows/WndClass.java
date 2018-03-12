@@ -20,6 +20,7 @@ package com.watabou.pixeldungeon.windows;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Group;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
 import com.watabou.pixeldungeon.actors.hero.HeroSubClass;
@@ -28,8 +29,6 @@ import com.watabou.pixeldungeon.ui.HighlightedText;
 import com.watabou.pixeldungeon.utils.Utils;
 
 public class WndClass extends WndTabbed {
-	
-	private static final String TXT_MASTERY	= "Mastery";
 	
 	private static final int WIDTH			= 110;
 	
@@ -57,7 +56,7 @@ public class WndClass extends WndTabbed {
 			tabMastery = new MasteryTab();
 			add( tabMastery );
 			
-			tab = new RankingTab( TXT_MASTERY, tabMastery );
+			tab = new RankingTab( Babylon.get().getFromResources("wnd_tabbed_mastery"), tabMastery );
 			tab.setSize( TAB_WIDTH, tabHeight() );
 			add( tab );
 			

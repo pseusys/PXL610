@@ -17,14 +17,13 @@
  */
 package com.watabou.pixeldungeon.windows;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.ui.Icons;
 
 public class WndError extends WndTitledMessage {
-
-	private static final String TXT_TITLE =  "ERROR";
 	
 	public WndError( String message ) {
-		super( Icons.WARNING.get(), TXT_TITLE, message );
+		super( Icons.WARNING.get(), Babylon.get().getFromResources("wnd_error"), message );
 	}
 
 }

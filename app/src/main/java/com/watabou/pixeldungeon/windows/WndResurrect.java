@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.windows;
 
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Game;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Rankings;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.hero.Hero;
@@ -30,10 +31,6 @@ import com.watabou.pixeldungeon.ui.RedButton;
 import com.watabou.pixeldungeon.ui.Window;
 
 public class WndResurrect extends Window {
-	
-	private static final String TXT_MESSAGE	= "You died, but you were given another chance to win this dungeon. Will you take it?";
-	private static final String TXT_YES		= "Yes, I will fight!";
-	private static final String TXT_NO		= "No, I give up";
 	
 	private static final int WIDTH		= 120;
 	private static final int BTN_HEIGHT	= 20;
@@ -55,13 +52,13 @@ public class WndResurrect extends Window {
 		titlebar.setRect( 0, 0, WIDTH, 0 );
 		add( titlebar );
 		
-		BitmapTextMultiline message = PixelScene.createMultiline( TXT_MESSAGE, 6 );
+		BitmapTextMultiline message = PixelScene.createMultiline( Babylon.get().getFromResources("wnd_resurrect_message"), 6 );
 		message.maxWidth = WIDTH;
 		message.measure();
 		message.y = titlebar.bottom() + GAP;
 		add( message );
 		
-		RedButton btnYes = new RedButton( TXT_YES ) {
+		RedButton btnYes = new RedButton( Babylon.get().getFromResources("wnd_resurrect_yes") ) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -75,7 +72,7 @@ public class WndResurrect extends Window {
 		btnYes.setRect( 0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT );
 		add( btnYes );
 		
-		RedButton btnNo = new RedButton( TXT_NO ) {
+		RedButton btnNo = new RedButton( Babylon.get().getFromResources("wnd_resurrect_no") ) {
 			@Override
 			protected void onClick() {
 				hide();

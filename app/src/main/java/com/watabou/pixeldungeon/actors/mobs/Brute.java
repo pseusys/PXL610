@@ -80,7 +80,7 @@ public class Brute extends Mob {
 			spend( TICK );
 			if (Dungeon.visible[pos]) {
 				GLog.w( Babylon.get().getFromResources("mob_brute_enraged"), name );
-				sprite.showStatus( CharSprite.NEGATIVE, "enraged" );
+				sprite.showStatus( CharSprite.NEGATIVE, Babylon.get().getFromResources("mob_brute_enraged_status"));
 			}
 		}
 	}

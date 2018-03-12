@@ -21,6 +21,7 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.ResultDescriptions;
@@ -40,17 +41,12 @@ import com.watabou.utils.Random;
 
 public class Chasm {
 	
-	private static final String TXT_CHASM	= "Chasm";
-	private static final String TXT_YES		= "Yes, I know what I'm doing";
-	private static final String TXT_NO		= "No, I changed my mind";
-	private static final String TXT_JUMP 	= 
-		"Do you really want to jump into the chasm? You can probably die.";
-	
 	public static boolean jumpConfirmed = false;
 	
 	public static void heroJump( final Hero hero ) {
 		GameScene.show( 
-			new WndOptions( TXT_CHASM, TXT_JUMP, TXT_YES, TXT_NO ) {
+			new WndOptions( Babylon.get().getFromResources("feature_chasm"), Babylon.get().getFromResources("feature_chasm_jump"),
+					Babylon.get().getFromResources("feature_chasm_yes"), Babylon.get().getFromResources("feature_chasm_no") ) {
 				@Override
 				protected void onSelect( int index ) {
 					if (index == 0) {
@@ -97,7 +93,7 @@ public class Chasm {
 				Badges.validateDeathFromFalling();
 				
 				Dungeon.fail( Utils.format( ResultDescriptions.FALL, Dungeon.depth ) );
-				GLog.n( "You fell to death..." );
+				GLog.n(Babylon.get().getFromResources("feature_chasm_death"));
 			}
 		} );
 	}

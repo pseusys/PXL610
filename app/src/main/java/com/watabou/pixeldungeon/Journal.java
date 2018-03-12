@@ -25,18 +25,18 @@ import com.watabou.utils.Bundle;
 public class Journal {
 
 	public static enum Feature {
-		WELL_OF_HEALTH			( "Well of Health" ),
-		WELL_OF_AWARENESS		( "Well of Awareness" ),
-		WELL_OF_TRANSMUTATION	( "Well of Transmutation" ),
-		SACRIFICIAL_FIRE		( "Sacrificial chamber" ),
-		ALCHEMY					( "Alchemy pot" ),
-		GARDEN					( "Garden" ),
-		STATUE					( "Animated statue" ),
+		WELL_OF_HEALTH			(Babylon.get().getFromResources("journal_well_health")),
+		WELL_OF_AWARENESS		(Babylon.get().getFromResources("journal_well_awareness")),
+		WELL_OF_TRANSMUTATION	(Babylon.get().getFromResources("journal_well_transmutation")),
+		SACRIFICIAL_FIRE		(Babylon.get().getFromResources("journal_sacrificial")),
+		ALCHEMY					(Babylon.get().getFromResources("journal_pot")),
+		GARDEN					(Babylon.get().getFromResources("journal_garden")),
+		STATUE					(Babylon.get().getFromResources("journal_statue")),
 		
-		GHOST					( "Sad ghost" ),
-		WANDMAKER				( "Old wandmaker" ),
-		TROLL					( "Troll blacksmith" ),
-		IMP						( "Ambitious imp" );
+		GHOST					(Babylon.get().getFromResources("journal_ghost")),
+		WANDMAKER				(Babylon.get().getFromResources("journal_wandmaker")),
+		TROLL					(Babylon.get().getFromResources("journal_blacksmith")),
+		IMP						(Babylon.get().getFromResources("journal_imp"));
 		
 		public String desc;
 		

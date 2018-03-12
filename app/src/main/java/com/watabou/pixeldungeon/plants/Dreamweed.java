@@ -17,6 +17,7 @@
  */
 package com.watabou.pixeldungeon.plants;
 
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.blobs.Blob;
 import com.watabou.pixeldungeon.actors.blobs.ConfusionGas;
@@ -25,13 +26,10 @@ import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Dreamweed extends Plant {
-
-	private static final String TXT_DESC = 
-		"Upon touching a Dreamweed it secretes a glittering cloud of confusing gas.";
 	
 	{
 		image = 3;
-		plantName = "Dreamweed";
+		plantName = Babylon.get().getFromResources("plants_dreamweed");
 	}
 	
 	@Override
@@ -45,14 +43,14 @@ public class Dreamweed extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_dreamweed_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Dreamweed";
+			plantName = Babylon.get().getFromResources("plants_dreamweed");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_DREAMWEED;
 			
 			plantClass = Dreamweed.class;
@@ -61,7 +59,7 @@ public class Dreamweed extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_dreamweed_desc");
 		}
 	}
 }

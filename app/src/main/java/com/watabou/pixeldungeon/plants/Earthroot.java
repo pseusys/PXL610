@@ -18,6 +18,7 @@
 package com.watabou.pixeldungeon.plants;
 
 import com.watabou.noosa.Camera;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Char;
 import com.watabou.pixeldungeon.actors.buffs.Buff;
@@ -29,14 +30,10 @@ import com.watabou.pixeldungeon.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
 public class Earthroot extends Plant {
-
-	private static final String TXT_DESC = 
-		"When a creature touches an Earthroot, its roots " +
-		"create a kind of natural armor around it.";
 	
 	{
 		image = 5;
-		plantName = "Earthroot";
+		plantName = Babylon.get().getFromResources("plants_earthroot");
 	}
 	
 	@Override
@@ -55,14 +52,14 @@ public class Earthroot extends Plant {
 	
 	@Override
 	public String desc() {
-		return TXT_DESC;
+		return Babylon.get().getFromResources("plants_earthroot_desc");
 	}
 	
 	public static class Seed extends Plant.Seed {
 		{
-			plantName = "Earthroot";
+			plantName = Babylon.get().getFromResources("plants_earthroot");
 			
-			name = "seed of " + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + plantName;
 			image = ItemSpriteSheet.SEED_EARTHROOT;
 			
 			plantClass = Earthroot.class;
@@ -71,7 +68,7 @@ public class Earthroot extends Plant {
 		
 		@Override
 		public String desc() {
-			return TXT_DESC;
+			return Babylon.get().getFromResources("plants_earthroot_desc");
 		}
 	}
 	
@@ -120,7 +117,7 @@ public class Earthroot extends Plant {
 		
 		@Override
 		public String toString() {
-			return "Herbal armor";
+			return Babylon.get().getFromResources("plants_earthroot_herbalarmor");
 		}
 		
 		private static final String POS		= "pos";

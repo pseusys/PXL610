@@ -25,6 +25,7 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -37,16 +38,6 @@ import com.watabou.pixeldungeon.windows.WndStory;
 public class InterlevelScene extends PixelScene {
 
 	private static final float TIME_TO_FADE = 0.3f;
-	
-	private static final String TXT_DESCENDING	= "Descending...";
-	private static final String TXT_ASCENDING	= "Ascending...";
-	private static final String TXT_LOADING		= "Loading...";
-	private static final String TXT_RESURRECTING= "Resurrecting...";
-	private static final String TXT_RETURNING	= "Returning...";
-	private static final String TXT_FALLING		= "Falling...";
-	
-	private static final String ERR_FILE_NOT_FOUND	= "File not found. For some reason.";
-	private static final String ERR_GENERIC			= "Something went wrong..."	;	
 	
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, NONE
@@ -78,22 +69,22 @@ public class InterlevelScene extends PixelScene {
 		String text = "";
 		switch (mode) {
 		case DESCEND:
-			text = TXT_DESCENDING;
+			text = Babylon.get().getFromResources("interlevelscene_descending");
 			break;
 		case ASCEND:
-			text = TXT_ASCENDING;
+			text = Babylon.get().getFromResources("interlevelscene_ascending");
 			break;
 		case CONTINUE:
-			text = TXT_LOADING;
+			text = Babylon.get().getFromResources("interlevelscene_loading");
 			break;
 		case RESURRECT:
-			text = TXT_RESURRECTING;
+			text = Babylon.get().getFromResources("interlevelscene_resurrecting");
 			break;
 		case RETURN:
-			text = TXT_RETURNING;
+			text = Babylon.get().getFromResources("interlevelscene_returning");
 			break;
 		case FALL:
-			text = TXT_FALLING;
+			text = Babylon.get().getFromResources("interlevelscene_falling");
 			break;
 		default:
 		}
@@ -143,11 +134,11 @@ public class InterlevelScene extends PixelScene {
 					
 				} catch (FileNotFoundException e) {
 					
-					error = ERR_FILE_NOT_FOUND;
+					error = Babylon.get().getFromResources("interlevelscene_err_filenotfound");
 					
 				} catch (Exception e ) {
 					
-					error = ERR_GENERIC;
+					error = Babylon.get().getFromResources("interlevelscene_err_other");
 					
 				}
 				

@@ -1,5 +1,7 @@
 package com.watabou.pixeldungeon;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -58,6 +60,10 @@ public class Babylon {
 
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
+
+        if ((current == 2) || (current == 3)) {
+            Toast.makeText(PXL610.instance.getApplicationContext(), "This language's coming soon", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public String getFromResources(String tag) {

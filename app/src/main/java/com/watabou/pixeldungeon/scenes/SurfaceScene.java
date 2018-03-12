@@ -36,6 +36,7 @@ import com.watabou.noosa.TouchArea;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.audio.Music;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Badges;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
@@ -157,7 +158,7 @@ public class SurfaceScene extends PixelScene {
 			frame.hardlight( 0xDDEEFF );
 		}
 		
-		RedButton gameOver = new RedButton( "Game Over" ) {
+		RedButton gameOver = new RedButton(Babylon.get().getFromResources("surfacescene_gameover")) {
 			protected void onClick() {
 				Game.switchScene( TitleScene.class );
 			}

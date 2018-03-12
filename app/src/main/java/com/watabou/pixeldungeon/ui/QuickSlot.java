@@ -19,6 +19,7 @@ package com.watabou.pixeldungeon.ui;
 
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Button;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.DungeonTilemap;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -33,8 +34,6 @@ import com.watabou.pixeldungeon.windows.WndBag;
 import com.watabou.utils.Bundle;
 
 public class QuickSlot extends Button implements WndBag.Listener {
-
-	private static final String TXT_SELECT_ITEM = "Select an item for the quickslot";
 	
 	private static QuickSlot primary;
 	private static QuickSlot secondary;
@@ -123,12 +122,12 @@ public class QuickSlot extends Button implements WndBag.Listener {
 	
 	@Override
 	protected void onClick() {
-		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, TXT_SELECT_ITEM );
+		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, Babylon.get().getFromResources("quickslot_selectitem") );
 	}
 	
 	@Override
 	protected boolean onLongClick() {
-		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, TXT_SELECT_ITEM );
+		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, Babylon.get().getFromResources("quickslot_selectitem") );
 		return true;
 	}
 	

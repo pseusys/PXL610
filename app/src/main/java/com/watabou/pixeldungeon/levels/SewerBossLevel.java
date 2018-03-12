@@ -22,6 +22,7 @@ import java.util.List;
 
 import com.watabou.noosa.Scene;
 import com.watabou.pixeldungeon.Assets;
+import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Bones;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.actors.Actor;
@@ -239,7 +240,7 @@ public class SewerBossLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return "Murky water";
+			return Babylon.get().getFromResources("levels_sewer_water");
 		default:
 			return super.tileName( tile );
 		}
@@ -249,7 +250,7 @@ public class SewerBossLevel extends RegularLevel {
 	public String tileDesc( int tile ) {
 		switch (tile) {
 		case Terrain.EMPTY_DECO:
-			return "Wet yellowish moss covers the floor.";
+			return Babylon.get().getFromResources("levels_sewer_empty");
 		default:
 			return super.tileDesc( tile );
 		}
