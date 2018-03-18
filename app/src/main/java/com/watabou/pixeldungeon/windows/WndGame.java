@@ -44,17 +44,17 @@ public class WndGame extends Window {
 		super();
 
 		addButtons(
-				new RedButton( "save game" ) {
+				new RedButton(Babylon.get().getFromResources("save_button_save")) {
 					@Override
 					protected void onClick() {
 						hide();
-						GameScene.show( new WndSaver("Save game", true, Dungeon.hero.heroClass, true) );
+						GameScene.show( new WndSaver(Babylon.get().getFromResources("save_title_save"), true, Dungeon.hero.heroClass, true) );
 					}
-				}, new RedButton( "load game" ) {
+				}, new RedButton(Babylon.get().getFromResources("save_buttton_load")) {
 					@Override
 					protected void onClick() {
 						hide();
-						GameScene.show( new WndSaver("Load game", false, Dungeon.hero.heroClass, true) );
+						GameScene.show( new WndSaver(Babylon.get().getFromResources("save_title_load"), false, Dungeon.hero.heroClass, true) );
 					}
 				}
 		);

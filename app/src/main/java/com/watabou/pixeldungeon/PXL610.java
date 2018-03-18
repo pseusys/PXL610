@@ -140,6 +140,8 @@ public class PXL610 extends Game {
 			Babylon.get().updateLocale();
 		}
 
+		Babylon.get().load();
+
 		if (Preferences.INSTANCE.getBoolean( Preferences.KEY_LANDSCAPE, false ) != landscape) {
 			landscape( !landscape );
 		}

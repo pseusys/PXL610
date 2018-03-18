@@ -1,9 +1,15 @@
 package com.watabou.pixeldungeon;
 
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.watabou.pixeldungeon.utils.GLog;
+
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -11,8 +17,12 @@ import java.util.ResourceBundle;
  */
 
 public class Babylon {
+
+    private static final String RESOURCE_NAME = "strings";
+
     private static Babylon instance;
 
+    private HashMap<String, String> resources;
     private ArrayList<Locale> localisations = new ArrayList<>();
     private Locale inUse;
 
@@ -34,6 +44,17 @@ public class Babylon {
         for (int i = 0; i < localisations.size(); i++) {
             if (lock.equals(localisations.get(i).getLanguage())) inUse = localisations.get(i);
         }
+
+        load();
+    }
+
+    public void load() {
+        resources = new HashMap<>();
+        Enumeration<String> keys = ResourceBundle.getBundle(RESOURCE_NAME).getKeys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            resources.put(key, ResourceBundle.getBundle(RESOURCE_NAME).getString(key));
+        }
     }
 
     public void updateLocale() {
@@ -46,6 +67,7 @@ public class Babylon {
             PXL610.localisation(Locale.ENGLISH.getLanguage());
             inUse = Locale.ENGLISH;
         }
+        GLog.i("resources loaded");
     }
 
     public void changeLocale(int loc) {
@@ -67,7 +89,7 @@ public class Babylon {
     }
 
     public String getFromResources(String tag) {
-        return ResourceBundle.getBundle("strings", inUse).getString(tag);
+        return resources.get(tag);
     }
 
     public String getLanguageName() {

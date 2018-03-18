@@ -5,18 +5,14 @@ import com.watabou.noosa.Game;
 import com.watabou.pixeldungeon.Babylon;
 import com.watabou.pixeldungeon.Dungeon;
 import com.watabou.pixeldungeon.GamesInProgress;
-import com.watabou.pixeldungeon.Statistics;
 import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.actors.hero.HeroClass;
-import com.watabou.pixeldungeon.levels.Level;
 import com.watabou.pixeldungeon.scenes.InterlevelScene;
 import com.watabou.pixeldungeon.scenes.PixelScene;
 import com.watabou.pixeldungeon.scenes.StartScene;
-import com.watabou.pixeldungeon.ui.GameLog;
 import com.watabou.pixeldungeon.ui.Window;
 import com.watabou.pixeldungeon.utils.Utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,17 +23,17 @@ import java.nio.channels.FileChannel;
  */
 
 public class WndSaver extends Window {
-    public static final String WR = "warrior_saveslot%d.dat";
-    public static final String WR_D = "warrior_saveslot%s_depthcopy%d.dat";
+    private static final String WR = "warrior_saveslot%d.dat";
+    private static final String WR_D = "warrior_saveslot%s_depthcopy%d.dat";
 
-    public static final String MG = "mage_saveslot%d.dat";
-    public static final String MG_D = "mage_saveslot%s_depthcopy%d.dat";
+    private static final String MG = "mage_saveslot%d.dat";
+    private static final String MG_D = "mage_saveslot%s_depthcopy%d.dat";
 
-    public static final String RG = "rogue_saveslot%d.dat";
-    public static final String RG_D = "rogue_saveslot%s_depthcopy%d.dat";
+    private static final String RG = "rogue_saveslot%d.dat";
+    private static final String RG_D = "rogue_saveslot%s_depthcopy%d.dat";
 
-    public static final String HN = "huntress_saveslot%d.dat";
-    public static final String HN_D = "huntress_saveslot%s_depthcopy%d.dat";
+    private static final String HN = "huntress_saveslot%d.dat";
+    private static final String HN_D = "huntress_saveslot%s_depthcopy%d.dat";
 
     private static final int WIDTH		= 112;
     private static final int BTN_HEIGHT	= 20;
@@ -93,8 +89,8 @@ public class WndSaver extends Window {
         tfTitle.measure();
         add( tfTitle );
 
-        if (inGame) {
-            BitmapTextMultiline tfMesage = PixelScene.createMultiline("NB! Your current progress will be lost!", 8);
+        if (inGame && !toSave) {
+            BitmapTextMultiline tfMesage = PixelScene.createMultiline(Babylon.get().getFromResources("save_notabene"), 8);
             tfMesage.maxWidth = WIDTH - GAP * 2;
             tfMesage.measure();
             tfMesage.x = GAP;
@@ -107,17 +103,17 @@ public class WndSaver extends Window {
         }
 
 
-        lastPlayed = new StartScene.GameButton("Autosave - your last game") {
+        final GamesInProgress.Info asinfo = GamesInProgress.check(Dungeon.gameFile(cl));
+        lastPlayed = new StartScene.GameButton(Babylon.get().getFromResources("save_autosave")) {
             @Override
             protected void onClick() {
                 hide();
                 InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
                 InterlevelScene.loadingFileName = Dungeon.gameFile(cl);
-                InterlevelScene.loadingFilePathName = Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth );
+                InterlevelScene.loadingFilePathName = Utils.format( Dungeon.depthFile( StartScene.curClass ), ((asinfo != null) ? asinfo.depth : 1) );
                 Game.switchScene( InterlevelScene.class );
             }
         };
-        GamesInProgress.Info asinfo = GamesInProgress.check(Dungeon.gameFile(cl));
         if (asinfo != null) {
             lastPlayed.secondary( Utils.format( Babylon.get().getFromResources("startscene_depth"), asinfo.depth, asinfo.level ), asinfo.challenges );
         } else {
@@ -136,7 +132,7 @@ public class WndSaver extends Window {
         for (int i = 0; i < 3; i++) {
             final int index = i;
 
-            StartScene.GameButton slot = new StartScene.GameButton("Game save slot " + index) {
+            StartScene.GameButton slot = new StartScene.GameButton(Babylon.get().getFromResources("save_slot") + index) {
                 @Override
                 protected void onClick() {
                     if (!toSave) {
@@ -155,7 +151,7 @@ public class WndSaver extends Window {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                        add( new WndError( "can not be loaded" ) {
+                        add( new WndError(Babylon.get().getFromResources("save_err_notsaved")) {
                             public void onBackPressed() {
                                 super.onBackPressed();
                                 this.hide();
@@ -177,7 +173,7 @@ public class WndSaver extends Window {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            add( new WndError( "can not be saved" ) {
+                            add( new WndError(Babylon.get().getFromResources("save_err_notloaded")) {
                                 public void onBackPressed() {
                                     super.onBackPressed();
                                     this.hide();
