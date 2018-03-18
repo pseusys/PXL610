@@ -92,7 +92,7 @@ public class WndSaver extends Window {
         add(lastPlayed);
         if (toSave) {
             lastPlayed.enable(false);
-            //lastPlayed.visible = false; //TODO: resize, make invisible;
+            //lastPlayed.visible = false; //TODO: resize, make invisible; //
         }
         pos += BTN_HEIGHT + GAP;
 
