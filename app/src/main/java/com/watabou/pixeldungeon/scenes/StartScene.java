@@ -48,6 +48,7 @@ import com.watabou.pixeldungeon.windows.WndChallenges;
 import com.watabou.pixeldungeon.windows.WndClass;
 import com.watabou.pixeldungeon.windows.WndMessage;
 import com.watabou.pixeldungeon.windows.WndOptions;
+import com.watabou.pixeldungeon.windows.WndSaver;
 import com.watabou.utils.Callback;
 
 public class StartScene extends PixelScene {
@@ -114,7 +115,7 @@ public class StartScene extends PixelScene {
 		btnNewGame = new GameButton( Babylon.get().getFromResources("startscene_new") ) {
 			@Override
 			protected void onClick() {
-				if (GamesInProgress.check( curClass ) != null) {
+				if (Game.instance.getFileStreamPath(Dungeon.gameFile(curClass)).exists()) {
 					StartScene.this.add( new WndOptions( Babylon.get().getFromResources("startscene_really"), Babylon.get().getFromResources("startscene_warning"),
 							Babylon.get().getFromResources("startscene_yes"), Babylon.get().getFromResources("startscene_no") ) {
 						@Override
@@ -135,8 +136,7 @@ public class StartScene extends PixelScene {
 		btnLoad = new GameButton( Babylon.get().getFromResources("startscene_load") ) {
 			@Override
 			protected void onClick() {
-				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-				Game.switchScene( InterlevelScene.class );
+				StartScene.this.add(new WndSaver("Restore game", false, curClass, false));
 			}
 		};
 		add( btnLoad );	
@@ -249,12 +249,11 @@ public class StartScene extends PixelScene {
 		if (cl != HeroClass.HUNTRESS || huntressUnlocked) {
 		
 			unlock.visible = false;
-			
-			GamesInProgress.Info info = GamesInProgress.check( curClass );
-			if (info != null) {
+
+			if (Game.instance.getFileStreamPath(Dungeon.gameFile(cl)).exists()) {
 				
 				btnLoad.visible = true;
-				btnLoad.secondary( Utils.format( Babylon.get().getFromResources("startscene_depth"), info.depth, info.level ), info.challenges );
+				btnLoad.secondary( null, false );
 				
 				btnNewGame.visible = true;
 				btnNewGame.secondary( Babylon.get().getFromResources("startscene_erase"), false );
@@ -301,7 +300,7 @@ public class StartScene extends PixelScene {
 		PXL610.switchNoFade( TitleScene.class );
 	}
 	
-	private static class GameButton extends RedButton {
+	public static class GameButton extends RedButton {
 		
 		private static final int SECONDARY_COLOR_N	= 0xCACFC2;
 		private static final int SECONDARY_COLOR_H	= 0xFFFF88;

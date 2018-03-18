@@ -286,9 +286,10 @@ public class Item implements Bundlable {
 	}
 	
 	public void use() {
+		GLog.w(String.valueOf(durability));
 		if (level > 0 && !isBroken()) {
 			int threshold = (int)(maxDurability() * DURABILITY_WARNING_LEVEL);
-			if (durability-- >= threshold && threshold > durability && levelKnown) {
+			if ((durability - 1) >= threshold && threshold > durability && levelKnown) {
 				GLog.w( Babylon.get().getFromResources("item_gonnabreak"), name() );
 			}
 			if (isBroken()) {

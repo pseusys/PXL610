@@ -371,7 +371,7 @@ public class Dungeon {
 			bundle.put( DEPTH, depth );
 			
 			for (int d : droppedItems.keyArray()) {
-				bundle.put( String.format( DROPPED, d ), droppedItems.get( d ) );
+				bundle.put( String.format(Babylon.get().getCurrent(), DROPPED, d ), droppedItems.get( d ) );
 			}
 			
 			bundle.put( POS, potionOfStrength );
@@ -445,9 +445,9 @@ public class Dungeon {
 		}
 	}
 	
-	public static void loadGame( HeroClass cl ) throws IOException {
+	/*public static void loadGame( HeroClass cl ) throws IOException {
 		loadGame( gameFile( cl ), true );
-	}
+	}*/
 	
 	public static void loadGame( String fileName ) throws IOException {
 		loadGame( fileName, false );

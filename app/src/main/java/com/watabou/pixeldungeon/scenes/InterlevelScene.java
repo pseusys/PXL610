@@ -43,6 +43,7 @@ public class InterlevelScene extends PixelScene {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, NONE
 	};
 	public static Mode mode;
+	public static String loadingFileName; // added by EK DORN ent.
 	
 	public static int returnDepth;
 	public static int returnPos;
@@ -114,7 +115,7 @@ public class InterlevelScene extends PixelScene {
 						ascend();
 						break;
 					case CONTINUE:
-						restore();
+						restore(loadingFileName);
 						break;
 					case RESURRECT:
 						resurrect();
@@ -253,13 +254,13 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.switchLevel( level, Level.resizingNeeded ? level.adjustPos( returnPos ) : returnPos );
 	}
 	
-	private void restore() throws Exception {
+	private void restore(String filename) throws Exception {
 		
 		Actor.fixTime();
 		
 		GameLog.wipe();
 		
-		Dungeon.loadGame( StartScene.curClass );
+		Dungeon.loadGame( filename, true );
 		if (Dungeon.depth == -1) {
 			Dungeon.depth = Statistics.deepestFloor;
 			Dungeon.switchLevel( Dungeon.loadLevel( StartScene.curClass ), -1 );

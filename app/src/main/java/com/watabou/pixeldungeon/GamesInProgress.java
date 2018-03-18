@@ -26,7 +26,7 @@ public class GamesInProgress {
 
 	private static HashMap<HeroClass, Info> state = new HashMap<HeroClass, Info>();
 	
-	public static Info check( HeroClass cl ) {
+	/*public static Info check( HeroClass cl ) {
 		
 		if (state.containsKey( cl )) {
 			
@@ -49,6 +49,23 @@ public class GamesInProgress {
 			return info;
 			
 		}
+	}*/
+
+	public static Info check( String filename ) {
+
+		Info info;
+		try {
+
+			Bundle bundle = Dungeon.gameBundle( filename );
+			info = new Info();
+			Dungeon.preview( info, bundle );
+
+		} catch (Exception e) {
+			info = null;
+		}
+
+		return info;
+
 	}
 	
 	public static void set( HeroClass cl, int depth, int level, boolean challenges ) {

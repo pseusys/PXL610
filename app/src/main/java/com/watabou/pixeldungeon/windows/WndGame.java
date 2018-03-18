@@ -42,6 +42,22 @@ public class WndGame extends Window {
 	public WndGame() {
 		
 		super();
+
+		addButtons(
+				new RedButton( "save game" ) {
+					@Override
+					protected void onClick() {
+						hide();
+						GameScene.show( new WndSaver("Save game", true, Dungeon.hero.heroClass, true) );
+					}
+				}, new RedButton( "load game" ) {
+					@Override
+					protected void onClick() {
+						hide();
+						GameScene.show( new WndSaver("Load game", false, Dungeon.hero.heroClass, true) );
+					}
+				}
+		);
 		
 		addButton( new RedButton( Babylon.get().getFromResources("wnd_game_settings") ) {
 			@Override
