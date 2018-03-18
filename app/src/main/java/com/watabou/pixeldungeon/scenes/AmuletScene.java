@@ -28,6 +28,7 @@ import com.watabou.pixeldungeon.ResultDescriptions;
 import com.watabou.pixeldungeon.effects.Flare;
 import com.watabou.pixeldungeon.effects.Speck;
 import com.watabou.pixeldungeon.ui.RedButton;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.utils.Random;
 
 public class AmuletScene extends PixelScene {
@@ -107,6 +108,8 @@ public class AmuletScene extends PixelScene {
 	@Override
 	protected void onBackPressed() {
 		InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+		InterlevelScene.loadingFileName = Dungeon.gameFile(Dungeon.hero.heroClass);
+		InterlevelScene.loadingFilePathName = Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth );
 		Game.switchScene( InterlevelScene.class );
 	}
 	

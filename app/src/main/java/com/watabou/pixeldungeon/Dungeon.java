@@ -347,7 +347,7 @@ public class Dungeon {
 		}
 	}
 	
-	private static String depthFile( HeroClass cl ) {
+	public static String depthFile( HeroClass cl ) {
 		switch (cl) {
 		case WARRIOR:
 			return WR_DEPTH_FILE;
@@ -422,7 +422,7 @@ public class Dungeon {
 	public static void saveLevel() throws IOException {
 		Bundle bundle = new Bundle();
 		bundle.put( LEVEL, level );
-		
+
 		OutputStream output = Game.instance.openFileOutput( Utils.format( depthFile( hero.heroClass ), depth ), Game.MODE_PRIVATE );
 		Bundle.write( bundle, output );
 		output.close();
@@ -536,7 +536,7 @@ public class Dungeon {
 		}
 	}
 	
-	public static Level loadLevel( HeroClass cl ) throws IOException {
+	/*public static Level loadLevel( HeroClass cl ) throws IOException {
 		
 		Dungeon.level = null;
 		Actor.clear();
@@ -545,6 +545,18 @@ public class Dungeon {
 		Bundle bundle = Bundle.read( input );
 		input.close();
 		
+		return (Level)bundle.get( "level" );
+	}*/
+
+	public static Level loadLevel( String filename ) throws IOException {
+
+		Dungeon.level = null;
+		Actor.clear();
+
+		InputStream input = Game.instance.openFileInput( filename ) ;
+		Bundle bundle = Bundle.read( input );
+		input.close();
+
 		return (Level)bundle.get( "level" );
 	}
 	

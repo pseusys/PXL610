@@ -32,6 +32,7 @@ import com.watabou.pixeldungeon.actors.Actor;
 import com.watabou.pixeldungeon.items.Generator;
 import com.watabou.pixeldungeon.levels.Level;
 import com.watabou.pixeldungeon.ui.GameLog;
+import com.watabou.pixeldungeon.utils.Utils;
 import com.watabou.pixeldungeon.windows.WndError;
 import com.watabou.pixeldungeon.windows.WndStory;
 
@@ -44,6 +45,7 @@ public class InterlevelScene extends PixelScene {
 	};
 	public static Mode mode;
 	public static String loadingFileName; // added by EK DORN ent.
+	public static String loadingFilePathName; // added by EK DORN ent.
 	
 	public static int returnDepth;
 	public static int returnPos;
@@ -115,7 +117,7 @@ public class InterlevelScene extends PixelScene {
 						ascend();
 						break;
 					case CONTINUE:
-						restore(loadingFileName);
+						restore(loadingFileName, loadingFilePathName);
 						break;
 					case RESURRECT:
 						resurrect();
@@ -215,7 +217,7 @@ public class InterlevelScene extends PixelScene {
 			level = Dungeon.newLevel();
 		} else {
 			Dungeon.depth++;
-			level = Dungeon.loadLevel( Dungeon.hero.heroClass );
+			level = Dungeon.loadLevel( Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth ) );
 		}
 		Dungeon.switchLevel( level, level.entrance );
 	}
@@ -230,7 +232,7 @@ public class InterlevelScene extends PixelScene {
 			level = Dungeon.newLevel();
 		} else {
 			Dungeon.depth++;
-			level = Dungeon.loadLevel( Dungeon.hero.heroClass );
+			level = Dungeon.loadLevel( Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth ) );
 		}
 		Dungeon.switchLevel( level, fallIntoPit ? level.pitCell() : level.randomRespawnCell() );
 	}
@@ -240,7 +242,7 @@ public class InterlevelScene extends PixelScene {
 		
 		Dungeon.saveLevel();
 		Dungeon.depth--;
-		Level level = Dungeon.loadLevel( Dungeon.hero.heroClass );
+		Level level = Dungeon.loadLevel( Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth ) );
 		Dungeon.switchLevel( level, level.exit );
 	}
 	
@@ -250,11 +252,11 @@ public class InterlevelScene extends PixelScene {
 		
 		Dungeon.saveLevel();
 		Dungeon.depth = returnDepth;
-		Level level = Dungeon.loadLevel( Dungeon.hero.heroClass );
+		Level level = Dungeon.loadLevel( Utils.format( Dungeon.depthFile( Dungeon.hero.heroClass ), Dungeon.depth ) );
 		Dungeon.switchLevel( level, Level.resizingNeeded ? level.adjustPos( returnPos ) : returnPos );
 	}
 	
-	private void restore(String filename) throws Exception {
+	private void restore(String filename, String loadingFilePathName) throws Exception {
 		
 		Actor.fixTime();
 		
@@ -263,9 +265,9 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.loadGame( filename, true );
 		if (Dungeon.depth == -1) {
 			Dungeon.depth = Statistics.deepestFloor;
-			Dungeon.switchLevel( Dungeon.loadLevel( StartScene.curClass ), -1 );
+			Dungeon.switchLevel( Dungeon.loadLevel( loadingFilePathName ), -1 );
 		} else {
-			Level level = Dungeon.loadLevel( StartScene.curClass );
+			Level level = Dungeon.loadLevel( loadingFilePathName );
 			Dungeon.switchLevel( level, Level.resizingNeeded ? level.adjustPos( Dungeon.hero.pos ) : Dungeon.hero.pos );
 		}
 	}
