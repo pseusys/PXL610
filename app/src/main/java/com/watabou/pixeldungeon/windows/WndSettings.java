@@ -98,7 +98,7 @@ public class WndSettings extends Window {
 				@Override
 				protected void onClick() {
 					Babylon.get().changeLocale(1);
-					WndSettings.this.destroy();
+					WndSettings.this.hide();
 					((TitleScene) PXL610.scene()).localUpdate();
 				}
 			};

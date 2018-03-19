@@ -4,12 +4,22 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.watabou.pixeldungeon.utils.GLog;
+import com.watabou.pixeldungeon.windows.WndError;
+import com.watabou.pixeldungeon.windows.WndSaver;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
@@ -50,10 +60,29 @@ public class Babylon {
 
     public void load() {
         resources = new HashMap<>();
-        Enumeration<String> keys = ResourceBundle.getBundle(RESOURCE_NAME).getKeys();
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
-            resources.put(key, ResourceBundle.getBundle(RESOURCE_NAME).getString(key));
+        ResourceBundle bundle = ResourceBundle.getBundle(RESOURCE_NAME, inUse);
+        Enumeration<String> keys = bundle.getKeys();
+
+        try {
+            while (keys.hasMoreElements()) {
+                String key = keys.nextElement();
+                String value = bundle.getString(key);
+
+                //System.out.println("language = " + bundle.getString("language_name"));
+
+                resources.put(key, value);
+                if (key.equals("language_name")) {
+                    System.out.println(value);
+                    System.out.println(new String(value.getBytes("ISO-8859-1"), "UTF-8"));
+                    System.out.println(new String(value.getBytes(), "UTF-8"));
+                    System.out.println(Arrays.toString(value.getBytes("UTF-8")));
+                }
+                /*String key = keys.nextElement();
+                resources.put(key, new String(bundle.getString(key).getBytes("ISO-8859-1"), "UTF-8"));*/
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("lol not loaded");
         }
     }
 
@@ -83,9 +112,10 @@ public class Babylon {
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
 
-        if ((current == 2) || (current == 3)) {
-            Toast.makeText(PXL610.instance.getApplicationContext(), "This language's coming soon", Toast.LENGTH_SHORT).show();
-        }
+        load();
+        //if ((current == 2) || (current == 3)) {
+            //
+        //}
     }
 
     public String getFromResources(String tag) {
