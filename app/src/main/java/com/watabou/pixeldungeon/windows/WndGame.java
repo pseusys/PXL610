@@ -43,21 +43,33 @@ public class WndGame extends Window {
 		
 		super();
 
-		addButtons(
-				new RedButton(Babylon.get().getFromResources("save_button_save")) {
-					@Override
-					protected void onClick() {
-						hide();
-						GameScene.show( new WndSaver(Babylon.get().getFromResources("save_title_save"), true, Dungeon.hero.heroClass, true) );
+		if (Dungeon.hero.isAlive()) {
+			addButtons(
+					new RedButton(Babylon.get().getFromResources("save_button_save")) {
+						@Override
+						protected void onClick() {
+							hide();
+							GameScene.show(new WndSaver(Babylon.get().getFromResources("save_title_save"), true, Dungeon.hero.heroClass, true));
+						}
+					}, new RedButton(Babylon.get().getFromResources("save_buttton_load")) {
+						@Override
+						protected void onClick() {
+							hide();
+							GameScene.show(new WndSaver(Babylon.get().getFromResources("save_title_load"), false, Dungeon.hero.heroClass, true));
+						}
 					}
-				}, new RedButton(Babylon.get().getFromResources("save_buttton_load")) {
-					@Override
-					protected void onClick() {
-						hide();
-						GameScene.show( new WndSaver(Babylon.get().getFromResources("save_title_load"), false, Dungeon.hero.heroClass, true) );
+			);
+		} else {
+			addButton(
+					new RedButton(Babylon.get().getFromResources("save_buttton_load")) {
+						@Override
+						protected void onClick() {
+							hide();
+							GameScene.show(new WndSaver(Babylon.get().getFromResources("save_title_load"), false, Dungeon.hero.heroClass, true));
+						}
 					}
-				}
-		);
+			);
+		}
 		
 		addButton( new RedButton( Babylon.get().getFromResources("wnd_game_settings") ) {
 			@Override

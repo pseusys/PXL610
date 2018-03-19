@@ -136,7 +136,7 @@ public class StartScene extends PixelScene {
 		btnLoad = new GameButton( Babylon.get().getFromResources("startscene_load") ) {
 			@Override
 			protected void onClick() {
-				StartScene.this.add(new WndSaver("Restore game", false, curClass, false));
+				StartScene.this.add(new WndSaver(Babylon.get().getFromResources("save_restoregame"), false, curClass, false));
 			}
 		};
 		add( btnLoad );	
@@ -250,7 +250,7 @@ public class StartScene extends PixelScene {
 		
 			unlock.visible = false;
 
-			if (Game.instance.getFileStreamPath(Dungeon.gameFile(cl)).exists()) {
+			if (WndSaver.saveCheck(cl)) {
 				
 				btnLoad.visible = true;
 				btnLoad.secondary( null, false );

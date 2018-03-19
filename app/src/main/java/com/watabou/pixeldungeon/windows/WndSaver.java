@@ -43,6 +43,13 @@ public class WndSaver extends Window {
 
     private StartScene.GameButton lastPlayed;
 
+    public static boolean saveCheck(HeroClass cl) {
+        return (Game.instance.getFileStreamPath(Dungeon.gameFile(cl)).exists() ||
+                Game.instance.getFileStreamPath(gameFile(cl, 0)).exists() ||
+                Game.instance.getFileStreamPath(gameFile(cl, 1)).exists() ||
+                Game.instance.getFileStreamPath(gameFile(cl, 2)).exists());
+    }
+
     private static String gameFile(HeroClass cl, int index) {
         switch (cl) {
             case WARRIOR:
@@ -89,15 +96,17 @@ public class WndSaver extends Window {
         tfTitle.measure();
         add( tfTitle );
 
-        if (inGame && !toSave) {
-            BitmapTextMultiline tfMesage = PixelScene.createMultiline(Babylon.get().getFromResources("save_notabene"), 8);
-            tfMesage.maxWidth = WIDTH - GAP * 2;
-            tfMesage.measure();
-            tfMesage.x = GAP;
-            tfMesage.y = tfTitle.y + tfTitle.height() + GAP;
-            add(tfMesage);
+        if (inGame && !toSave && Dungeon.hero.isAlive()) {
+            //if (Dungeon.hero.isAlive()) {
+                BitmapTextMultiline tfMesage = PixelScene.createMultiline(Babylon.get().getFromResources("save_notabene"), 8);
+                tfMesage.maxWidth = WIDTH - GAP * 2;
+                tfMesage.measure();
+                tfMesage.x = GAP;
+                tfMesage.y = tfTitle.y + tfTitle.height() + GAP;
+                add(tfMesage);
 
-            pos = tfMesage.y + tfMesage.height() + GAP;
+                pos = tfMesage.y + tfMesage.height() + GAP;
+            //}
         } else {
             pos = tfTitle.y + tfTitle.height() + GAP;
         }
@@ -118,6 +127,7 @@ public class WndSaver extends Window {
             lastPlayed.secondary( Utils.format( Babylon.get().getFromResources("startscene_depth"), asinfo.depth, asinfo.level ), asinfo.challenges );
         } else {
             lastPlayed.secondary( null, false );
+            lastPlayed.enable(false);
         }
         lastPlayed.setRect(GAP, pos, WIDTH - GAP * 2, BTN_HEIGHT);
         add(lastPlayed);
