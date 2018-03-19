@@ -153,7 +153,7 @@ public abstract class Char extends Actor {
 				}
 			}
 			
-			enemy.sprite.bloodBurstA( sprite.center(), effectiveDamage );
+			//enemy.sprite.bloodBurstA( sprite.center(), effectiveDamage );
 			enemy.sprite.flash();
 			
 			if (!enemy.isAlive() && visibleFight) {

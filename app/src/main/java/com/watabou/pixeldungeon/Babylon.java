@@ -68,17 +68,7 @@ public class Babylon {
                 String key = keys.nextElement();
                 String value = bundle.getString(key);
 
-                //System.out.println("language = " + bundle.getString("language_name"));
-
                 resources.put(key, value);
-                if (key.equals("language_name")) {
-                    System.out.println(value);
-                    System.out.println(new String(value.getBytes("ISO-8859-1"), "UTF-8"));
-                    System.out.println(new String(value.getBytes(), "UTF-8"));
-                    System.out.println(Arrays.toString(value.getBytes("UTF-8")));
-                }
-                /*String key = keys.nextElement();
-                resources.put(key, new String(bundle.getString(key).getBytes("ISO-8859-1"), "UTF-8"));*/
             }
         } catch (Exception e) {
             e.printStackTrace();
