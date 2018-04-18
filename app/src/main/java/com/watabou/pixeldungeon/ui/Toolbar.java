@@ -262,7 +262,7 @@ public class Toolbar extends Component {
 		
 		@Override
 		protected void onTouchDown() {
-			base.brightness( 1.4f );
+			base.brightness( 1.2f ); // EKDORN&&&
 		}
 		
 		@Override

@@ -3,6 +3,8 @@ package com.watabou.pixeldungeon;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.watabou.noosa.Game;
+import com.watabou.pixeldungeon.scenes.TitleScene;
 import com.watabou.pixeldungeon.utils.GLog;
 import com.watabou.pixeldungeon.windows.WndError;
 import com.watabou.pixeldungeon.windows.WndSaver;
@@ -93,19 +95,16 @@ public class Babylon {
         int current = localisations.indexOf(inUse);
 
         current += loc;
-        if (current > 3) {
+        if (current > 1 /*3 in finale*/) {
             current = 0;
         } else if (current < 0) {
-            current = 3;
+            current = 1 /*0 in finale*/;
         }
 
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
 
         load();
-        //if ((current == 2) || (current == 3)) {
-            //
-        //}
     }
 
     public String getFromResources(String tag) {

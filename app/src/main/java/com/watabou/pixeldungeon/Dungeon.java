@@ -176,6 +176,9 @@ public class Dungeon {
 			level = new SewerBossLevel();
 			break;
 		case 6:
+			level = new LastLevel();
+			break;
+		/*case 6:
 		case 7:
 		case 8:
 		case 9:
@@ -215,7 +218,7 @@ public class Dungeon {
 			break;
 		case 26:
 			level = new LastLevel();
-			break;
+			break;*/
 		default:
 			level = new DeadEndLevel();
 			Statistics.deepestFloor--;
