@@ -80,6 +80,8 @@ public class WndGhost extends Window {
     }
 
     private void click(Item reward) {
+        WndGhost.this.hide();
+
         if (WndGhost.this.questItem != null) {
             WndGhost.this.questItem.detach( Dungeon.hero.belongings.backpack );
         }
