@@ -49,6 +49,7 @@ import com.watabou.pixeldungeon.levels.SewerLevel;
 import com.watabou.pixeldungeon.scenes.GameScene;
 import com.watabou.pixeldungeon.sprites.GhostSprite;
 import com.watabou.pixeldungeon.utils.Utils;
+import com.watabou.pixeldungeon.windows.WndGhost;
 import com.watabou.pixeldungeon.windows.WndQuest;
 import com.watabou.pixeldungeon.windows.WndSadGhost;
 import com.watabou.utils.Bundle;
@@ -359,7 +360,7 @@ public class Ghost extends NPC {
 
 				Item item = Dungeon.hero.belongings.getItem( DriedRose.class );	
 				if (item != null) {
-					GameScene.show( new WndSadGhost( ghost, item, Babylon.get().getFromResources("mob_ghost_completed0") ) );
+					GameScene.show( new WndGhost( ghost, Babylon.get().getFromResources("mob_ghost_completed0"), Quest.armor, Quest.weapon, item ) );
 				} else {
 					GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest1") ) );
 					relocate( ghost );
@@ -381,7 +382,7 @@ public class Ghost extends NPC {
 
 				Item item = Dungeon.hero.belongings.getItem( RatSkull.class );	
 				if (item != null) {
-					GameScene.show( new WndSadGhost( ghost, item, Babylon.get().getFromResources("mob_ghost_completed1") ) );
+					GameScene.show( new WndGhost( ghost, Babylon.get().getFromResources("mob_ghost_completed1"), Quest.armor, Quest.weapon, item ) );
 				} else {
 					GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest3") ) );
 					relocate( ghost );
@@ -401,7 +402,7 @@ public class Ghost extends NPC {
 		public void interact( final Ghost ghost ) {
 			if (Quest.given) {
 
-				GameScene.show( new WndSadGhost( ghost, null, Utils.format( Babylon.get().getFromResources("mob_ghost_quest5"), Dungeon.hero.className() ) ) );
+				GameScene.show( new WndGhost( ghost, Utils.format( Babylon.get().getFromResources("mob_ghost_completed3"), Dungeon.hero.className() ), Quest.armor, Quest.weapon, null ) );
 				
 			} else {
 				GameScene.show( new WndQuest( ghost, Babylon.get().getFromResources("mob_ghost_quest4"),
