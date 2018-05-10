@@ -39,12 +39,12 @@ public class LastLevel extends Level {
 	
 	@Override
 	public String tilesTex() {
-		return Assets.TILES_HALLS;
+		return Assets.TILES_SEWERS;
 	}
 	
 	@Override
 	public String waterTex() {
-		return Assets.WATER_HALLS;
+		return Assets.WATER_SEWERS;
 	}
 	
 	@Override
@@ -97,14 +97,14 @@ public class LastLevel extends Level {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return Babylon.get().getFromResources("levels_halls_water");
+			return Babylon.get().getFromResources("levels_sewer_water");
 		case Terrain.GRASS:
-			return Babylon.get().getFromResources("levels_halls_grass");
+			return Babylon.get().getFromResources("levels_desc_grass");
 		case Terrain.HIGH_GRASS:
-			return Babylon.get().getFromResources("levels_halls_highgrass");
+			return Babylon.get().getFromResources("levels_desc_highgrass");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return Babylon.get().getFromResources("levels_halls_statue");
+			return Babylon.get().getFromResources("levels_desc_statue");
 		default:
 			return super.tileName( tile );
 		}
@@ -114,10 +114,10 @@ public class LastLevel extends Level {
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
-			return Babylon.get().getFromResources("levels_halls_eater_desc");
+			return Babylon.get().getFromResources("levels_sewer_water_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return Babylon.get().getFromResources("levels_halls_statue_desc");
+			return Babylon.get().getFromResources("levels_sewer_statue_desc");
 		default:
 			return super.tileDesc( tile );
 		}
