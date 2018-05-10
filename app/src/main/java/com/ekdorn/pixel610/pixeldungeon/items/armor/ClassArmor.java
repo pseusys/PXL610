@@ -1,0 +1,139 @@
+/*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+package com.ekdorn.pixel610.pixeldungeon.items.armor;
+
+import java.util.ArrayList;
+
+import com.ekdorn.pixel610.pixeldungeon.Babylon;
+import com.ekdorn.pixel610.pixeldungeon.actors.hero.Hero;
+import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
+import com.ekdorn.pixel610.utils.Bundle;
+
+abstract public class ClassArmor extends Armor {
+	
+	private int DR;
+	
+	{
+		levelKnown = true;
+		cursedKnown = true;
+		defaultAction = special();
+	}
+	
+	public ClassArmor() {
+		super( 6 );
+	}
+	
+	public static ClassArmor upgrade ( Hero owner, Armor armor ) {
+		
+		ClassArmor classArmor = null;
+		
+		switch (owner.heroClass) {
+		case WARRIOR:
+			classArmor = new WarriorArmor();
+			break;
+		case ROGUE:
+			classArmor = new RogueArmor();
+			break;
+		case MAGE:
+			classArmor = new MageArmor();
+			break;
+		case HUNTRESS:
+			classArmor = new HuntressArmor();
+			break;
+		}
+		
+		classArmor.STR = armor.STR;
+		classArmor.DR = armor.DR();
+		
+		classArmor.inscribe( armor.glyph );
+		
+		return classArmor;
+	}
+	
+	private static final String ARMOR_STR	= "STR";
+	private static final String ARMOR_DR	= "DR";
+	
+	@Override
+	public void storeInBundle( Bundle bundle ) {
+		super.storeInBundle( bundle );
+		bundle.put( ARMOR_STR, STR );
+		bundle.put( ARMOR_DR, DR );
+	}
+	
+	@Override
+	public void restoreFromBundle( Bundle bundle ) {
+		super.restoreFromBundle( bundle );
+		STR = bundle.getInt( ARMOR_STR );
+		DR = bundle.getInt( ARMOR_DR );
+	}
+	
+	@Override
+	public ArrayList<String> actions( Hero hero ) {
+		ArrayList<String> actions = super.actions( hero );
+		if (hero.HP >= 3 && isEquipped( hero )) {
+			actions.add( special() );
+		}
+		return actions;
+	}
+	
+	@Override
+	public void execute( Hero hero, String action ) {
+		if (action == special()) {
+			
+			if (hero.HP < 3) {
+				GLog.w( Babylon.get().getFromResources("armor_health_toolow") );
+			} else if (!isEquipped( hero )) {
+				GLog.w( Babylon.get().getFromResources("armor_notequipped") );
+			} else {
+				curUser = hero;
+				doSpecial();
+			}
+			
+		} else {	
+			super.execute( hero, action );		
+		}
+	}
+	
+	abstract public String special();
+	abstract public void doSpecial();
+	
+	@Override
+	public int DR() {
+		return DR;
+	}
+	
+	@Override
+	public boolean isUpgradable() {
+		return false;
+	}
+	
+	@Override
+	public boolean isIdentified() {
+		return true;
+	}
+	
+	@Override
+	public int price() {
+		return 0;
+	}
+	
+	@Override
+	public String desc() {
+		return Babylon.get().getFromResources("armor_looks_awesome");
+	}
+}
