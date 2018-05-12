@@ -20,14 +20,17 @@ package com.ekdorn.pixel610.noosa.audio;
 import java.io.IOException;
 
 import com.ekdorn.pixel610.noosa.Game;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.util.Log;
 
-public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener {
+public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 	
 	INSTANCE;
+
 	
 	private MediaPlayer player;
 	
@@ -35,6 +38,8 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 	private boolean lastLooping;
 	
 	private boolean enabled = true;
+
+	private int lastInPack = -1; // Used for not-repeating previous track;
 	
 	public void play( String assetName, boolean looping ) {
 		
@@ -52,14 +57,18 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 		}
 		
 		try {
-			
-			AssetFileDescriptor afd = Game.instance.getAssets().openFd( assetName );
+			int newNumber = Melody.getRandomNameForPackExceptioned( lastInPack );
+			lastInPack = newNumber;
+			String actual = looping ? assetName : Utils.format(assetName, newNumber);
+
+			AssetFileDescriptor afd = Game.instance.getAssets().openFd( actual );
 			
 			player = new MediaPlayer();
 			player.setAudioStreamType( AudioManager.STREAM_MUSIC );
 			player.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength() );
 			player.setOnPreparedListener( this );
 			player.setOnErrorListener( this );
+			player.setOnCompletionListener( this );
 			player.setLooping( looping );
 			player.prepareAsync();
 			
@@ -74,6 +83,14 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 	public void mute() {
 		lastPlayed = null;
 		stop();
+	}
+
+	@Override
+	public void onCompletion(MediaPlayer mp) {
+		if (!mp.isLooping()) {
+			stop();
+			play( lastPlayed, false );
+		}
 	}
 
 	@Override

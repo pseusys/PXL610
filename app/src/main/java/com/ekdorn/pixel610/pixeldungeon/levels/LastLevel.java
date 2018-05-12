@@ -110,7 +110,7 @@ public class LastLevel extends Level {
 		}
 	}
 	
-	@Override
+	/*@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
@@ -121,7 +121,7 @@ public class LastLevel extends Level {
 		default:
 			return super.tileDesc( tile );
 		}
-	}
+	}*/
 	
 	@Override
 	public void addVisuals( Scene scene ) {

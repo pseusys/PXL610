@@ -133,7 +133,7 @@ public class PXL610 extends Game {
 		instance.getWindowManager().getDefaultDisplay().getMetrics( metrics );
 		boolean landscape = metrics.widthPixels > metrics.heightPixels;
 
-		PXL610.programIntro(true);
+		//PXL610.programIntro(true);
 
 		if (PXL610.programIntro()) { // PXL610: update localisation;
 			PXL610.programIntro(false);

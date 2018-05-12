@@ -1,27 +1,31 @@
+/*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 EK DORN
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+
 package com.ekdorn.pixel610.pixeldungeon;
 
-import android.support.annotation.NonNull;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.ekdorn.pixel610.noosa.Game;
-import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
-import com.ekdorn.pixel610.pixeldungeon.windows.WndError;
-import com.ekdorn.pixel610.pixeldungeon.windows.WndSaver;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
@@ -61,6 +65,7 @@ public class Babylon {
     }
 
     public void load() {
+        Log.e("TAG", "load: " + inUse );
         resources = new HashMap<>();
         ResourceBundle bundle = ResourceBundle.getBundle(RESOURCE_NAME, inUse);
         Enumeration<String> keys = bundle.getKeys();

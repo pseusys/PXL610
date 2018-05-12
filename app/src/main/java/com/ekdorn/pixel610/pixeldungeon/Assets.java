@@ -113,9 +113,10 @@ public class Assets {
 	public static final String FONTS25X	= "font25x.png";
 	public static final String FONTS3X	= "font3x.png";
 	
-	public static final String THEME	= "theme.mp3";
-	public static final String TUNE		= "game.mp3";
-	public static final String HAPPY	= "surface.mp3";
+	public static final String THEME	       = "theme.mp3";
+	public static final String HAPPY	       = "surface.mp3";
+	public final static int FIRST_PACK_COUNT   = 2;
+	public static final String FIRST_PACK      = "game%s.mp3";
 	
 	public static final String SND_CLICK	= "snd_click.mp3";
 	public static final String SND_BADGE	= "snd_badge.mp3";
