@@ -39,14 +39,17 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 
-public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTouchListener {
+@SuppressLint("Registered")
+public class Game extends AppCompatActivity implements GLSurfaceView.Renderer, View.OnTouchListener {
 
+	@SuppressLint("StaticFieldLeak")
 	public static Game instance;
 	
 	// Actual size of the screen
@@ -161,7 +164,7 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 	
 	@Override
 	public boolean onKeyDown( int keyCode, KeyEvent event ) {
-		
+
 		if (keyCode == Keys.VOLUME_DOWN || 
 			keyCode == Keys.VOLUME_UP) {
 			

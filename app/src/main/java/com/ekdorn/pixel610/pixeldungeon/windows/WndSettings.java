@@ -17,7 +17,18 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.windows;
 
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Camera;
+import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
@@ -28,6 +39,7 @@ import com.ekdorn.pixel610.pixeldungeon.ui.CheckBox;
 import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Toolbar;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class WndSettings extends Window {
 
@@ -43,6 +55,8 @@ public class WndSettings extends Window {
 
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
+
+	private static String name;
 
 	public WndSettings( boolean inGame ) {
 		super();
@@ -106,10 +120,19 @@ public class WndSettings extends Window {
 
 			RedButton btnLocalisation = new RedButton(Babylon.get().getLanguageName()) {
 				@Override
-				protected void onClick() {
-				}
+				protected void onClick() {}
 			};
 			add(btnLocalisation.setRect(btnLanguageBack.right(), 0, WIDTH - btnLanguageBack.width() - btnLanguageBack.width(), BTN_HEIGHT) );
+
+			// Name Settings
+			RedButton btnName = new RedButton(PXL610.user_name()) {
+				@Override
+				protected void onClick() {
+					hide();
+					dialog(false);
+				}
+			};
+			add( btnName.setRect( 0, btnLocalisation.bottom() + GAP, WIDTH, BTN_HEIGHT) );
 
 			// Previous settings
 			CheckBox btnScaleUp = new CheckBox( Babylon.get().getFromResources("sett_scale_up") ) {
@@ -119,7 +142,7 @@ public class WndSettings extends Window {
 					PXL610.scaleUp( checked() );
 				}
 			};
-			btnScaleUp.setRect( 0, BTN_HEIGHT + GAP, WIDTH, BTN_HEIGHT );
+			btnScaleUp.setRect( 0, btnName.bottom() + GAP, WIDTH, BTN_HEIGHT );
 			btnScaleUp.checked( PXL610.scaleUp() );
 			add( btnScaleUp );
 
@@ -218,5 +241,63 @@ public class WndSettings extends Window {
 
 	private String orientationText() {
 		return PXL610.landscape() ? Babylon.get().getFromResources("sett_switch_port") : Babylon.get().getFromResources("sett_switch_land");
+	}
+
+	public static void dialog(final boolean onLoad) {
+		Handler mainHandler = new Handler(Looper.getMainLooper());
+		Runnable dialog = new Runnable() {
+			@Override
+			public void run() {
+				AlertDialog.Builder builder = new AlertDialog.Builder(Game.instance);
+				builder.setTitle(Babylon.get().getFromResources("name_change_dialog_title"));
+
+				builder.setCancelable(false);
+				// Set up the input
+				final EditText input = new EditText(Game.instance);
+				// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+				input.setInputType(InputType.TYPE_CLASS_TEXT);
+				builder.setView(input);
+
+				// Set up the buttons
+				builder.setPositiveButton(Babylon.get().getFromResources("name_change_dialog_agreed"), null);
+				builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						if (name != null) {
+							PXL610.user_name(name);
+						}
+					}
+				});
+				final AlertDialog act = builder.show();
+				act.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (!input.getText().toString().equals("")) {
+							String pseudoname = input.getText().toString();
+							boolean nameSuggest = true;
+							char wrongChar = 'I';
+							for (int i = 0; i < pseudoname.length(); i++) {
+								if (!BitmapText.Font.FULL.contains(Character.toString(pseudoname.charAt(i)))) {
+									nameSuggest = false;
+									wrongChar = pseudoname.charAt(i);
+								}
+							}
+							if (nameSuggest) {
+								name = input.getText().toString();
+								if (onLoad) {
+									act.dismiss();
+								} else {
+									act.dismiss();
+									Game.scene().add(new WndSettings( false ));
+								}
+							} else {
+								Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("name_change_dialog_error"), Character.toString(wrongChar)), Toast.LENGTH_SHORT).show();
+							}
+						}
+					}
+				});
+			}
+		};
+		mainHandler.post(dialog);
 	}
 }

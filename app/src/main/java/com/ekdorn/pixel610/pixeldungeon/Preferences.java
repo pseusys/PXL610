@@ -39,6 +39,9 @@ enum Preferences {
 	public static final String KEY_PROGRAM_INTRO  = "program_intro";
 	public static final String KEY_BRIGHTNESS	  = "brightness";
 	public static final String KEY_LOCALISATION	  = "localisation";
+
+	public static final String KEY_USER_NAME	  = "name";
+	public static final String KEY_NSTANCE_ID	  = "id";
 	
 	private SharedPreferences prefs;
 	

@@ -38,7 +38,6 @@ import com.ekdorn.pixel610.pixeldungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.utils.Bundle;
 
 public enum HeroClass {
-
 	WARRIOR(Babylon.get().getFromResources("hero_cl_warrior")),
 	MAGE(Babylon.get().getFromResources("hero_cl_mage")),
 	ROGUE(Babylon.get().getFromResources("hero_cl_rogue")),

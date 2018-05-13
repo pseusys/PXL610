@@ -33,6 +33,9 @@ import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
+
+import java.util.UUID;
 
 public class PXL610 extends Game {
 	
@@ -138,6 +141,9 @@ public class PXL610 extends Game {
 		if (PXL610.programIntro()) { // PXL610: update localisation;
 			PXL610.programIntro(false);
 			Babylon.get().updateLocale();
+
+			WndSettings.dialog(true);
+			PXL610.user_id( UUID.randomUUID().toString() );
 		}
 
 		Babylon.get().load();
@@ -375,6 +381,22 @@ public class PXL610 extends Game {
 
 	public static String localisation() {
 		return Preferences.INSTANCE.getString( Preferences.KEY_LOCALISATION, "en" );
+	}
+
+	public static void user_name( String value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_USER_NAME, value );
+	}
+
+	public static String user_name() {
+		return Preferences.INSTANCE.getString( Preferences.KEY_USER_NAME, "" );
+	}
+
+	public static void user_id( String value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_NSTANCE_ID, value );
+	}
+
+	public static String user_id() {
+		return Preferences.INSTANCE.getString( Preferences.KEY_NSTANCE_ID, "" );
 	}
 	
 	/*

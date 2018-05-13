@@ -599,6 +599,7 @@ public class Dungeon {
 		resultDescription = desc;
 		if (hero.belongings.getItem( Ankh.class ) == null) { 
 			Rankings.INSTANCE.submit( false );
+			OnlineRatinger.send(false);
 		}
 	}
 	
@@ -612,6 +613,7 @@ public class Dungeon {
 		
 		resultDescription = desc;
 		Rankings.INSTANCE.submit( true );
+		OnlineRatinger.send(true);
 	}
 	
 	public static void observe() {
