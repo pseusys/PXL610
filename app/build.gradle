@@ -6,7 +6,7 @@ android {
         applicationId "com.ekdorn.pixel610"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 2
+        versionCode 3
         versionName "0.5 pre-alpha"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

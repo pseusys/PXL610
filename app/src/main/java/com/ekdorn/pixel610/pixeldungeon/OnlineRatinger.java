@@ -127,6 +127,7 @@ public enum OnlineRatinger {
 
     public void get() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        topData = new ArrayList<Map<String, Object>>();
 
         for (int i = 0; i < 6; i++) {
             db.collection(COLLECTION).document(Utils.format(DOCUMENT, i))

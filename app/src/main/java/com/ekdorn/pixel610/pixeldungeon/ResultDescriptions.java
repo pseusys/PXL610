@@ -21,11 +21,11 @@ public class ResultDescriptions {
 
 	// Mobs 
 	public static final String MOB	= Babylon.get().getFromResources("results_mob");
-	public static final String BOSS	= Babylon.get().getFromResources("results_boss");
+	public static final String BOSS	= Babylon.get().getFromResources("results_mob");
 	
 	// Items
 	public static final String WAND		= Babylon.get().getFromResources("results_wand");
-	public static final String GLYPH	= Babylon.get().getFromResources("results_glyph");
+	public static final String GLYPH	= Babylon.get().getFromResources("results_mob");
 	public static final String BOMB		= Babylon.get().getFromResources("results_bomb");
 	
 	// Dungeon features

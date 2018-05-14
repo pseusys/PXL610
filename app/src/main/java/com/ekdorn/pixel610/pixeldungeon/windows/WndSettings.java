@@ -17,12 +17,15 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.windows;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -55,8 +58,6 @@ public class WndSettings extends Window {
 
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
-
-	private static String name;
 
 	public WndSettings( boolean inGame ) {
 		super();
@@ -256,19 +257,23 @@ public class WndSettings extends Window {
 				final EditText input = new EditText(Game.instance);
 				// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
 				input.setInputType(InputType.TYPE_CLASS_TEXT);
+				input.setText(PXL610.user_name());
+				input.setSelection(input.getText().length());
+				input.setFocusable(true);
 				builder.setView(input);
 
 				// Set up the buttons
 				builder.setPositiveButton(Babylon.get().getFromResources("name_change_dialog_agreed"), null);
-				builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				final AlertDialog act = builder.show();
+				input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 					@Override
-					public void onDismiss(DialogInterface dialog) {
-						if (name != null) {
-							PXL610.user_name(name);
+					public void onFocusChange(View v, boolean hasFocus) {
+						if (hasFocus) {
+							act.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 						}
 					}
 				});
-				final AlertDialog act = builder.show();
+				input.requestFocus();
 				act.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -283,7 +288,7 @@ public class WndSettings extends Window {
 								}
 							}
 							if (nameSuggest) {
-								name = input.getText().toString();
+								PXL610.user_name(pseudoname);
 								if (onLoad) {
 									act.dismiss();
 								} else {
