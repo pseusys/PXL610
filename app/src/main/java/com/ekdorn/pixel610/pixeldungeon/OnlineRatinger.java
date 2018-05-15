@@ -30,9 +30,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.okhttp.internal.Util;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -48,7 +50,11 @@ public enum OnlineRatinger {
     private static final String huntress = "huntress";
 
     private static final String COLLECTION  = "ranks";
-    private static final String DOCUMENT    = "five_winners_%s";
+    private static final String RANK_DOCUMENT    = "five_winners_%s";
+    private static final String SYS_DOCUMENT    = "stats";
+
+    private static final String NUMBER    = "number";
+    private static final String TOTAL    = "total";
 
     public static final String CLASS        = "class";
     public static final String INFO         = "info";
@@ -62,11 +68,19 @@ public enum OnlineRatinger {
     public static final String ID           = "id";
 
     private List<Map<String, Object>> topData;
+    private long bestGlobal;
+    private long countGlobal;
+    private FirebaseFirestore db;
 
     private OnLoadedListener lister;
 
     OnlineRatinger() {
         topData = new ArrayList<Map<String, Object>>();
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
     }
 
 
@@ -77,21 +91,22 @@ public enum OnlineRatinger {
     }
 
     private static void check(final Map<String, Object> rec, final int repet) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection(COLLECTION).document(Utils.format(DOCUMENT, repet))
+        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, repet))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            System.out.println(task.getResult().getData().get(SCORE).getClass() + "\n" + rec.get(SCORE).getClass());
-                            if (((Number) (task.getResult().getData().get(SCORE))).longValue() < ((Number) (rec.get(SCORE))).longValue()) {
-                                Log.e("TAG", "onComplete: Exchanged with score number " + repet );
+                            if (task.getResult().exists()) {
+                                if (((Number) (task.getResult().getData().get(SCORE))).longValue() < ((Number) (rec.get(SCORE))).longValue()) {
+                                    Log.e("TAG", "onComplete: Exchanged with score number " + repet);
+                                    push(rec, repet);
+                                    if (repet < 5) check(task.getResult().getData(), repet + 1);
+                                } else if (repet < 5) {
+                                    check(rec, repet + 1);
+                                }
+                            } else {
                                 push(rec, repet);
-                                if (repet < 5) check(task.getResult().getData(), repet+1);
-                            } else if (repet < 5) {
-                                check(rec, repet+1);
                             }
                         } else {
                             Log.w("TAG", "Error getting documents.", task.getException());
@@ -100,10 +115,8 @@ public enum OnlineRatinger {
                 });
     }
 
-    private static void push(Map<String, Object> rec, int place) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection(COLLECTION).document(Utils.format(DOCUMENT, place))
+    private static void push(final Map<String, Object> rec, int place) {
+        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, place))
                 .set( rec )
                 .addOnSuccessListener(new OnSuccessListener<Object>() {
                     @Override
@@ -117,6 +130,43 @@ public enum OnlineRatinger {
                         Log.w("TAG", "Error adding document", e);
                     }
                 });
+
+        INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            long total = ((Number) rec.get(SCORE)).longValue();
+                            long number = 1L;
+                            if (task.getResult().exists()) {
+                                total = ((Number) task.getResult().getData().get(TOTAL)).longValue() + ((Number) rec.get(SCORE)).longValue();
+                                number = ((Number) task.getResult().getData().get(NUMBER)).intValue() + 1L;
+                            }
+                            Map<String, Object> sys = new HashMap<>();
+                            sys.put(TOTAL, total);
+                            sys.put(NUMBER, number);
+
+                            INSTANCE.db.collection(COLLECTION).document(Utils.format(SYS_DOCUMENT))
+                                    .set( sys )
+                                    .addOnSuccessListener(new OnSuccessListener<Object>() {
+                                        @Override
+                                        public void onSuccess(Object o) {
+                                            Log.d("TAG", "DocumentSnapshot added with ID: " + o);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w("TAG", "Error adding document", e);
+                                        }
+                                    });
+
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 
     // GET //
@@ -126,19 +176,21 @@ public enum OnlineRatinger {
     }
 
     public void get() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         topData = new ArrayList<Map<String, Object>>();
+        bestGlobal = countGlobal = 0;
 
         for (int i = 0; i < 6; i++) {
-            db.collection(COLLECTION).document(Utils.format(DOCUMENT, i))
+            db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, i))
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                INSTANCE.topData.add(task.getResult().getData());
-                                if (INSTANCE.topData.size() == 6) {
-                                    lister.scream(INSTANCE.topData);
+                                boolean exists = task.getResult().exists();
+                                if (exists && topData.size() < 6) {
+                                    topData.add(task.getResult().getData());
+                                } else {
+                                    lister.scream();
                                 }
                             } else {
                                 Log.w("TAG", "Error getting documents.", task.getException());
@@ -146,11 +198,42 @@ public enum OnlineRatinger {
                         }
                     });
         }
+
+        db.collection(COLLECTION).document(SYS_DOCUMENT)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            boolean exists = task.getResult().exists();
+                            if (exists) {
+                                countGlobal = ((Number) task.getResult().getData().get(NUMBER)).longValue();
+                                bestGlobal = ((Number) task.getResult().getData().get(TOTAL)).longValue() / countGlobal;
+                            }
+                            lister.cry();
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public List<Map<String, Object>> getTopData() {
+        return INSTANCE.topData;
+    }
+
+    public long getBestGlobal() {
+        return INSTANCE.bestGlobal;
+    }
+
+    public long getCountGlobal() {
+        return INSTANCE.countGlobal;
     }
 
 
     public interface OnLoadedListener {
-        public void scream(List<Map<String, Object>> data);
+        public void scream();
+        public void cry();
     }
 
     // CREATE //
@@ -178,13 +261,6 @@ public enum OnlineRatinger {
 
         return rate;
     }
-
-    private static final Comparator<Rankings.Record> scoreComparator = new Comparator<Rankings.Record>() {
-        @Override
-        public int compare(Rankings.Record lhs, Rankings.Record rhs ) {
-            return (int)Math.signum( rhs.score - lhs.score );
-        }
-    };
 
     // OTHER //
     public static HeroClass getClassById(String id) {

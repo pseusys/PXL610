@@ -57,9 +57,16 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 		}
 		
 		try {
-			int newNumber = Melody.getRandomNameForPackExceptioned( lastInPack );
-			lastInPack = newNumber;
-			String actual = looping ? assetName : Utils.format(assetName, newNumber);
+			String actual;
+			if (!looping) {
+				int newNumber = (lastInPack == -1) ? 0 : Melody.getRandomNameForPackExceptioned( lastInPack );
+				lastInPack = newNumber;
+				actual = Utils.format(assetName, newNumber);
+			} else {
+				actual = assetName;
+			}
+
+			Log.e("TAG", "play: " + lastInPack );
 
 			AssetFileDescriptor afd = Game.instance.getAssets().openFd( actual );
 			

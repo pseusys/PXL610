@@ -30,6 +30,7 @@ import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.utils.BitmapCache;
 import com.ekdorn.pixel610.utils.SystemTime;
+import com.google.firebase.crash.FirebaseCrash;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -95,6 +96,8 @@ public class Game extends AppCompatActivity implements GLSurfaceView.Renderer, V
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
+
+		FirebaseCrash.setCrashCollectionEnabled(true);
 		
 		BitmapCache.context = TextureCache.context = instance = this;
 		

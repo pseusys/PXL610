@@ -17,6 +17,9 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.scenes;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.BitmapTextMultiline;
 import com.ekdorn.pixel610.noosa.Camera;
@@ -63,6 +66,11 @@ public class RankingsScene extends PixelScene {
 
 	private TextButton switcher;
 	private static boolean isLocal = true;
+	private boolean loaded0, loaded1 = false;
+
+	float rowHeight;
+	float left;
+	float top;
 	
 	@Override
 	public void create() {
@@ -81,10 +89,39 @@ public class RankingsScene extends PixelScene {
 		archs.setSize( w, h );
 		add(archs);
 
+		rowHeight = PXL610.landscape() ? ROW_HEIGHT_L : ROW_HEIGHT_P;
+
+        Rankings.INSTANCE.load();
+
 		if (isLocal) {
 			showLocalRanking();
 		} else {
-			showGlobalRanking();
+			final Image busy = Icons.BUSY.get();
+			Handler mainHandler = new Handler(Looper.getMainLooper());
+			Runnable dialog = new Runnable() {
+				@Override
+				public void run() {
+					OnlineRatinger.INSTANCE.get();
+					OnlineRatinger.INSTANCE.setListener(new OnlineRatinger.OnLoadedListener() {
+						@Override
+						public void scream() {
+							if (busy != null) remove(busy);
+							loaded0 = true;
+						}
+
+                        @Override
+                        public void cry() {
+							loaded1 = true;
+                        }
+                    });
+				}
+			};
+			mainHandler.post(dialog);
+			busy.origin.set( busy.width / 2, busy.height / 2 );
+			busy.angularSpeed = 720;
+			busy.x = (w - busy.width) / 2;
+			busy.y = (h - busy.height) / 2;
+			add( busy );
 		}
 		
 		ExitButton btnExit = new ExitButton();
@@ -95,16 +132,12 @@ public class RankingsScene extends PixelScene {
 	}
 
 	private void showLocalRanking() {
-		Rankings.INSTANCE.load();
-
 		if (Rankings.INSTANCE.records.size() > 0) {
 
-			float rowHeight = PXL610.landscape() ? ROW_HEIGHT_L : ROW_HEIGHT_P;
+			left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
+			top = align( (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2 );
 
-			float left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
-			float top = align( (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2 );
-
-			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingscene_toprankings"), 9 );
+			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingscene_localrankings"), 9 );
 			title.hardlight( Window.TITLE_COLOR );
 			title.measure();
 			title.x = align( (w - title.width()) / 2 );
@@ -158,70 +191,104 @@ public class RankingsScene extends PixelScene {
 			}
 
 		} else {
+			isLocal = !isLocal;
+			PXL610.switchNoFade( RankingsScene.class );
+		}
+	}
 
+	private void showGlobalRanking() {
+		List<Map<String, Object>> data = OnlineRatinger.INSTANCE.getTopData();
+
+		if (data.size() > 0) {
+
+			left = (w - (Math.min( MAX_ROW_WIDTH, w ) / 3 * 2)) / 2 + GAP;
+			top = align( (h - rowHeight  * data.size()) / 2 );
+
+			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingscene_globalrankings"), 9 );
+			title.hardlight( Window.TITLE_COLOR );
+			title.measure();
+			title.x = align( (w - title.width()) / 2 );
+			title.y = align( top - title.height() - GAP );
+			add( title );
+
+			switcher = new TextButton("<-") {
+				@Override
+				protected void onClick() {
+					isLocal = !isLocal;
+					PXL610.switchNoFade( RankingsScene.class );
+				}
+			};
+			switcher.useText().hardlight(Window.TITLE_COLOR);
+			switcher.setPos(align((w - title.width()) / 2 - switcher.useText().width() - GAP), align(top - title.height() - GAP));
+			if (Rankings.INSTANCE.records.size() > 0) add(switcher);
+
+			pos = 0;
+
+			Collections.sort(data, new Comparator<Map<String, Object>>() {
+				@Override
+				public int compare(Map<String, Object> lhs, Map<String, Object> rhs) {
+					return (int) Math.signum(((Number) rhs.get(OnlineRatinger.SCORE)).intValue() - ((Number) lhs.get(OnlineRatinger.SCORE)).intValue());
+				}
+			});
+
+			for (int i = 0; i < data.size(); i++) {
+				GlobalRecord row = new GlobalRecord(pos, data.get(i));
+				row.setRect(left, top + pos * rowHeight, w - left * 2, rowHeight);
+				RankingsScene.this.add(row);
+
+				pos++;
+			}
+
+			BitmapText games = PixelScene.createText( Babylon.get().getFromResources("rankingscene_global"), 8 );
+			games.hardlight( DEFAULT_COLOR );
+			games.measure();
+			add( games );
+
+			BitmapText won = PixelScene.createText( Long.toString( OnlineRatinger.INSTANCE.getCountGlobal() ), 8 );
+			won.hardlight( Window.TITLE_COLOR );
+			won.measure();
+			add( won );
+
+
+            BitmapText score = PixelScene.createText(Babylon.get().getFromResources("rankingscene_better") + " ", 8 );
+            score.hardlight( DEFAULT_COLOR );
+            score.measure();
+            add( score );
+
+            long percent = (Rankings.INSTANCE.records.size() > 0) ? ((Rankings.INSTANCE.records.get(0).score / (OnlineRatinger.INSTANCE.getBestGlobal() / 100)) - 100) : (0);
+            BitmapText perc = PixelScene.createText( Long.toString( percent ) + "%", 8 );
+            perc.hardlight( Window.TITLE_COLOR );
+            perc.measure();
+            add( perc );
+
+
+			float tw0 = games.width() + won.width();
+			games.x = align( (w - tw0) / 2 );
+			won.x = games.x + games.width();
+			games.y = won.y = align( top + pos * rowHeight + GAP );
+
+            float tw1 = score.width() + perc.width();
+            score.x = align( (w - tw1) / 2 );
+            perc.x = score.x + score.width();
+			score.y = perc.y = align( games.y + GAP + games.height() );
+
+		} else {
 			BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingsscene_nogames"), 8 );
 			title.hardlight( DEFAULT_COLOR );
 			title.measure();
 			title.x = align( (w - title.width()) / 2 );
 			title.y = align( (h - title.height()) / 2 );
 			add( title );
-
 		}
 	}
 
-	private void showGlobalRanking() {
-		final float rowHeight = PXL610.landscape() ? ROW_HEIGHT_L : ROW_HEIGHT_P;
-
-		final float left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
-		final float top = align( (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2 );
-
-		BitmapText title = PixelScene.createText( Babylon.get().getFromResources("rankingscene_toprankings"), 9 );
-		title.hardlight( Window.TITLE_COLOR );
-		title.measure();
-		title.x = align( (w - title.width()) / 2 );
-		title.y = align( top - title.height() - GAP );
-		add( title );
-
-		switcher = new TextButton("<-") {
-			@Override
-			protected void onClick() {
-				isLocal = !isLocal;
-				PXL610.switchNoFade( RankingsScene.class );
-			}
-		};
-		switcher.useText().hardlight(Window.TITLE_COLOR);
-		switcher.setPos(align((w - title.width()) / 2 - switcher.useText().width() - GAP), align(top - title.height() - GAP));
-		add(switcher);
-
-		pos = 0;
-		final Image busy= Icons.BUSY.get();
-
-		OnlineRatinger.INSTANCE.get();
-		OnlineRatinger.INSTANCE.setListener(new OnlineRatinger.OnLoadedListener() {
-			@Override
-			public void scream(List<Map<String, Object>> data) {
-				remove( busy );
-				Collections.sort(data, new Comparator<Map<String, Object>>() {
-					@Override
-					public int compare( Map<String, Object> lhs, Map<String, Object> rhs ) {
-						return (int)Math.signum( ((Number) rhs.get(OnlineRatinger.SCORE)).intValue() - ((Number) lhs.get(OnlineRatinger.SCORE)).intValue() );
-					}
-				});
-				for (int i = 0; i < data.size(); i++) {
-					GlobalRecord row = new GlobalRecord( pos, data.get(i) );
-					row.setRect( left, top + pos * rowHeight, w - left * 2, rowHeight );
-					add( row );
-
-					pos++;
-				}
-			}
-		});
-
-		busy.origin.set( busy.width / 2, busy.height / 2 );
-		busy.angularSpeed = 720;
-		busy.x = (w - busy.width) / 2;
-		busy.y = (h - busy.height) / 2;
-		add( busy );
+	@Override
+	public void update() {
+		super.update();
+		if (loaded0 && loaded1) {
+			loaded0 = loaded1 = false;
+			showGlobalRanking();
+		}
 	}
 
 	@Override
@@ -398,7 +465,7 @@ public class RankingsScene extends PixelScene {
 
 			super.layout();
 
-			shield.x = x + width / 6;
+			shield.x = x;
 			shield.y = y + (height - shield.height) / 2;
 
 			position.x = align( shield.x + (shield.width - position.width()) / 2 );
@@ -408,7 +475,7 @@ public class RankingsScene extends PixelScene {
 				flare.point( shield.center() );
 			}
 
-			classIcon.x = align( x + width * 5 / 6 - classIcon.width );
+			classIcon.x = align( x + width - classIcon.width );
 			classIcon.y = shield.y;
 
 			desc.x = shield.x + shield.width + GAP;
