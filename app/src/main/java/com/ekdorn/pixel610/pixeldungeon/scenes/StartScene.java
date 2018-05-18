@@ -188,7 +188,7 @@ public class StartScene extends PixelScene {
 		unlock = new Group();
 		add( unlock );
 		
-		if (!(huntressUnlocked = Badges.isUnlocked( Badges.Badge.BOSS_SLAIN_3 ))) {
+		if (!(huntressUnlocked = /*Badges.isUnlocked( Badges.Badge.BOSS_SLAIN_3 )*/false)) {
 		
 			BitmapTextMultiline text = PixelScene.createMultiline( Babylon.get().getFromResources("startscene_unlock"), 9 );
 			text.maxWidth = (int)width;

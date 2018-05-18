@@ -38,7 +38,7 @@ public class ScrollOfIdentify extends InventoryScroll {
 		curUser.sprite.parent.add( new Identification( curUser.sprite.center().offset( 0, -16 ) ) );
 		
 		item.identify();
-		GLog.i(Babylon.get().getFromResources("scroll_identify_identified") + item );
+		GLog.i(Babylon.get().getFromResources("scroll_identify_identified") + " " + item );
 		
 		Badges.validateItemLevelAquired( item );
 	}

@@ -109,7 +109,7 @@ public class ShortSword extends MeleeWeapon {
 				
 			} else {
 				
-				if (item instanceof Boomerang) {
+				if (item != null) {
 					GLog.w( Babylon.get().getFromResources("weapon_shortsword_notaboomerang") );
 				}
 				

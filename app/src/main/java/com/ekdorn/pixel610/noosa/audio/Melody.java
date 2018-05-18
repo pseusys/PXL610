@@ -28,13 +28,11 @@ public class Melody { // For future music packs;
         return Utils.format(packName, Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT));
     }
 
-    protected static int getRandomNameForPackExceptioned(int last) {
+    protected static int getRandomNameForPackExceptioned(int last, int prelast) {
         int nova;
         nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
-        if (last != -1) {
-            while (nova == last) {
-                nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
-            }
+        while ((nova == last) || (nova == prelast)) {
+            nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
         }
         return nova;
     }

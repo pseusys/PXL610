@@ -253,7 +253,7 @@ public abstract class Wand extends KindOfWeapon {
 		}
 		
 		if (isBroken()) {
-			sb.insert( 0, Babylon.get().getFromResources("wand_broken"));
+			sb.insert( 0, Babylon.get().getFromResources("wand_broken") + " ");
 		}
 		
 		return sb.toString();

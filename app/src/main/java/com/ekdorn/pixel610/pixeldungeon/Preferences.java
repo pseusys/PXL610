@@ -36,7 +36,6 @@ enum Preferences {
 	public static final String KEY_CHALLENGES	  = "challenges";
 	public static final String KEY_DONATED		  = "donated";
 	public static final String KEY_GAME_INTRO     = "game_intro";
-	public static final String KEY_PROGRAM_INTRO  = "program_intro";
 	public static final String KEY_BRIGHTNESS	  = "brightness";
 	public static final String KEY_LOCALISATION	  = "localisation";
 

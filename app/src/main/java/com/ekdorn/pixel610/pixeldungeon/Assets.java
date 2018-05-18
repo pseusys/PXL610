@@ -115,7 +115,7 @@ public class Assets {
 	
 	public static final String THEME	       = "theme.mp3";
 	public static final String HAPPY	       = "surface.mp3";
-	public final static int FIRST_PACK_COUNT   = 1;
+	public final static int FIRST_PACK_COUNT   = 4;
 	public static final String FIRST_PACK      = "game%s.mp3";
 	
 	public static final String SND_CLICK	= "snd_click.mp3";

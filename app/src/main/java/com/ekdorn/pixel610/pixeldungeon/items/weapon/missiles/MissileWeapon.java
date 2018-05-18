@@ -119,19 +119,19 @@ abstract public class MissileWeapon extends Weapon {
 		
 		int min = min();
 		int max = max();
-		info.append(Utils.format(Babylon.get().getFromResources("weapon_missle_info0"), (min + (max - min) / 2)) );
+		info.append( "\n\n" + Utils.format(Babylon.get().getFromResources("weapon_missle_info0"), (min + (max - min) / 2)) + " " );
 		
 		if (Dungeon.hero.belongings.backpack.items.contains( this )) {
 			if (STR > Dungeon.hero.STR()) {
-				info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info1"), name) );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_fin0"), name) );
 			}
 			if (STR < Dungeon.hero.STR()) {
-				info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info2"), name) );
+				info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_fin1"), name) );
 			}
 		}
 		
 		if (isEquipped( Dungeon.hero )) {
-			info.append( Utils.format(Babylon.get().getFromResources("weapon_missle_info3"), name) );
+			info.append( "\n\n" + Utils.format(Babylon.get().getFromResources("weapon_melee_fin2"), name) );
 		}
 		
 		return info.toString();

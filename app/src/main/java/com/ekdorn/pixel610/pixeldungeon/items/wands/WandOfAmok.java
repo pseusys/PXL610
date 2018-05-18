@@ -49,7 +49,7 @@ public class WandOfAmok extends Wand {
 
 		} else {
 			
-			GLog.i(Babylon.get().getFromResources("wand_amok_nothing"));
+			GLog.i(Babylon.get().getFromResources("wand_nothing"));
 			
 		}
 	}

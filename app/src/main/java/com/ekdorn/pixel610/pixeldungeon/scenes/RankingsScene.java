@@ -166,7 +166,7 @@ public class RankingsScene extends PixelScene {
 			}
 
 			if (Rankings.INSTANCE.totalNumber >= Rankings.TABLE_SIZE) {
-				BitmapText label = PixelScene.createText( Babylon.get().getFromResources("rankingscene_total"), 8 );
+				BitmapText label = PixelScene.createText( Babylon.get().getFromResources("rankingscene_total") + " ", 8 );
 				label.hardlight( DEFAULT_COLOR );
 				label.measure();
 				add( label );
@@ -239,7 +239,7 @@ public class RankingsScene extends PixelScene {
 				pos++;
 			}
 
-			BitmapText games = PixelScene.createText( Babylon.get().getFromResources("rankingscene_global"), 8 );
+			BitmapText games = PixelScene.createText( Babylon.get().getFromResources("rankingscene_global") + " ", 8 );
 			games.hardlight( DEFAULT_COLOR );
 			games.measure();
 			add( games );

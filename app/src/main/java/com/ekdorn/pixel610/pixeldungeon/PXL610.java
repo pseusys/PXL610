@@ -138,8 +138,7 @@ public class PXL610 extends Game {
 
 		//PXL610.programIntro(true);
 
-		if (PXL610.programIntro()) { // PXL610: update localisation;
-			PXL610.programIntro(false);
+		if (PXL610.user_name().equals("")) { // PXL610: update localisation;
 			Babylon.get().updateLocale();
 
 			WndSettings.dialog(true);
@@ -365,14 +364,6 @@ public class PXL610 extends Game {
 	
 	public static boolean gameIntro() {
 		return Preferences.INSTANCE.getBoolean( Preferences.KEY_GAME_INTRO, true );
-	}
-
-	public static void programIntro( boolean value ) {
-		Preferences.INSTANCE.put( Preferences.KEY_PROGRAM_INTRO, value );
-	}
-
-	public static boolean programIntro() {
-		return Preferences.INSTANCE.getBoolean( Preferences.KEY_PROGRAM_INTRO, true );
 	}
 
 	public static void localisation( String value ) {

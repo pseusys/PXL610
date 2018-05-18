@@ -43,7 +43,7 @@ public class WandOfPoison extends Wand {
 			
 		} else {
 			
-			GLog.i(Babylon.get().getFromResources("wand_poison_nothing"));
+			GLog.i(Babylon.get().getFromResources("wand_nothing"));
 			
 		}
 	}

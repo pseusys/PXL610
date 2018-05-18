@@ -43,7 +43,7 @@ public class WandOfSlowness extends Wand {
 
 		} else {
 			
-			GLog.i(Babylon.get().getFromResources("wand_slowness_nothing"));
+			GLog.i(Babylon.get().getFromResources("wand_nothing"));
 			
 		}
 	}

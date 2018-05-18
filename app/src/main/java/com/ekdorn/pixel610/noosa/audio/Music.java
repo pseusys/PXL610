@@ -39,7 +39,7 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 	
 	private boolean enabled = true;
 
-	private int lastInPack = -1; // Used for not-repeating previous track;
+	private int lastInPack, preLastInPack = -1; // Used for not-repeating previous track;
 	
 	public void play( String assetName, boolean looping ) {
 		
@@ -59,7 +59,8 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 		try {
 			String actual;
 			if (!looping) {
-				int newNumber = (lastInPack == -1) ? 0 : Melody.getRandomNameForPackExceptioned( lastInPack );
+				int newNumber = (lastInPack == -1) ? 0 : Melody.getRandomNameForPackExceptioned( lastInPack, preLastInPack );
+				preLastInPack = lastInPack;
 				lastInPack = newNumber;
 				actual = Utils.format(assetName, newNumber);
 			} else {

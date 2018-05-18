@@ -95,37 +95,37 @@ public class MeleeWeapon extends Weapon {
 					Babylon.get().getFromResources("weapon_melee_level2")) :
 			"";
 		info.append( p );
-		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc0") + Utils.indefinite( quality ), name) );
-		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc1"), tier) );
+		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc0") + " " + Utils.indefinite( quality ), name) );
+		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc1"), tier) + " " );
 		
 		if (levelKnown) {
 			int min = min();
 			int max = max();
-			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known0"), (min + (max - min) / 2)) );
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known0"), (min + (max - min) / 2)) + " " );
 		} else {
 			int min = min0();
 			int max = max0();
-			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known1"), (min + (max - min) / 2), typicalSTR()) );
+			info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_known1"), (min + (max - min) / 2), typicalSTR()) + " " );
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append(Babylon.get().getFromResources("weapon_melee_known2"));
+				info.append(Babylon.get().getFromResources("weapon_melee_known2") + " ");
 			}
 		}
 		
 		if (DLY != 1f) {
-			info.append(Babylon.get().getFromResources("weapon_melee_add0") + (DLY < 1f ? Babylon.get().getFromResources("weapon_melee_add1") :
+			info.append(Babylon.get().getFromResources("weapon_melee_add0") + " " + (DLY < 1f ? Babylon.get().getFromResources("weapon_melee_add1") :
 					Babylon.get().getFromResources("weapon_melee_add2")) );
 			if (ACU != 1f) {
 				if ((ACU > 1f) == (DLY < 1f)) {
-					info.append(Babylon.get().getFromResources("weapon_melee_add3"));
+					info.append(Babylon.get().getFromResources("weapon_melee_add3") + " ");
 				} else {
-					info.append(Babylon.get().getFromResources("weapon_melee_add4"));
+					info.append(Babylon.get().getFromResources("weapon_melee_add4") + " ");
 				}
 				info.append( ACU > 1f ? Babylon.get().getFromResources("weapon_melee_add5") : Babylon.get().getFromResources("weapon_melee_add6"));
 			}
-			info.append(Babylon.get().getFromResources("weapon_melee_add7"));
+			info.append(Babylon.get().getFromResources("weapon_melee_add7") + " ");
 		} else if (ACU != 1f) {
-			info.append(Babylon.get().getFromResources("weapon_melee_add8") + (ACU > 1f ? Babylon.get().getFromResources("weapon_melee_add9") :
-					Babylon.get().getFromResources("weapon_melee_add10")) + Babylon.get().getFromResources("weapon_melee_add11"));
+			info.append(Babylon.get().getFromResources("weapon_melee_add8") + " " + (ACU > 1f ? Babylon.get().getFromResources("weapon_melee_add9") :
+					Babylon.get().getFromResources("weapon_melee_add10")) + Babylon.get().getFromResources("weapon_melee_add11") + " ");
 		}
 		switch (imbue) {
 		case SPEED:

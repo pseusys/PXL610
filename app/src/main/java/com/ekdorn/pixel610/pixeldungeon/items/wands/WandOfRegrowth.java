@@ -67,7 +67,7 @@ public class WandOfRegrowth extends Wand {
 			
 		} else {
 			
-			GLog.i(Babylon.get().getFromResources("wand_regrowth_nothing"));
+			GLog.i(Babylon.get().getFromResources("wand_nothing"));
 			
 		}
 	}

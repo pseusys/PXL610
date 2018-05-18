@@ -70,7 +70,7 @@ public class WandOfTeleportation extends Wand {
 
 		} else {
 			
-			GLog.i(Babylon.get().getFromResources("wand_teleportation_nothing"));
+			GLog.i(Babylon.get().getFromResources("wand_nothing"));
 			
 		}
 	}
