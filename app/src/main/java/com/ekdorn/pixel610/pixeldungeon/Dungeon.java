@@ -62,6 +62,7 @@ import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.StartScene;
 import com.ekdorn.pixel610.pixeldungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.pixeldungeon.utils.BArray;
+import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndResurrect;
 import com.ekdorn.pixel610.utils.Bundlable;
@@ -597,6 +598,7 @@ public class Dungeon {
 	
 	public static void fail( String desc ) {
 		resultDescription = desc;
+		GLog.n(Babylon.get().getFromResources("final_death"));
 		if (hero.belongings.getItem( Ankh.class ) == null) { 
 			Rankings.INSTANCE.submit( false );
 			OnlineRatinger.send(false);

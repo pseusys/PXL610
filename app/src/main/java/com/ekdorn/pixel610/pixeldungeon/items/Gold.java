@@ -86,9 +86,9 @@ public class Gold extends Item {
 		case 0:
 			return Babylon.get().getFromResources("item_gold_collect");
 		case 1:
-			return Babylon.get().getFromResources("item_gold_infoone") + Babylon.get().getFromResources("item_gold_collect");
+			return Babylon.get().getFromResources("item_gold_infoone") + " " + Babylon.get().getFromResources("item_gold_collect");
 		default:
-			return Utils.format( Babylon.get().getFromResources("item_gold_info") + Babylon.get().getFromResources("item_gold_collect"), quantity );
+			return Utils.format( Babylon.get().getFromResources("item_gold_info") + Babylon.get().getFromResources("item_gold_collect"), quantity ) + " ";
 		}
 	}
 	

@@ -39,9 +39,13 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 	
 	private boolean enabled = true;
 
-	private int lastInPack, preLastInPack = -1; // Used for not-repeating previous track;
-	
-	public void play( String assetName, boolean looping ) {
+	private int lastInPack, preLastInPack; // Used for not-repeating previous track;
+
+	Music() {
+		this.lastInPack = this.preLastInPack = -1;
+	}
+
+	public void play(String assetName, boolean looping ) {
 		
 		if (isPlaying() && lastPlayed.equals( assetName )) {
 			return;
@@ -55,7 +59,9 @@ public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 		if (!enabled || assetName == null) {
 			return;
 		}
-		
+
+		Log.e("TAG", "play: " + lastInPack );
+
 		try {
 			String actual;
 			if (!looping) {

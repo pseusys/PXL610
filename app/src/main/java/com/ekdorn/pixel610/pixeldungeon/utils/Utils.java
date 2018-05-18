@@ -19,6 +19,8 @@ package com.ekdorn.pixel610.pixeldungeon.utils;
 
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 
+import java.util.Locale;
+
 public class Utils {
 
 	public static String capitalize( String str ) {
@@ -32,10 +34,12 @@ public class Utils {
 	public static String VOWELS	= "aoeiu";
 	
 	public static String indefinite( String noun ) { //TODO: manage;
-		if (noun.length() == 0) {
-			return "a";
-		} else {
-			return (VOWELS.indexOf( Character.toLowerCase( noun.charAt( 0 ) ) ) != -1 ? "an " : "a ") + noun;
-		}
+		if (Babylon.get().getCurrent().equals(Locale.ENGLISH)) {
+			if (noun.length() == 0) {
+				return "a";
+			} else {
+				return (VOWELS.indexOf(Character.toLowerCase(noun.charAt(0))) != -1 ? "an " : "a ") + noun;
+			}
+		} else return "";
 	}
 }

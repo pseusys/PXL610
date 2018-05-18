@@ -98,7 +98,7 @@ public class WndHero extends WndTabbed {
 			title.measure();
 			add( title );
 			
-			RedButton btnCatalogus = new RedButton( Babylon.get().getFromResources("wnd_hero_catologus") ) {
+			RedButton btnCatalogus = new RedButton( Babylon.get().getFromResources("catologus") ) {
 				@Override
 				protected void onClick() {
 					hide();
