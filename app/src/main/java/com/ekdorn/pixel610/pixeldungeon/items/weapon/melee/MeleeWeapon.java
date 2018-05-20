@@ -95,7 +95,7 @@ public class MeleeWeapon extends Weapon {
 					Babylon.get().getFromResources("weapon_melee_level2")) :
 			"";
 		info.append( p );
-		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc0") + " " + Utils.indefinite( quality ), name) );
+		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc0") + " " + Utils.indefinite( quality ), name) + " " );
 		info.append( Utils.format(Babylon.get().getFromResources("weapon_melee_desc1"), tier) + " " );
 		
 		if (levelKnown) {

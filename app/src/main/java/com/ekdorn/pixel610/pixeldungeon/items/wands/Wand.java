@@ -78,18 +78,18 @@ public abstract class Wand extends KindOfWeapon {
 		WandOfAvalanche.class
 	};
 	private static final String[] woods = 
-		{Babylon.get().getFromResources("wand_holly"),
-				Babylon.get().getFromResources("wand_yew"),
-				Babylon.get().getFromResources("wand_ebony"),
-				Babylon.get().getFromResources("wand_cherry"),
-				Babylon.get().getFromResources("wand_teak"),
-				Babylon.get().getFromResources("wand_rowan"),
-				Babylon.get().getFromResources("wand_willow"),
-				Babylon.get().getFromResources("wand_mahogany"),
-				Babylon.get().getFromResources("wand_bamboo"),
-				Babylon.get().getFromResources("wand_purpleheart"),
-				Babylon.get().getFromResources("wand_oak"),
-				Babylon.get().getFromResources("wand_birch")};
+		{Babylon.get().getFromResources("wand_holly") + " ",
+				Babylon.get().getFromResources("wand_yew") + " ",
+				Babylon.get().getFromResources("wand_ebony") + " ",
+				Babylon.get().getFromResources("wand_cherry") + " ",
+				Babylon.get().getFromResources("wand_teak") + " ",
+				Babylon.get().getFromResources("wand_rowan") + " ",
+				Babylon.get().getFromResources("wand_willow") + " ",
+				Babylon.get().getFromResources("wand_mahogany") + " ",
+				Babylon.get().getFromResources("wand_bamboo") + " ",
+				Babylon.get().getFromResources("wand_purpleheart") + " ",
+				Babylon.get().getFromResources("wand_oak") + " ",
+				Babylon.get().getFromResources("wand_birch") + " "};
 	private static final Integer[] images = {
 		ItemSpriteSheet.WAND_HOLLY, 
 		ItemSpriteSheet.WAND_YEW, 

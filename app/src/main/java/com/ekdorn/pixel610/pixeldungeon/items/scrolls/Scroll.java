@@ -149,7 +149,7 @@ public abstract class Scroll extends Item {
 			handler.know( this );
 		}
 		
-		Badges.validateAllScrollsIdentified();
+		//Badges.validateAllScrollsIdentified();
 	}
 	
 	@Override

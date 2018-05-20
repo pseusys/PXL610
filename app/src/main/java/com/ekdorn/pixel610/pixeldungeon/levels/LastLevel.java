@@ -110,18 +110,18 @@ public class LastLevel extends Level {
 		}
 	}
 	
-	/*@Override
+	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
 		case Terrain.WATER:
-			return Babylon.get().getFromResources("levels_sewer_water_desc");
+			return Babylon.get().getFromResources("levels_desc_water_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return Babylon.get().getFromResources("levels_sewer_statue_desc");
+			return Babylon.get().getFromResources("levels_desc_statue_desc");
 		default:
 			return super.tileDesc( tile );
 		}
-	}*/
+	}
 	
 	@Override
 	public void addVisuals( Scene scene ) {

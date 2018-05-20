@@ -24,10 +24,13 @@ import com.ekdorn.pixel610.pixeldungeon.items.TomeOfMastery;
 import com.ekdorn.pixel610.pixeldungeon.items.armor.ClothArmor;
 import com.ekdorn.pixel610.pixeldungeon.items.bags.Keyring;
 import com.ekdorn.pixel610.pixeldungeon.items.food.Food;
+import com.ekdorn.pixel610.pixeldungeon.items.potions.Potion;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfStrength;
 import com.ekdorn.pixel610.pixeldungeon.items.rings.RingOfShadows;
+import com.ekdorn.pixel610.pixeldungeon.items.scrolls.Scroll;
 import com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfIdentify;
 import com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfMagicMapping;
+import com.ekdorn.pixel610.pixeldungeon.items.wands.Wand;
 import com.ekdorn.pixel610.pixeldungeon.items.wands.WandOfMagicMissile;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.Dagger;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.Knuckles;
@@ -140,8 +143,14 @@ public enum HeroClass {
 		new Dart( 8 ).identify().collect();
 		
 		QuickSlot.primaryValue = Dart.class;
-		
-		new PotionOfStrength().setKnown();
+
+		for (Class<? extends Scroll> scroll: Scroll.getUnknown()) {
+            try {
+                scroll.newInstance().setKnown();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 	}
 	
 	private static void initMage( Hero hero ) {	
@@ -151,8 +160,6 @@ public enum HeroClass {
 		wand.identify().collect();
 		
 		QuickSlot.primaryValue = wand;
-		
-		new ScrollOfIdentify().setKnown();
 	}
 	
 	private static void initRogue( Hero hero ) {

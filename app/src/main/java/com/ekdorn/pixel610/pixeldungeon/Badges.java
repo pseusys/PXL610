@@ -63,8 +63,8 @@ public class Badges {
 		LEVEL_REACHED_2(Babylon.get().getFromResources("badges_12level"), 9 ),
 		LEVEL_REACHED_3(Babylon.get().getFromResources("badges_18level"), 10 ),
 		LEVEL_REACHED_4(Babylon.get().getFromResources("badges_24level"), 11 ),
-		ALL_POTIONS_IDENTIFIED(Babylon.get().getFromResources("badges_potions"), 16 ),
-		ALL_SCROLLS_IDENTIFIED(Babylon.get().getFromResources("badges_scrolls"), 17 ),
+		//ALL_POTIONS_IDENTIFIED(Babylon.get().getFromResources("badges_potions"), 16 ),
+		//ALL_SCROLLS_IDENTIFIED(Babylon.get().getFromResources("badges_scrolls"), 17 ),
 		ALL_RINGS_IDENTIFIED(Babylon.get().getFromResources("badges_rings"), 18 ),
 		ALL_WANDS_IDENTIFIED(Babylon.get().getFromResources("badges_wands"), 19 ),
 		ALL_ITEMS_IDENTIFIED(Babylon.get().getFromResources("badges_items"), 35, true ),
@@ -427,38 +427,38 @@ public class Badges {
 		displayBadge( badge );
 	}
 	
-	public static void validateAllPotionsIdentified() {
-		if (Dungeon.hero != null && Dungeon.hero.isAlive() && 
+	/*public static void validateAllPotionsIdentified() {
+		if (Dungeon.hero != null && Dungeon.hero.isAlive() &&
 			!local.contains( Badge.ALL_POTIONS_IDENTIFIED ) && Potion.allKnown()) {
-			
+
 			Badge badge = Badge.ALL_POTIONS_IDENTIFIED;
 			local.add( badge );
 			displayBadge( badge );
-			
+
 			validateAllItemsIdentified();
 		}
 	}
-	
+
 	public static void validateAllScrollsIdentified() {
-		if (Dungeon.hero != null && Dungeon.hero.isAlive() && 
+		if (Dungeon.hero != null && Dungeon.hero.isAlive() &&
 			!local.contains( Badge.ALL_SCROLLS_IDENTIFIED ) && Scroll.allKnown()) {
-			
+
 			Badge badge = Badge.ALL_SCROLLS_IDENTIFIED;
 			local.add( badge );
 			displayBadge( badge );
-			
+
 			validateAllItemsIdentified();
 		}
-	}
-	
+	}*/
+
 	public static void validateAllRingsIdentified() {
-		if (Dungeon.hero != null && Dungeon.hero.isAlive() && 
+		if (Dungeon.hero != null && Dungeon.hero.isAlive() &&
 			!local.contains( Badge.ALL_RINGS_IDENTIFIED ) && Ring.allKnown()) {
-			
+
 			Badge badge = Badge.ALL_RINGS_IDENTIFIED;
 			local.add( badge );
 			displayBadge( badge );
-			
+
 			validateAllItemsIdentified();
 		}
 	}
@@ -504,8 +504,8 @@ public class Badges {
 	
 	public static void validateAllItemsIdentified() {
 		if (!global.contains( Badge.ALL_ITEMS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_POTIONS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_SCROLLS_IDENTIFIED ) &&
+			/*global.contains( Badge.ALL_POTIONS_IDENTIFIED ) &&
+			global.contains( Badge.ALL_SCROLLS_IDENTIFIED ) &&*/
 			global.contains( Badge.ALL_RINGS_IDENTIFIED ) &&
 			global.contains( Badge.ALL_WANDS_IDENTIFIED )) {
 			
@@ -914,8 +914,8 @@ public class Badges {
 		leaveBest( filtered, Badge.DEATH_FROM_GAS, Badge.YASD );
 		leaveBest( filtered, Badge.DEATH_FROM_HUNGER, Badge.YASD );
 		leaveBest( filtered, Badge.DEATH_FROM_POISON, Badge.YASD );
-		leaveBest( filtered, Badge.ALL_POTIONS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_SCROLLS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
+		leaveBest( filtered/*, Badge.ALL_POTIONS_IDENTIFIED*/, Badge.ALL_ITEMS_IDENTIFIED );
+		leaveBest( filtered/*, Badge.ALL_SCROLLS_IDENTIFIED*/, Badge.ALL_ITEMS_IDENTIFIED );
 		leaveBest( filtered, Badge.ALL_RINGS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
 		leaveBest( filtered, Badge.ALL_WANDS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
 		leaveBest( filtered, Badge.VICTORY, Badge.VICTORY_ALL_CLASSES );

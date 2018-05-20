@@ -24,7 +24,7 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 public class DwarfToken extends Item {
 	
 	{
-		name = Babylon.get().getFromResources("quest_dewarftoken");
+		name = Babylon.get().getFromResources("quest_dwarftoken");
 		image = ItemSpriteSheet.TOKEN;
 		
 		stackable = true;

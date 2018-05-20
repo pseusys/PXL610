@@ -23,6 +23,7 @@ import com.ekdorn.pixel610.pixeldungeon.actors.Char;
 import com.ekdorn.pixel610.pixeldungeon.actors.buffs.Buff;
 
 import com.ekdorn.pixel610.pixeldungeon.sprites.RatKingSprite;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class RatKing extends NPC {
 
@@ -66,7 +67,7 @@ public class RatKing extends NPC {
 		sprite.turnTo( pos, Dungeon.hero.pos );
 		if (state == SLEEPEING) {
 			notice();
-			yell(Babylon.get().getFromResources("mob_ratking_idle0"));
+			yell(Utils.format(Babylon.get().getFromResources("mob_ratking_idle0"), Dungeon.hero.heroClass.title()));
 			state = WANDERING;
 		} else {
 			yell(Babylon.get().getFromResources("mob_ratking_idle1"));

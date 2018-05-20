@@ -138,11 +138,11 @@ public class InterlevelScene extends PixelScene {
 				} catch (FileNotFoundException e) {
 
 					error = Babylon.get().getFromResources("interlevelscene_err_filenotfound");
-					
+
 				} catch (Exception e ) {
 					
 					error = Babylon.get().getFromResources("interlevelscene_err_other");
-					
+
 				}
 				
 				if (phase == Phase.STATIC && error == null) {

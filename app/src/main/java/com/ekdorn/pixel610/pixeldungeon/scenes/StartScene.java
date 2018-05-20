@@ -56,7 +56,7 @@ public class StartScene extends PixelScene {
 	private static final float BUTTON_HEIGHT	= 24;
 	private static final float GAP				= 2;
 	
-	private static final float WIDTH_P	= 116;
+	private static final float WIDTH_P	= 150;
 	private static final float HEIGHT_P	= 220;
 	
 	private static final float WIDTH_L	= 224;
@@ -173,7 +173,7 @@ public class StartScene extends PixelScene {
 			for (int i=0; i < classes.length; i++) {
 				ClassShield shield = shields.get( classes[i] );
 				shield.setRect( 
-					left + (i % 2) * shieldW, 
+					left + (i % 2) * shieldW,
 					top + (i / 2) * shieldH, 
 					shieldW, shieldH );
 			}
@@ -236,7 +236,7 @@ public class StartScene extends PixelScene {
 	
 	private void updateClass( HeroClass cl ) {
 		
-		if (curClass == cl) {
+		if ((curClass == cl) && (cl != HeroClass.HUNTRESS) && (cl != HeroClass.ROGUE)) { //EKDORN: not ready
 			add( new WndClass( cl ) );
 			return;
 		}
@@ -246,7 +246,7 @@ public class StartScene extends PixelScene {
 		}
 		shields.get( curClass = cl ).highlight( true );
 		
-		if (cl != HeroClass.HUNTRESS || huntressUnlocked) {
+		if (((cl != HeroClass.HUNTRESS) && (cl !=HeroClass.ROGUE)) || huntressUnlocked) {
 		
 			unlock.visible = false;
 
@@ -384,7 +384,7 @@ public class StartScene extends PixelScene {
 				highlighted = BASIC_HIGHLIGHTED;
 			}
 			
-			name.text( cl.name() );
+			name.text( (cl.title()).toUpperCase(Babylon.get().getCurrent()) );
 			name.measure();
 			name.hardlight( normal );
 			

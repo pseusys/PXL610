@@ -267,7 +267,7 @@ public class Ring extends EquipableItem {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : gem + Babylon.get().getFromResources("ring_ring");
+		return isKnown() ? name :  Babylon.get().getFromResources("ring_ring")+ " " + gem;
 	}
 	
 	@Override
@@ -283,7 +283,7 @@ public class Ring extends EquipableItem {
 			
 		} else if (cursed && cursedKnown) {
 			
-			return desc() + Babylon.get().getFromResources("ring_cursedknown") + name() + ".";
+			return desc() + Babylon.get().getFromResources("ring_cursedknown") + " " + name() + ".";
 			
 		} else {
 			

@@ -33,6 +33,7 @@ import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.pixeldungeon.ui.ExitButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Icons;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
+import com.ekdorn.pixel610.utils.GameMath;
 
 public class AboutScene extends PixelScene {
 	
@@ -69,11 +70,20 @@ public class AboutScene extends PixelScene {
 		add( hotArea );
 		
 		Image wata = Icons.WATA.get();
-		wata.x = align( (Camera.main.width - wata.width) / 2 );
-		wata.y = text.y - wata.height - 8;
+		Image ek = Icons.EK.get();
+
+		float binX = ek.width + 16 + wata.width;
+		float binY = Math.max(ek.height, wata.height);
+
+		wata.x = align( (Camera.main.width - binX) / 2 );
+		wata.y = align( text.y - (binY + wata.height)/2 - 8);
 		add( wata );
+		ek.x = align( wata.x + wata.width + 16 );
+		ek.y = text.y - (binY + ek.height)/2 - 8;
+		add( ek );
 		
-		new Flare( 7, 64 ).color( 0x112233, true ).show( wata, 0 ).angularSpeed = +20;
+		new Flare( 7, 32 ).color( 0x112233, true ).show( wata, 0 ).angularSpeed = +40;
+		new Flare( 7, 32 ).color( 0x332211, true ).show( ek, 0 ).angularSpeed = -45;
 		
 		Archs archs = new Archs();
 		archs.setSize( Camera.main.width, Camera.main.height );

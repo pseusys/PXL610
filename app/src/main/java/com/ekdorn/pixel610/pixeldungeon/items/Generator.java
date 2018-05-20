@@ -21,6 +21,7 @@ import java.util.HashMap;
 
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.actors.hero.Hero;
+import com.ekdorn.pixel610.pixeldungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.pixeldungeon.items.armor.*;
 import com.ekdorn.pixel610.pixeldungeon.items.bags.Bag;
 import com.ekdorn.pixel610.pixeldungeon.items.food.Food;
@@ -43,7 +44,7 @@ public class Generator {
 		ARMOR	( 10,	Armor.class ),
 		POTION	( 50,	Potion.class ),
 		SCROLL	( 40,	Scroll.class ),
-		WAND	( 4,	Wand.class ),
+		WAND	( 15,	Wand.class ),
 		RING	( 2,	Ring.class ),
 		SEED	( 5,	Plant.Seed.class ),
 		FOOD	( 0,	Food.class ),
@@ -213,6 +214,12 @@ public class Generator {
 				return randomArmor();
 			case WEAPON:
 				return randomWeapon();
+			case WAND:
+				if (Dungeon.hero.heroClass.equals(HeroClass.MAGE)) { //TODO: revise;
+					return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).identify().random();
+				} else {
+					return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).random();
+				}
 			default:
 				return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).random();
 			}

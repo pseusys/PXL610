@@ -1009,11 +1009,13 @@ public abstract class Level implements Bundlable {
 			return Babylon.get().getFromResources("levels_desc_triggeredtrap_desc");
 		case Terrain.STATUE:
 		case Terrain.STATUE_SP:
-			return Babylon.get().getFromResources("levels_desc_staatue_desc");
+			return Babylon.get().getFromResources("levels_desc_statue_desc");
 		case Terrain.ALCHEMY:
 			return Babylon.get().getFromResources("levels_desc_alchemypot_desc");
 		case Terrain.EMPTY_WELL:
 			return Babylon.get().getFromResources("levels_desc_emptywell_desc");
+		case Terrain.PEDESTAL:
+			return Babylon.get().getFromResources("levels_desc_pedestal_desc");
 		default:
 			if (tile >= Terrain.WATER_TILES) {
 				return tileDesc( Terrain.WATER );
