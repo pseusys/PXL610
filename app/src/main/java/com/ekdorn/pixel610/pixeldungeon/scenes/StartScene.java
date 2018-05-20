@@ -92,7 +92,7 @@ public class StartScene extends PixelScene {
 			width = WIDTH_L;
 			height = HEIGHT_L;
 		} else {
-			width = WIDTH_P;
+			width = WIDTH_P;//
 			height = HEIGHT_P;
 		}
 
