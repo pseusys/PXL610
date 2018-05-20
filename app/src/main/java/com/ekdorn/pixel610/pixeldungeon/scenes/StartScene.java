@@ -109,7 +109,7 @@ public class StartScene extends PixelScene {
 		title.y = align( top );
 		add( title );
 		
-		buttonX = left;
+		buttonX = left + 16;
 		buttonY = bottom - BUTTON_HEIGHT;
 		
 		btnNewGame = new GameButton( Babylon.get().getFromResources("startscene_new") ) {
