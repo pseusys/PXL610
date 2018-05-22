@@ -26,13 +26,14 @@ import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfFrost;
 import com.ekdorn.pixel610.pixeldungeon.levels.Level;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.utils.BArray;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.utils.PathFinder;
 
 public class Icecap extends Plant {
 	
 	{
 		image = 1;
-		plantName = Babylon.get().getFromResources("plants_icecap");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_icecap");
 	}
 	
 	@Override
@@ -59,7 +60,7 @@ public class Icecap extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_icecap");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_ICECAP;
 			
 			plantClass = Icecap.class;

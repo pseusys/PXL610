@@ -40,7 +40,7 @@ public class Babylon {
 
     private HashMap<String, String> resources;
     private ArrayList<Locale> localisations = new ArrayList<>();
-    private Locale inUse;
+    private Locale inUse = new Locale("ru");
 
     public static Babylon get() {
         if (instance == null) {
@@ -84,32 +84,32 @@ public class Babylon {
     }
 
     public void updateLocale() {
-        Locale current = Locale.getDefault();
+        /*Locale current = Locale.getDefault();
 
         if (localisations.contains(current)) {
             PXL610.localisation(current.getLanguage());
             inUse = current;
-        } else {
-            PXL610.localisation(Locale.ENGLISH.getLanguage());
-            inUse = Locale.ENGLISH;
-        }
+        } else {*/
+            PXL610.localisation(inUse.getLanguage());
+            inUse = new Locale("ru");
+        //}
         GLog.i("resources loaded");
     }
 
     public void changeLocale(int loc) {
-        int current = localisations.indexOf(inUse);
+        /*int current = localisations.indexOf(inUse);
 
         current += loc;
-        if (current > 1 /*3 in finale*/) {
+        if (current > 1 3 in finale) {
             current = 0;
         } else if (current < 0) {
-            current = 1 /*0 in finale*/;
+            current = 1 0 in finale;
         }
 
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
 
-        load();
+        load();*/
     }
 
     public String getFromResources(String tag) {

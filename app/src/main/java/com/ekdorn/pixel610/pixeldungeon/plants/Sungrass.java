@@ -27,13 +27,14 @@ import com.ekdorn.pixel610.pixeldungeon.effects.particles.ShaftParticle;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfHealing;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.ui.BuffIndicator;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.utils.Bundle;
 
 public class Sungrass extends Plant {
 	
 	{
 		image = 4;
-		plantName = Babylon.get().getFromResources("plants_sungrass");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_sungrass");
 	}
 	
 	@Override
@@ -58,7 +59,7 @@ public class Sungrass extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_sungrass");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_SUNGRASS;
 			
 			plantClass = Sungrass.class;

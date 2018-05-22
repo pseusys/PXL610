@@ -37,7 +37,7 @@ import com.ekdorn.pixel610.utils.GameMath;
 
 public class AboutScene extends PixelScene {
 	
-	private static final String LNK = "pixeldungeon.watabou.ru";
+	private static final String LNK = "www.instagram.com/ek.dorn";
 	
 	@Override
 	public void create() {
@@ -71,8 +71,9 @@ public class AboutScene extends PixelScene {
 		
 		Image wata = Icons.WATA.get();
 		Image ek = Icons.EK.get();
+		Image Nkg = Icons.NKG.get();
 
-		float binX = ek.width + 16 + wata.width;
+		float binX = ek.width + 16 + wata.width + 16 + Nkg.width;
 		float binY = Math.max(ek.height, wata.height);
 
 		wata.x = align( (Camera.main.width - binX) / 2 );
@@ -81,9 +82,13 @@ public class AboutScene extends PixelScene {
 		ek.x = align( wata.x + wata.width + 16 );
 		ek.y = text.y - (binY + ek.height)/2 - 8;
 		add( ek );
+		Nkg.x = align( ek.x + ek.width + 16 );
+		Nkg.y = text.y - (binY + ek.height)/2 - 8;
+		add( Nkg );
 		
 		new Flare( 7, 32 ).color( 0x112233, true ).show( wata, 0 ).angularSpeed = +40;
 		new Flare( 7, 32 ).color( 0x332211, true ).show( ek, 0 ).angularSpeed = -45;
+		new Flare( 7, 32 ).color( 0x661278, true ).show( Nkg, 0 ).angularSpeed = +100;
 		
 		Archs archs = new Archs();
 		archs.setSize( Camera.main.width, Camera.main.height );

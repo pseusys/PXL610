@@ -26,12 +26,13 @@ import com.ekdorn.pixel610.pixeldungeon.effects.CellEmitter;
 import com.ekdorn.pixel610.pixeldungeon.effects.particles.PoisonParticle;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfToxicGas;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class Sorrowmoss extends Plant {
 	
 	{
 		image = 2;
-		plantName = Babylon.get().getFromResources("plants_sorrowmoss");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_sorrowmoss");
 	}
 	
 	@Override
@@ -56,7 +57,7 @@ public class Sorrowmoss extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_sorrowmoss");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_SORROWMOSS;
 			
 			plantClass = Sorrowmoss.class;

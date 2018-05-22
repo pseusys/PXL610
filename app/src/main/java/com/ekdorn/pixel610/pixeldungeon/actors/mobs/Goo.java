@@ -39,6 +39,7 @@ import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.CharSprite;
 import com.ekdorn.pixel610.pixeldungeon.sprites.GooSprite;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndScript;
 import com.ekdorn.pixel610.utils.Callback;
 import com.ekdorn.pixel610.utils.Random;
 public class Goo extends Mob {
@@ -204,6 +205,8 @@ public class Goo extends Mob {
 		Badges.validateBossSlain();
 		
 		yell(Babylon.get().getFromResources("mob_goo_death"));
+
+		GameScene.show(new WndScript(Goo.this, Babylon.get().getFromResources("mob_goo_plot")));
 	}
 	
 	@Override

@@ -27,13 +27,14 @@ import com.ekdorn.pixel610.pixeldungeon.effects.particles.EarthParticle;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfParalyticGas;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.ui.BuffIndicator;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.utils.Bundle;
 
 public class Earthroot extends Plant {
 	
 	{
 		image = 5;
-		plantName = Babylon.get().getFromResources("plants_earthroot");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_earthroot");
 	}
 	
 	@Override
@@ -59,7 +60,7 @@ public class Earthroot extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_earthroot");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_EARTHROOT;
 			
 			plantClass = Earthroot.class;

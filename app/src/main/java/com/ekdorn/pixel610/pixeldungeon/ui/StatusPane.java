@@ -32,6 +32,8 @@ import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
 import com.ekdorn.pixel610.pixeldungeon.effects.particles.BloodParticle;
+import com.ekdorn.pixel610.pixeldungeon.effects.particles.EnergyParticle;
+import com.ekdorn.pixel610.pixeldungeon.effects.particles.SmokeParticle;
 import com.ekdorn.pixel610.pixeldungeon.items.keys.IronKey;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
@@ -89,7 +91,7 @@ public class StatusPane extends Component {
 		add( avatar );
 		
 		blood = new BitmaskEmitter( avatar );
-		blood.pour( BloodParticle.FACTORY, 0.3f );
+		blood.pour( SmokeParticle.FACTORY, 0.3f );
 		blood.autoKill = false;
 		blood.on = false;
 		add( blood );

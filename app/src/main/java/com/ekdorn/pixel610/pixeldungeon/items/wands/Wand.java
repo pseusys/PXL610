@@ -373,7 +373,14 @@ public abstract class Wand extends KindOfWeapon {
 		
 		return this;
 	}
-	
+
+	@Override
+	public boolean collect() {
+		if (Dungeon.hero.heroClass.equals(HeroClass.MAGE)) this.identify();
+
+		return super.collect();
+	}
+
 	public static boolean allKnown() {
 		return handler.known().size() == wands.length;
 	}

@@ -17,12 +17,13 @@ import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfStrength;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class Rotberry extends Plant {
 	
 	{
 		image = 7;
-		plantName = Babylon.get().getFromResources("plants_rotberry");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_rotberry");
 	}
 	
 	@Override
@@ -47,7 +48,7 @@ public class Rotberry extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_rotberry");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_ROTBERRY;
 			
 			plantClass = Rotberry.class;

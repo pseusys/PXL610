@@ -186,8 +186,8 @@ public class SurfaceScene extends PixelScene {
 	
 	private static class Sky extends Visual {
 		
-		private static final int[] day		= {0xFF4488FF, 0xFFCCEEFF};
-		private static final int[] night	= {0xFF001155, 0xFF335980};
+		private static final int[] day		= {0xFF9A6D6D, 0xFF9A6D6D};
+		private static final int[] night	= {0xFF9A6D6D, 0xFF9A6D6D};
 		
 		private SmartTexture texture;
 		private FloatBuffer verticesBuffer;

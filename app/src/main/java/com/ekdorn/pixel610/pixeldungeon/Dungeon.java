@@ -60,6 +60,7 @@ import com.ekdorn.pixel610.pixeldungeon.levels.SewerBossLevel;
 import com.ekdorn.pixel610.pixeldungeon.levels.SewerLevel;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.StartScene;
+import com.ekdorn.pixel610.pixeldungeon.ui.GameLog;
 import com.ekdorn.pixel610.pixeldungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.pixeldungeon.utils.BArray;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;

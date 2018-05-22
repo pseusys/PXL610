@@ -214,16 +214,10 @@ public class Generator {
 				return randomArmor();
 			case WEAPON:
 				return randomWeapon();
-			case WAND:
-				if (Dungeon.hero.heroClass.equals(HeroClass.MAGE)) { //TODO: revise;
-					return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).identify().random();
-				} else {
-					return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).random();
-				}
 			default:
 				return ((Item)cat.classes[Random.chances( cat.probs )].newInstance()).random();
 			}
-			
+
 		} catch (Exception e) {
 
 			return null;

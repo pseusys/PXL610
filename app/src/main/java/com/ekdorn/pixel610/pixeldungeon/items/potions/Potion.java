@@ -247,7 +247,7 @@ public class Potion extends Item {
 	
 	@Override
 	public String name() {
-		return isKnown() ? name : color + Babylon.get().getFromResources("potion_potion");
+		return isKnown() ? name : color + " " + Babylon.get().getFromResources("potion_potion");
 	}
 	
 	@Override

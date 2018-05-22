@@ -24,12 +24,13 @@ import com.ekdorn.pixel610.pixeldungeon.actors.blobs.ConfusionGas;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfInvisibility;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class Dreamweed extends Plant {
 	
 	{
 		image = 3;
-		plantName = Babylon.get().getFromResources("plants_dreamweed");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_dreamweed");
 	}
 	
 	@Override
@@ -50,7 +51,7 @@ public class Dreamweed extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_dreamweed");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_DREAMWEED;
 			
 			plantClass = Dreamweed.class;

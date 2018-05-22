@@ -27,12 +27,13 @@ import com.ekdorn.pixel610.pixeldungeon.effects.particles.FlameParticle;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfLiquidFlame;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class Firebloom extends Plant {
 	
 	{
 		image = 0;
-		plantName = Babylon.get().getFromResources("plants_firebloom");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_firebloom");
 	}
 	
 	@Override
@@ -55,7 +56,7 @@ public class Firebloom extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_firebloom");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_FIREBLOOM;
 			
 			plantClass = Firebloom.class;

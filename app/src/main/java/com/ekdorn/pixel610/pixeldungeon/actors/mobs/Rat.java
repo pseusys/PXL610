@@ -20,7 +20,9 @@ package com.ekdorn.pixel610.pixeldungeon.actors.mobs;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.actors.Char;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Ghost;
+import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.RatSprite;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndScript;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Rat extends Mob {

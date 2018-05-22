@@ -27,12 +27,13 @@ import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.PotionOfMindVision;
 import com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class Fadeleaf extends Plant {
 	
 	{
 		image = 6;
-		plantName = Babylon.get().getFromResources("plants_fadeleaf");
+		plantName = Utils.capitalize(Babylon.get().getFromResources("plants_plantof")) + " " + Babylon.get().getFromResources("plants_fadeleaf");
 	}
 	
 	@Override
@@ -79,7 +80,7 @@ public class Fadeleaf extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_fadeleaf");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + plantName;
+			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
 			image = ItemSpriteSheet.SEED_FADELEAF;
 			
 			plantClass = Fadeleaf.class;
