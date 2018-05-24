@@ -24,8 +24,29 @@ import com.ekdorn.pixel610.pixeldungeon.actors.buffs.Buff;
 
 import com.ekdorn.pixel610.pixeldungeon.sprites.RatKingSprite;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
+import com.ekdorn.pixel610.utils.Random;
 
 public class RatKing extends NPC {
+
+	public RatKing() {
+		switch (Random.Int( 3 )) {
+			case 0:
+				name = Babylon.get().getFromResources("mob_ratking_customname0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("mob_ratking_customname1");
+				break;
+			case 2:
+				name = Babylon.get().getFromResources("mob_ratking_customname2");
+				break;
+			case 3:
+				name = Babylon.get().getFromResources("mob_ratking_customname3");
+				break;
+			default:
+				name = Babylon.get().getFromResources("mob_ratking");
+				break;
+		}
+	}
 
 	{
 		name = Babylon.get().getFromResources("mob_ratking");

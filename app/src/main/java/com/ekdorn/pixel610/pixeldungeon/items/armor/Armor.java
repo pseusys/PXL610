@@ -234,7 +234,7 @@ public class Armor extends EquipableItem {
 		}
 		
 		if (isEquipped( Dungeon.hero )) {
-			info.append(Babylon.get().getFromResources("armor_wearing") + name + (cursed ? Babylon.get().getFromResources("armor_ifcursed") : ".") );
+			info.append(Babylon.get().getFromResources("armor_wearing") + " " + name + (cursed ? Babylon.get().getFromResources("armor_ifcursed") : ".") );
 		} else {
 			if (cursedKnown && cursed) {
 				info.append( Utils.format(Babylon.get().getFromResources("armor_cursedknown"), name) );

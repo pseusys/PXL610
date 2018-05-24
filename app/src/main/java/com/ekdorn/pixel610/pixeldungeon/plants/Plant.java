@@ -170,7 +170,7 @@ public class Plant implements Bundlable {
 		
 		@Override
 		public String info() { 
-			return String.format( Babylon.get().getFromResources("plants_seed"), Utils.indefinite( plantName ), desc() );
+			return String.format( Babylon.get().getFromResources("plants_seed"), desc() );
 		}
 	}
 }

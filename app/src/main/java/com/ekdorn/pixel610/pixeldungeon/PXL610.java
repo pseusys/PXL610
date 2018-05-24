@@ -371,7 +371,7 @@ public class PXL610 extends Game {
 	}
 
 	public static String localisation() {
-		return Preferences.INSTANCE.getString( Preferences.KEY_LOCALISATION, "en" );
+		return Preferences.INSTANCE.getString( Preferences.KEY_LOCALISATION, "ru" );
 	}
 
 	public static void user_name( String value ) {

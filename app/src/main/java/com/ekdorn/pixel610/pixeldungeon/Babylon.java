@@ -55,11 +55,13 @@ public class Babylon {
         localisations.add(Locale.GERMAN);
         localisations.add(new Locale("la"));
 
-        String lock = PXL610.localisation();
+        /*String lock = PXL610.localisation();
 
         for (int i = 0; i < localisations.size(); i++) {
             if (lock.equals(localisations.get(i).getLanguage())) inUse = localisations.get(i);
-        }
+        }*/
+
+        inUse = new Locale("ru");
 
         load();
     }
