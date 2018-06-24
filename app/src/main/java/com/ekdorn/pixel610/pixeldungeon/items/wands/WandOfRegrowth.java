@@ -56,7 +56,7 @@ public class WandOfRegrowth extends Wand {
 			}
 		}
 		
-		int c = Dungeon.level.map[cell];
+		int c = Dungeon.level.map[cell];//
 		if (c == Terrain.EMPTY || 
 			c == Terrain.EMBERS || 
 			c == Terrain.EMPTY_DECO || 
