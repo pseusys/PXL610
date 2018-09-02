@@ -63,7 +63,7 @@ public class ItemSprite extends MovieClip {
 	}
 	
 	public ItemSprite( int image, Glowing glowing ) {
-		super( Assets.ITEMS );
+		super((Dungeon.level == null) ? (Assets.ITEMS_SEWERS) : (Dungeon.level.itemsTex()) );
 		
 		if (film == null) {
 			film = new TextureFilm( texture, SIZE, SIZE );
@@ -202,7 +202,7 @@ public class ItemSprite extends MovieClip {
 	}
 	
 	public static int pick( int index, int x, int y ) {
-		Bitmap bmp = TextureCache.get( Assets.ITEMS ).bitmap;
+		Bitmap bmp = TextureCache.get( Dungeon.level.itemsTex() ).bitmap;
 		int rows = bmp.getWidth() / SIZE;
 		int row = index / rows;
 		int col = index % rows;

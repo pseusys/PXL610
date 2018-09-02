@@ -62,6 +62,16 @@ public class PrisonBossLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_PRISON;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_PRISON;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_PRISON;
+	}
 	
 	private static final String ARENA	= "arena";
 	private static final String DOOR	= "door";

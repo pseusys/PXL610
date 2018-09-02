@@ -48,6 +48,16 @@ public class SewerLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_SEWERS;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_SEWERS;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_SEWERS;
+	}
 	
 	protected boolean[] water() {
 		return Patch.generate( feeling == Feeling.WATER ? 0.60f : 0.45f, 5 );

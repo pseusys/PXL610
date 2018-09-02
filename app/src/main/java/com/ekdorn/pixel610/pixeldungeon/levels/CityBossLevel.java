@@ -63,6 +63,16 @@ public class CityBossLevel extends Level {
 	public String waterTex() {
 		return Assets.WATER_CITY;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_CITY;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_CITY;
+	}
 	
 	private static final String DOOR	= "door";
 	private static final String ENTERED	= "entered";

@@ -65,6 +65,16 @@ public class CavesBossLevel extends Level {
 	public String waterTex() {
 		return Assets.WATER_CAVES;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_CAVES;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_CAVES;
+	}
 	
 	private static final String DOOR	= "door";
 	private static final String ENTERED	= "entered";

@@ -41,7 +41,7 @@ public class PlantSprite extends Image {
 	private int pos = -1;
 	
 	public PlantSprite() {
-		super( Assets.PLANTS );
+		super( (Dungeon.level == null) ? (Assets.PLANTS_SEWERS) : (Dungeon.level.plantsTex()) );
 		
 		if (frames == null) {
 			frames = new TextureFilm( texture, 16, 16 );

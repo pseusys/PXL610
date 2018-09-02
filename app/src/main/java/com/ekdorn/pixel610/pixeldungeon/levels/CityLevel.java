@@ -45,6 +45,16 @@ public class CityLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_CITY;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_CITY;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_CITY;
+	}
 	
 	protected boolean[] water() {
 		return Patch.generate( feeling == Feeling.WATER ? 0.65f : 0.45f, 4 );

@@ -50,6 +50,16 @@ public class CavesLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_CAVES;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_CAVES;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_CAVES;
+	}
 	
 	protected boolean[] water() {
 		return Patch.generate( feeling == Feeling.WATER ? 0.60f : 0.45f, 6 );

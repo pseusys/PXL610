@@ -46,6 +46,16 @@ public class PrisonLevel extends RegularLevel {
 	public String waterTex() {
 		return Assets.WATER_PRISON;
 	}
+
+	@Override
+	public String itemsTex() {
+		return Assets.ITEMS_PRISON;
+	}
+
+	@Override
+	public String plantsTex() {
+		return Assets.PLANTS_PRISON;
+	}
 	
 	protected boolean[] water() {
 		return Patch.generate( feeling == Feeling.WATER ? 0.65f : 0.45f, 4 );
