@@ -26,8 +26,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 public class IronKey extends Key {
 
 	public static int curDepthQuantity = 0;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("key_iron");
 		image = ItemSpriteSheet.IRON_KEY;
 	}

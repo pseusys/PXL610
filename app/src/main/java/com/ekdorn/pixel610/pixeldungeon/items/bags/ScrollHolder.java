@@ -24,7 +24,8 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class ScrollHolder extends Bag {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("bag_scrollholder");
 		image = ItemSpriteSheet.HOLDER;
 		

@@ -23,8 +23,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class PlateArmor extends Armor {
 
-	{
-		name = Babylon.get().getFromResources("armor_plate");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("armor_plate", depth);
 		image = ItemSpriteSheet.ARMOR_PLATE;
 	}
 	
@@ -34,7 +35,6 @@ public class PlateArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return
-				Babylon.get().getFromResources("armor_plate_desc");
+		return Babylon.get().getFromResources("armor_plate_desc", depth);
 	}
 }

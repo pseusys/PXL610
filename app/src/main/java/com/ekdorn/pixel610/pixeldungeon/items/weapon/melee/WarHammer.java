@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class WarHammer extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_hammer");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_hammer", depth);
 		image = ItemSpriteSheet.WAR_HAMMER;
 	}
 	
@@ -33,6 +34,6 @@ public class WarHammer extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_hammer_desc");
+		return Babylon.get().getFromResources("weapon_hammer_desc", depth);
 	}
 }

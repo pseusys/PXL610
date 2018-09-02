@@ -37,8 +37,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Bomb extends Item {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_bomb");
 		image = ItemSpriteSheet.BOMB;
 		defaultAction = Babylon.get().getFromResources("item_acthrow");

@@ -24,8 +24,9 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Dart extends MissileWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_dart");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_dart", depth);
 		image = ItemSpriteSheet.DART;
 	}
 	
@@ -50,7 +51,7 @@ public class Dart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_dart_desc");
+		return Babylon.get().getFromResources("weapon_dart_desc", depth);
 	}
 	
 	@Override

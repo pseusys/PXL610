@@ -25,7 +25,8 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class PotionOfStrength extends Potion {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_strength");
 	}
 	

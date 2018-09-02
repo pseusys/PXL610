@@ -24,7 +24,8 @@ import com.ekdorn.pixel610.pixeldungeon.items.Item;
 
 public class RingOfHaggler extends Ring {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("ring_haggler");
 	}
 	

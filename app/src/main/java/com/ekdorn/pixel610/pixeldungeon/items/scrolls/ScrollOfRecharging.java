@@ -28,7 +28,8 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class ScrollOfRecharging extends Scroll {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_recharging");
 	}
 	

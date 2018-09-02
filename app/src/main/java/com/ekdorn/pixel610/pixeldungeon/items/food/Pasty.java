@@ -23,7 +23,8 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Pasty extends Food {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("food_pasty");
 		image = ItemSpriteSheet.PASTY;
 		energy = Hunger.STARVING;

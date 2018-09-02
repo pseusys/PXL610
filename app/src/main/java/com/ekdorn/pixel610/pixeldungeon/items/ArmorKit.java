@@ -35,8 +35,9 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndBag;
 public class ArmorKit extends Item {
 	
 	private static final float TIME_TO_UPGRADE = 2;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_armorset");
 		image = ItemSpriteSheet.KIT;
 		

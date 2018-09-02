@@ -97,7 +97,7 @@ public class LastLevel extends Level {
 	public String tileName( int tile ) {
 		switch (tile) {
 		case Terrain.WATER:
-			return Babylon.get().getFromResources("levels_sewer_water");
+			return Babylon.get().getFromResources("levels_prison_water");
 		case Terrain.GRASS:
 			return Babylon.get().getFromResources("levels_desc_grass");
 		case Terrain.HIGH_GRASS:

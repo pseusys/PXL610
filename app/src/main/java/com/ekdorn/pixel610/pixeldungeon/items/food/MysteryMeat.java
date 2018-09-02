@@ -32,7 +32,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class MysteryMeat extends Food {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("food_meat");
 		image = ItemSpriteSheet.MEAT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;

@@ -24,8 +24,9 @@ import com.ekdorn.pixel610.utils.Bundle;
 public class Key extends Item {
 
 	public static final float TIME_TO_UNLOCK = 1f;
-	
-	{
+
+	@Override
+	public void finish() {
 		stackable = false;
 	}
 	

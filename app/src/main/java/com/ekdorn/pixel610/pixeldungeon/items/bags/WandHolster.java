@@ -25,7 +25,8 @@ import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class WandHolster extends Bag {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("bag_wandholder");
 		image = ItemSpriteSheet.HOLSTER;
 		

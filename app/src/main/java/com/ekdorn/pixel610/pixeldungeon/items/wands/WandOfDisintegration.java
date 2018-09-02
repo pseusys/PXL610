@@ -36,7 +36,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class WandOfDisintegration extends Wand {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_desint");
 		hitChars = false;
 	}

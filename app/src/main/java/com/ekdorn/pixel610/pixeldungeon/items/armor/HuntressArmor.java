@@ -33,8 +33,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.utils.Callback;
 
 public class HuntressArmor extends ClassArmor {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("armor_huntress");
 		image = ItemSpriteSheet.ARMOR_HUNTRESS;
 	}

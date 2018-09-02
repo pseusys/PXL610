@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Quarterstaff extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_quarterstaff");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_quarterstaff", depth);
 		image = ItemSpriteSheet.QUARTERSTAFF;
 	}
 	
@@ -33,6 +34,6 @@ public class Quarterstaff extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_quarterstaff_desc");
+		return Babylon.get().getFromResources("weapon_quarterstaff_desc", depth);
 	}
 }

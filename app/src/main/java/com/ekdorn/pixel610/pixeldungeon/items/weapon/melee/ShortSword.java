@@ -36,10 +36,11 @@ public class ShortSword extends MeleeWeapon {
 
 	private static final float TIME_TO_REFORGE	= 2f;
 	
-	private boolean  equipped;
+	private boolean equipped;
 
-	{
-		name = Babylon.get().getFromResources("weapon_shortsword");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_shortsword", depth);
 		image = ItemSpriteSheet.SHORT_SWORD;
 	}
 	
@@ -88,7 +89,7 @@ public class ShortSword extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_shortsword_desc");
+		return Babylon.get().getFromResources("weapon_shortsword_desc", depth);
 	}
 	
 	private final WndBag.Listener itemSelector = new WndBag.Listener() {

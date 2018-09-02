@@ -33,8 +33,9 @@ import com.ekdorn.pixel610.utils.Random;
 public class ScrollOfMirrorImage extends Scroll {
 
 	private static final int NIMAGES	= 3;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_image");
 	}
 	

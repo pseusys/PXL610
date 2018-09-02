@@ -43,8 +43,9 @@ public class WarriorArmor extends ClassArmor {
 	
 	private static int LEAP_TIME	= 1;
 	private static int SHOCK_TIME	= 3;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("armor_warrior");
 		image = ItemSpriteSheet.ARMOR_WARRIOR;
 	}

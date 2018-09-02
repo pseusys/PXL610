@@ -34,7 +34,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class FrozenCarpaccio extends Food {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("food_carpaccio");
 		image = ItemSpriteSheet.CARPACCIO;
 		energy = Hunger.STARVING - Hunger.HUNGRY;

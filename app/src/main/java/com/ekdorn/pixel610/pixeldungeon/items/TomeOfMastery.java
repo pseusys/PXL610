@@ -40,8 +40,9 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndChooseWay;
 public class TomeOfMastery extends Item {
 	
 	public static final float TIME_TO_READ = 10;
-	
-	{
+
+	@Override
+	public void finish() {
 		stackable = false;
 		name = Dungeon.hero != null && Dungeon.hero.subClass != HeroSubClass.NONE ? Babylon.get().getFromResources("tome_mastery") :
 				Babylon.get().getFromResources("tome_remastery");

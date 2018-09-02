@@ -21,7 +21,8 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 
 public class RingOfSatiety extends Ring {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("ring_satiety");
 	}
 	

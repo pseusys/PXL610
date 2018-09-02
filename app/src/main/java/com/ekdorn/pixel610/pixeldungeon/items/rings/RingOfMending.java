@@ -20,8 +20,9 @@ package com.ekdorn.pixel610.pixeldungeon.items.rings;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 
 public class RingOfMending extends Ring {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("ring_mending");
 	}
 	

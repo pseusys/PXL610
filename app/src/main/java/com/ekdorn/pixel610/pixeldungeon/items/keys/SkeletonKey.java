@@ -21,8 +21,9 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class SkeletonKey extends Key {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("key_skeleton");
 		image = ItemSpriteSheet.SKELETON_KEY;
 	}

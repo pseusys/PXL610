@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Mace extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_mace");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_mace", depth);
 		image = ItemSpriteSheet.MACE;
 	}
 	
@@ -33,6 +34,6 @@ public class Mace extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_mace_desc");
+		return Babylon.get().getFromResources("weapon_mace_desc", depth);
 	}
 }

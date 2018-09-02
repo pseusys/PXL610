@@ -30,8 +30,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 public class Torch extends Item {
 	
 	public static final float TIME_TO_LIGHT = 1;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("torch_name");
 		image = ItemSpriteSheet.TORCH;
 		

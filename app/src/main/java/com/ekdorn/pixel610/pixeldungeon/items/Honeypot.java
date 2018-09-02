@@ -35,8 +35,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Honeypot extends Item {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_honeypot");
 		image = ItemSpriteSheet.HONEYPOT;
 		defaultAction = Babylon.get().getFromResources("item_acthrow");

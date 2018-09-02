@@ -27,8 +27,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndBag;
 
 public class ScrollOfUpgrade extends InventoryScroll {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_upgrade");
 		inventoryTitle = Babylon.get().getFromResources("scroll_upgrade_title");
 		mode = WndBag.Mode.UPGRADEABLE;

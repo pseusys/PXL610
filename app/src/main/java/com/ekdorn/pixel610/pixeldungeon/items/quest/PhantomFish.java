@@ -32,8 +32,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 public class PhantomFish extends Item {
 	
 	private static final float TIME_TO_EAT	= 2f;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("quest_phantomfish");
 		image = ItemSpriteSheet.PHANTOM;
 

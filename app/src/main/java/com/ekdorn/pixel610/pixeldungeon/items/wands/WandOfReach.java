@@ -42,8 +42,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.utils.Callback;
 
 public class WandOfReach extends Wand {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_reach");
 		hitChars = false;
 	}

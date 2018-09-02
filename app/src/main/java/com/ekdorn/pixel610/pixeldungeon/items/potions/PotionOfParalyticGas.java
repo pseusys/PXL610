@@ -27,7 +27,8 @@ import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 
 public class PotionOfParalyticGas extends Potion {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_paragas");
 	}
 	

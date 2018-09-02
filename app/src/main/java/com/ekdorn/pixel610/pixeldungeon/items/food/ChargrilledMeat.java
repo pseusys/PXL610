@@ -23,7 +23,8 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class ChargrilledMeat extends Food {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("food_grilled_meat");
 		image = ItemSpriteSheet.STEAK;
 		energy = Hunger.STARVING - Hunger.HUNGRY;

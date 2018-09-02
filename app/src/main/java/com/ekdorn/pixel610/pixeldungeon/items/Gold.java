@@ -34,8 +34,9 @@ import com.ekdorn.pixel610.utils.Bundle;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Gold extends Item {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_gold");
 		image = ItemSpriteSheet.GOLD;
 		stackable = true;

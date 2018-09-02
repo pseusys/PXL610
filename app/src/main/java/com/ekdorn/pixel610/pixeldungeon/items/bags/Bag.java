@@ -31,8 +31,9 @@ import com.ekdorn.pixel610.utils.Bundlable;
 import com.ekdorn.pixel610.utils.Bundle;
 
 public class Bag extends Item implements Iterable<Item> {
-	
-	{
+
+	@Override
+	public void finish() {
 		image = 11;
 		
 		defaultAction = Babylon.get().getFromResources("bag_acopen");

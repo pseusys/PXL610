@@ -26,7 +26,8 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class PotionOfMindVision extends Potion {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_mindvision");
 	}
 	

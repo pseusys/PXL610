@@ -39,8 +39,9 @@ public class Food extends Item {
 	
 	public float energy = Hunger.HUNGRY;
 	public String message = Babylon.get().getFromResources("food_message");
-	
-	{
+
+	@Override
+	public void finish() {
 		stackable = true;
 		name = Babylon.get().getFromResources("food_name");
 		image = ItemSpriteSheet.RATION;

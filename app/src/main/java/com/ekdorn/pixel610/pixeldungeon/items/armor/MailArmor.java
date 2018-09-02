@@ -23,8 +23,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class MailArmor extends Armor {
 
-	{
-		name = Babylon.get().getFromResources("armor_mail");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("armor_mail", depth);
 		image = ItemSpriteSheet.ARMOR_MAIL;
 	}
 	
@@ -34,6 +35,6 @@ public class MailArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("armor_mail_desc");
+		return Babylon.get().getFromResources("armor_mail_desc", depth);
 	}
 }

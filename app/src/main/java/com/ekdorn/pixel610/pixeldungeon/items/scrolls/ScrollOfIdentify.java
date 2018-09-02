@@ -26,7 +26,8 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndBag;
 
 public class ScrollOfIdentify extends InventoryScroll {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_identify");
 		inventoryTitle = Babylon.get().getFromResources("scroll_identify_title");
 		mode = WndBag.Mode.UNIDENTIFED;

@@ -28,8 +28,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndBag;
 
 public class ScrollOfEnchantment extends InventoryScroll {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_enchantment");
 		inventoryTitle = Babylon.get().getFromResources("scroll_enchantment_title");
 		mode = WndBag.Mode.ENCHANTABLE;

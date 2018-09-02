@@ -47,7 +47,8 @@ public class Armor extends EquipableItem {
 	public Glyph glyph;
 	
 	public Armor( int tier ) {
-		
+		super();
+
 		this.tier = tier;
 		
 		STR = typicalSTR();

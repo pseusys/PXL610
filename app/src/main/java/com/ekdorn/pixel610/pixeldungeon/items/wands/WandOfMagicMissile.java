@@ -42,8 +42,9 @@ public class WandOfMagicMissile extends Wand {
 	private static final float TIME_TO_DISENCHANT	= 2f;
 	
 	private boolean disenchantEquipped;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_magicmissle");
 		image = ItemSpriteSheet.WAND_MAGIC_MISSILE;
 	}

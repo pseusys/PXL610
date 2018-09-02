@@ -21,9 +21,10 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Dagger extends MeleeWeapon {
-	
-	{
-		name = Babylon.get().getFromResources("weapon_dagger");
+
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_dagger", depth);
 		image = ItemSpriteSheet.DAGGER;
 	}
 	
@@ -33,6 +34,6 @@ public class Dagger extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_dagger_desc");
+		return Babylon.get().getFromResources("weapon_dagger_desc", depth);
 	}
 }

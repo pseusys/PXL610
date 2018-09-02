@@ -28,9 +28,10 @@ import com.ekdorn.pixel610.utils.Random;
 public class CurareDart extends MissileWeapon {
 
 	public static final float DURATION	= 3f;
-	
-	{
-		name = Babylon.get().getFromResources("weapon_curaredart");
+
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_curaredart", depth);
 		image = ItemSpriteSheet.CURARE_DART;
 		
 		STR = 14;
@@ -63,7 +64,7 @@ public class CurareDart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_curaredart_desc");
+		return Babylon.get().getFromResources("weapon_curaredart_desc", depth);
 	}
 	
 	@Override

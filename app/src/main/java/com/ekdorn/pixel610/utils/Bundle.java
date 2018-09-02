@@ -17,6 +17,10 @@
 
 package com.ekdorn.pixel610.utils;
 
+import android.util.Log;
+
+import com.ekdorn.pixel610.pixeldungeon.items.armor.Armor;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -104,7 +108,9 @@ public class Bundle {
 			Class<?> cl = Class.forName( clName );
 			if (cl != null) {
 				Bundlable object = (Bundlable)cl.newInstance();
+				Log.e("TAG", "get: " + clName + " " + ((object instanceof Armor)?(((Armor)object).depth + " " + ((Armor)object).name()):("")) );
 				object.restoreFromBundle( this );
+				Log.e("TAG", "get: " + clName + " " + ((object instanceof Armor)?(((Armor)object).depth + " " + ((Armor)object).name() + "\n"):("")) );
 				return object;
 			} else {
 				return null;

@@ -21,9 +21,10 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Longsword extends MeleeWeapon {
-	
-	{
-		name = Babylon.get().getFromResources("weapon_longsword");
+
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_longsword", depth);
 		image = ItemSpriteSheet.LONG_SWORD;
 	}
 	
@@ -33,6 +34,6 @@ public class Longsword extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_longsword_desc");
+		return Babylon.get().getFromResources("weapon_longsword_desc", depth);
 	}
 }

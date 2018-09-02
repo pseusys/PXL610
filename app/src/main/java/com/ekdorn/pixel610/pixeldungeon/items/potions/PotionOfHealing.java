@@ -30,7 +30,8 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class PotionOfHealing extends Potion {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_healing");
 	}
 	

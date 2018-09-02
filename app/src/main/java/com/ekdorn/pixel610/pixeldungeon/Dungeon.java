@@ -178,9 +178,6 @@ public class Dungeon {
 			level = new SewerBossLevel();
 			break;
 		case 6:
-			level = new LastLevel();
-			break;
-		/*case 6:
 		case 7:
 		case 8:
 		case 9:
@@ -190,6 +187,9 @@ public class Dungeon {
 			level = new PrisonBossLevel();
 			break;
 		case 11:
+			level = new LastLevel();
+			break;
+		/*case 11:
 		case 12:
 		case 13:
 		case 14:

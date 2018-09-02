@@ -23,7 +23,8 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class OverpricedRation extends Food {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("food_op");
 		image = ItemSpriteSheet.OVERPRICED;
 		energy = Hunger.STARVING - Hunger.HUNGRY;

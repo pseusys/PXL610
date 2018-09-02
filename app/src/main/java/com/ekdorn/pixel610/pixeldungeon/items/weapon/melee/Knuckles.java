@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Knuckles extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_knuckles");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_knuckles", depth);
 		image = ItemSpriteSheet.KNUCKLEDUSTER;
 	}
 	
@@ -33,6 +34,6 @@ public class Knuckles extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_knuckles_desc");
+		return Babylon.get().getFromResources("weapon_knuckles_desc", depth);
 	}
 }

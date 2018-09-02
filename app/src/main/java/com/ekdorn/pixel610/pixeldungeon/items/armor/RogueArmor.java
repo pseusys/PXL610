@@ -37,8 +37,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class RogueArmor extends ClassArmor {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("armor_rogue");
 		image = ItemSpriteSheet.ARMOR_ROGUE;
 	}

@@ -29,8 +29,9 @@ import com.ekdorn.pixel610.pixeldungeon.items.Item;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class ScrollOfRemoveCurse extends Scroll {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_removecurse");
 	}
 	

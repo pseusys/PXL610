@@ -30,7 +30,8 @@ import com.ekdorn.pixel610.utils.Callback;
 
 public class WandOfPoison extends Wand {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_poison");
 	}
 	

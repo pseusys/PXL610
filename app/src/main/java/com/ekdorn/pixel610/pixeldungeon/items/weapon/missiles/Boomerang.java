@@ -27,8 +27,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.MissileSprite;
 
 public class Boomerang extends MissileWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_boomerang");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_boomerang", depth);
 		image = ItemSpriteSheet.BOOMERANG;
 		
 		STR = 10;
@@ -108,6 +109,6 @@ public class Boomerang extends MissileWeapon {
 	@Override
 	public String desc() {
 		return
-				Babylon.get().getFromResources("weapon_boomerang_desc");
+				Babylon.get().getFromResources("weapon_boomerang_desc", depth);
 	}
 }

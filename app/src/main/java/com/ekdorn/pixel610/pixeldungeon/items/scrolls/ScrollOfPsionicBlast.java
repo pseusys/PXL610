@@ -31,7 +31,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class ScrollOfPsionicBlast extends Scroll {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_psionicblast");
 	}
 	

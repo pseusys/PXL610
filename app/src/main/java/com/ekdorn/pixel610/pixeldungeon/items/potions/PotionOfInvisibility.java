@@ -30,8 +30,9 @@ import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 public class PotionOfInvisibility extends Potion {
 
 	private static final float ALPHA	= 0.4f;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_invis");
 	}
 	

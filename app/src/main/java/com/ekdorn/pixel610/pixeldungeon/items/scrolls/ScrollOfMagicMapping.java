@@ -31,8 +31,9 @@ import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class ScrollOfMagicMapping extends Scroll {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_mmapping");
 	}
 	

@@ -22,7 +22,8 @@ import com.ekdorn.pixel610.pixeldungeon.actors.hero.Hero;
 
 public class PotionOfExperience extends Potion {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_experience");
 	}
 	

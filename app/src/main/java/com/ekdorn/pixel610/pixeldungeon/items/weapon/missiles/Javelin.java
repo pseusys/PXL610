@@ -27,8 +27,9 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Javelin extends MissileWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_javelin");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_javelin", depth);
 		image = ItemSpriteSheet.JAVELIN;
 		
 		STR = 15;
@@ -61,7 +62,7 @@ public class Javelin extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_javelin_desc");
+		return Babylon.get().getFromResources("weapon_javelin_desc", depth);
 	}
 	
 	@Override

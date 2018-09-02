@@ -23,8 +23,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class ClothArmor extends Armor {
 
-	{	
-		name = Babylon.get().getFromResources("armor_cloth");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("armor_cloth", depth);
 		image = ItemSpriteSheet.ARMOR_CLOTH;
 	}
 	
@@ -34,6 +35,6 @@ public class ClothArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("armor_cloth_desc");
+		return Babylon.get().getFromResources("armor_cloth_desc", depth);
 	}
 }

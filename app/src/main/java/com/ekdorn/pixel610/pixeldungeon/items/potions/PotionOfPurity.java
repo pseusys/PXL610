@@ -37,8 +37,9 @@ import com.ekdorn.pixel610.utils.PathFinder;
 public class PotionOfPurity extends Potion {
 	
 	private static final int DISTANCE	= 2;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("potion_purity");
 	}
 	

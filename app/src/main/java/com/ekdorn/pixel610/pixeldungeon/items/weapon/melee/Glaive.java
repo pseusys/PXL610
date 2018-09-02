@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Glaive extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_glaive");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_glaive", depth);
 		image = ItemSpriteSheet.GLAIVE;
 	}
 	
@@ -33,6 +34,6 @@ public class Glaive extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_glavie_desc");
+		return Babylon.get().getFromResources("weapon_glavie_desc", depth);
 	}
 }

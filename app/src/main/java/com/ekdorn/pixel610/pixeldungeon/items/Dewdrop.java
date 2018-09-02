@@ -28,9 +28,10 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.CharSprite;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Dewdrop extends Item {
-	
-	{
-		name = Babylon.get().getFromResources("item_dewdrop");
+
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("item_dewdrop", depth);
 		image = ItemSpriteSheet.DEWDROP;
 		
 		stackable = true;
@@ -69,6 +70,6 @@ public class Dewdrop extends Item {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("item_dewdrop_desc");
+		return Babylon.get().getFromResources("item_dewdrop_desc", depth);
 	}
 }

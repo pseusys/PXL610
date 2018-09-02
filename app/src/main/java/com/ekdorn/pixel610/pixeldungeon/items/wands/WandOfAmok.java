@@ -32,7 +32,8 @@ import com.ekdorn.pixel610.utils.Callback;
 
 public class WandOfAmok extends Wand {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_amok");
 	}
 

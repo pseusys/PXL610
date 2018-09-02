@@ -27,8 +27,9 @@ import com.ekdorn.pixel610.pixeldungeon.items.wands.WandOfBlink;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class ScrollOfTeleportation extends Scroll {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_teleportation");
 	}
 	

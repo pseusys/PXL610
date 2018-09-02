@@ -37,8 +37,9 @@ public class DewVial extends Item {
 	private static final int MAX_VOLUME	= 10;
 	
 	private static final float TIME_TO_DRINK = 1f;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_dewvial");
 		image = ItemSpriteSheet.VIAL;
 		

@@ -24,8 +24,9 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Shuriken extends MissileWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_shuriken");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_shuriken", depth);
 		image = ItemSpriteSheet.SHURIKEN;
 		
 		STR = 13;
@@ -54,7 +55,7 @@ public class Shuriken extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_shuriken_desc");
+		return Babylon.get().getFromResources("weapon_shuriken_desc", depth);
 	}
 	
 	@Override

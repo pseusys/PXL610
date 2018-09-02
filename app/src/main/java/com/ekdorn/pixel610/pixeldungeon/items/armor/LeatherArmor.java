@@ -17,14 +17,18 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.items.armor;
 
+import android.util.Log;
+
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
+import com.ekdorn.pixel610.utils.Bundle;
 
 
 public class LeatherArmor extends Armor {
 
-	{	
-		name = Babylon.get().getFromResources("armor_leather");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("armor_leather", depth);
 		image = ItemSpriteSheet.ARMOR_LEATHER;
 	}
 	
@@ -34,6 +38,13 @@ public class LeatherArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("armor_leatrher_desc");
+		Log.e("TAG", "desc: " + depth );
+		return Babylon.get().getFromResources("armor_leatrher_desc", depth);
+	}
+
+	@Override
+	public void restoreFromBundle( Bundle bundle ) {
+		name = Babylon.get().getFromResources("armor_leather", depth);
+		image = ItemSpriteSheet.ARMOR_LEATHER;
 	}
 }

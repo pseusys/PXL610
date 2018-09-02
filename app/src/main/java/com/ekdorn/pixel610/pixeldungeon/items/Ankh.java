@@ -22,7 +22,8 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Ankh extends Item {
 
-	{
+	@Override
+	public void finish() {
 		stackable = true;
 		name = Babylon.get().getFromResources("item_ankh");
 		image = ItemSpriteSheet.ANKH;

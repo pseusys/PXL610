@@ -40,7 +40,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class WandOfFirebolt extends Wand {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("wand_firebolt");
 	}
 	

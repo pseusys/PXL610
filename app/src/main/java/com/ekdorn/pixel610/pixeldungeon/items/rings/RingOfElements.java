@@ -31,7 +31,8 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class RingOfElements extends Ring {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("ring_elements");
 	}
 	

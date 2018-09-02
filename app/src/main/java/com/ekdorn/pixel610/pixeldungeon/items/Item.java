@@ -74,13 +74,15 @@ public class Item implements Bundlable {
 	protected int quantity = 1;
 	
 	private int level = 0;
-	private int durability = maxDurability();
+	public int durability = maxDurability();
 	public boolean levelKnown = false;
 	
 	public boolean cursed;
 	public boolean cursedKnown;
 	
 	public boolean unique = false;
+
+	public int depth;
 	
 	private static Comparator<Item> itemComparator = new Comparator<Item>() {	
 		@Override
@@ -88,8 +90,17 @@ public class Item implements Bundlable {
 			return Generator.Category.order( lhs ) - Generator.Category.order( rhs );
 		}
 	};
-	
-	public ArrayList<String> actions( Hero hero ) {
+
+	public Item() {
+		this.depth = Dungeon.depth / 5;
+		finish();
+		System.out.println(this.name);
+		System.out.println(this.desc());
+		System.out.println(this.getClass());
+		System.out.println();
+	}
+
+	public ArrayList<String> actions(Hero hero ) {
 		ArrayList<String> actions = new ArrayList<String>();
 		actions.add( Babylon.get().getFromResources("item_acdrop") );
 		actions.add( Babylon.get().getFromResources("item_acthrow") );
@@ -471,6 +482,7 @@ public class Item implements Bundlable {
 	}
 	
 	public Item random() {
+		this.depth = Dungeon.depth / 5;
 		return this;
 	}
 	
@@ -496,6 +508,7 @@ public class Item implements Bundlable {
 	private static final String CURSED			= "cursed";
 	private static final String CURSED_KNOWN	= "cursedKnown";
 	private static final String DURABILITY		= "durability";
+	private static final String DEPTH           = "depth";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -504,6 +517,7 @@ public class Item implements Bundlable {
 		bundle.put( LEVEL_KNOWN, levelKnown );
 		bundle.put( CURSED, cursed );
 		bundle.put( CURSED_KNOWN, cursedKnown );
+		bundle.put( DEPTH, depth );
 		if (isUpgradable()) {
 			bundle.put( DURABILITY, durability );
 		}
@@ -524,13 +538,18 @@ public class Item implements Bundlable {
 		}
 		
 		cursed	= bundle.getBoolean( CURSED );
+		depth   = bundle.getInt( DEPTH );
 		
 		if (isUpgradable()) {
 			durability = bundle.getInt( DURABILITY );
 		}
 		
 		QuickSlot.restore( bundle, this );
+
+		finish();
 	}
+
+	public void finish() {}
 	
 	public void cast( final Hero user, int dst ) {
 		

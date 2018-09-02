@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class Spear extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_spear");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_spear", depth);
 		image = ItemSpriteSheet.SPEAR;
 	}
 	
@@ -33,6 +34,6 @@ public class Spear extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_spear_desc");
+		return Babylon.get().getFromResources("weapon_spear_desc", depth);
 	}
 }

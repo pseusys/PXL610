@@ -34,8 +34,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 
 public class MageArmor extends ClassArmor {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("armor_mage");
 		image = ItemSpriteSheet.ARMOR_MAGE;
 	}

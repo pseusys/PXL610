@@ -27,8 +27,9 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Tamahawk extends MissileWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_tomahawk");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_tomahawk", depth);
 		image = ItemSpriteSheet.TOMAHAWK;
 		
 		STR = 17;
@@ -61,7 +62,7 @@ public class Tamahawk extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_tomahawk_desc");
+		return Babylon.get().getFromResources("weapon_tomahawk_desc", depth);
 	}
 	
 	@Override

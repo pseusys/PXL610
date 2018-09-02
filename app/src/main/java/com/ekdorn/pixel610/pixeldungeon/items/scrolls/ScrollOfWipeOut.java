@@ -42,8 +42,9 @@ import com.ekdorn.pixel610.utils.Random;
 public class ScrollOfWipeOut extends Item {
 	
 	protected static final float TIME_TO_READ	= 1f;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("scroll_wipeout");
 		image = ItemSpriteSheet.SCROLL_WIPE_OUT;
 		

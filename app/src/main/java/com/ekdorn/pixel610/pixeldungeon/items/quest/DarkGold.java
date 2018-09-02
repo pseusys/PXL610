@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.items.Item;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class DarkGold extends Item {
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("quest_darkgold");
 		image = ItemSpriteSheet.ORE;
 		

@@ -38,8 +38,9 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndBag;
 public class Weightstone extends Item {
 	
 	private static final float TIME_TO_APPLY = 2;
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("weightstone_name");
 		image = ItemSpriteSheet.WEIGHT;
 		

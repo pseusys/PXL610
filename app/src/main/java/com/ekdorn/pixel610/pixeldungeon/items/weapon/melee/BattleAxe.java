@@ -22,8 +22,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 
 public class BattleAxe extends MeleeWeapon {
 
-	{
-		name = Babylon.get().getFromResources("weapon_axe");
+	@Override
+	public void finish() {
+		name = Babylon.get().getFromResources("weapon_axe", depth);
 		image = ItemSpriteSheet.BATTLE_AXE;
 	}
 	
@@ -33,6 +34,6 @@ public class BattleAxe extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_axe_desc");
+		return Babylon.get().getFromResources("weapon_axe_desc", depth);
 	}
 }

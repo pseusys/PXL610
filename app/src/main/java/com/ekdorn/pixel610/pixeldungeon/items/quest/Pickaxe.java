@@ -45,8 +45,9 @@ public class Pickaxe extends Weapon {
 	public static final float TIME_TO_MINE = 2;
 	
 	private static final Glowing BLOODY = new Glowing( 0x550000 );
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("quest_pickaxe");
 		image = ItemSpriteSheet.PICKAXE;
 		

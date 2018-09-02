@@ -32,8 +32,9 @@ import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 public class Amulet extends Item {
 	
 	private static final String AC_END = Babylon.get().getFromResources("item_amulet_acend");
-	
-	{
+
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("item_amulet");
 		image = ItemSpriteSheet.AMULET;
 		

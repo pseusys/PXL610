@@ -23,7 +23,8 @@ import com.ekdorn.pixel610.pixeldungeon.actors.hero.Hero;
 
 public class RingOfDetection extends Ring {
 
-	{
+	@Override
+	public void finish() {
 		name = Babylon.get().getFromResources("ring_detection");
 	}
 	
