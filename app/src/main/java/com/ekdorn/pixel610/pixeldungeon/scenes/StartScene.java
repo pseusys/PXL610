@@ -297,7 +297,7 @@ public class StartScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		PXL610.switchNoFade( TitleScene.class );
+		PXL610.switchNoFade( ModeScene.class );
 	}
 	
 	public static class GameButton extends RedButton {

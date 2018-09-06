@@ -112,7 +112,7 @@ public class TitleScene extends PixelScene {
 		DashboardItem btnPlay = new DashboardItem(Babylon.get().getFromResources("title_play"), 0 ) {
 			@Override
 			protected void onClick() {
-				PXL610.switchNoFade( StartScene.class );
+				PXL610.switchNoFade( ModeScene.class ); //NOREPLY!!!
 			}
 		};
 		add( btnPlay );

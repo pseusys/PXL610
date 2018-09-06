@@ -53,7 +53,7 @@ public class WndOnlineRank extends Window {
 
         pos += GAP + GAP;
 
-        pos = statSlot( this, Babylon.get().getFromResources("wnd_rankings_gameduration"),  ((Number) rec.get(OnlineRatinger.DURATION)).toString(), pos );
+        pos = statSlot( this, Babylon.get().getFromResources("wnd_rankings_gameduration"), Long.toString(((Number) rec.get(OnlineRatinger.DURATION)).longValue()), pos );
         pos = statSlot( this, Babylon.get().getFromResources("wnd_rankings_score"), ((Number) rec.get(OnlineRatinger.SCORE)).toString(), pos );
         pos = statSlot( this, Babylon.get().getFromResources("wnd_rankings_name"), (String) rec.get(OnlineRatinger.SENDER), pos );
 

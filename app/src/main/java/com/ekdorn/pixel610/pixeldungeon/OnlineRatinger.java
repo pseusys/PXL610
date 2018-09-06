@@ -179,7 +179,7 @@ public enum OnlineRatinger {
         topData = new ArrayList<Map<String, Object>>();
         bestGlobal = countGlobal = 0;
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, i))
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -189,8 +189,10 @@ public enum OnlineRatinger {
                                 boolean exists = task.getResult().exists();
                                 if (exists && topData.size() < 6) {
                                     topData.add(task.getResult().getData());
+                                    System.out.println("gotit");
                                 } else {
                                     lister.scream();
+                                    System.out.println("screaming");
                                 }
                             } else {
                                 Log.w("TAG", "Error getting documents.", task.getException());
