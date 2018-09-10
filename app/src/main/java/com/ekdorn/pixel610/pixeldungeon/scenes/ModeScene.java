@@ -305,14 +305,7 @@ public class ModeScene extends PixelScene {
             add( name );
 
             fb = new Fireball();
-            switch (Game.instance.gameMode.tag) {
-                case GameMode.original:
-                    fb.minimizeBy(0.75F);
-                    break;
-                case GameMode.dlc1:
-                    fb.minimizeBy(0.5F);
-                    break;
-            }
+            fb.minimizeBy( Game.instance.gameMode.outlook.torchInt );
             add ( fb );
 
             emitter = new BitmaskEmitter( avatar );

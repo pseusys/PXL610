@@ -26,7 +26,7 @@ public class GameMode {
         initOriginal.tag = original;
         initOriginal.title = "Оригинал";
 
-        initOriginal.outlook = new OutLook(25, 13,
+        initOriginal.outlook = new OutLook(25, 13, 0.75F,
                 Assets.ARCS_BG_0, Assets.ARCS_FG_0,
                 Assets.CHROME);
 
@@ -39,7 +39,7 @@ public class GameMode {
         initDLC1.tag = dlc1;
         initDLC1.title = "ДЛЦ 1";
 
-        initDLC1.outlook = new OutLook(16, 31,
+        initDLC1.outlook = new OutLook(16, 31, 0.5F,
                 Assets.ARCS_BG_1, Assets.ARCS_FG_1,
                 Assets.CHROME);
 
@@ -63,15 +63,17 @@ public class GameMode {
     public static class OutLook {
         public int torchX;
         public int torchY;
+        public float torchInt;
 
         public String archs0Asset;
         public String archs1Asset;
 
         public String uiAsset;
 
-        public OutLook(int torchX, int torchY, String archs0Asset, String archs1Asset, String uiAsset) {
+        public OutLook(int torchX, int torchY, float torchInt, String archs0Asset, String archs1Asset, String uiAsset) {
             this.torchX = torchX;
             this.torchY = torchY;
+            this.torchInt = torchInt;
             this.archs0Asset = archs0Asset;
             this.archs1Asset = archs1Asset;
             this.uiAsset = uiAsset;
