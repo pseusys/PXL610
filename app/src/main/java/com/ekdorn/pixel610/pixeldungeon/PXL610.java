@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
@@ -136,7 +137,7 @@ public class PXL610 extends Game {
 		instance.getWindowManager().getDefaultDisplay().getMetrics( metrics );
 		boolean landscape = metrics.widthPixels > metrics.heightPixels;
 
-		//PXL610.programIntro(true);
+		this.gameMode = GameMode.init(PXL610.gamemode()); // PXL610: update gamemode;
 
 		if (PXL610.user_name().equals("")) { // PXL610: update localisation;
 			Babylon.get().updateLocale();
@@ -388,6 +389,14 @@ public class PXL610 extends Game {
 
 	public static String user_id() {
 		return Preferences.INSTANCE.getString( Preferences.KEY_NSTANCE_ID, "" );
+	}
+
+	public static void gamemode( String value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_GAMEMODE, value );
+	}
+
+	public static String gamemode() {
+		return Preferences.INSTANCE.getString( Preferences.KEY_GAMEMODE, GameMode.original);
 	}
 	
 	/*

@@ -19,9 +19,11 @@ package com.ekdorn.pixel610.pixeldungeon;
 
 public class Assets {
 
-	public static final String ARCS_BG		= "arcs1.png";
-	public static final String ARCS_FG		= "arcs2.png";
-	public static final String DASHBOARD	= "dashboard.png";
+	public static final String ARCS_BG_0		= "arcs10.png";
+	public static final String ARCS_FG_0		= "arcs20.png";
+	public static final String ARCS_BG_1		= "arcs11.png";
+	public static final String ARCS_FG_1		= "arcs21.png";
+	public static final String DASHBOARD	    = "dashboard.png";
 	
 	public static final String BANNERS	= "banners.png";
 	public static final String BADGES	= "badges.png";

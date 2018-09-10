@@ -38,6 +38,7 @@ enum Preferences {
 	public static final String KEY_GAME_INTRO     = "game_intro";
 	public static final String KEY_BRIGHTNESS	  = "brightness";
 	public static final String KEY_LOCALISATION	  = "localisation";
+	public static final String KEY_GAMEMODE	      = "gamemode";
 
 	public static final String KEY_USER_NAME	  = "name";
 	public static final String KEY_NSTANCE_ID	  = "id";

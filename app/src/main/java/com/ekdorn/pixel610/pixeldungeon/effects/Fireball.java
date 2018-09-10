@@ -86,10 +86,10 @@ public class Fireball extends Component {
 		bLight.x = x - bLight.width / 2;
 		bLight.y = y - bLight.height / 2;
 		
-		emitter.pos( 
-			x - bLight.width / 4, 
-			y - bLight.height / 4, 
-			bLight.width / 2, 
+		emitter.pos(
+			x - bLight.width / 4,
+			y - bLight.height / 4,
+			bLight.width / 2,
 			bLight.height / 2 );
 		
 		fLight.x = x - fLight.width / 2;
@@ -117,6 +117,22 @@ public class Fireball extends Component {
 		GLES20.glBlendFunc( GL10.GL_SRC_ALPHA, GL10.GL_ONE );
 		super.draw();
 		GLES20.glBlendFunc( GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA );
+	}
+
+	public void minimizeBy(final float scale) {
+		bLight.scale.set(scale);
+		fLight.scale.set(scale);
+
+		emitter.pour( new Emitter.Factory() {
+			@Override
+			public void emit(Emitter emitter, int index, float x, float y) {
+				Flame p = (Flame)emitter.recycle( Flame.class );
+				p.reset();
+				p.timeLeft = p.timeLeft*scale;
+				p.x = x - p.width / 2;
+				p.y = y - p.height / 2;
+			}
+		}, 0.1f );
 	}
 	
 	public static class Flame extends Image {

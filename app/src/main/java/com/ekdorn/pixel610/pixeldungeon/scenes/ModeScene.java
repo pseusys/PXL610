@@ -17,12 +17,16 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.effects.BannerSprites;
+import com.ekdorn.pixel610.pixeldungeon.effects.Fireball;
 import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
 import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.pixeldungeon.ui.ExitButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.utils.Callback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ModeScene extends PixelScene {
@@ -34,15 +38,16 @@ public class ModeScene extends PixelScene {
     private static final float HEIGHT_P	= 220;
 
     private static final float WIDTH_L	= 224;
-    private static final float HEIGHT_L	= 152;
+    private static final float HEIGHT_L	= 168;
 
-    private static HashMap<String, ModeShield> shields = new HashMap<String, ModeShield>();
+    private ModeShield shield;
     private static String curName;
 
+    ArrayList<String> list;
     private float buttonX;
     private float buttonY;
 
-    private GameButton btnNewGame;
+    private RedButton btnNewGame;
     private RedButton btnBack;
     private RedButton btnForth;
 
@@ -80,7 +85,7 @@ public class ModeScene extends PixelScene {
         buttonX = left + 16;
         buttonY = bottom - BUTTON_HEIGHT;
 
-        btnNewGame = new GameButton( Babylon.get().getFromResources("startscene_new") ) {
+        btnNewGame = new RedButton( Babylon.get().getFromResources("startscene_new") ) {
             @Override
             protected void onClick() {
                 PXL610.switchNoFade( StartScene.class );
@@ -88,37 +93,53 @@ public class ModeScene extends PixelScene {
         };
         add( btnNewGame );
 
+        list = new ArrayList<>();
+        list.add(GameMode.original);
+        list.add(GameMode.dlc1);
+
         btnBack = new RedButton( "<" ) {
             @Override
             protected void onClick() {
+                int next = list.indexOf(Game.instance.gameMode.tag) - 1;
+                if (next < 0) {
+                    next = list.size() - 1;
+                }
+
+                Game.instance.gameMode = GameMode.init(list.get(next));
+                PXL610.switchNoFade( ModeScene.class );
             }
         };
         add( btnBack );
         btnForth = new RedButton( ">" ) {
             @Override
             protected void onClick() {
+                int next = list.indexOf(Game.instance.gameMode.tag) + 1;
+                if (next == list.size()) {
+                    next = 0;
+                }
+
+                Game.instance.gameMode = GameMode.init(list.get(next));
+                PXL610.switchNoFade( ModeScene.class );
             }
         };
         add( btnForth );
 
-        String[] modes = {
-                "Original", "DLC1"
-        };
+        Image title = BannerSprites.get( BannerSprites.Type.SELECT_YOUR_HERO );
+        title.x = align( (w - title.width()) / 2 );
+        title.y = align( top );
+        add( title );
 
-        ModeShield shielder = new ModeShield( modes[0] );
-        shields.put( modes[0], shielder );
-        add( shielder );
+        shield = new ModeShield( Game.instance.gameMode.title );
+        add( shield );
 
         if (PXL610.landscape()) {
             float shieldW = width/2;
-            ModeShield shield = shields.get( modes[0] );
-            shield.setRect( left + (width - shieldW)/2, (buttonY + top - shieldW)/2, shieldW, shieldW );
-            btnBack.setRect(left, (buttonY + top - shieldW/3)/2, width/15, shieldW/3);
-            btnForth.setRect(w - left - width/15, (buttonY + top - shieldW/3)/2, width/15, shieldW/3);
+            shield.setRect( left + (width - shieldW)/2, (buttonY + top + title.height() - shieldW)/2, shieldW, shieldW );
+            btnBack.setRect(left, (buttonY + top  + title.height() - shieldW/3)/2, width/15, shieldW/3);
+            btnForth.setRect(w - left - width/15, (buttonY + top  + title.height() - shieldW/3)/2, width/15, shieldW/3);
 
         } else {
             float shieldW = width - width/5 - 10;
-            ModeShield shield = shields.get( modes[0] );
             shield.setRect(left + 5 + width/10, (h - shieldW)/2, shieldW, shieldW );
             Log.e("TAG", "create: " + left );
             btnBack.setRect(left + 5, (h - shieldW/3)/2, width/10, shieldW/3);
@@ -151,7 +172,7 @@ public class ModeScene extends PixelScene {
         add( btnExit );
 
         curName = null;
-        updateClass( modes[0] );
+        updateClass( Game.instance.gameMode.tag );
         fadeIn();
 
         Badges.loadingListener = new Callback() {
@@ -181,16 +202,15 @@ public class ModeScene extends PixelScene {
         }
 
         if (curName != null) {
-            shields.get( curName ).highlight( false );
+            shield.highlight( false );
         }
-        shields.get( curName = name ).highlight( true );
+        shield.highlight( true );
 
-        if (name != "DLC1") {
+        if (name != GameMode.dlc1) {
 
             unlock.visible = false;
 
             btnNewGame.visible = true;
-            btnNewGame.secondary( null, false );
             btnNewGame.setRect( buttonX, buttonY, Camera.main.width - buttonX * 2, BUTTON_HEIGHT );
 
         } else {
@@ -219,80 +239,42 @@ public class ModeScene extends PixelScene {
         PXL610.switchNoFade( TitleScene.class );
     }
 
-    public static class GameButton extends RedButton {
-
-        private static final int SECONDARY_COLOR_N	= 0xCACFC2;
-        private static final int SECONDARY_COLOR_H	= 0xFFFF88;
-
-        private BitmapText secondary;
-
-        public GameButton( String primary ) {
-            super( primary );
-
-            this.secondary.text( null );
-        }
-
-        @Override
-        protected void createChildren() {
-            super.createChildren();
-
-            secondary = createText( 6 );
-            add( secondary );
-        }
-
-        @Override
-        protected void layout() {
-            super.layout();
-
-            if (secondary.text().length() > 0) {
-                text.y = align( y + (height - text.height() - secondary.baseLine()) / 2 );
-
-                secondary.x = align( x + (width - secondary.width()) / 2 );
-                secondary.y = align( text.y + text.height() );
-            } else {
-                text.y = align( y + (height - text.baseLine()) / 2 );
-            }
-        }
-
-        public void secondary( String text, boolean highlighted ) {
-            secondary.text( text );
-            secondary.measure();
-
-            secondary.hardlight( highlighted ? SECONDARY_COLOR_H : SECONDARY_COLOR_N );
-        }
-    }
-
     private class ModeShield extends Button {
 
-        private static final float MIN_BRIGHTNESS	= 0.6f;
+        private static final float MIN_BRIGHTNESS	 = 0.6f;
 
-        private static final int BASIC_NORMAL		= 0x444444;
-        private static final int BASIC_HIGHLIGHTED	= 0xCACFC2;
+        private static final int BASIC_NORMAL		 = 0x444444;
+        private static final int BASIC_HIGHLIGHTED	 = 0xCACFC2;
 
-        private static final int MASTERY_NORMAL		= 0x666644;
-        private static final int MASTERY_HIGHLIGHTED= 0xFFFF88;
+        private static final int MASTERY_NORMAL		 = 0x666644;
+        private static final int MASTERY_HIGHLIGHTED = 0xFFFF88;
 
-        private static final int WIDTH	= 32;
-        private static final int HEIGHT	= 32;
-        private static final int SCALE	= 3;
+        private static final int WIDTH	    = 32;
+        private static final int HEIGHT	    = 32;
+        private static final int SCALE	    = 3;
 
         private String modeName;
 
         private Image avatar;
         private BitmapText name;
         private Emitter emitter;
+        private Fireball fb;
 
         private float brightness;
 
         private int normal;
         private int highlighted;
 
+        private int vector = 1;
+        private float moved;
+
         public ModeShield( String mode ) {
             super();
 
             this.modeName = mode;
+            this.moved = 0;
 
-            avatar.frame( 0, 0, WIDTH, HEIGHT );
+            avatar.frame( list.indexOf(Game.instance.gameMode.tag) * WIDTH, 0, WIDTH, HEIGHT );
             avatar.scale.set( SCALE );
 
             if (true) {
@@ -316,11 +298,22 @@ public class ModeScene extends PixelScene {
 
             super.createChildren();
 
-            avatar = new Image( Assets.MODES );
+            avatar = new Image(Assets.MODES);
             add( avatar );
 
             name = PixelScene.createText( 9 );
             add( name );
+
+            fb = new Fireball();
+            switch (Game.instance.gameMode.tag) {
+                case GameMode.original:
+                    fb.minimizeBy(0.75F);
+                    break;
+                case GameMode.dlc1:
+                    fb.minimizeBy(0.5F);
+                    break;
+            }
+            add ( fb );
 
             emitter = new BitmaskEmitter( avatar );
             add( emitter );
@@ -332,10 +325,13 @@ public class ModeScene extends PixelScene {
             super.layout();
 
             avatar.x = align( x + (width - avatar.width()) / 2 );
-            avatar.y = align( y + (height - avatar.height() - name.height()) / 2 );
+            avatar.y = align( y + (height - avatar.height() - name.height()) / 2 + (moved*moved*2));
 
             name.x = align( x + (width - name.width()) / 2 );
             name.y = avatar.y + avatar.height() + SCALE;
+
+            fb.setRect( avatar.x + avatar.width()/32*Game.instance.gameMode.outlook.torchX, avatar.y + avatar.height()/32*Game.instance.gameMode.outlook.torchY,
+                    avatar.width()/64, avatar.height()/64 );
         }
 
         @Override
@@ -351,6 +347,13 @@ public class ModeScene extends PixelScene {
         @Override
         public void update() {
             super.update();
+
+            if (moved*moved > 1) {
+                vector = -vector;
+            }
+            moved += 0.04*vector;
+            System.out.println(moved);
+            layout();
 
             if (brightness < 1.0f && brightness > MIN_BRIGHTNESS) {
                 if ((brightness -= Game.elapsed) <= MIN_BRIGHTNESS) {

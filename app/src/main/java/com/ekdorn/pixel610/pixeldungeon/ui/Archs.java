@@ -21,6 +21,7 @@ import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.SkinnedBlock;
 import com.ekdorn.pixel610.noosa.ui.Component;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
+import com.ekdorn.pixel610.pixeldungeon.PXL610;
 
 public class Archs extends Component {
 
@@ -36,12 +37,12 @@ public class Archs extends Component {
 	
 	@Override
 	protected void createChildren() {
-		arcsBg = new SkinnedBlock( 1, 1, Assets.ARCS_BG );
+		arcsBg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs0Asset );
 		arcsBg.autoAdjust = true;
 		arcsBg.offsetTo( 0,  offsB );
 		add( arcsBg );
 		
-		arcsFg = new SkinnedBlock( 1, 1, Assets.ARCS_FG );
+		arcsFg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs1Asset );
 		arcsFg.autoAdjust = true;
 		arcsFg.offsetTo( 0,  offsF );
 		add( arcsFg );
