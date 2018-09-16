@@ -274,10 +274,10 @@ public class ModeScene extends PixelScene {
             this.modeName = mode;
             this.moved = 0;
 
-            avatar.frame( list.indexOf(Game.instance.gameMode.tag) * WIDTH, 0, WIDTH, HEIGHT );
+            avatar.frame( list.indexOf(Game.instance.gameMode.tag) * WIDTH + list.indexOf(Game.instance.gameMode.tag), 0, WIDTH, HEIGHT );
             avatar.scale.set( SCALE );
 
-            if (true) {
+            if (false) {
                 normal = MASTERY_NORMAL;
                 highlighted = MASTERY_HIGHLIGHTED;
             } else {
@@ -345,7 +345,6 @@ public class ModeScene extends PixelScene {
                 vector = -vector;
             }
             moved += 0.04*vector;
-            System.out.println(moved);
             layout();
 
             if (brightness < 1.0f && brightness > MIN_BRIGHTNESS) {

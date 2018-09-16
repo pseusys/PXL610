@@ -34,6 +34,7 @@ import com.ekdorn.pixel610.pixeldungeon.effects.Degradation;
 import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
 import com.ekdorn.pixel610.pixeldungeon.items.armor.Armor;
 import com.ekdorn.pixel610.pixeldungeon.items.bags.Bag;
+import com.ekdorn.pixel610.pixeldungeon.items.bags.Keyring;
 import com.ekdorn.pixel610.pixeldungeon.items.rings.Ring;
 import com.ekdorn.pixel610.pixeldungeon.items.wands.Wand;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.Weapon;
@@ -94,10 +95,7 @@ public class Item implements Bundlable {
 	public Item() {
 		this.depth = Dungeon.depth / 5;
 		finish();
-		System.out.println(this.name);
-		System.out.println(this.desc());
-		System.out.println(this.getClass());
-		System.out.println();
+		if (this instanceof Keyring) System.out.println(((Keyring) this).size);
 	}
 
 	public ArrayList<String> actions(Hero hero ) {

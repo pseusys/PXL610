@@ -26,6 +26,7 @@ public class Keyring extends Bag {
 
 	@Override
 	public void finish() {
+
 		name = Babylon.get().getFromResources("bag_keyring");
 		image = ItemSpriteSheet.KEYRING;
 		

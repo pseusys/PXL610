@@ -39,7 +39,7 @@ public class GameMode {
         initDLC1.tag = dlc1;
         initDLC1.title = "ДЛЦ 1";
 
-        initDLC1.outlook = new OutLook(16, 31, 0.5F,
+        initDLC1.outlook = new OutLook(16, 29, 0.5F,
                 Assets.ARCS_BG_1, Assets.ARCS_FG_1,
                 Assets.CHROME);
 

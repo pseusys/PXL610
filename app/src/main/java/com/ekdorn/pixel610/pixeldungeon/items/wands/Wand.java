@@ -108,10 +108,6 @@ public abstract class Wand extends KindOfWeapon {
 	
 	private String wood;
 	
-	{
-		defaultAction =  Babylon.get().getFromResources("wand_zap");
-	}
-	
 	@SuppressWarnings("unchecked")
 	public static void initWoods() {
 		handler = new ItemStatusHandler<Wand>( (Class<? extends Wand>[])wands, woods, images );
@@ -135,6 +131,8 @@ public abstract class Wand extends KindOfWeapon {
 		} catch (Exception e) {
 			// Wand of Magic Missile
 		}
+
+		finish();
 	}
 	
 	@Override
@@ -499,5 +497,10 @@ public abstract class Wand extends KindOfWeapon {
 				TIME_TO_CHARGE;
 			spend( time2charge );
 		}
+	}
+
+	@Override
+	public void finish() {
+		defaultAction =  Babylon.get().getFromResources("wand_zap");
 	}
 }

@@ -86,7 +86,7 @@ public enum Icons {
 			icon.frame( icon.texture.uvRect( 64, 39, 76, 55 ) );
 			break;
 		case NKG:
-			icon.frame( icon.texture.uvRect( 78, 39, 90, 55 ) );
+			icon.frame( icon.texture.uvRect( 78, 40, 90, 55 ) );
 			break;
 		case WARRIOR:
 			icon.frame( icon.texture.uvRect( 0, 29, 16, 45 ) );

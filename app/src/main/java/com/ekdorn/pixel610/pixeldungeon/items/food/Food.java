@@ -40,6 +40,11 @@ public class Food extends Item {
 	public float energy = Hunger.HUNGRY;
 	public String message = Babylon.get().getFromResources("food_message");
 
+	public Food() {
+		super();
+		finish();
+	}
+
 	@Override
 	public void finish() {
 		stackable = true;
