@@ -19,7 +19,7 @@ package com.ekdorn.pixel610.utils;
 
 import android.util.Log;
 
-import com.ekdorn.pixel610.pixeldungeon.items.armor.Armor;
+import com.ekdorn.pixel610.classicdungeon.items.armor.Armor;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

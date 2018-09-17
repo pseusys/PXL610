@@ -28,7 +28,7 @@ android:installLocation="auto">
 
     <activity
         android:label="@string/app_name"
-        android:name=".pixeldungeon.PXL610"
+        android:name=".classicdungeon.PXL610"
         android:screenOrientation="portrait">
         <intent-filter >
             <action android:name="android.intent.action.MAIN" />
