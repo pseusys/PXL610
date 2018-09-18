@@ -20,6 +20,7 @@ package com.ekdorn.pixel610.classicdungeon.scenes;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.ekdorn.pixel610.classicdungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.BitmapTextMultiline;
 import com.ekdorn.pixel610.noosa.Camera;
@@ -255,7 +256,8 @@ public class RankingsScene extends PixelScene {
             score.measure();
             add( score );
 
-            long percent = (Rankings.INSTANCE.records.size() > 0) ? ((Rankings.INSTANCE.records.get(0).score / (OnlineRatinger.INSTANCE.getBestGlobal() / 100)) - 100) : (0);
+            int highscore = Rankings.INSTANCE.records.size() > 0 ? Rankings.INSTANCE.records.get(0).score : 1;
+            long percent = (Rankings.INSTANCE.records.size() > 0) ? ((highscore / (OnlineRatinger.INSTANCE.getBestGlobal() / 100)) - 100) : (0);
             BitmapText perc = PixelScene.createText( Long.toString( percent ) + "%", 8 );
             perc.hardlight( Window.TITLE_COLOR );
             perc.measure();
@@ -439,7 +441,7 @@ public class RankingsScene extends PixelScene {
 				desc.hardlight( TEXT_LOSE );
 			}
 
-			classIcon.copy( Icons.get( OnlineRatinger.getClassById((String) rec.get(OnlineRatinger.CLASS))) );
+			classIcon.copy( Icons.get( HeroClass.getClassById((String) rec.get(OnlineRatinger.CLASS))) );
 		}
 
 		@Override

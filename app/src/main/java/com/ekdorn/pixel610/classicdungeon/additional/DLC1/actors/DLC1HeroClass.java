@@ -15,56 +15,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-package com.ekdorn.pixel610.classicdungeon.actors.hero;
+package com.ekdorn.pixel610.classicdungeon.additional.DLC1.actors;
 
 import com.ekdorn.pixel610.classicdungeon.Assets;
 import com.ekdorn.pixel610.classicdungeon.Babylon;
-import com.ekdorn.pixel610.classicdungeon.Badges;
-import com.ekdorn.pixel610.classicdungeon.items.TomeOfMastery;
+import com.ekdorn.pixel610.classicdungeon.actors.hero.Hero;
+import com.ekdorn.pixel610.classicdungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.classicdungeon.items.armor.ClothArmor;
 import com.ekdorn.pixel610.classicdungeon.items.bags.Keyring;
 import com.ekdorn.pixel610.classicdungeon.items.food.Food;
 import com.ekdorn.pixel610.classicdungeon.items.rings.RingOfShadows;
-import com.ekdorn.pixel610.classicdungeon.items.scrolls.Scroll;
 import com.ekdorn.pixel610.classicdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.ekdorn.pixel610.classicdungeon.items.wands.WandOfMagicMissile;
 import com.ekdorn.pixel610.classicdungeon.items.weapon.melee.Dagger;
-import com.ekdorn.pixel610.classicdungeon.items.weapon.melee.Knuckles;
-import com.ekdorn.pixel610.classicdungeon.items.weapon.melee.ShortSword;
-import com.ekdorn.pixel610.classicdungeon.items.weapon.missiles.Dart;
 import com.ekdorn.pixel610.classicdungeon.items.weapon.missiles.Boomerang;
+import com.ekdorn.pixel610.classicdungeon.items.weapon.missiles.Dart;
 import com.ekdorn.pixel610.classicdungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.utils.Bundle;
 
-public enum HeroClass {
+public enum DLC1HeroClass {
 
-	WARRIOR("warrior"),
-	MAGE("mage"),
-	ROGUE("rogue"),
-	HUNTRESS("huntress");
-	
+	MALE("rogue"),
+	FEMALE("huntress");
+
 	private String tag;
-	
-	private HeroClass( String tag ) {
+
+	private DLC1HeroClass( String tag ) {
 		this.tag = tag;
 	}
-	
-	public static final String[] WAR_PERKS = {
-			Babylon.get().getFromResources("hero_cl_war_0"),
-			Babylon.get().getFromResources("hero_cl_war_1"),
-			Babylon.get().getFromResources("hero_cl_war_2"),
-			Babylon.get().getFromResources("hero_cl_war_3"),
-			Babylon.get().getFromResources("hero_cl_war_4"),
-	};
-	
-	public static final String[] MAG_PERKS = {
-			Babylon.get().getFromResources("hero_cl_mag_0"),
-			Babylon.get().getFromResources("hero_cl_mag_1"),
-			Babylon.get().getFromResources("hero_cl_mag_2"),
-			Babylon.get().getFromResources("hero_cl_mag_3"),
-			Babylon.get().getFromResources("hero_cl_mag_4")
-	};
-	
+
 	public static final String[] ROG_PERKS = {
 			Babylon.get().getFromResources("hero_cl_rog_0"),
 			Babylon.get().getFromResources("hero_cl_rog_1"),
@@ -73,7 +51,7 @@ public enum HeroClass {
 			Babylon.get().getFromResources("hero_cl_rog_4"),
 			Babylon.get().getFromResources("hero_cl_rog_5")
 	};
-	
+
 	public static final String[] HUN_PERKS = {
 			Babylon.get().getFromResources("hero_cl_hun_0"),
 			Babylon.get().getFromResources("hero_cl_hun_1"),
@@ -81,177 +59,110 @@ public enum HeroClass {
 			Babylon.get().getFromResources("hero_cl_hun_3"),
 			Babylon.get().getFromResources("hero_cl_hun_4")
 	};
-	
-	public void initHero( Hero hero ) {
-		
+
+	public void initHero( DLC1Hero hero ) {
+
 		hero.heroClass = this;
-		
+
 		initCommon( hero );
-		
+
 		switch (this) {
-		case WARRIOR:
-			initWarrior( hero );
-			break;
-			
-		case MAGE:
-			initMage( hero );
-			break;
-			
-		case ROGUE:
-			initRogue( hero );
-			break;
-			
-		case HUNTRESS:
-			initHuntress( hero );
-			break;
+
+			case MALE:
+				initRogue( hero );
+				break;
+
+			case FEMALE:
+				initHuntress( hero );
+				break;
 		}
-		
-		if (Badges.isUnlocked( masteryBadge() )) {
-			new TomeOfMastery().collect();
-		}
-		
+
 		hero.updateAwareness();
 	}
-	
+
 	private static void initCommon( Hero hero ) {
 		(hero.belongings.armor = new ClothArmor()).identify();
 		new Food().identify().collect();
 		new Keyring().collect();
 	}
-	
-	public Badges.Badge masteryBadge() {
-		switch (this) {
-		case WARRIOR:
-			return Badges.Badge.MASTERY_WARRIOR;
-		case MAGE:
-			return Badges.Badge.MASTERY_MAGE;
-		case ROGUE:
-			return Badges.Badge.MASTERY_ROGUE;
-		case HUNTRESS:
-			return Badges.Badge.MASTERY_HUNTRESS;
-		}
-		return null;
-	}
-	
-	private static void initWarrior( Hero hero ) {
-		hero.STR = hero.STR + 1;
-		
-		(hero.belongings.weapon = new ShortSword()).identify();
-		new Dart( 8 ).identify().collect();
-		
-		QuickSlot.primaryValue = Dart.class;
 
-		for (Class<? extends Scroll> scroll: Scroll.getUnknown()) {
-            try {
-                scroll.newInstance().setKnown();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-	}
-	
-	private static void initMage( Hero hero ) {	
-		(hero.belongings.weapon = new Knuckles()).identify();
-		
-		WandOfMagicMissile wand = new WandOfMagicMissile();
-		wand.identify().collect();
-		
-		QuickSlot.primaryValue = wand;
-	}
-	
 	private static void initRogue( Hero hero ) {
 		(hero.belongings.weapon = new Dagger()).identify();
 		(hero.belongings.ring1 = new RingOfShadows()).upgrade().identify();
 		new Dart( 8 ).identify().collect();
-		
+
 		hero.belongings.ring1.activate( hero );
-		
+
 		QuickSlot.primaryValue = Dart.class;
-		
+
 		new ScrollOfMagicMapping().setKnown();
 	}
-	
+
 	private static void initHuntress( Hero hero ) {
-		
+
 		hero.HP = (hero.HT -= 5);
-		
+
 		(hero.belongings.weapon = new Dagger()).identify();
 		Boomerang boomerang = new Boomerang();
 		boomerang.identify().collect();
-		
+
 		QuickSlot.primaryValue = boomerang;
 	}
 
 	public String tag() {
 		return tag;
 	}
-	
+
 	public String title() {
 		switch (this) {
-			case WARRIOR:
-				return Babylon.get().getFromResources("hero_cl_warrior");
-			case MAGE:
-				return Babylon.get().getFromResources("hero_cl_mage");
-			case ROGUE:
+			case MALE:
 				return Babylon.get().getFromResources("hero_cl_rogue");
-			case HUNTRESS:
+			case FEMALE:
 				return Babylon.get().getFromResources("hero_cl_huntress");
 			default:
 				return Babylon.get().getFromResources("hero_cl_rogue");
 		}
 	}
-	
+
 	public String spritesheet() {
-		
+
 		switch (this) {
-		case WARRIOR:
-			return Assets.WARRIOR;
-		case MAGE:
-			return Assets.MAGE;
-		case ROGUE:
-			return Assets.ROGUE;
-		case HUNTRESS:
-			return Assets.HUNTRESS;
+			case MALE:
+				return Assets.ROGUE;
+			case FEMALE:
+				return Assets.HUNTRESS;
 		}
-		
+
 		return null;
 	}
-	
+
 	public String[] perks() {
-		
+
 		switch (this) {
-		case WARRIOR:
-			return WAR_PERKS;
-		case MAGE:
-			return MAG_PERKS;
-		case ROGUE:
-			return ROG_PERKS;
-		case HUNTRESS:
-			return HUN_PERKS;
+			case MALE:
+				return ROG_PERKS;
+			case FEMALE:
+				return HUN_PERKS;
 		}
-		
+
 		return null;
 	}
 
 	private static final String CLASS	= "class";
-	
+
 	public void storeInBundle( Bundle bundle ) {
 		bundle.put( CLASS, toString() );
 	}
-	
-	public static HeroClass restoreInBundle( Bundle bundle ) {
+
+	public static DLC1HeroClass restoreInBundle(Bundle bundle ) {
 		String value = bundle.getString( CLASS );
-		return value.length() > 0 ? valueOf( value ) : ROGUE;
+		return value.length() > 0 ? valueOf( value ) : MALE;
 	}
 
 	public static HeroClass getClassById(String id) {
-		if (id.equals(WARRIOR.tag)) {
-			return HeroClass.WARRIOR;
-		} else if (id.equals(MAGE.tag)) {
-			return HeroClass.MAGE;
-		} else if (id.equals(ROGUE.tag)) {
+		if (id.equals(MALE.tag)) {
 			return HeroClass. ROGUE;
-		} else if (id.equals(HUNTRESS.tag)) {
+		} else if (id.equals(FEMALE.tag)) {
 			return HeroClass.HUNTRESS;
 		} else {
 			return HeroClass. ROGUE;

@@ -195,17 +195,12 @@ public class ModeScene extends PixelScene {
 
     private void updateClass( String name ) {
 
-        if ((curName != null) && (curName.equals(name))) {
-            //add( new WndClass( cl ) );
-            return;
-        }
-
         if (curName != null) {
             shield.highlight( false );
         }
         shield.highlight( true );
 
-        if (name != GameMode.dlc1) {
+        if (name.equals(GameMode.original)) {
 
             unlock.visible = false;
 
@@ -217,19 +212,6 @@ public class ModeScene extends PixelScene {
             unlock.visible = true;
             btnNewGame.visible = false;
 
-        }
-    }
-
-    private void startNewGame() {
-
-        Dungeon.hero = null;
-        InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-
-        if (PXL610.gameIntro()) {
-            PXL610.gameIntro( false );
-            Game.switchScene( IntroScene.class );
-        } else {
-            Game.switchScene( InterlevelScene.class );
         }
     }
 
@@ -333,7 +315,7 @@ public class ModeScene extends PixelScene {
             emitter.start( Speck.factory( Speck.LIGHT ), 0.05f, 7 );
 
             Sample.INSTANCE.play( Assets.SND_CLICK, 1, 1, 1.2f );
-            updateClass( modeName );
+            //add( new WndClass( cl ) );
         }
 
         @Override

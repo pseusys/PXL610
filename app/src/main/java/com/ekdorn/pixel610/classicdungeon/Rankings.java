@@ -66,7 +66,7 @@ public enum Rankings {
 		}
 		
 		records.add( rec );
-		
+
 		Collections.sort( records, scoreComparator );
 		
 		lastRecord = records.indexOf( rec );

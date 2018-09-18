@@ -39,11 +39,6 @@ import java.util.Map;
 public enum OnlineRatinger {
     INSTANCE;
 
-    private static final String mage = "mage";
-    private static final String warrior = "warrior";
-    private static final String rogue = "rogue";
-    private static final String huntress = "huntress";
-
     private static final String COLLECTION  = "ranks";
     private static final String RANK_DOCUMENT    = "five_winners_%s";
     private static final String SYS_DOCUMENT    = "stats";
@@ -238,13 +233,7 @@ public enum OnlineRatinger {
     private static Map<String, Object> createRate(boolean win) {
         Map<String, Object> rate = new HashMap<>();
 
-        String heroClass = "";
-        switch (Dungeon.hero.heroClass) {
-            case MAGE: heroClass = mage; break;
-            case ROGUE: heroClass = rogue; break;
-            case WARRIOR: heroClass = warrior; break;
-            case HUNTRESS: heroClass = huntress; break;
-        }
+        String heroClass = Dungeon.hero.heroClass.tag();
 
         rate.put(CLASS, heroClass);
         rate.put(INFO, Dungeon.resultDescription);
@@ -257,21 +246,5 @@ public enum OnlineRatinger {
         rate.put(ID, PXL610.user_id());
 
         return rate;
-    }
-
-    // OTHER //
-    public static HeroClass getClassById(String id) {
-        switch(id) {
-            case mage:
-                return HeroClass.MAGE;
-            case warrior:
-                return HeroClass.WARRIOR;
-            case rogue:
-                return HeroClass. ROGUE;
-            case huntress:
-                return HeroClass.HUNTRESS;
-            default:
-                return null;
-        }
     }
 }

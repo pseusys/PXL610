@@ -18,6 +18,7 @@
 
 package com.ekdorn.pixel610.classicdungeon.windows;
 
+import com.ekdorn.pixel610.classicdungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Group;
 import com.ekdorn.pixel610.classicdungeon.Babylon;
@@ -39,9 +40,9 @@ public class WndOnlineRank extends Window {
 
         IconTitle title = new IconTitle();
         System.out.println((String) rec.get(OnlineRatinger.CLASS) + " " + ((Number) rec.get(OnlineRatinger.SCORE)).intValue());
-        title.icon( HeroSprite.avatar( OnlineRatinger.getClassById((String) rec.get(OnlineRatinger.CLASS)), ((Number) rec.get(OnlineRatinger.TIER)).intValue() ) );
+        title.icon( HeroSprite.avatar( HeroClass.getClassById((String) rec.get(OnlineRatinger.CLASS)), ((Number) rec.get(OnlineRatinger.TIER)).intValue() ) );
         title.label( Utils.format( Babylon.get().getFromResources("wnd_hero_title"), ((Number) rec.get(OnlineRatinger.LEVEL)).intValue(),
-                OnlineRatinger.getClassById((String) rec.get(OnlineRatinger.CLASS)).title() ).toUpperCase( Babylon.get().getCurrent() ) );
+                HeroClass.getClassById((String) rec.get(OnlineRatinger.CLASS)).title() ).toUpperCase( Babylon.get().getCurrent() ) );
         title.setRect( 0, 0, WIDTH, 0 );
         add( title );
 
