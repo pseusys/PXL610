@@ -18,8 +18,8 @@
 
 package com.ekdorn.pixel610.noosa.audio;
 
-import com.ekdorn.pixel610.classicdungeon.Assets;
-import com.ekdorn.pixel610.classicdungeon.utils.Utils;
+import com.ekdorn.pixel610.pixeldungeon.Assets;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Melody { // For future music packs;

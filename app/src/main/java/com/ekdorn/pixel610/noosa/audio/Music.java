@@ -20,7 +20,7 @@ package com.ekdorn.pixel610.noosa.audio;
 import java.io.IOException;
 
 import com.ekdorn.pixel610.noosa.Game;
-import com.ekdorn.pixel610.classicdungeon.utils.Utils;
+import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;

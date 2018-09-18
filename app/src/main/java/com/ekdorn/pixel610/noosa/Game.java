@@ -28,7 +28,7 @@ import com.ekdorn.pixel610.input.Keys;
 import com.ekdorn.pixel610.input.Touchscreen;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
-import com.ekdorn.pixel610.classicdungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.utils.BitmapCache;
 import com.ekdorn.pixel610.utils.SystemTime;
 import com.google.firebase.crash.FirebaseCrash;
