@@ -17,6 +17,9 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.windows;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,6 +37,7 @@ import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
 import com.ekdorn.pixel610.pixeldungeon.ui.CheckBox;
@@ -56,6 +60,8 @@ public class WndSettings extends Window {
 
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
+
+	private static boolean name_id_toggle = true;
 
 	public WndSettings( boolean inGame ) {
 		super();
@@ -123,15 +129,44 @@ public class WndSettings extends Window {
 			};
 			add(btnLocalisation.setRect(btnLanguageBack.right(), 0, WIDTH - btnLanguageBack.width() - btnLanguageBack.width(), BTN_HEIGHT) );
 
-			// Name Settings
-			RedButton btnName = new RedButton(PXL610.user_name()) {
+			// Switch name/id settings
+			RedButton btnSwitch = new RedButton(name_id_toggle ? TXT_UP : TXT_BACK) {
 				@Override
 				protected void onClick() {
-					hide();
-					dialog(false);
+					name_id_toggle = !name_id_toggle;
+                    WndSettings.this.hide();
+					((TitleScene) PXL610.scene()).add( new WndSettings( false ) );
 				}
 			};
-			add( btnName.setRect( 0, btnLocalisation.bottom() + GAP, WIDTH, BTN_HEIGHT) );
+			// Name Settings
+			RedButton btnName = new RedButton(name_id_toggle ? Babylon.get().getFromResources("name_tip") + PXL610.user_name()
+					: Babylon.get().getFromResources("code_tip") +  PXL610.user_id().substring(Inviter.prefix.length())) {
+				@Override
+				protected void onClick() {
+				    if (!name_id_toggle) {
+                        Handler mainHandler = new Handler(Looper.getMainLooper());
+                        Runnable dialog = new Runnable() {
+                            @Override
+                            public void run() {
+                                ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
+                                ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_id());
+                                clipboard.setPrimaryClip(clip);
+                            }
+                        };
+                        mainHandler.post(dialog);
+                    } else {
+						WndSettings.this.hide();
+				    	dialog(false);
+					}
+				}
+			};
+			if (name_id_toggle) {
+				add(btnSwitch.setRect(WIDTH - w, btnLocalisation.bottom() + GAP, w, BTN_HEIGHT));
+				add(btnName.setRect(0, btnLocalisation.bottom() + GAP, WIDTH - btnSwitch.width(), BTN_HEIGHT));
+			} else {
+				add(btnSwitch.setRect(0, btnLocalisation.bottom() + GAP, w, BTN_HEIGHT));
+				add(btnName.setRect(btnSwitch.right(), btnLocalisation.bottom() + GAP, WIDTH - btnSwitch.width(), BTN_HEIGHT));
+			}
 
 			// Previous settings
 			CheckBox btnScaleUp = new CheckBox( Babylon.get().getFromResources("sett_scale_up") ) {
@@ -249,6 +284,7 @@ public class WndSettings extends Window {
 			public void run() {
 				AlertDialog.Builder builder = new AlertDialog.Builder(Game.instance);
 				builder.setTitle(Babylon.get().getFromResources("name_change_dialog_title"));
+				builder.setMessage(Babylon.get().getFromResources("dialog_tip"));
 
 				builder.setCancelable(false);
 				// Set up the input
@@ -277,24 +313,35 @@ public class WndSettings extends Window {
 					public void onClick(View v) {
 						if (!input.getText().toString().equals("")) {
 							String pseudoname = input.getText().toString();
-							boolean nameSuggest = true;
-							char wrongChar = 'I';
-							for (int i = 0; i < pseudoname.length(); i++) {
-								if (!BitmapText.Font.FULL.contains(Character.toString(pseudoname.charAt(i)))) {
-									nameSuggest = false;
-									wrongChar = pseudoname.charAt(i);
-								}
-							}
-							if (nameSuggest) {
-								PXL610.user_name(pseudoname);
+							if (pseudoname.startsWith(Inviter.prefix)) {
+								Inviter.invite(pseudoname);
 								if (onLoad) {
-									act.dismiss();
+									input.setText("");
+									Toast.makeText(Game.instance, Babylon.get().getFromResources("now_name"), Toast.LENGTH_SHORT).show();
 								} else {
 									act.dismiss();
-									Game.scene().add(new WndSettings( false ));
+									Game.scene().add(new WndSettings(false));
 								}
 							} else {
-								Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("name_change_dialog_error"), Character.toString(wrongChar)), Toast.LENGTH_SHORT).show();
+								boolean nameSuggest = true;
+								char wrongChar = 'I';
+								for (int i = 0; i < pseudoname.length(); i++) {
+									if (!BitmapText.Font.FULL.contains(Character.toString(pseudoname.charAt(i)))) {
+										nameSuggest = false;
+										wrongChar = pseudoname.charAt(i);
+									}
+								}
+								if (nameSuggest) {
+									PXL610.user_name(pseudoname);
+									if (onLoad) {
+										act.dismiss();
+									} else {
+										act.dismiss();
+										Game.scene().add(new WndSettings(false));
+									}
+								} else {
+									Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("name_change_dialog_error"), Character.toString(wrongChar)), Toast.LENGTH_SHORT).show();
+								}
 							}
 						}
 					}

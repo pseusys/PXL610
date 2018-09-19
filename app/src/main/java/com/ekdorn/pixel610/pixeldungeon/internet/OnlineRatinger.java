@@ -16,11 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package com.ekdorn.pixel610.pixeldungeon;
+package com.ekdorn.pixel610.pixeldungeon.internet;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.ekdorn.pixel610.pixeldungeon.Dungeon;
+import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.Rankings;
+import com.ekdorn.pixel610.pixeldungeon.Statistics;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

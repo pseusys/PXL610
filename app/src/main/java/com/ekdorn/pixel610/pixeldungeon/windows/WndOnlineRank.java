@@ -22,7 +22,7 @@ import com.ekdorn.pixel610.pixeldungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Group;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
-import com.ekdorn.pixel610.pixeldungeon.OnlineRatinger;
+import com.ekdorn.pixel610.pixeldungeon.internet.OnlineRatinger;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.HeroSprite;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;

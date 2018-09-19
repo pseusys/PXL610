@@ -37,6 +37,7 @@ import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Blacksmith;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Imp;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Ghost;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Wandmaker;
+import com.ekdorn.pixel610.pixeldungeon.internet.OnlineRatinger;
 import com.ekdorn.pixel610.pixeldungeon.items.Ankh;
 import com.ekdorn.pixel610.pixeldungeon.items.Item;
 import com.ekdorn.pixel610.pixeldungeon.items.potions.Potion;

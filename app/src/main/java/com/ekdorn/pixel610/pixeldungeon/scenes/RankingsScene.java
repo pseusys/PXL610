@@ -29,7 +29,7 @@ import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.ui.Button;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
-import com.ekdorn.pixel610.pixeldungeon.OnlineRatinger;
+import com.ekdorn.pixel610.pixeldungeon.internet.OnlineRatinger;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.Rankings;
 import com.ekdorn.pixel610.pixeldungeon.effects.Flare;

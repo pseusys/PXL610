@@ -35,6 +35,7 @@ import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.pixeldungeon.ui.ExitButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.PrefsButton;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
+import com.ekdorn.pixel610.utils.InDev;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -112,7 +113,7 @@ public class TitleScene extends PixelScene {
 		DashboardItem btnPlay = new DashboardItem(Babylon.get().getFromResources("title_play"), 0 ) {
 			@Override
 			protected void onClick() {
-				PXL610.switchNoFade( ModeScene.class ); //NOREPLY!!!
+				PXL610.switchNoFade( InDev.isDeveloper() ? ModeScene.class : StartScene.class ); //NOREPLY!!!
 			}
 		};
 		add( btnPlay );

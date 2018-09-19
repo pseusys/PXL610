@@ -30,12 +30,11 @@ import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
-
-import java.util.UUID;
 
 public class PXL610 extends Game {
 	
@@ -142,8 +141,15 @@ public class PXL610 extends Game {
 			Babylon.get().updateLocale();
 
 			WndSettings.dialog(true);
-			PXL610.user_id( UUID.randomUUID().toString() );
 		}
+
+		if (PXL610.user_id().equals("") || (PXL610.user_id().length() > Inviter.idLength())) { // PXL610: update id;
+			String id = Inviter.updateID();
+			PXL610.user_id( id );
+			Inviter.publishID(id);
+		}
+
+		Inviter.loadBonus(PXL610.user_id());
 
 		Babylon.get().load();
 
@@ -334,12 +340,20 @@ public class PXL610 extends Game {
 		return Preferences.INSTANCE.getBoolean( Preferences.KEY_BRIGHTNESS, false );
 	}
 	
-	public static void donated( String value ) {
-		Preferences.INSTANCE.put( Preferences.KEY_DONATED, value );
+	public static void invited( boolean value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_INVITED, value );
 	}
-	
-	public static String donated() {
-		return Preferences.INSTANCE.getString( Preferences.KEY_DONATED, "" );
+
+	public static boolean invited() {
+		return Preferences.INSTANCE.getBoolean( Preferences.KEY_INVITED, false );
+	}
+
+	public static void bonus( int value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_BONUS, value );
+	}
+
+	public static int bonus() {
+		return Preferences.INSTANCE.getInt( Preferences.KEY_BONUS, 0 );
 	}
 	
 	public static void lastClass( int value ) {

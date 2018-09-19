@@ -48,6 +48,7 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndMessage;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndOptions;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSaver;
 import com.ekdorn.pixel610.utils.Callback;
+import com.ekdorn.pixel610.utils.InDev;
 
 public class StartScene extends PixelScene {
 
@@ -295,7 +296,7 @@ public class StartScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		PXL610.switchNoFade( ModeScene.class );
+		PXL610.switchNoFade( InDev.isDeveloper() ? ModeScene.class : TitleScene.class );
 	}
 	
 	public static class GameButton extends RedButton {

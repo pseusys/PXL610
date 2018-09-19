@@ -96,7 +96,7 @@ public enum Rankings {
 		save();
 	}
 	
-	protected static int score( boolean win ) {
+	public static int score( boolean win ) {
 		return (Statistics.goldCollected + Dungeon.hero.lvl * Statistics.deepestFloor * 100) * (win ? 2 : 1);
 	}
 	

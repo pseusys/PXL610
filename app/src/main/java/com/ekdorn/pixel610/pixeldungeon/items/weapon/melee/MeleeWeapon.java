@@ -158,7 +158,7 @@ public class MeleeWeapon extends Weapon {
 		} else {
 			if (cursedKnown && cursed) {
 				info.append( p );
-				info.append(Babylon.get().getFromResources("weapon_melee_fin4") + name + "." );
+				info.append(Babylon.get().getFromResources("weapon_melee_fin4") );
 			}
 		}
 		

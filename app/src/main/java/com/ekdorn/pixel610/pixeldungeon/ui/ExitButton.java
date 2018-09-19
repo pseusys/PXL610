@@ -26,6 +26,7 @@ import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.scenes.ModeScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.StartScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
+import com.ekdorn.pixel610.utils.InDev;
 
 public class ExitButton extends Button {
 	
@@ -69,7 +70,7 @@ public class ExitButton extends Button {
 	protected void onClick() {
 		if (Game.scene() instanceof TitleScene) {
 			Game.instance.finish();
-		} else if (Game.scene() instanceof StartScene) {
+		} else if ((Game.scene() instanceof StartScene) && (InDev.isDeveloper())) {
 			PXL610.switchNoFade( ModeScene.class );
 		} else {
 			PXL610.switchNoFade( TitleScene.class );

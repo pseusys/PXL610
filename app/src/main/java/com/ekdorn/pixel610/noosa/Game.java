@@ -29,6 +29,7 @@ import com.ekdorn.pixel610.input.Touchscreen;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.utils.BitmapCache;
 import com.ekdorn.pixel610.utils.SystemTime;
 import com.google.firebase.crash.FirebaseCrash;
@@ -153,7 +154,8 @@ public class Game extends AppCompatActivity implements GLSurfaceView.Renderer, V
 	public void onDestroy() {
 		super.onDestroy();
 		destroyGame();
-		
+
+		Inviter.unloadBonus();
 		Music.INSTANCE.mute();
 		Sample.INSTANCE.reset();
 	}
