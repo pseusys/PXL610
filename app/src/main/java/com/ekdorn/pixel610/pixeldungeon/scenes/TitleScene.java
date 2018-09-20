@@ -35,7 +35,7 @@ import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.pixeldungeon.ui.ExitButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.PrefsButton;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
-import com.ekdorn.pixel610.utils.InDev;
+import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 
 import javax.microedition.khronos.opengles.GL10;
 

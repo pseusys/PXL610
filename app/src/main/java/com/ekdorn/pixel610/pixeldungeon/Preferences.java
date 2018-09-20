@@ -41,6 +41,7 @@ enum Preferences {
 	public static final String KEY_LOCALISATION	  = "localisation";
 	public static final String KEY_GAMEMODE	      = "gamemode";
 
+	public static final String KEY_SUPERUSER_NAME = "admin";
 	public static final String KEY_USER_NAME	  = "name";
 	public static final String KEY_NSTANCE_ID	  = "id";
 	

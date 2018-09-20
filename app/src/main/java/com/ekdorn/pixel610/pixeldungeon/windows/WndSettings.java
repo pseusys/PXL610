@@ -37,6 +37,7 @@ import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
@@ -143,20 +144,23 @@ public class WndSettings extends Window {
 					: Babylon.get().getFromResources("code_tip") +  PXL610.user_id().substring(Inviter.prefix.length())) {
 				@Override
 				protected void onClick() {
-				    if (!name_id_toggle) {
-                        Handler mainHandler = new Handler(Looper.getMainLooper());
-                        Runnable dialog = new Runnable() {
-                            @Override
-                            public void run() {
-                                ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
-                                ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_id());
-                                clipboard.setPrimaryClip(clip);
-                            }
-                        };
-                        mainHandler.post(dialog);
-                    } else {
+				    if (name_id_toggle) {
 						WndSettings.this.hide();
-				    	dialog(false);
+						SysDialog.createNameWrite(false);
+					} else if (InDev.isDeveloper()) {
+						WndSettings.this.hide();
+						SysDialog.createInviteAdd();
+                    } else {
+						Handler mainHandler = new Handler(Looper.getMainLooper());
+						Runnable dialog = new Runnable() {
+							@Override
+							public void run() {
+								ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
+								ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_id());
+								clipboard.setPrimaryClip(clip);
+							}
+						};
+						mainHandler.post(dialog);
 					}
 				}
 			};
@@ -275,79 +279,5 @@ public class WndSettings extends Window {
 
 	private String orientationText() {
 		return PXL610.landscape() ? Babylon.get().getFromResources("sett_switch_port") : Babylon.get().getFromResources("sett_switch_land");
-	}
-
-	public static void dialog(final boolean onLoad) {
-		Handler mainHandler = new Handler(Looper.getMainLooper());
-		Runnable dialog = new Runnable() {
-			@Override
-			public void run() {
-				AlertDialog.Builder builder = new AlertDialog.Builder(Game.instance);
-				builder.setTitle(Babylon.get().getFromResources("name_change_dialog_title"));
-				builder.setMessage(Babylon.get().getFromResources("dialog_tip"));
-
-				builder.setCancelable(false);
-				// Set up the input
-				final EditText input = new EditText(Game.instance);
-				// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-				input.setInputType(InputType.TYPE_CLASS_TEXT);
-				input.setText(PXL610.user_name());
-				input.setSelection(input.getText().length());
-				input.setFocusable(true);
-				builder.setView(input);
-
-				// Set up the buttons
-				builder.setPositiveButton(Babylon.get().getFromResources("name_change_dialog_agreed"), null);
-				final AlertDialog act = builder.show();
-				input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-					@Override
-					public void onFocusChange(View v, boolean hasFocus) {
-						if (hasFocus) {
-							act.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-						}
-					}
-				});
-				input.requestFocus();
-				act.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (!input.getText().toString().equals("")) {
-							String pseudoname = input.getText().toString();
-							if (pseudoname.startsWith(Inviter.prefix)) {
-								Inviter.invite(pseudoname);
-								if (onLoad) {
-									input.setText("");
-									Toast.makeText(Game.instance, Babylon.get().getFromResources("now_name"), Toast.LENGTH_SHORT).show();
-								} else {
-									act.dismiss();
-									Game.scene().add(new WndSettings(false));
-								}
-							} else {
-								boolean nameSuggest = true;
-								char wrongChar = 'I';
-								for (int i = 0; i < pseudoname.length(); i++) {
-									if (!BitmapText.Font.FULL.contains(Character.toString(pseudoname.charAt(i)))) {
-										nameSuggest = false;
-										wrongChar = pseudoname.charAt(i);
-									}
-								}
-								if (nameSuggest) {
-									PXL610.user_name(pseudoname);
-									if (onLoad) {
-										act.dismiss();
-									} else {
-										act.dismiss();
-										Game.scene().add(new WndSettings(false));
-									}
-								} else {
-									Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("name_change_dialog_error"), Character.toString(wrongChar)), Toast.LENGTH_SHORT).show();
-								}
-							}
-						}
-					}
-				});
-			}
-		};
-		mainHandler.post(dialog);
 	}
 }

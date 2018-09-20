@@ -30,9 +30,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,9 +87,7 @@ public enum OnlineRatinger {
     }
 
     private static void check(final Map<String, Object> rec, final int repet) {
-        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, repet))
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, repet)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -109,9 +110,7 @@ public enum OnlineRatinger {
     }
 
     private static void push(final Map<String, Object> rec, int place) {
-        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, place))
-                .set( rec )
-                .addOnSuccessListener(new OnSuccessListener<Object>() {
+        INSTANCE.db.collection(COLLECTION).document(Utils.format(RANK_DOCUMENT, place)).set( rec ).addOnSuccessListener(new OnSuccessListener<Object>() {
                     @Override
                     public void onSuccess(Object o) {
                         Log.d("TAG", "DocumentSnapshot added with ID: " + o);
@@ -124,7 +123,7 @@ public enum OnlineRatinger {
                     }
                 });
 
-        INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT)
+        /*INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -159,7 +158,35 @@ public enum OnlineRatinger {
                             Log.w("TAG", "Error getting documents.", task.getException());
                         }
                     }
-                });
+                });*/
+
+        DocumentReference sfDocRef = INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT);
+        INSTANCE.db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(sfDocRef);
+
+                long total = ((Number) snapshot.getData().get(TOTAL)).longValue() + ((Number) rec.get(SCORE)).longValue();
+                long number = ((Number) snapshot.getData().get(NUMBER)).intValue() + 1L;
+                Map<String, Object> sys = new HashMap<>();
+                sys.put(TOTAL, total);
+                sys.put(NUMBER, number);
+
+                transaction.update(sfDocRef, sys);
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("TAG", "Transaction success!");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("TAG", "Transaction failure.", e);
+                }
+        });
+
     }
 
     // GET //

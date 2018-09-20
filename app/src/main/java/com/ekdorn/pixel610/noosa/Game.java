@@ -155,7 +155,6 @@ public class Game extends AppCompatActivity implements GLSurfaceView.Renderer, V
 		super.onDestroy();
 		destroyGame();
 
-		Inviter.unloadBonus();
 		Music.INSTANCE.mute();
 		Sample.INSTANCE.reset();
 	}

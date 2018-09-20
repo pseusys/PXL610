@@ -48,7 +48,7 @@ import com.ekdorn.pixel610.pixeldungeon.windows.WndMessage;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndOptions;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSaver;
 import com.ekdorn.pixel610.utils.Callback;
-import com.ekdorn.pixel610.utils.InDev;
+import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 
 public class StartScene extends PixelScene {
 

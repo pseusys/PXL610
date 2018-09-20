@@ -26,7 +26,7 @@ import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.scenes.ModeScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.StartScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
-import com.ekdorn.pixel610.utils.InDev;
+import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 
 public class ExitButton extends Button {
 	

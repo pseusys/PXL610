@@ -30,10 +30,12 @@ import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
+import com.ekdorn.pixel610.pixeldungeon.windows.SysDialog;
 import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
 
 public class PXL610 extends Game {
@@ -140,16 +142,19 @@ public class PXL610 extends Game {
 		if (PXL610.user_name().equals("")) { // PXL610: update localisation;
 			Babylon.get().updateLocale();
 
-			WndSettings.dialog(true);
+			SysDialog.createNameWrite(true);
 		}
 
 		if (PXL610.user_id().equals("") || (PXL610.user_id().length() > Inviter.idLength())) { // PXL610: update id;
 			String id = Inviter.updateID();
 			PXL610.user_id( id );
 			Inviter.publishID(id);
+
+			SysDialog.createInviteWrite();
 		}
 
 		Inviter.loadBonus(PXL610.user_id());
+		InDev.loadSuperuserName();
 
 		Babylon.get().load();
 
@@ -410,6 +415,14 @@ public class PXL610 extends Game {
 
 	public static String gamemode() {
 		return Preferences.INSTANCE.getString( Preferences.KEY_GAMEMODE, GameMode.original);
+	}
+
+	public static void superuser_name( String value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_SUPERUSER_NAME, value );
+	}
+
+	public static String superuser_name() {
+		return Preferences.INSTANCE.getString( Preferences.KEY_SUPERUSER_NAME, InDev.developer_key );
 	}
 	
 	/*
