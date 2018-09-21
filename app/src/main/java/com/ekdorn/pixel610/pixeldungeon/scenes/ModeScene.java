@@ -56,8 +56,6 @@ public class ModeScene extends PixelScene {
 
         super.create();
 
-        Badges.loadGlobal();
-
         uiCamera.visible = false;
 
         int w = Camera.main.width;
@@ -173,23 +171,8 @@ public class ModeScene extends PixelScene {
         updateClass( Game.instance.gameMode.tag );
         fadeIn();
 
-        Badges.loadingListener = new Callback() {
-            @Override
-            public void call() {
-                if (Game.scene() == ModeScene.this) {
-                    PXL610.switchNoFade( ModeScene.class );
-                }
-            }
-        };
-    }
+        PXL610.switchNoFade( ModeScene.class );
 
-    @Override
-    public void destroy() {
-
-        Badges.saveGlobal();
-        Badges.loadingListener = null;
-
-        super.destroy();
     }
 
     private void updateClass( String name ) {
@@ -223,11 +206,8 @@ public class ModeScene extends PixelScene {
 
         private static final float MIN_BRIGHTNESS	 = 0.6f;
 
-        private static final int BASIC_NORMAL		 = 0x444444;
-        private static final int BASIC_HIGHLIGHTED	 = 0xCACFC2;
-
-        private static final int MASTERY_NORMAL		 = 0x666644;
-        private static final int MASTERY_HIGHLIGHTED = 0xFFFF88;
+        private static final int NORMAL		 = 0x444444;
+        private static final int HIGHLIGHTED	 = 0xCACFC2;
 
         private static final int WIDTH	    = 32;
         private static final int HEIGHT	    = 32;
@@ -257,13 +237,9 @@ public class ModeScene extends PixelScene {
             avatar.frame( list.indexOf(Game.instance.gameMode.tag) * WIDTH + list.indexOf(Game.instance.gameMode.tag), 0, WIDTH, HEIGHT );
             avatar.scale.set( SCALE );
 
-            if (false) {
-                normal = MASTERY_NORMAL;
-                highlighted = MASTERY_HIGHLIGHTED;
-            } else {
-                normal = BASIC_NORMAL;
-                highlighted = BASIC_HIGHLIGHTED;
-            }
+
+            normal = NORMAL;
+            highlighted = HIGHLIGHTED;
 
             name.text( modeName );
             name.measure();

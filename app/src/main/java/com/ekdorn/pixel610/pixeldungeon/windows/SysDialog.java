@@ -113,9 +113,14 @@ public class SysDialog {
                         if (!input.getText().toString().equals("")) {
                             String pseudoname = input.getText().toString();
                             if (pseudoname.startsWith(Inviter.prefix)) {
-                                Inviter.invite(pseudoname);
-                                act.dismiss();
-                                Game.scene().add(new WndSettings(false));
+                                Inviter.invite(pseudoname, new Inviter.OnTransactionSuccess() {
+                                    @Override
+                                    public void OnSuccess() {
+                                        act.dismiss();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(Game.instance, Babylon.get().getFromResources("dialog_wrongformat"), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             PXL610.invited(false);
@@ -162,10 +167,18 @@ public class SysDialog {
                             String pseudoname = input.getText().toString();
                             try {
                                 Integer i = Integer.parseInt(pseudoname);
-                                Inviter.invite(PXL610.user_id(), i);
-                            } catch (Error e) {
+                                Inviter.invite(PXL610.user_id(), i, new Inviter.OnTransactionSuccess() {
+                                    @Override
+                                    public void OnSuccess() {
+                                        act.dismiss();
+                                        Game.scene().add(new WndSettings(false));
+                                    }
+                                });
+                            } catch (Exception e) {
                                 Toast.makeText(Game.instance, Babylon.get().getFromResources("settings_notnumber"), Toast.LENGTH_SHORT).show();
                             }
+
+                        } else {
                             act.dismiss();
                             Game.scene().add(new WndSettings(false));
                         }

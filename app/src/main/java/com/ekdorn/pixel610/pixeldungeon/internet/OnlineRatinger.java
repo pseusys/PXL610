@@ -45,6 +45,8 @@ import java.util.Map;
 public enum OnlineRatinger {
     INSTANCE;
 
+    private static final int MAX_DATA_COUNTER = 6;
+
     private static final String COLLECTION  = "ranks";
     private static final String RANK_DOCUMENT    = "five_winners_%s";
     private static final String SYS_DOCUMENT    = "stats";
@@ -123,43 +125,6 @@ public enum OnlineRatinger {
                     }
                 });
 
-        /*INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            long total = ((Number) rec.get(SCORE)).longValue();
-                            long number = 1L;
-                            if (task.getResult().exists()) {
-                                total = ((Number) task.getResult().getData().get(TOTAL)).longValue() + ((Number) rec.get(SCORE)).longValue();
-                                number = ((Number) task.getResult().getData().get(NUMBER)).intValue() + 1L;
-                            }
-                            Map<String, Object> sys = new HashMap<>();
-                            sys.put(TOTAL, total);
-                            sys.put(NUMBER, number);
-
-                            INSTANCE.db.collection(COLLECTION).document(Utils.format(SYS_DOCUMENT))
-                                    .set( sys )
-                                    .addOnSuccessListener(new OnSuccessListener<Object>() {
-                                        @Override
-                                        public void onSuccess(Object o) {
-                                            Log.d("TAG", "DocumentSnapshot added with ID: " + o);
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("TAG", "Error adding document", e);
-                                        }
-                                    });
-
-                        } else {
-                            Log.w("TAG", "Error getting documents.", task.getException());
-                        }
-                    }
-                });*/
-
         DocumentReference sfDocRef = INSTANCE.db.collection(COLLECTION).document(SYS_DOCUMENT);
         INSTANCE.db.runTransaction(new Transaction.Function<Void>() {
             @Override
@@ -207,7 +172,7 @@ public enum OnlineRatinger {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 boolean exists = task.getResult().exists();
-                                if (exists && topData.size() < 6) {
+                                if (exists && topData.size() < MAX_DATA_COUNTER) {
                                     topData.add(task.getResult().getData());
                                     System.out.println("gotit");
                                 } else {
@@ -263,7 +228,7 @@ public enum OnlineRatinger {
     private static Map<String, Object> createRate(boolean win) {
         Map<String, Object> rate = new HashMap<>();
 
-        String heroClass = Dungeon.hero.heroClass.tag();
+        String heroClass = Dungeon.hero.heroClass.name();
 
         rate.put(CLASS, heroClass);
         rate.put(INFO, Dungeon.resultDescription);

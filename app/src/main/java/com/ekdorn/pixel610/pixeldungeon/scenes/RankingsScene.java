@@ -441,7 +441,7 @@ public class RankingsScene extends PixelScene {
 				desc.hardlight( TEXT_LOSE );
 			}
 
-			classIcon.copy( Icons.get( HeroClass.getClassById((String) rec.get(OnlineRatinger.CLASS))) );
+			classIcon.copy( Icons.get( HeroClass.valueOf((String) rec.get(OnlineRatinger.CLASS))) );
 		}
 
 		@Override

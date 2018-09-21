@@ -52,25 +52,25 @@ import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 
 public class StartScene extends PixelScene {
 
-	private static final float BUTTON_HEIGHT	= 24;
+	protected static final float BUTTON_HEIGHT	= 24;
 	private static final float GAP				= 2;
-	
-	private static final float WIDTH_P	= 150;
-	private static final float HEIGHT_P	= 220;
-	
-	private static final float WIDTH_L	= 224;
-	private static final float HEIGHT_L	= 124;
+
+	protected static final float WIDTH_P	= 150;
+	protected static final float HEIGHT_P	= 220;
+
+	protected static final float WIDTH_L	= 224;
+	protected static final float HEIGHT_L	= 124;
 	
 	private static HashMap<HeroClass, ClassShield> shields = new HashMap<HeroClass, ClassShield>();
+
+	protected float buttonX;
+	protected float buttonY;
 	
-	private float buttonX;
-	private float buttonY;
-	
-	private GameButton btnLoad;
-	private GameButton btnNewGame;
+	protected GameButton btnLoad;
+	protected GameButton btnNewGame;
 	
 	private boolean huntressUnlocked;
-	private Group unlock;
+	protected Group unlock;
 	
 	public static HeroClass curClass;
 	
@@ -143,7 +143,7 @@ public class StartScene extends PixelScene {
 		float centralHeight = buttonY - title.y - title.height();
 		
 		HeroClass[] classes = {
-			HeroClass.WARRIOR, HeroClass.MAGE, HeroClass.ROGUE, HeroClass.HUNTRESS	
+			HeroClass.WARRIOR, HeroClass.MAGE, HeroClass.ROGUE, HeroClass.HUNTRESS
 		};
 		for (HeroClass cl : classes) {
 			ClassShield shield = new ClassShield( cl );
@@ -158,27 +158,27 @@ public class StartScene extends PixelScene {
 				ClassShield shield = shields.get( classes[i] );
 				shield.setRect( left + i * shieldW, top, shieldW, shieldH );
 			}
-			
+
 			ChallengeButton challenge = new ChallengeButton();
-			challenge.setPos( 
+			challenge.setPos(
 				w / 2 - challenge.width() / 2,
 				top + shieldH - challenge.height() / 2 );
 			add( challenge );
-			
+
 		} else {
 			float shieldW = width / 2;
 			float shieldH = Math.min( centralHeight / 2, shieldW * 1.2f );
 			top = title.y + title.height() + centralHeight / 2 - shieldH;
 			for (int i=0; i < classes.length; i++) {
 				ClassShield shield = shields.get( classes[i] );
-				shield.setRect( 
+				shield.setRect(
 					left + (i % 2) * shieldW,
-					top + (i / 2) * shieldH, 
+					top + (i / 2) * shieldH,
 					shieldW, shieldH );
 			}
-			
+
 			ChallengeButton challenge = new ChallengeButton();
-			challenge.setPos( 
+			challenge.setPos(
 				w / 2 - challenge.width() / 2,
 				top + shieldH - challenge.height() / 2 );
 			add( challenge );
@@ -222,6 +222,14 @@ public class StartScene extends PixelScene {
 				}
 			}
 		};
+	}
+
+	private void createOriginal() {
+
+	}
+
+	private void createDLC1() {
+
 	}
 	
 	@Override
@@ -342,7 +350,7 @@ public class StartScene extends PixelScene {
 		}
 	}
 	
-	private class ClassShield extends Button {
+	public class ClassShield extends Button {
 		
 		private static final float MIN_BRIGHTNESS	= 0.6f;
 		
@@ -457,7 +465,7 @@ public class StartScene extends PixelScene {
 		}
 	}
 	
-	private class ChallengeButton extends Button {
+	public class ChallengeButton extends Button {
 		
 		private Image image;
 		

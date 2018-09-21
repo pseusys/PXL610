@@ -20,6 +20,8 @@ package com.ekdorn.pixel610.pixeldungeon.actors.hero;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.Badges;
+import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.pixeldungeon.items.TomeOfMastery;
 import com.ekdorn.pixel610.pixeldungeon.items.armor.ClothArmor;
 import com.ekdorn.pixel610.pixeldungeon.items.bags.Keyring;
@@ -38,17 +40,10 @@ import com.ekdorn.pixel610.utils.Bundle;
 
 public enum HeroClass {
 
-	WARRIOR("warrior"),
-	MAGE("mage"),
-	ROGUE("rogue"),
-	HUNTRESS("huntress");
-	
-	private String tag;
-	
-	private HeroClass( String tag ) {
-		this.tag = tag;
-	}
-	
+	WARRIOR, MAGE, ROGUE, HUNTRESS,
+
+	MALE;
+
 	public static final String[] WAR_PERKS = {
 			Babylon.get().getFromResources("hero_cl_war_0"),
 			Babylon.get().getFromResources("hero_cl_war_1"),
@@ -85,8 +80,20 @@ public enum HeroClass {
 	public void initHero( Hero hero ) {
 		
 		hero.heroClass = this;
-		
-		initCommon( hero );
+
+		switch (PXL610.gamemode()) {
+			case GameMode.original:
+				initOriginal( hero );
+
+				if (Badges.isUnlocked( masteryBadge() )) {
+					new TomeOfMastery().collect();
+				}
+				break;
+
+			case GameMode.dlc1:
+				initDLC1( hero );
+				break;
+		}
 		
 		switch (this) {
 		case WARRIOR:
@@ -106,14 +113,16 @@ public enum HeroClass {
 			break;
 		}
 		
-		if (Badges.isUnlocked( masteryBadge() )) {
-			new TomeOfMastery().collect();
-		}
-		
 		hero.updateAwareness();
 	}
 	
-	private static void initCommon( Hero hero ) {
+	private static void initOriginal( Hero hero ) {
+		(hero.belongings.armor = new ClothArmor()).identify();
+		new Food().identify().collect();
+		new Keyring().collect();
+	}
+
+	private static void initDLC1( Hero hero ) {
 		(hero.belongings.armor = new ClothArmor()).identify();
 		new Food().identify().collect();
 		new Keyring().collect();
@@ -181,10 +190,6 @@ public enum HeroClass {
 		
 		QuickSlot.primaryValue = boomerang;
 	}
-
-	public String tag() {
-		return tag;
-	}
 	
 	public String title() {
 		switch (this) {
@@ -242,19 +247,5 @@ public enum HeroClass {
 	public static HeroClass restoreInBundle( Bundle bundle ) {
 		String value = bundle.getString( CLASS );
 		return value.length() > 0 ? valueOf( value ) : ROGUE;
-	}
-
-	public static HeroClass getClassById(String id) {
-		if (id.equals(WARRIOR.tag)) {
-			return HeroClass.WARRIOR;
-		} else if (id.equals(MAGE.tag)) {
-			return HeroClass.MAGE;
-		} else if (id.equals(ROGUE.tag)) {
-			return HeroClass. ROGUE;
-		} else if (id.equals(HUNTRESS.tag)) {
-			return HeroClass.HUNTRESS;
-		} else {
-			return HeroClass. ROGUE;
-		}
 	}
 }

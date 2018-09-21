@@ -8,6 +8,7 @@ import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
+import com.ekdorn.pixel610.pixeldungeon.windows.SysDialog;
 import com.ekdorn.pixel610.utils.Random;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,17 +47,17 @@ public class Inviter {
         createDB().collection(COLLECTION).document(id).set(data);
     }
 
-    public static void invite(String code) {
+    public static void invite(String code, OnTransactionSuccess ots) {
         if (PXL610.invited()) {
             Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_already_invited"), Toast.LENGTH_SHORT).show();
         } else if (code.equals(PXL610.user_id())) {
             Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_selfinvite"), Toast.LENGTH_SHORT).show();
         } else {
-            invite(code, 1);
+            invite(code, 1, ots);
         }
     }
 
-    public static void invite(String code, int number) {
+    public static void invite(String code, int number, OnTransactionSuccess ots) {
         DocumentReference sfDocRef = createDB().collection(COLLECTION).document(code);
         createDB().runTransaction(new Transaction.Function<Void>() {
             @Override
@@ -75,6 +76,7 @@ public class Inviter {
             public void onSuccess(Void aVoid) {
                 Log.d("TAG", "Transaction success!");
                 PXL610.invited(true);
+                ots.OnSuccess();
                 if (code.equals(PXL610.user_id())) {
                     Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_adding_done"), Toast.LENGTH_SHORT).show();
                     Inviter.loadBonus(PXL610.user_id());
@@ -93,52 +95,6 @@ public class Inviter {
                 }
             }
         });
-
-
-            /*createDB().collection(COLLECTION).document(code).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful() && task.getResult().exists()) {
-                        long total = ((Number) task.getResult().get(INVITATIONS)).intValue() + number;
-
-                        Map<String, Object> data = new HashMap<>();
-                        data.put(INVITATIONS, total);
-
-                        createDB().collection(COLLECTION).document(PXL610.user_id())
-                                .set(data)
-                                .addOnSuccessListener(new OnSuccessListener<Object>() {
-                                    @Override
-                                    public void onSuccess(Object o) {
-                                        Log.d("TAG", "DocumentSnapshot added with ID: " + o);
-                                        PXL610.invited(true);
-                                        if (code.equals(PXL610.user_id())) {
-                                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_adding_done"), Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_invited"), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w("TAG", "Error adding document", e);
-                                        if (code.equals(PXL610.user_id())) {
-                                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_adding_error"), Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_error"), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    } else {
-                        Log.w("TAG", "Error getting documents.", task.getException());
-                        if (code.equals(PXL610.user_id())) {
-                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_error"), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_notvalid_code"), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            });*/
     }
 
     public static void loadBonus(String id) {
@@ -168,5 +124,9 @@ public class Inviter {
                 .build();
         db.setFirestoreSettings(settings);
         return db;
+    }
+
+    public interface OnTransactionSuccess {
+        public void OnSuccess();
     }
 }
