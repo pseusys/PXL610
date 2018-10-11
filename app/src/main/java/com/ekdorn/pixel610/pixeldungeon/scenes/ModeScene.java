@@ -14,7 +14,7 @@ import com.ekdorn.pixel610.noosa.particles.Emitter;
 import com.ekdorn.pixel610.noosa.ui.Button;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
-import com.ekdorn.pixel610.pixeldungeon.Badges;
+//import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.pixeldungeon.effects.BannerSprites;
@@ -170,9 +170,6 @@ public class ModeScene extends PixelScene {
         curName = null;
         updateClass( Game.instance.gameMode.tag );
         fadeIn();
-
-        PXL610.switchNoFade( ModeScene.class );
-
     }
 
     private void updateClass( String name ) {
@@ -182,7 +179,7 @@ public class ModeScene extends PixelScene {
         }
         shield.highlight( true );
 
-        if (name.equals(GameMode.original)) {
+        if (true/*name.equals(GameMode.original)*/) {
 
             unlock.visible = false;
 

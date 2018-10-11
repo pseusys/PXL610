@@ -17,6 +17,7 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.scenes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ekdorn.pixel610.noosa.BitmapText;
@@ -35,6 +36,7 @@ import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.actors.hero.HeroClass;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.pixeldungeon.effects.BannerSprites;
 import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
 import com.ekdorn.pixel610.pixeldungeon.effects.BannerSprites.Type;
@@ -141,58 +143,71 @@ public class StartScene extends PixelScene {
 		add( btnLoad );	
 		
 		float centralHeight = buttonY - title.y - title.height();
-		
-		HeroClass[] classes = {
-			HeroClass.WARRIOR, HeroClass.MAGE, HeroClass.ROGUE, HeroClass.HUNTRESS
-		};
+
+		ArrayList<HeroClass> classes = new ArrayList<>();
+		if (PXL610.gamemode().equals(GameMode.original)) {
+			classes.add(HeroClass.WARRIOR);
+			classes.add(HeroClass.MAGE);
+			classes.add(HeroClass.ROGUE);
+			classes.add(HeroClass.HUNTRESS);
+		} else {
+			classes.add(HeroClass.MALE);
+			classes.add(HeroClass.FEMALE);
+		}
+
 		for (HeroClass cl : classes) {
 			ClassShield shield = new ClassShield( cl );
 			shields.put( cl, shield );
 			add( shield );
 		}
+
+		float shieldW, shieldH = 0;
 		if (PXL610.landscape()) {
-			float shieldW = width / 4;
-			float shieldH = Math.min( centralHeight, shieldW );
+			shieldW = width / classes.size();
+			shieldH = Math.min( centralHeight, shieldW );
 			top = title.y + title.height + (centralHeight - shieldH) / 2;
-			for (int i=0; i < classes.length; i++) {
-				ClassShield shield = shields.get( classes[i] );
+			for (int i=0; i < classes.size(); i++) {
+				ClassShield shield = shields.get( classes.get(i) );
 				shield.setRect( left + i * shieldW, top, shieldW, shieldH );
 			}
 
-			ChallengeButton challenge = new ChallengeButton();
-			challenge.setPos(
-				w / 2 - challenge.width() / 2,
-				top + shieldH - challenge.height() / 2 );
-			add( challenge );
-
 		} else {
-			float shieldW = width / 2;
-			float shieldH = Math.min( centralHeight / 2, shieldW * 1.2f );
+			shieldW = width / 2;
+			shieldH = Math.min( centralHeight / 2, shieldW * 1.2f );
 			top = title.y + title.height() + centralHeight / 2 - shieldH;
-			for (int i=0; i < classes.length; i++) {
-				ClassShield shield = shields.get( classes[i] );
-				shield.setRect(
-					left + (i % 2) * shieldW,
-					top + (i / 2) * shieldH,
-					shieldW, shieldH );
+			for (int i=0; i < classes.size(); i++) {
+				ClassShield shield = shields.get( classes.get(i) );
+				if (PXL610.gamemode().equals(GameMode.original)) {
+					shield.setRect(
+							left + (i % 2) * shieldW,
+							top + (i / 2) * shieldH,
+							shieldW, shieldH);
+				} else {
+					shield.setRect(
+							(float) (left + 0.5 * shieldW),
+							top + i * shieldH,
+							shieldW, shieldH);
+				}
 			}
-
-			ChallengeButton challenge = new ChallengeButton();
-			challenge.setPos(
-				w / 2 - challenge.width() / 2,
-				top + shieldH - challenge.height() / 2 );
-			add( challenge );
 		}
-		
+
+        if (PXL610.gamemode().equals(GameMode.original)) {
+            ChallengeButton challenge = new ChallengeButton();
+            challenge.setPos(
+                    w / 2 - challenge.width() / 2,
+                    top + shieldH - challenge.height() / 2);
+            add(challenge);
+        }
+
 		unlock = new Group();
 		add( unlock );
-		
+
 		if (!(huntressUnlocked = /*Badges.isUnlocked( Badges.Badge.BOSS_SLAIN_3 )*/false)) {
-		
+
 			BitmapTextMultiline text = PixelScene.createMultiline( Babylon.get().getFromResources("startscene_unlock"), 9 );
 			text.maxWidth = (int)width;
 			text.measure();
-			
+
 			float pos = (bottom - BUTTON_HEIGHT) + (BUTTON_HEIGHT - text.height()) / 2;
 			for (BitmapText line : text.new LineSplitter().split()) {
 				line.measure();
@@ -200,8 +215,8 @@ public class StartScene extends PixelScene {
 				line.x = PixelScene.align( w / 2 - line.width() / 2 );
 				line.y = PixelScene.align( pos );
 				unlock.add( line );
-				
-				pos += line.height(); 
+
+				pos += line.height();
 			}
 		}
 		
@@ -210,7 +225,7 @@ public class StartScene extends PixelScene {
 		add( btnExit );
 		
 		curClass = null;
-		updateClass( HeroClass.values()[PXL610.lastClass()] );
+		updateClass(classes.get(PXL610.lastClass(PXL610.gamemode())));
 		
 		fadeIn();
 		
@@ -222,14 +237,6 @@ public class StartScene extends PixelScene {
 				}
 			}
 		};
-	}
-
-	private void createOriginal() {
-
-	}
-
-	private void createDLC1() {
-
 	}
 	
 	@Override
@@ -243,7 +250,7 @@ public class StartScene extends PixelScene {
 	
 	private void updateClass( HeroClass cl ) {
 		
-		if ((curClass == cl) && (cl != HeroClass.HUNTRESS) && (cl != HeroClass.ROGUE)) { //EKDORN: not ready
+		if ((curClass == cl) && ((cl == HeroClass.MAGE) || (cl == HeroClass.WARRIOR))) { //EKDORN: not ready
 			add( new WndClass( cl ) );
 			return;
 		}
@@ -253,7 +260,7 @@ public class StartScene extends PixelScene {
 		}
 		shields.get( curClass = cl ).highlight( true );
 		
-		if (((cl != HeroClass.HUNTRESS) && (cl !=HeroClass.ROGUE)) || huntressUnlocked) {
+		if ((cl == HeroClass.MAGE) || (cl == HeroClass.WARRIOR) || (cl == HeroClass.MALE)) {
 		
 			unlock.visible = false;
 

@@ -20,6 +20,8 @@ package com.ekdorn.pixel610.pixeldungeon.ui;
 import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.SkinnedBlock;
 import com.ekdorn.pixel610.noosa.ui.Component;
+import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 
 public class Archs extends Component {
 
@@ -28,8 +30,10 @@ public class Archs extends Component {
 	private SkinnedBlock arcsBg;
 	private SkinnedBlock arcsFg;
 	
-	private static float offsB = 0;
-	private static float offsF = 0;
+	private static float offsBy = 0;
+	private static float offsFy = 0;
+	private static float offsBx = 0;
+	private static float offsFx = 0;
 	
 	public boolean reversed = false;
 	
@@ -37,12 +41,12 @@ public class Archs extends Component {
 	protected void createChildren() {
 		arcsBg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs0Asset );
 		arcsBg.autoAdjust = true;
-		arcsBg.offsetTo( 0,  offsB );
+		arcsBg.offsetTo( offsBx,  offsBy );
 		add( arcsBg );
 		
 		arcsFg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs1Asset );
 		arcsFg.autoAdjust = true;
-		arcsFg.offsetTo( 0,  offsF );
+		arcsFg.offsetTo( offsFx,  offsFy );
 		add( arcsFg );
 	}
 	
@@ -64,11 +68,13 @@ public class Archs extends Component {
 		if (reversed) {
 			shift = -shift;
 		}
-		
-		arcsBg.offset( 0, shift );
-		arcsFg.offset( 0, shift * 2 );
-		
-		offsB = arcsBg.offsetY();
-		offsF = arcsFg.offsetY();
+
+		arcsBg.offset( shift * Game.instance.gameMode.outlook.archs0Xmult, shift * Game.instance.gameMode.outlook.archs0Ymult );
+		arcsFg.offset( shift * Game.instance.gameMode.outlook.archs1Xmult, shift * Game.instance.gameMode.outlook.archs1Ymult );
+
+		offsBy = arcsBg.offsetY();
+		offsFy = arcsFg.offsetY();
+		offsBx = arcsBg.offsetX();
+		offsFx = arcsFg.offsetX();
 	}
 }

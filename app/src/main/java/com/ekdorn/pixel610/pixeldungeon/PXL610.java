@@ -361,12 +361,28 @@ public class PXL610 extends Game {
 		return Preferences.INSTANCE.getInt( Preferences.KEY_BONUS, 0 );
 	}
 	
-	public static void lastClass( int value ) {
-		Preferences.INSTANCE.put( Preferences.KEY_LAST_CLASS, value );
+	public static void lastClass( String mode, int value ) {
+		int result = Preferences.INSTANCE.getInt( Preferences.KEY_LAST_CLASS, 0 );
+		switch (mode) {
+			case GameMode.original:
+				result -= ((result % 10) - value);
+				break;
+			case GameMode.dlc1:
+				result -= ((result % 100) - value*10);
+				break;
+		}
+		Preferences.INSTANCE.put( Preferences.KEY_LAST_CLASS, result );
 	}
 	
-	public static int lastClass() {
-		return Preferences.INSTANCE.getInt( Preferences.KEY_LAST_CLASS, 0 );
+	public static int lastClass( String mode ) {
+		switch (mode) {
+			case GameMode.original:
+				return (Preferences.INSTANCE.getInt(Preferences.KEY_LAST_CLASS, 0) % 10);
+			case GameMode.dlc1:
+				return (Preferences.INSTANCE.getInt(Preferences.KEY_LAST_CLASS, 0) / 10) % 10;
+			default:
+				return Preferences.INSTANCE.getInt(Preferences.KEY_LAST_CLASS, 0);
+		}
 	}
 	
 	public static void challenges( int value ) {

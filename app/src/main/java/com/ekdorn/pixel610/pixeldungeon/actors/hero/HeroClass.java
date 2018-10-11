@@ -42,7 +42,7 @@ public enum HeroClass {
 
 	WARRIOR, MAGE, ROGUE, HUNTRESS,
 
-	MALE;
+	MALE, FEMALE;
 
 	public static final String[] WAR_PERKS = {
 			Babylon.get().getFromResources("hero_cl_war_0"),
@@ -201,6 +201,12 @@ public enum HeroClass {
 				return Babylon.get().getFromResources("hero_cl_rogue");
 			case HUNTRESS:
 				return Babylon.get().getFromResources("hero_cl_huntress");
+
+			/*case MALE:
+                return;
+            case FEMALE:
+                return;*/
+
 			default:
 				return Babylon.get().getFromResources("hero_cl_rogue");
 		}
@@ -217,6 +223,11 @@ public enum HeroClass {
 			return Assets.ROGUE;
 		case HUNTRESS:
 			return Assets.HUNTRESS;
+
+        /*case MALE:
+            return;
+        case FEMALE:
+            return;*/
 		}
 		
 		return null;
@@ -233,6 +244,11 @@ public enum HeroClass {
 			return ROG_PERKS;
 		case HUNTRESS:
 			return HUN_PERKS;
+
+		/*case MALE:
+            return;
+        case FEMALE:
+            return;*/
 		}
 		
 		return null;

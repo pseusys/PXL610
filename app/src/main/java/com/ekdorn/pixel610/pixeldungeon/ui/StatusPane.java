@@ -184,17 +184,17 @@ public class StatusPane extends Component {
 	@Override
 	public void update() {
 		super.update();
+
+		float health = (float)Dungeon.hero.HP / Dungeon.hero.HT;
 		
 		if (tagDanger != danger.visible || tagLoot != loot.visible || tagResume != resume.visible) {
 			
 			tagDanger = danger.visible;
 			tagLoot = loot.visible;
-			tagResume = resume.visible;
+			if (health > 0) tagResume = resume.visible;
 			
 			layoutTags();
 		}
-		
-		float health = (float)Dungeon.hero.HP / Dungeon.hero.HT;
 		
 		if (health == 0) {
 			avatar.tint( 0x000000, 0.6f );

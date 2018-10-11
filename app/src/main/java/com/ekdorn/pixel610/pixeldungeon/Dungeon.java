@@ -37,6 +37,7 @@ import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Blacksmith;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Imp;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Ghost;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.npcs.Wandmaker;
+import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
 import com.ekdorn.pixel610.pixeldungeon.internet.OnlineRatinger;
 import com.ekdorn.pixel610.pixeldungeon.items.Ankh;
 import com.ekdorn.pixel610.pixeldungeon.items.Item;
@@ -160,28 +161,48 @@ public class Dungeon {
 		Arrays.fill( visible, false );
 		
 		Level level;
+		switch (PXL610.gamemode()) {
+			case GameMode.original:
+				level = createOriginalLevel();
+				break;
+			case GameMode.dlc1:
+				level = createDLC1Level();
+				break;
+			default:
+				level = createOriginalLevel();
+				break;
+		}
+		level.create();
+		
+		Statistics.qualifiedForNoKilling = !bossLevel();
+		
+		return level;
+	}
+
+	private static Level createOriginalLevel() {
+		Level level;
 		switch (depth) {
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-			level = new SewerLevel();
-			break;
-		case 5:
-			level = new SewerBossLevel();
-			break;
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			level = new PrisonLevel();
-			break;
-		case 10:
-			level = new PrisonBossLevel();
-			break;
-		case 11:
-			level = new LastLevel();
-			break;
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				level = new SewerLevel();
+				break;
+			case 5:
+				level = new SewerBossLevel();
+				break;
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				level = new PrisonLevel();
+				break;
+			case 10:
+				level = new PrisonBossLevel();
+				break;
+			case 11:
+				level = new LastLevel();
+				break;
 		/*case 11:
 		case 12:
 		case 13:
@@ -214,15 +235,29 @@ public class Dungeon {
 		case 26:
 			level = new LastLevel();
 			break;*/
-		default:
-			level = new DeadEndLevel();
-			Statistics.deepestFloor--;
+			default:
+				level = new DeadEndLevel();
+				Statistics.deepestFloor--;
 		}
-		
-		level.create();
-		
-		Statistics.qualifiedForNoKilling = !bossLevel();
-		
+		return level;
+	}
+
+	private static Level createDLC1Level() {
+		Level level;
+		switch (depth) {
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				level = new SewerLevel();
+				break;
+			case 5:
+				level = new SewerBossLevel();
+				break;
+			default:
+				level = new DeadEndLevel();
+				Statistics.deepestFloor--;
+		}
 		return level;
 	}
 	
@@ -307,15 +342,14 @@ public class Dungeon {
 	
 	private static final String RG_GAME_FILE	= "game.dat";
 	private static final String RG_DEPTH_FILE	= "depth%d.dat";
-	
 	private static final String WR_GAME_FILE	= "warrior.dat";
 	private static final String WR_DEPTH_FILE	= "warrior%d.dat";
-	
 	private static final String MG_GAME_FILE	= "mage.dat";
 	private static final String MG_DEPTH_FILE	= "mage%d.dat";
-	
 	private static final String RN_GAME_FILE	= "ranger.dat";
 	private static final String RN_DEPTH_FILE	= "ranger%d.dat";
+
+	//TODO: MALE AND FEMALE SUPPORT;
 	
 	private static final String VERSION		= "version";
 	private static final String CHALLENGES	= "challenges";
