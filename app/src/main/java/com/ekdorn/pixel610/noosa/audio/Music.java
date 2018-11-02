@@ -28,140 +28,140 @@ import android.media.MediaPlayer;
 import android.util.Log;
 
 public enum Music implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
-	
-	INSTANCE;
 
-	
-	private MediaPlayer player;
-	
-	private String lastPlayed;
-	private boolean lastLooping;
-	
-	private boolean enabled = true;
+  INSTANCE;
 
-	private int lastInPack, preLastInPack; // Used for not-repeating previous track;
 
-	Music() {
-		this.lastInPack = this.preLastInPack = -1;
-	}
+  private MediaPlayer player;
 
-	public void play(String assetName, boolean looping ) {
-		
-		if (isPlaying() && lastPlayed.equals( assetName )) {
-			return;
-		}
-		
-		stop();
-		
-		lastPlayed = assetName;
-		lastLooping = looping;
-		
-		if (!enabled || assetName == null) {
-			return;
-		}
+  private String lastPlayed;
+  private boolean lastLooping;
 
-		Log.e("TAG", "play: " + lastInPack );
+  private boolean enabled = true;
 
-		try {
-			String actual;
-			if (!looping) {
-				int newNumber = (lastInPack == -1) ? 0 : Melody.getRandomNameForPackExceptioned( lastInPack, preLastInPack );
-				preLastInPack = lastInPack;
-				lastInPack = newNumber;
-				actual = Utils.format(assetName, newNumber);
-			} else {
-				actual = assetName;
-			}
+  private int lastInPack, preLastInPack; // Used for not-repeating previous track;
 
-			Log.e("TAG", "play: " + lastInPack );
+  Music() {
+    this.lastInPack = this.preLastInPack = -1;
+  }
 
-			AssetFileDescriptor afd = Game.instance.getAssets().openFd( actual );
-			
-			player = new MediaPlayer();
-			player.setAudioStreamType( AudioManager.STREAM_MUSIC );
-			player.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength() );
-			player.setOnPreparedListener( this );
-			player.setOnErrorListener( this );
-			player.setOnCompletionListener( this );
-			player.setLooping( looping );
-			player.prepareAsync();
-			
-		} catch (IOException e) {
-			
-			player.release();
-			player = null;
-			
-		}
-	}
-	
-	public void mute() {
-		lastPlayed = null;
-		stop();
-	}
+  public void play(String assetName, boolean looping ) {
 
-	@Override
-	public void onCompletion(MediaPlayer mp) {
-		if (!mp.isLooping()) {
-			stop();
-			play( lastPlayed, false );
-		}
-	}
+    if (isPlaying() && lastPlayed.equals( assetName )) {
+      return;
+    }
 
-	@Override
-	public void onPrepared( MediaPlayer player ) {
-		player.start();
-	}
-	
-	@Override
-	public boolean onError( MediaPlayer mp, int what, int extra ) {
-		if (player != null) {
-			player.release();
-			player = null;
-		}
-		return true;
-	}
-	
-	public void pause() {
-		if (player != null) {
-			player.pause();
-		}
-	}
-	
-	public void resume() {
-		if (player != null) {
-			player.start();
-		}
-	}
-	
-	public void stop() {
-		if (player != null) {
-			player.stop();
-			player.release();
-			player = null;
-		}
-	}
-	
-	public void volume( float value ) {
-		if (player != null) {
-			player.setVolume( value, value );
-		}
-	}
-	
-	public boolean isPlaying() {
-		return player != null && player.isPlaying();
-	}
-	
-	public void enable( boolean value ) {
-		enabled = value;
-		if (isPlaying() && !value) {
-			stop();
-		} else
-		if (!isPlaying() && value) {
-			play( lastPlayed, lastLooping );
-		}
-	}
-	
-	public boolean isEnabled() {
-		return enabled;
-	}
+    stop();
+
+    lastPlayed = assetName;
+    lastLooping = looping;
+
+    if (!enabled || assetName == null) {
+      return;
+    }
+
+    Log.e("TAG", "play: " + lastInPack );
+
+    try {
+      String actual;
+      if (!looping) {
+        int newNumber = (lastInPack == -1) ? 0 : Melody.getRandomNameForPackExceptioned( lastInPack, preLastInPack );
+        preLastInPack = lastInPack;
+        lastInPack = newNumber;
+        actual = Utils.format(assetName, newNumber);
+      } else {
+        actual = assetName;
+      }
+
+      Log.e("TAG", "play: " + lastInPack );
+
+      AssetFileDescriptor afd = Game.instance.getAssets().openFd( actual );
+
+      player = new MediaPlayer();
+      player.setAudioStreamType( AudioManager.STREAM_MUSIC );
+      player.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength() );
+      player.setOnPreparedListener( this );
+      player.setOnErrorListener( this );
+      player.setOnCompletionListener( this );
+      player.setLooping( looping );
+      player.prepareAsync();
+
+    } catch (IOException e) {
+
+      player.release();
+      player = null;
+
+    }
+  }
+
+  public void mute() {
+    lastPlayed = null;
+    stop();
+  }
+
+  @Override
+  public void onCompletion(MediaPlayer mp) {
+    if (!mp.isLooping()) {
+      stop();
+      play( lastPlayed, false );
+    }
+  }
+
+  @Override
+  public void onPrepared( MediaPlayer player ) {
+    player.start();
+  }
+
+  @Override
+  public boolean onError( MediaPlayer mp, int what, int extra ) {
+    if (player != null) {
+      player.release();
+      player = null;
+    }
+    return true;
+  }
+
+  public void pause() {
+    if (player != null) {
+      player.pause();
+    }
+  }
+
+  public void resume() {
+    if (player != null) {
+      player.start();
+    }
+  }
+
+  public void stop() {
+    if (player != null) {
+      player.stop();
+      player.release();
+      player = null;
+    }
+  }
+
+  public void volume( float value ) {
+    if (player != null) {
+      player.setVolume( value, value );
+    }
+  }
+
+  public boolean isPlaying() {
+    return player != null && player.isPlaying();
+  }
+
+  public void enable( boolean value ) {
+    enabled = value;
+    if (isPlaying() && !value) {
+      stop();
+    } else
+    if (!isPlaying() && value) {
+      play( lastPlayed, lastLooping );
+    }
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
 }

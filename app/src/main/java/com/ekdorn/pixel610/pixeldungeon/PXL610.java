@@ -30,13 +30,15 @@ import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
+import com.ekdorn.pixel610.pixeldungeon.internet.Authentication;
+import com.ekdorn.pixel610.pixeldungeon.internet.FireBaser;
 import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
-import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
-import com.ekdorn.pixel610.pixeldungeon.windows.SysDialog;
-import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Calendar;
 
 public class PXL610 extends Game {
 	
@@ -139,22 +141,28 @@ public class PXL610 extends Game {
 
 		this.gameMode = GameMode.init(PXL610.gamemode()); // PXL610: update gamemode;
 
-		if (PXL610.user_name().equals("")) { // PXL610: update localisation;
+		//try{
+			//if (getPackageManager().getPackageInfo(getPackageName(), 0 ).lastUpdateTime > lastlaunch()) {
+				Updater.update(getApplicationContext()); // PXL610: updating old functions directly;
+			//}
+		//} catch (PackageManager.NameNotFoundException nne) {
+			//Updater.update(getApplicationContext());
+		//}
+		lastlaunch(Calendar.getInstance().getTimeInMillis());
+
+		if (FirebaseAuth.getInstance().getCurrentUser() == null) { // PXL610: update id;
 			Babylon.get().updateLocale();
+			/*String id = Inviter.updateID();
+			PXL610.user_name( id );
+			Inviter.publishID(id);*/
 
-			SysDialog.createNameWrite(true);
+			Log.e("TAG", "onCreate: AUTH");
+			Authentication auth = new Authentication(PXL610.this);
+			auth.show();
+		} else {
+			FireBaser.loadBonus(PXL610.user_name());
+			InDev.loadSuperuserName();
 		}
-
-		if (PXL610.user_id().equals("") || (PXL610.user_id().length() > Inviter.idLength())) { // PXL610: update id;
-			String id = Inviter.updateID();
-			PXL610.user_id( id );
-			Inviter.publishID(id);
-
-			SysDialog.createInviteWrite();
-		}
-
-		Inviter.loadBonus(PXL610.user_id());
-		InDev.loadSuperuserName();
 
 		Babylon.get().load();
 
@@ -417,20 +425,20 @@ public class PXL610 extends Game {
 		return Preferences.INSTANCE.getString( Preferences.KEY_USER_NAME, "" );
 	}
 
-	public static void user_id( String value ) {
-		Preferences.INSTANCE.put( Preferences.KEY_NSTANCE_ID, value );
-	}
-
-	public static String user_id() {
-		return Preferences.INSTANCE.getString( Preferences.KEY_NSTANCE_ID, "" );
-	}
-
 	public static void gamemode( String value ) {
 		Preferences.INSTANCE.put( Preferences.KEY_GAMEMODE, value );
 	}
 
 	public static String gamemode() {
 		return Preferences.INSTANCE.getString( Preferences.KEY_GAMEMODE, GameMode.original);
+	}
+
+	public static void lastlaunch( Long value ) {
+		Preferences.INSTANCE.put( Preferences.KEY_LAST_LAUNCH, value );
+	}
+
+	public static long lastlaunch() {
+		return Preferences.INSTANCE.getLong( Preferences.KEY_LAST_LAUNCH, -1L);
 	}
 
 	public static void superuser_name( String value ) {

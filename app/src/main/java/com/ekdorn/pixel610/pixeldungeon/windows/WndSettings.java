@@ -20,17 +20,9 @@ package com.ekdorn.pixel610.pixeldungeon.windows;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.AlertDialog;
-import android.text.InputType;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Camera;
 import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.noosa.audio.Sample;
@@ -38,14 +30,13 @@ import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
-import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
+import com.ekdorn.pixel610.pixeldungeon.internet.SysDialog;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
 import com.ekdorn.pixel610.pixeldungeon.ui.CheckBox;
 import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Toolbar;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
-import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
 
 public class WndSettings extends Window {
 
@@ -130,24 +121,11 @@ public class WndSettings extends Window {
 			};
 			add(btnLocalisation.setRect(btnLanguageBack.right(), 0, WIDTH - btnLanguageBack.width() - btnLanguageBack.width(), BTN_HEIGHT) );
 
-			// Switch name/id settings
-			RedButton btnSwitch = new RedButton(name_id_toggle ? TXT_UP : TXT_BACK) {
-				@Override
-				protected void onClick() {
-					name_id_toggle = !name_id_toggle;
-                    WndSettings.this.hide();
-					((TitleScene) PXL610.scene()).add( new WndSettings( false ) );
-				}
-			};
 			// Name Settings
-			RedButton btnName = new RedButton(name_id_toggle ? Babylon.get().getFromResources("name_tip") + PXL610.user_name()
-					: Babylon.get().getFromResources("code_tip") +  PXL610.user_id().substring(Inviter.prefix.length())) {
+			RedButton btnName = new RedButton(PXL610.user_name()) {
 				@Override
 				protected void onClick() {
-				    if (name_id_toggle) {
-						WndSettings.this.hide();
-						SysDialog.createNameWrite(false);
-					} else if (InDev.isDeveloper()) {
+				    if (InDev.isDeveloper()) {
 						WndSettings.this.hide();
 						SysDialog.createInviteAdd();
                     } else {
@@ -156,7 +134,7 @@ public class WndSettings extends Window {
 							@Override
 							public void run() {
 								ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
-								ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_id());
+								ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_name());
 								clipboard.setPrimaryClip(clip);
 							}
 						};
@@ -164,13 +142,9 @@ public class WndSettings extends Window {
 					}
 				}
 			};
-			if (name_id_toggle) {
-				add(btnSwitch.setRect(WIDTH - w, btnLocalisation.bottom() + GAP, w, BTN_HEIGHT));
-				add(btnName.setRect(0, btnLocalisation.bottom() + GAP, WIDTH - btnSwitch.width(), BTN_HEIGHT));
-			} else {
-				add(btnSwitch.setRect(0, btnLocalisation.bottom() + GAP, w, BTN_HEIGHT));
-				add(btnName.setRect(btnSwitch.right(), btnLocalisation.bottom() + GAP, WIDTH - btnSwitch.width(), BTN_HEIGHT));
-			}
+
+			btnName.setRect(0, btnLocalisation.bottom() + GAP, WIDTH, BTN_HEIGHT);
+            add(btnName);
 
 			// Previous settings
 			CheckBox btnScaleUp = new CheckBox( Babylon.get().getFromResources("sett_scale_up") ) {

@@ -24,16 +24,16 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Melody { // For future music packs;
 
-    protected static String getRandomNameForPack(String packName) {
-        return Utils.format(packName, Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT));
-    }
+  protected static String getRandomNameForPack(String packName) {
+    return Utils.format(packName, Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT));
+  }
 
-    protected static int getRandomNameForPackExceptioned(int last, int prelast) {
-        int nova;
-        nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
-        while ((nova == last) || (nova == prelast)) {
-            nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
-        }
-        return nova;
+  protected static int getRandomNameForPackExceptioned(int last, int prelast) {
+    int nova;
+    nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
+    while ((nova == last) || (nova == prelast)) {
+      nova = Random.NormalIntRange(0, Assets.FIRST_PACK_COUNT);
     }
+    return nova;
+  }
 }

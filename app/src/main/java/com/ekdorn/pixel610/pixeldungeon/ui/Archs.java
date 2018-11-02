@@ -36,27 +36,32 @@ public class Archs extends Component {
 	private static float offsFx = 0;
 	
 	public boolean reversed = false;
-	
+	private boolean vertical;
+
+	public Archs() {
+		this.vertical =  Game.instance.gameMode.outlook.vertical;
+	}
+
 	@Override
 	protected void createChildren() {
 		arcsBg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs0Asset );
 		arcsBg.autoAdjust = true;
-		arcsBg.offsetTo( offsBx,  offsBy );
+		arcsBg.offsetTo( vertical ? offsBx : 0, vertical ? 0 : offsBy );
 		add( arcsBg );
 		
 		arcsFg = new SkinnedBlock( 1, 1, Game.instance.gameMode.outlook.archs1Asset );
 		arcsFg.autoAdjust = true;
-		arcsFg.offsetTo( offsFx,  offsFy );
+		arcsFg.offsetTo( vertical ? offsFx : 0, vertical ? 0 : offsFy );
 		add( arcsFg );
 	}
 	
 	@Override
 	protected void layout() {
 		arcsBg.size( width, height );
-		arcsBg.offset( arcsBg.texture.width / 4 - (width % arcsBg.texture.width) / 2, 0 );
-		
 		arcsFg.size( width, height );
-		arcsFg.offset( arcsFg.texture.width / 4 - (width % arcsFg.texture.width) / 2, 0 );
+
+		arcsBg.offset(arcsBg.texture.width / 4 - (width % arcsBg.texture.width) / 2, 0);
+		arcsFg.offset(arcsFg.texture.width / 4 - (width % arcsFg.texture.width) / 2, 0);
 	}
 	
 	@Override

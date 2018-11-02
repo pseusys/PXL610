@@ -29,18 +29,19 @@ import com.ekdorn.pixel610.input.Touchscreen;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
-import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
+import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.utils.BitmapCache;
 import com.ekdorn.pixel610.utils.SystemTime;
-import com.google.firebase.crash.FirebaseCrash;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.media.AudioManager;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -95,12 +96,16 @@ public class Game extends AppCompatActivity implements GLSurfaceView.Renderer, V
 		super();
 		sceneClass = c;
 	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(newBase);
+		MultiDex.install(this);
+	}
 	
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-
-		FirebaseCrash.setCrashCollectionEnabled(true);
 		
 		BitmapCache.context = TextureCache.context = instance = this;
 		

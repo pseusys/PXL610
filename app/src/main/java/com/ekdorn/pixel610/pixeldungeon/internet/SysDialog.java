@@ -1,4 +1,4 @@
-package com.ekdorn.pixel610.pixeldungeon.windows;
+package com.ekdorn.pixel610.pixeldungeon.internet;
 
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,16 +10,13 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
-import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
-import com.ekdorn.pixel610.pixeldungeon.internet.Inviter;
-import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
 
 public class SysDialog {
-    public static void createNameWrite(boolean onLoad) {
+    /*public static void createNameWrite(boolean onLoad) {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         Runnable dialog = new Runnable() {
             @Override
@@ -113,9 +110,9 @@ public class SysDialog {
                         if (!input.getText().toString().equals("")) {
                             String pseudoname = input.getText().toString();
                             if (pseudoname.startsWith(Inviter.prefix)) {
-                                Inviter.invite(pseudoname, new Inviter.OnTransactionSuccess() {
+                                FireBaser.invite(pseudoname, new FireBaser.OnVoidResult() {
                                     @Override
-                                    public void OnSuccess() {
+                                    public void onResult() {
                                         act.dismiss();
                                     }
                                 });
@@ -131,7 +128,7 @@ public class SysDialog {
             }
         };
         mainHandler.post(dialog);
-    }
+    }*/
 
     public static void createInviteAdd() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -167,9 +164,9 @@ public class SysDialog {
                             String pseudoname = input.getText().toString();
                             try {
                                 Integer i = Integer.parseInt(pseudoname);
-                                Inviter.invite(PXL610.user_id(), i, new Inviter.OnTransactionSuccess() {
+                                FireBaser.invite(PXL610.user_name(), i, new FireBaser.OnVoidResult() {
                                     @Override
-                                    public void OnSuccess() {
+                                    public void onResult() {
                                         act.dismiss();
                                         Game.scene().add(new WndSettings(false));
                                     }

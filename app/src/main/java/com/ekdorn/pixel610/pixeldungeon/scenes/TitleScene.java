@@ -22,6 +22,7 @@ import android.opengl.GLES20;
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.Camera;
 import com.ekdorn.pixel610.noosa.Game;
+import com.ekdorn.pixel610.noosa.Gizmo;
 import com.ekdorn.pixel610.noosa.Image;
 import com.ekdorn.pixel610.noosa.audio.Music;
 import com.ekdorn.pixel610.noosa.audio.Sample;

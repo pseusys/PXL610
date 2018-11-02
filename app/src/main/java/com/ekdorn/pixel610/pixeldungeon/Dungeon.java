@@ -339,23 +339,17 @@ public class Dungeon {
 		
 		return false;
 	}
-	
-	private static final String RG_GAME_FILE	= "game.dat";
-	private static final String RG_DEPTH_FILE	= "depth%d.dat";
-	private static final String WR_GAME_FILE	= "warrior.dat";
-	private static final String WR_DEPTH_FILE	= "warrior%d.dat";
-	private static final String MG_GAME_FILE	= "mage.dat";
-	private static final String MG_DEPTH_FILE	= "mage%d.dat";
-	private static final String RN_GAME_FILE	= "ranger.dat";
-	private static final String RN_DEPTH_FILE	= "ranger%d.dat";
 
-	//TODO: MALE AND FEMALE SUPPORT;
+	public static final String GAME_FILE_TEMPLATE	= "%s-%s-%s.dat";    // Here it comes: GAME_MODE-CHARACTER_TYPE-SLOT_NUMBER
+	public static final String DEPTH_FILE_TEMPLATE	= "%s-%s-%s-%d.dat"; // Here it comes: GAME_MODE-CHARACTER_TYPE-SLOT_NUMBER-DEPTH_NUMBER
+
+	private static final String AUTO_SAVE_MARK = "auto";
 	
 	private static final String VERSION		= "version";
 	private static final String CHALLENGES	= "challenges";
 	private static final String HERO		= "hero";
 	private static final String GOLD		= "gold";
-	private static final String DEPTH		= "depth";
+	public static final String DEPTH		= "depth";
 	private static final String LEVEL		= "level";
 	private static final String DROPPED		= "dropped%d";
 	private static final String POS			= "potionsOfStrength";
@@ -367,29 +361,18 @@ public class Dungeon {
 	private static final String BADGES		= "badges";
 	
 	public static String gameFile( HeroClass cl ) {
-		switch (cl) {
-		case WARRIOR:
-			return WR_GAME_FILE;
-		case MAGE:
-			return MG_GAME_FILE;
-		case HUNTRESS:
-			return RN_GAME_FILE;
-		default:
-			return RG_GAME_FILE;
-		}
+		String mode = Game.instance.gameMode.tag;
+		String hero = cl.name();
+
+		return Utils.format(GAME_FILE_TEMPLATE, mode, hero, AUTO_SAVE_MARK);
 	}
-	
+
 	public static String depthFile( HeroClass cl ) {
-		switch (cl) {
-		case WARRIOR:
-			return WR_DEPTH_FILE;
-		case MAGE:
-			return MG_DEPTH_FILE;
-		case HUNTRESS:
-			return RN_DEPTH_FILE;
-		default:
-			return RG_DEPTH_FILE;
-		}
+		String mode = Game.instance.gameMode.tag;
+		String hero = cl.name();
+
+		return Utils.format(DEPTH_FILE_TEMPLATE.substring(0, DEPTH_FILE_TEMPLATE.lastIndexOf('-')), mode, hero, AUTO_SAVE_MARK) +
+				DEPTH_FILE_TEMPLATE.substring(DEPTH_FILE_TEMPLATE.lastIndexOf('-'));
 	}
 	
 	public static void saveGame( String fileName ) throws IOException {

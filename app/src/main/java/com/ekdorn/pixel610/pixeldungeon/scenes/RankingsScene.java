@@ -419,7 +419,7 @@ public class RankingsScene extends PixelScene {
 
 			this.rec = rec;
 
-			if (((String) rec.get(OnlineRatinger.ID)).equals(PXL610.user_id())) {
+			if (((String) rec.get(OnlineRatinger.ID)).equals(PXL610.user_name())) {
 				flare = new Flare( 6, 24 );
 				flare.angularSpeed = 90;
 				flare.color( ((boolean) rec.get(OnlineRatinger.WIN)) ? FLARE_WIN : FLARE_LOSE );

@@ -41,18 +41,6 @@ import java.nio.channels.FileChannel;
  */
 
 public class WndSaver extends Window {
-    private static final String WR = "warrior_saveslot%d.dat";
-    private static final String WR_D = "warrior_saveslot%s_depthcopy%d.dat";
-
-    private static final String MG = "mage_saveslot%d.dat";
-    private static final String MG_D = "mage_saveslot%s_depthcopy%d.dat";
-
-    private static final String RG = "rogue_saveslot%d.dat";
-    private static final String RG_D = "rogue_saveslot%s_depthcopy%d.dat";
-
-    private static final String HN = "huntress_saveslot%d.dat";
-    private static final String HN_D = "huntress_saveslot%s_depthcopy%d.dat";
-
     private static final int WIDTH		= 112;
     private static final int BTN_HEIGHT	= 20;
     private static final int GAP 		= 2;
@@ -68,33 +56,21 @@ public class WndSaver extends Window {
                 Game.instance.getFileStreamPath(gameFile(cl, 2)).exists());
     }
 
-    private static String gameFile(HeroClass cl, int index) {
-        switch (cl) {
-            case WARRIOR:
-                return Utils.format(WR, index);
-            case MAGE:
-                return Utils.format(MG, index);
-            case HUNTRESS:
-                return Utils.format(HN, index);
-            default:
-                return Utils.format(RG, index);
-        }
+    public static String gameFile(HeroClass cl, int slot) {
+        String mode = Game.instance.gameMode.tag;
+        String hero = cl.name();
+
+        return Utils.format(Dungeon.GAME_FILE_TEMPLATE, mode, hero, String.valueOf(slot));
     }
 
     public static String depthFile( HeroClass cl, int slot, int index ) {
-        switch (cl) {
-            case WARRIOR:
-                return Utils.format(WR_D, slot, index);
-            case MAGE:
-                return Utils.format(MG_D, slot, index);
-            case HUNTRESS:
-                return Utils.format(HN_D, slot, index);
-            default:
-                return Utils.format(RG_D, slot, index);
-        }
+        String mode = Game.instance.gameMode.tag;
+        String hero = cl.name();
+
+        return Utils.format(Dungeon.DEPTH_FILE_TEMPLATE, mode, hero, String.valueOf(slot), index );
     }
 
-    public void copy(String src, String dst) throws IOException {
+    public static void copy(String src, String dst) throws IOException {
         FileInputStream inStream = Game.instance.openFileInput(src);
         FileOutputStream outStream = Game.instance.openFileOutput(dst, Game.MODE_PRIVATE);
         FileChannel inChannel = inStream.getChannel();

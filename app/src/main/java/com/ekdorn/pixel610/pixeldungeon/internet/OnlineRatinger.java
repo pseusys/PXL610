@@ -238,7 +238,7 @@ public enum OnlineRatinger {
         rate.put(DURATION, Statistics.duration);
         rate.put(TIER, Dungeon.hero.tier());
         rate.put(SENDER, PXL610.user_name());
-        rate.put(ID, PXL610.user_id());
+        rate.put(ID, PXL610.user_name());
 
         return rate;
     }

@@ -29,6 +29,7 @@ public class GameMode {
         initOriginal.outlook = new OutLook(25, 13, 0.75F,
                 Assets.ARCS_BG_0, Assets.ARCS_FG_0,
                 0, 0, 1, 2,
+                false,
                 Assets.CHROME);
 
         return initOriginal;
@@ -43,6 +44,7 @@ public class GameMode {
         initDLC1.outlook = new OutLook(16, 29, 0.5F,
                 Assets.ARCS_BG_1, Assets.ARCS_FG_1,
                 1, 2, 0, 0,
+                false,
                 Assets.CHROME);
 
         return initDLC1;
@@ -72,11 +74,14 @@ public class GameMode {
         public String archs1Asset;
         public int archs1Xmult, archs1Ymult;
 
+        public boolean vertical;
+
         public String uiAsset;
 
         public OutLook(int torchX, int torchY, float torchInt,
                        String archs0Asset, String archs1Asset,
                        int x0, int x1, int y0, int y1,
+                       boolean vertical,
                        String uiAsset) {
 
             this.torchX = torchX;
@@ -89,6 +94,8 @@ public class GameMode {
             this.archs1Xmult = x1;
             this.archs1Ymult = y1;
             this.archs1Asset = archs1Asset;
+
+            this.vertical = vertical;
 
             this.uiAsset = uiAsset;
         }

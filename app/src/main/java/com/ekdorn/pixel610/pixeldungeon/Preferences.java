@@ -40,10 +40,10 @@ enum Preferences {
 	public static final String KEY_BRIGHTNESS	  = "brightness";
 	public static final String KEY_LOCALISATION	  = "localisation";
 	public static final String KEY_GAMEMODE	      = "gamemode";
+	public static final String KEY_LAST_LAUNCH	  = "last_launch";
 
 	public static final String KEY_SUPERUSER_NAME = "admin";
 	public static final String KEY_USER_NAME	  = "name";
-	public static final String KEY_NSTANCE_ID	  = "id";
 	
 	private SharedPreferences prefs;
 	
@@ -65,9 +65,19 @@ enum Preferences {
 	String getString( String key, String defValue  ) {
 		return get().getString( key, defValue );
 	}
+
+	long getLong( String key, long defValue  ) {
+		return get().getLong( key, defValue );
+	}
+
+
 	
 	void put( String key, int value ) {
 		get().edit().putInt( key, value ).commit();
+	}
+
+	void put( String key, long value ) {
+		get().edit().putLong( key, value ).commit();
 	}
 	
 	void put( String key, boolean value ) {
