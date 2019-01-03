@@ -30,6 +30,7 @@ import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.Bones;
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.GamesInProgress;
+import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.ResultDescriptions;
 import com.ekdorn.pixel610.pixeldungeon.actors.Actor;
 import com.ekdorn.pixel610.pixeldungeon.actors.Char;
@@ -166,7 +167,8 @@ public class Hero extends Char {
 	}
 
 	public int STR() {
-		return weakened ? STR - 2 : STR;
+		int prec = weakened ? STR - 2 : STR;
+		return (int) (prec * (1 + 0.05*PXL610.bonus()));
 	}
 
 	private static final String ATTACK		= "attackSkill";
@@ -242,6 +244,8 @@ public class Hero extends Char {
 	public int attackSkill( Char target ) {
 		
 		int bonus = 0;
+		bonus += 0.05*PXL610.bonus();
+
 		for (Buff buff : buffs( RingOfAccuracy.Accuracy.class )) {
 			bonus += ((RingOfAccuracy.Accuracy)buff).level;
 		}
@@ -262,6 +266,8 @@ public class Hero extends Char {
 	public int defenseSkill( Char enemy ) {
 		
 		int bonus = 0;
+        bonus += 0.05*PXL610.bonus();
+
 		for (Buff buff : buffs( RingOfEvasion.Evasion.class )) {
 			bonus += ((RingOfEvasion.Evasion)buff).level;
 		}

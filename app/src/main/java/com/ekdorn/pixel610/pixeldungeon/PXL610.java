@@ -21,6 +21,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -45,7 +46,7 @@ public class PXL610 extends Game {
 	public PXL610() {
 		super( TitleScene.class );
 		
-		com.ekdorn.pixel610.utils.Bundle.addAlias(
+		/*com.ekdorn.pixel610.utils.Bundle.addAlias(
 			com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfUpgrade.class,
 			"com.watabou.pixeldungeon.items.scrolls.ScrollOfEnhancement" );
 		com.ekdorn.pixel610.utils.Bundle.addAlias(
@@ -126,7 +127,7 @@ public class PXL610 extends Game {
 		// 1.9.0
 		com.ekdorn.pixel610.utils.Bundle.addAlias(
 			com.ekdorn.pixel610.pixeldungeon.items.wands.WandOfReach.class,
-			"com.watabou.pixeldungeon.items.wands.WandOfTelekinesis" );
+			"com.watabou.pixeldungeon.items.wands.WandOfTelekinesis" );*/
 	}
 	
 	@Override
@@ -141,29 +142,21 @@ public class PXL610 extends Game {
 
 		this.gameMode = GameMode.init(PXL610.gamemode()); // PXL610: update gamemode;
 
-		//try{
-			//if (getPackageManager().getPackageInfo(getPackageName(), 0 ).lastUpdateTime > lastlaunch()) {
+		try{
+			if (getPackageManager().getPackageInfo(getPackageName(), 0 ).lastUpdateTime > lastlaunch()) {
 				Updater.update(getApplicationContext()); // PXL610: updating old functions directly;
-			//}
-		//} catch (PackageManager.NameNotFoundException nne) {
-			//Updater.update(getApplicationContext());
-		//}
+			}
+		} catch (PackageManager.NameNotFoundException nne) {
+			Updater.update(getApplicationContext());
+		}
 		lastlaunch(Calendar.getInstance().getTimeInMillis());
 
-		if (FirebaseAuth.getInstance().getCurrentUser() == null) { // PXL610: update id;
-			Babylon.get().updateLocale();
-			/*String id = Inviter.updateID();
-			PXL610.user_name( id );
-			Inviter.publishID(id);*/
-
-			Log.e("TAG", "onCreate: AUTH");
-			Authentication auth = new Authentication(PXL610.this);
-			auth.show();
-		} else {
+		if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 			FireBaser.loadBonus(PXL610.user_name());
 			InDev.loadSuperuserName();
 		}
 
+		Babylon.get().updateLocale();
 		Babylon.get().load();
 
 		if (Preferences.INSTANCE.getBoolean( Preferences.KEY_LANDSCAPE, false ) != landscape) {
@@ -422,7 +415,7 @@ public class PXL610 extends Game {
 	}
 
 	public static String user_name() {
-		return Preferences.INSTANCE.getString( Preferences.KEY_USER_NAME, "" );
+		return Preferences.INSTANCE.getString( Preferences.KEY_USER_NAME, Babylon.get().getFromResources("def_user") );
 	}
 
 	public static void gamemode( String value ) {
@@ -446,7 +439,7 @@ public class PXL610 extends Game {
 	}
 
 	public static String superuser_name() {
-		return Preferences.INSTANCE.getString( Preferences.KEY_SUPERUSER_NAME, InDev.developer_key );
+		return Preferences.INSTANCE.getString( Preferences.KEY_SUPERUSER_NAME, "" );
 	}
 	
 	/*

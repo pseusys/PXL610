@@ -65,6 +65,7 @@ import com.ekdorn.pixel610.utils.Bundle;
 import com.ekdorn.pixel610.utils.PathFinder;
 import com.ekdorn.pixel610.utils.Random;
 import com.ekdorn.pixel610.utils.SparseArray;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Dungeon {
 	
@@ -612,7 +613,7 @@ public class Dungeon {
 		GLog.n(Babylon.get().getFromResources("final_death"));
 		if (hero.belongings.getItem( Ankh.class ) == null) { 
 			Rankings.INSTANCE.submit( false );
-			OnlineRatinger.send(false);
+			if (FirebaseAuth.getInstance().getCurrentUser() != null) OnlineRatinger.send(false);
 		}
 	}
 	
@@ -626,7 +627,7 @@ public class Dungeon {
 		
 		resultDescription = desc;
 		Rankings.INSTANCE.submit( true );
-		OnlineRatinger.send(true);
+		if (FirebaseAuth.getInstance().getCurrentUser() != null) OnlineRatinger.send(true);
 	}
 	
 	public static void observe() {

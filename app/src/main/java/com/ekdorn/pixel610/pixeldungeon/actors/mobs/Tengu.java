@@ -17,6 +17,7 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.actors.mobs;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.ekdorn.pixel610.noosa.audio.Sample;
@@ -48,7 +49,7 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Tengu extends Mob {
 
-	private static final int JUMP_DELAY = 5;
+	private AiState DANCING = new Dancing();
 	
 	{
 		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_tengu") : Babylon.get().getFromResources("mob_tengumemory");
@@ -58,8 +59,6 @@ public class Tengu extends Mob {
 		EXP = 20;
 		defenseSkill = 20;
 	}
-	
-	private int timeToJump = JUMP_DELAY;
 	
 	@Override
 	public int damageRoll() {
@@ -108,71 +107,15 @@ public class Tengu extends Mob {
 	}
 	
 	@Override
-	protected boolean getCloser( int target ) {
-		if (Level.fieldOfView[target]) {
-			jump();
-			return true;
-		} else {
-			return super.getCloser( target );
-		}
-	}
-	
-	@Override
 	protected boolean canAttack( Char enemy ) {
 		return Ballistica.cast( pos, enemy.pos, false, true ) == enemy.pos;
-	}
-	
-	@Override
-	protected boolean doAttack( Char enemy ) {
-		timeToJump--;
-		if (timeToJump <= 0 && Level.adjacent( pos, enemy.pos )) {
-			jump();
-			return true;
-		} else {
-			return super.doAttack( enemy );
-		}
-	}
-	
-	private void jump() {
-		timeToJump = JUMP_DELAY;
-		
-		for (int i=0; i < 4; i++) {
-			int trapPos;
-			do {
-				trapPos = Random.Int( Level.LENGTH );
-			} while (!Level.fieldOfView[trapPos] || !Level.passable[trapPos]);
-			
-			if (Dungeon.level.map[trapPos] == Terrain.INACTIVE_TRAP) {
-				Level.set( trapPos, Terrain.POISON_TRAP );
-				GameScene.updateMap( trapPos );
-				ScrollOfMagicMapping.discover( trapPos );
-			}
-		}
-		
-		int newPos;
-		do {
-			newPos = Random.Int( Level.LENGTH );
-		} while (
-			!Level.fieldOfView[newPos] || 
-			!Level.passable[newPos] || 
-			(enemy != null && Level.adjacent( newPos, enemy.pos )) ||
-			Actor.findChar( newPos ) != null);
-		
-		sprite.move( pos, newPos );
-		move( newPos );
-		
-		if (Dungeon.visible[newPos]) {
-			CellEmitter.get( newPos ).burst( Speck.factory( Speck.WOOL ), 6 );
-			Sample.INSTANCE.play( Assets.SND_PUFF );
-		}
-		
-		spend( 1 / speed() );
 	}
 	
 	@Override
 	public void notice() {
 		super.notice();
 		yell(Utils.format(Babylon.get().getFromResources("mob_tengu_notice"), Dungeon.hero.heroClass.title()) );
+		this.state = DANCING;
 	}
 	
 	@Override
@@ -192,5 +135,76 @@ public class Tengu extends Mob {
 	@Override
 	public HashSet<Class<?>> resistances() {
 		return RESISTANCES;
+	}
+
+	private class Dancing implements AiState {
+
+		public static final String TAG	= "DANCING";
+		private int direction = 0;
+
+		@Override
+		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
+
+			int oldPos = pos;
+
+			if (direction == 0) {
+				//attac();
+				direction = Random.NormalIntRange(5, 7);
+			} else {
+				pos += Level.NEIGHBOURS8[direction];
+			}
+
+			switch (direction) {
+				case 1:
+					pos += Level.NEIGHBOURS8[5];
+				case 2:
+					pos += Level.NEIGHBOURS8[4];
+				case 3:
+					pos += Level.NEIGHBOURS8[7];
+				case 4:
+					pos += Level.NEIGHBOURS8[6];
+				case 0:
+					direction = Random.NormalIntRange(5, 7);
+			}
+			ArrayList<Integer> candidates = new ArrayList<Integer>();
+
+			for (int i=0; i < Level.NEIGHBOURS8.length; i++) {
+				int p = pos + Level.NEIGHBOURS8[i];
+				if (Actor.findChar( p ) == null && (Level.passable[p] || Level.avoid[p])) {
+					candidates.add( p );
+				}
+			}
+
+			return doAttack( enemy );
+
+			/*if (enemyInFOV && canAttack( enemy )) {
+
+
+			} else {
+
+				if (enemyInFOV) {
+					target = enemy.pos;
+				}
+
+				//int oldPos = pos;
+				if (target != -1 && getCloser( target )) {
+
+					spend( 1 / speed() );
+					return moveSprite( oldPos,  pos );
+
+				} else {
+
+					spend( TICK );
+					state = WANDERING;
+					target = Dungeon.level.randomDestination();
+					return true;
+				}
+			}*/
+		}
+
+		@Override
+		public String status() {
+			return Utils.format(Babylon.get().getFromResources("mob_status_hunting"), name );
+		}
 	}
 }

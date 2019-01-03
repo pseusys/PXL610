@@ -14,7 +14,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 public class InDev {
-    public static final String developer_key = "ekdornadmin";
     private static final String COLLECTION  = "superusers";
     private static final String DOCUMENT  = "admin";
     private static final String NAME    = "name";

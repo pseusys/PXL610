@@ -125,8 +125,7 @@ public class Imp extends NPC {
 	
 	@Override
 	public String description() {
-		return
-				Babylon.get().getFromResources("mob_imp_desc");
+		return Babylon.get().getFromResources("mob_imp_desc");
 	}
 	
 	public static class Quest {

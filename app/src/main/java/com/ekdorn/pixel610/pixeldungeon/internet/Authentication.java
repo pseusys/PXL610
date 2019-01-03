@@ -18,8 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ekdorn.pixel610.R;
+import com.ekdorn.pixel610.noosa.Game;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.scenes.TitleScene;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -136,7 +139,11 @@ public class Authentication extends Dialog {
                 final String name = sInputName.getText().toString();
                 final String password = sInputPassword.getText().toString();
 
-                if (name.contains("@") && name.contains(".")) {
+                if (name.equals("")) {
+                    sInputName.setError("This field must be filled");
+                } else if (password.equals("")) {
+                    sInputPassword.setError("Email is required");
+                } else if (name.contains("@") && name.contains(".")) {
 
                     FireBaser.findIdByEmail(name, new FireBaser.OnStringResult() {
                         @Override
@@ -173,10 +180,11 @@ public class Authentication extends Dialog {
                 if (task.isSuccessful()) {
                     PXL610.user_name(id);
                     InDev.loadSuperuserName();
-                    FireBaser.updateUser(id, email);
+                    //FireBaser.updateUser(id, email);
                     if (InDev.isDeveloper()) Toast.makeText(Authentication.this.getContext(), Babylon.get().getFromResources("super_access"), Toast.LENGTH_SHORT).show();
                     FireBaser.loadBonus(PXL610.user_name());
                     Authentication.this.dismiss();
+                    Game.scene().add(new WndSettings(false));
                 } else {
                     Toast.makeText(Authentication.this.getContext(), "password_incorrect", Toast.LENGTH_SHORT).show();
                 }
@@ -201,6 +209,8 @@ public class Authentication extends Dialog {
                         @Override
                         public void onResult() {
                             Authentication.this.dismiss();
+                            Game.scene().add(new WndSettings(false));
+
                             FireBaser.loadBonus(PXL610.user_name());
                         }
                     });
@@ -213,8 +223,13 @@ public class Authentication extends Dialog {
 
     @Override
     public void onBackPressed() {
-        main.getChildAt(0).setVisibility(View.VISIBLE);
-        main.getChildAt(1).setVisibility(View.GONE);
-        main.getChildAt(2).setVisibility(View.GONE);
+        if (main.getChildAt(0).getVisibility() == View.VISIBLE) {
+            this.dismiss();
+            Game.scene().add(new WndSettings(false));
+        } else {
+            main.getChildAt(0).setVisibility(View.VISIBLE);
+            main.getChildAt(1).setVisibility(View.GONE);
+            main.getChildAt(2).setVisibility(View.GONE);
+        }
     }
 }

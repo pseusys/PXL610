@@ -22,6 +22,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.ekdorn.pixel610.noosa.Camera;
 import com.ekdorn.pixel610.noosa.Game;
@@ -29,6 +30,8 @@ import com.ekdorn.pixel610.noosa.audio.Sample;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
+import com.ekdorn.pixel610.pixeldungeon.internet.Authentication;
+import com.ekdorn.pixel610.pixeldungeon.internet.FireBaser;
 import com.ekdorn.pixel610.pixeldungeon.internet.InDev;
 import com.ekdorn.pixel610.pixeldungeon.internet.SysDialog;
 import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
@@ -37,6 +40,8 @@ import com.ekdorn.pixel610.pixeldungeon.ui.CheckBox;
 import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Toolbar;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class WndSettings extends Window {
 
@@ -125,20 +130,34 @@ public class WndSettings extends Window {
 			RedButton btnName = new RedButton(PXL610.user_name()) {
 				@Override
 				protected void onClick() {
-				    if (InDev.isDeveloper()) {
-						WndSettings.this.hide();
-						SysDialog.createInviteAdd();
-                    } else {
+					if (FirebaseAuth.getInstance().getCurrentUser() == null) { // PXL610: update id;
+						Log.e("TAG", "onCreate: AUTH");
 						Handler mainHandler = new Handler(Looper.getMainLooper());
-						Runnable dialog = new Runnable() {
+						Runnable myRunnable = new Runnable() {
 							@Override
 							public void run() {
-								ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
-								ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_name());
-								clipboard.setPrimaryClip(clip);
+								Authentication auth = new Authentication(Game.instance);
+								WndSettings.this.hide();
+								auth.show();
 							}
 						};
-						mainHandler.post(dialog);
+						mainHandler.post(myRunnable);
+					} else {
+						if (InDev.isDeveloper()) {
+							WndSettings.this.hide();
+							SysDialog.createInviteAdd();
+						} else {
+							Handler mainHandler = new Handler(Looper.getMainLooper());
+							Runnable dialog = new Runnable() {
+								@Override
+								public void run() {
+									ClipboardManager clipboard = (ClipboardManager) Game.instance.getSystemService(Context.CLIPBOARD_SERVICE);
+									ClipData clip = ClipData.newPlainText("Invite code", PXL610.user_name());
+									clipboard.setPrimaryClip(clip);
+								}
+							};
+							mainHandler.post(dialog);
+						}
 					}
 				}
 			};

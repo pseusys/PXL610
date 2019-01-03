@@ -45,7 +45,7 @@ import com.ekdorn.pixel610.utils.Random;
 
 public abstract class Mob extends Char {
 	
-	protected static final String	TXT_ECHO	= "echo of ";
+	protected static final String TXT_ECHO	= "echo of ";
 	
 	protected static final String TXT_NOTICE1	= "?!";
 	protected static final String TXT_RAGE		= "#$%^";
@@ -572,6 +572,47 @@ public abstract class Mob extends Char {
 			return Utils.format(Babylon.get().getFromResources("mob_status_fleeing"), name );
 		}
 	}
+
+	/*private class Escaping implements AiState {
+
+		public static final String TAG	= "ESCAPING";
+
+		@Override
+		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
+			Mob.this.hostile = false;
+
+			enemySeen = enemyInFOV;
+			if (enemyInFOV && canAttack( enemy )) {
+
+				return doAttack( enemy );
+
+			} else {
+
+				if (enemyInFOV) {
+					target = enemy.pos;
+				}
+
+				int oldPos = pos;
+				if (target != -1 && getCloser( target )) {
+
+					spend( 1 / speed() );
+					return moveSprite( oldPos,  pos );
+
+				} else {
+
+					spend( TICK );
+					state = WANDERING;
+					target = Dungeon.level.randomDestination();
+					return true;
+				}
+			}
+		}
+
+		@Override
+		public String status() {
+			return Utils.format(Babylon.get().getFromResources("mob_status_hunting"), name );
+		}
+	}*/
 	
 	private class Passive implements AiState {
 		

@@ -59,6 +59,7 @@ public class MovieClip extends Image {
 						curFrame = 0;
 					}
 					finished = true;
+
 					if (listener != null) {
 						listener.onComplete( curAnim );
 						// This check can probably be removed

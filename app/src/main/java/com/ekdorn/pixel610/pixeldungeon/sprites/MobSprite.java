@@ -26,7 +26,7 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class MobSprite extends CharSprite {
 
-	private static final float FADE_TIME	= 3f;
+	private static final float FADE_TIME	= 0.25f;
 	private static final float FALL_TIME	= 1f;
 	
 	@Override

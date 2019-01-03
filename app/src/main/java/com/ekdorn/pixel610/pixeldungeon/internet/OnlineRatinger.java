@@ -173,7 +173,9 @@ public enum OnlineRatinger {
                             if (task.isSuccessful()) {
                                 boolean exists = task.getResult().exists();
                                 if (exists && topData.size() < MAX_DATA_COUNTER) {
-                                    topData.add(task.getResult().getData());
+                                    Map<String, Object> data = task.getResult().getData();
+                                    data.put(CLASS, data.get(CLASS).toString().toUpperCase());
+                                    topData.add(data);
                                     System.out.println("gotit");
                                 } else {
                                     lister.scream();
@@ -228,7 +230,7 @@ public enum OnlineRatinger {
     private static Map<String, Object> createRate(boolean win) {
         Map<String, Object> rate = new HashMap<>();
 
-        String heroClass = Dungeon.hero.heroClass.name();
+        String heroClass = Dungeon.hero.heroClass.name().toLowerCase();
 
         rate.put(CLASS, heroClass);
         rate.put(INFO, Dungeon.resultDescription);
