@@ -89,7 +89,7 @@ public class Item implements Bundlable {
 	};
 
 	public Item() {
-		this.depth = Dungeon.depth / 5;
+		this.depth = (Dungeon.depth - 1) / 5;
 		finish();
 		if (this instanceof Keyring) System.out.println(((Keyring) this).size);
 	}
@@ -415,7 +415,7 @@ public class Item implements Bundlable {
 	}
 	
 	public int image() {
-		return image;
+		return image + 128 * depth;
 	}
 	
 	public ItemSprite.Glowing glowing() {

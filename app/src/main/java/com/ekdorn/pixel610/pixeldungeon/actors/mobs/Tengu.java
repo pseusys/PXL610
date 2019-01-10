@@ -17,11 +17,8 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.actors.mobs;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
-import com.ekdorn.pixel610.noosa.audio.Sample;
-import com.ekdorn.pixel610.pixeldungeon.Assets;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.Statistics;
@@ -32,24 +29,26 @@ import com.ekdorn.pixel610.pixeldungeon.actors.Char;
 import com.ekdorn.pixel610.pixeldungeon.actors.blobs.ToxicGas;
 import com.ekdorn.pixel610.pixeldungeon.actors.buffs.Poison;
 import com.ekdorn.pixel610.pixeldungeon.actors.hero.HeroSubClass;
-import com.ekdorn.pixel610.pixeldungeon.effects.CellEmitter;
-import com.ekdorn.pixel610.pixeldungeon.effects.Speck;
+import com.ekdorn.pixel610.pixeldungeon.items.Heap;
 import com.ekdorn.pixel610.pixeldungeon.items.TomeOfMastery;
 import com.ekdorn.pixel610.pixeldungeon.items.keys.SkeletonKey;
-import com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfMagicMapping;
 import com.ekdorn.pixel610.pixeldungeon.items.scrolls.ScrollOfPsionicBlast;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.enchantments.Death;
+import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.ekdorn.pixel610.pixeldungeon.levels.Level;
-import com.ekdorn.pixel610.pixeldungeon.levels.Terrain;
+import com.ekdorn.pixel610.pixeldungeon.levels.PrisonBossLevel;
 import com.ekdorn.pixel610.pixeldungeon.mechanics.Ballistica;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
+import com.ekdorn.pixel610.pixeldungeon.sprites.CharSprite;
+import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.sprites.TenguSprite;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
+import com.ekdorn.pixel610.pixeldungeon.windows.WndScript;
 import com.ekdorn.pixel610.utils.Random;
 
 public class Tengu extends Mob {
 
-	private AiState DANCING = new Dancing();
+	public AiState DANCING = new Dancing();
 	
 	{
 		name = Dungeon.depth == Statistics.deepestFloor ? Babylon.get().getFromResources("mob_tengu") : Babylon.get().getFromResources("mob_tengumemory");
@@ -67,7 +66,7 @@ public class Tengu extends Mob {
 	
 	@Override
 	public int attackSkill( Char target ) {
-		return 20;
+		return 25;
 	}
 	
 	@Override
@@ -94,7 +93,7 @@ public class Tengu extends Mob {
 			break;
 		}
 		if (!Badges.isUnlocked( badgeToCheck ) || Dungeon.hero.subClass != HeroSubClass.NONE) {
-			Dungeon.level.drop( new TomeOfMastery(), pos ).sprite.drop();
+			//Dungeon.level.drop( new TomeOfMastery(), pos ).sprite.drop();
 		}
 		
 		GameScene.bossSlain();
@@ -104,6 +103,8 @@ public class Tengu extends Mob {
 		Badges.validateBossSlain();
 		
 		yell(Babylon.get().getFromResources("mob_tengu_death"));
+
+		GameScene.show(new WndScript(Tengu.this, Babylon.get().getFromResources("mob_goo_plot")));
 	}
 	
 	@Override
@@ -120,8 +121,7 @@ public class Tengu extends Mob {
 	
 	@Override
 	public String description() {
-		return
-				Babylon.get().getFromResources("mob_tengu_desc");
+		return Babylon.get().getFromResources("mob_tengu_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
@@ -144,67 +144,100 @@ public class Tengu extends Mob {
 
 		@Override
 		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
-
 			int oldPos = pos;
 
 			if (direction == 0) {
-				//attac();
-				direction = Random.NormalIntRange(5, 7);
+				direction = Random.NormalIntRange(4, 7);
 			} else {
 				pos += Level.NEIGHBOURS8[direction];
 			}
 
-			switch (direction) {
-				case 1:
-					pos += Level.NEIGHBOURS8[5];
-				case 2:
-					pos += Level.NEIGHBOURS8[4];
-				case 3:
-					pos += Level.NEIGHBOURS8[7];
-				case 4:
-					pos += Level.NEIGHBOURS8[6];
-				case 0:
-					direction = Random.NormalIntRange(5, 7);
-			}
-			ArrayList<Integer> candidates = new ArrayList<Integer>();
+			if (!(Actor.findChar( pos ) == null && (Level.passable[pos] || Level.avoid[pos]))) {
+				pos = oldPos;
 
-			for (int i=0; i < Level.NEIGHBOURS8.length; i++) {
-				int p = pos + Level.NEIGHBOURS8[i];
-				if (Actor.findChar( p ) == null && (Level.passable[p] || Level.avoid[p])) {
-					candidates.add( p );
+				switch (direction) {
+					case 4:
+					case 6:
+						int left = pos + Level.NEIGHBOURS4[2];
+						if (!(Actor.findChar( left ) == null && Level.passable[left])) {
+							direction++;
+						} else {
+							direction += (direction > 5) ? -2 : 2;
+						}
+						break;
+					case 5:
+					case 7:
+						int right = pos + Level.NEIGHBOURS4[0];
+						if (!(Actor.findChar( right ) == null && Level.passable[right])) {
+							direction--;
+						} else {
+							direction += (direction > 6) ? -2 : 2;
+						}
+						break;
 				}
 			}
 
-			return doAttack( enemy );
+			if (pos != oldPos) {
+                if (enemyInFOV && canAttack( enemy )) attack();
+                heal(pos);
 
-			/*if (enemyInFOV && canAttack( enemy )) {
+                return moveSprite(oldPos, pos);
+            } else {
+			    return Tengu.this.state.act(enemyInFOV, justAlerted);
+            }
+		}
 
-
+		private void attack() {
+			if (Random.IntRange(0, 14) == 0) {
+				for (int i = 0; i < 2; i++) {
+					int aim = ((PrisonBossLevel) Dungeon.level).roomExit.random();
+					Dungeon.level.drop(new Tengu.Button(), aim).sprite.drop(aim);
+				}
+				sprite.showStatus(CharSprite.NEGATIVE, "!!!");
 			} else {
+				doAttack(enemy);
+			}
+		}
 
-				if (enemyInFOV) {
-					target = enemy.pos;
-				}
-
-				//int oldPos = pos;
-				if (target != -1 && getCloser( target )) {
-
-					spend( 1 / speed() );
-					return moveSprite( oldPos,  pos );
-
-				} else {
-
-					spend( TICK );
-					state = WANDERING;
-					target = Dungeon.level.randomDestination();
-					return true;
-				}
-			}*/
+		private void heal(int pos) {
+			Heap heap;
+			if (((heap = Dungeon.level.heaps.get(pos)) != null) && (heap.peek() instanceof Button)) {
+				heap.pickUp();
+				yell(Babylon.get().getFromResources("mob_tengu_heal"));
+				Tengu.this.HP = HT;
+			}
 		}
 
 		@Override
 		public String status() {
-			return Utils.format(Babylon.get().getFromResources("mob_status_hunting"), name );
+			return Utils.format(Babylon.get().getFromResources("mob_status_dancing"), name );
+		}
+	}
+
+	public static class Button extends MissileWeapon {
+		@Override
+		public void finish() {
+			name = Babylon.get().getFromResources("weapon_button");
+			image = ItemSpriteSheet.BOOMERANG;
+
+			STR = 10;
+
+			stackable = true;
+		}
+
+		@Override
+		public int min() {
+			return 3;
+		}
+
+		@Override
+		public int max() {
+			return 10;
+		}
+
+		@Override
+		public String desc() {
+			return Babylon.get().getFromResources("weapon_button_desc");
 		}
 	}
 }

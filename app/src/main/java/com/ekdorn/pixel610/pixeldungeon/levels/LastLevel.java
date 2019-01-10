@@ -46,12 +46,6 @@ public class LastLevel extends Level {
 	public String waterTex() {
 		return Assets.WATER_SEWERS;
 	}
-
-	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_SEWERS;
-	}
-
 	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_SEWERS;

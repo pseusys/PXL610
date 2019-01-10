@@ -48,11 +48,6 @@ public class PrisonLevel extends RegularLevel {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_PRISON;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_PRISON;
 	}

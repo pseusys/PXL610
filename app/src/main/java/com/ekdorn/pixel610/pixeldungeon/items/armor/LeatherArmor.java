@@ -17,8 +17,6 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.items.armor;
 
-import android.util.Log;
-
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.utils.Bundle;
@@ -38,7 +36,6 @@ public class LeatherArmor extends Armor {
 	
 	@Override
 	public String desc() {
-		Log.e("TAG", "desc: " + depth );
 		return Babylon.get().getFromResources("armor_leatrher_desc", depth);
 	}
 

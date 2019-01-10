@@ -40,12 +40,12 @@ import com.ekdorn.pixel610.utils.Rect;
 
 public abstract class RegularLevel extends Level {
 
-	protected HashSet<Room> rooms;
-	
-	protected Room roomEntrance;
-	protected Room roomExit;
-	
-	protected ArrayList<Room.Type> specials;
+	public HashSet<Room> rooms;
+
+	public Room roomEntrance;
+	public Room roomExit;
+
+	public ArrayList<Room.Type> specials;
 	
 	public int secretDoors;
 	
@@ -339,8 +339,8 @@ public abstract class RegularLevel extends Level {
 		return chances;
 	}
 	
-	protected int minRoomSize = 7;
-	protected int maxRoomSize = 9;
+	protected int minRoomSize = (this instanceof PrisonBossLevel) ? 9 : 7;
+	protected int maxRoomSize = (this instanceof PrisonBossLevel) ? 12 : 9;
 	
 	protected void split( Rect rect ) {
 		

@@ -205,8 +205,6 @@ public class Goo extends Mob {
 		Badges.validateBossSlain();
 		
 		yell(Babylon.get().getFromResources("mob_goo_death"));
-
-		GameScene.show(new WndScript(Goo.this, Babylon.get().getFromResources("mob_goo_plot")));
 	}
 	
 	@Override
@@ -217,8 +215,7 @@ public class Goo extends Mob {
 	
 	@Override
 	public String description() {
-		return
-				Babylon.get().getFromResources("mob_goo_desc");
+		return Babylon.get().getFromResources("mob_goo_desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

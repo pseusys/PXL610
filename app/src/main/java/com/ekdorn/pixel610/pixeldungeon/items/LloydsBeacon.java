@@ -44,7 +44,7 @@ public class LloydsBeacon extends Item {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("beacon_name", depth);
+		name = Babylon.get().getFromResources("beacon_name");
 		image = ItemSpriteSheet.BEACON;
 		
 		unique = true;
@@ -157,6 +157,6 @@ public class LloydsBeacon extends Item {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("beacon_info", depth) + (returnDepth == -1 ? "" : Utils.format( Babylon.get().getFromResources("beacon_set"), returnDepth ) );
+		return Babylon.get().getFromResources("beacon_info") + (returnDepth == -1 ? "" : Utils.format( Babylon.get().getFromResources("beacon_set"), returnDepth ) );
 	}
 }

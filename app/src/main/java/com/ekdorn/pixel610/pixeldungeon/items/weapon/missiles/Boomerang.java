@@ -108,7 +108,6 @@ public class Boomerang extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return
-				Babylon.get().getFromResources("weapon_boomerang_desc", depth);
+		return Babylon.get().getFromResources("weapon_boomerang_desc");
 	}
 }

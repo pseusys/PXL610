@@ -56,11 +56,6 @@ public class SewerBossLevel extends RegularLevel {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_SEWERS;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_SEWERS;
 	}

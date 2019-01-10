@@ -47,11 +47,6 @@ public class CityLevel extends RegularLevel {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_CITY;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_CITY;
 	}

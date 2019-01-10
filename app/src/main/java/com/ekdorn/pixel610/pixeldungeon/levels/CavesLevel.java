@@ -52,11 +52,6 @@ public class CavesLevel extends RegularLevel {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_CAVES;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_CAVES;
 	}

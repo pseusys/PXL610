@@ -61,11 +61,6 @@ public class HallsLevel extends RegularLevel {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_HALLS;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_HALLS;
 	}

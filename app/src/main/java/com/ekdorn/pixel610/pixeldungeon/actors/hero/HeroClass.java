@@ -36,6 +36,13 @@ import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.Knuckles;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.ShortSword;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.Dart;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.Boomerang;
+import com.ekdorn.pixel610.pixeldungeon.plants.Dreamweed;
+import com.ekdorn.pixel610.pixeldungeon.plants.Earthroot;
+import com.ekdorn.pixel610.pixeldungeon.plants.Fadeleaf;
+import com.ekdorn.pixel610.pixeldungeon.plants.Firebloom;
+import com.ekdorn.pixel610.pixeldungeon.plants.Icecap;
+import com.ekdorn.pixel610.pixeldungeon.plants.Sorrowmoss;
+import com.ekdorn.pixel610.pixeldungeon.plants.Sungrass;
 import com.ekdorn.pixel610.pixeldungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.utils.Bundle;
 

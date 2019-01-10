@@ -17,6 +17,8 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.levels;
 
+import android.util.Log;
+
 import java.util.List;
 
 import com.ekdorn.pixel610.noosa.Scene;
@@ -28,6 +30,7 @@ import com.ekdorn.pixel610.pixeldungeon.actors.Actor;
 import com.ekdorn.pixel610.pixeldungeon.actors.Char;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.Bestiary;
 import com.ekdorn.pixel610.pixeldungeon.actors.mobs.Mob;
+import com.ekdorn.pixel610.pixeldungeon.actors.mobs.Tengu;
 import com.ekdorn.pixel610.pixeldungeon.items.Heap;
 import com.ekdorn.pixel610.pixeldungeon.items.Item;
 import com.ekdorn.pixel610.pixeldungeon.items.keys.IronKey;
@@ -61,11 +64,6 @@ public class PrisonBossLevel extends RegularLevel {
 	@Override
 	public String waterTex() {
 		return Assets.WATER_PRISON;
-	}
-
-	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_PRISON;
 	}
 
 	@Override
@@ -124,17 +122,19 @@ public class PrisonBossLevel extends RegularLevel {
 					return false;
 				}
 				roomExit = Random.element( rooms );
+
 			} while (
 				roomExit == roomEntrance || 
-				roomExit.width() < 7 || 
-				roomExit.height() < 7 || 
+				roomExit.width() < 10 ||
+				roomExit.height() < 5 ||
 				roomExit.top == 0);
 	
 			Graph.buildDistanceMap( rooms, roomExit );
 			distance = Graph.buildPath( rooms, roomEntrance, roomExit ).size();
 			
 		} while (distance < 3);
-		
+
+		//Log.e("TAG", "build: EXIT CREATED " + roomExit.height());
 		roomEntrance.type = Type.ENTRANCE;
 		roomExit.type = Type.BOSS_EXIT;
 		
@@ -154,21 +154,22 @@ public class PrisonBossLevel extends RegularLevel {
 		}
 		
 		for (Room r : rooms) {
+			//Log.e("TAG", "build: room " + r.height() + " " + r.width());
 			if (r.type == Type.NULL && r.connected.size() > 0) {
 				r.type = Type.PASSAGE; 
 			}
 		}
-		
+
 		paint();
 
 		Room r = (Room)roomExit.connected.keySet().toArray()[0];
 		if (roomExit.connected.get( r ).y == roomExit.top) {
 			return false;
 		}
-		
+
 		paintWater();
 		paintGrass();
-		
+
 		placeTraps();
 		
 		return true;
@@ -210,9 +211,9 @@ public class PrisonBossLevel extends RegularLevel {
 		int nTraps = nTraps();
 
 		for (int i=0; i < nTraps; i++) {
-			
+
 			int trapPos = Random.Int( LENGTH );
-			
+
 			if (map[trapPos] == Terrain.EMPTY) {
 				map[trapPos] = Terrain.POISON_TRAP;
 			}
@@ -220,11 +221,11 @@ public class PrisonBossLevel extends RegularLevel {
 	}
 	
 	@Override
-	protected void decorate() {	
-		
+	protected void decorate() {
+
 		for (int i=WIDTH + 1; i < LENGTH - WIDTH - 1; i++) {
-			if (map[i] == Terrain.EMPTY) { 
-				
+			if (map[i] == Terrain.EMPTY) {
+
 				float c = 0.15f;
 				if (map[i + 1] == Terrain.WALL && map[i + WIDTH] == Terrain.WALL) {
 					c += 0.2f;
@@ -238,7 +239,7 @@ public class PrisonBossLevel extends RegularLevel {
 				if (map[i - 1] == Terrain.WALL && map[i - WIDTH] == Terrain.WALL) {
 					c += 0.2f;
 				}
-				
+
 				if (Random.Float() < c) {
 					map[i] = Terrain.EMPTY_DECO;
 				}
@@ -276,12 +277,8 @@ public class PrisonBossLevel extends RegularLevel {
 		arenaDoor = door.x + door.y * WIDTH;
 		Painter.set( this, arenaDoor, Terrain.LOCKED_DOOR );
 
-		Painter.fill( this, 
-			roomExit.left + 2,
-			roomExit.top + 2,
-			roomExit.width() - 3,
-			roomExit.height() - 3,
-			Terrain.INACTIVE_TRAP );
+		Painter.fill(this, roomExit, 1, Terrain.EMPTY_SP);
+		Painter.fill(this, roomExit, 2, Terrain.EMPTY);
 	}
 	
 	@Override
@@ -325,7 +322,7 @@ public class PrisonBossLevel extends RegularLevel {
 			} while (pos == cell || Actor.findChar( pos ) != null);
 			
 			Mob boss = Bestiary.mob( Dungeon.depth );
-			boss.state = boss.HUNTING;
+			boss.state = ((Tengu) boss).DANCING;
 			boss.pos = pos;
 			GameScene.add( boss );
 			boss.notice();

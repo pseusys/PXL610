@@ -42,11 +42,6 @@ public class DeadEndLevel extends Level {
 	}
 
 	@Override
-	public String itemsTex() {
-		return Assets.ITEMS_CITY;
-	}
-
-	@Override
 	public String plantsTex() {
 		return Assets.PLANTS_PRISON;
 	}

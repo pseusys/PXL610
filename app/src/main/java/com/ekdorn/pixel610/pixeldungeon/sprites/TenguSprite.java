@@ -19,6 +19,7 @@ package com.ekdorn.pixel610.pixeldungeon.sprites;
 
 import com.ekdorn.pixel610.noosa.TextureFilm;
 import com.ekdorn.pixel610.pixeldungeon.Assets;
+import com.ekdorn.pixel610.pixeldungeon.actors.mobs.Tengu;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.Shuriken;
 import com.ekdorn.pixel610.pixeldungeon.levels.Level;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
@@ -74,7 +75,7 @@ public class TenguSprite extends MobSprite {
 		if (!Level.adjacent( cell, ch.pos )) {
 			
 			((MissileSprite)parent.recycle( MissileSprite.class )).
-				reset( ch.pos, cell, new Shuriken(), new Callback() {			
+				reset( ch.pos, cell, new Tengu.Button(), new Callback() {
 					@Override
 					public void call() {
 						ch.onAttackComplete();

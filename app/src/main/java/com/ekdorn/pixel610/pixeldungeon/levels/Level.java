@@ -340,10 +340,6 @@ public abstract class Level implements Bundlable {
 	public String plantsTex() {
 		return null;
 	}
-
-	public String itemsTex() {
-		return null;
-	}
 	
 	abstract protected boolean build();
 

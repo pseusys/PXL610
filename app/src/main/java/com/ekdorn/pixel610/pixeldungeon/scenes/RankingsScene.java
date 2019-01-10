@@ -20,6 +20,7 @@ package com.ekdorn.pixel610.pixeldungeon.scenes;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.actors.hero.HeroClass;
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.BitmapTextMultiline;

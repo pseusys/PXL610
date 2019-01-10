@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.ekdorn.pixel610.noosa.BitmapTextMultiline;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
+import com.ekdorn.pixel610.pixeldungeon.Dungeon;
 import com.ekdorn.pixel610.pixeldungeon.items.Heap;
 import com.ekdorn.pixel610.pixeldungeon.items.Heap.Type;
 import com.ekdorn.pixel610.pixeldungeon.items.Item;
