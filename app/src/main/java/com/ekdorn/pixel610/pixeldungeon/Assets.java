@@ -17,8 +17,6 @@
  */
 package com.ekdorn.pixel610.pixeldungeon;
 
-import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
-
 public class Assets {
 
 	public static final String ARCS_BG_0		= "arcs10.png";
@@ -39,7 +37,8 @@ public class Assets {
 	public static final String XP_BAR	= "exp_bar.png";
 	public static final String TOOLBAR	= "toolbar.png";
 	public static final String SHADOW	= "shadow.png";
-	
+
+	public static final int TEXTURE_LENGTH = 7;
 	public static final String WARRIOR	= "warrior.png";
 	public static final String MAGE		= "mage.png";
 	public static final String ROGUE	= "rogue.png";
@@ -93,9 +92,8 @@ public class Assets {
 	public static final String BEE		= "bee.png";
 	public static final String MIMIC	= "mimic.png";
 
-    public static final String ITEMS	= "items.png";
 	public static final int ITEMS_LENGTH	= 128;
-	public static final String ITEMS_SEWERS	= "items0.png";
+	public static final String ITEMS = "items.png";
 	public static final String ITEMS_PRISON	= "items1.png";
 	public static final String ITEMS_CAVES	= "items.png";
 	public static final String ITEMS_CITY	= "items.png";

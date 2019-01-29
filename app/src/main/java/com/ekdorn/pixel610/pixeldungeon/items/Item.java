@@ -415,7 +415,7 @@ public class Item implements Bundlable {
 	}
 	
 	public int image() {
-		return image + 128 * depth;
+		return image + Assets.ITEMS_LENGTH * depth;
 	}
 	
 	public ItemSprite.Glowing glowing() {

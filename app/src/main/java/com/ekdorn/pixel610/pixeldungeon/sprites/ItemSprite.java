@@ -35,7 +35,6 @@ import com.ekdorn.pixel610.pixeldungeon.items.Item;
 import com.ekdorn.pixel610.pixeldungeon.levels.Level;
 import com.ekdorn.pixel610.pixeldungeon.levels.Terrain;
 import com.ekdorn.pixel610.pixeldungeon.scenes.GameScene;
-import com.ekdorn.pixel610.pixeldungeon.utils.GLog;
 import com.ekdorn.pixel610.utils.PointF;
 import com.ekdorn.pixel610.utils.Random;
 
@@ -64,7 +63,7 @@ public class ItemSprite extends MovieClip {
 	}
 
 	public ItemSprite( int image, Glowing glowing ) {
-		super(Assets.ITEMS_SEWERS);
+		super(Assets.ITEMS);
 		
 		if (film == null) {
 			film = new TextureFilm( texture, SIZE, SIZE );
@@ -203,7 +202,7 @@ public class ItemSprite extends MovieClip {
 	}
 	
 	public static int pick( int index, int x, int y ) {
-		Bitmap bmp = TextureCache.get( Assets.ITEMS_SEWERS ).bitmap;
+		Bitmap bmp = TextureCache.get( Assets.ITEMS).bitmap;
 		int rows = bmp.getWidth() / SIZE;
 		int row = index / rows;
 		int col = index % rows;

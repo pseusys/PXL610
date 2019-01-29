@@ -77,26 +77,34 @@ public class Heap implements Bundlable {
 	public LinkedList<Item> items = new LinkedList<Item>();
 	
 	public int image() {
+		int ret;
 		switch (type) {
-		case HEAP:
-		case FOR_SALE:
-			return size() > 0 ? items.peek().image() : 0;
-		case CHEST:
-		case MIMIC:
-			return ItemSpriteSheet.CHEST;
-		case LOCKED_CHEST:
-			return ItemSpriteSheet.LOCKED_CHEST;
-		case CRYSTAL_CHEST:
-			return ItemSpriteSheet.CRYSTAL_CHEST;
-		case TOMB:
-			return ItemSpriteSheet.TOMB;
-		case SKELETON:
-			return ItemSpriteSheet.BONES;
-		case HIDDEN:
-			return ItemSpriteSheet.HIDDEN;
-		default:
-			return 0;
+			case HEAP:
+			case FOR_SALE:
+				return size() > 0 ? items.peek().image() : 0;
+			case CHEST:
+			case MIMIC:
+				ret = ItemSpriteSheet.CHEST;
+				break;
+			case LOCKED_CHEST:
+				ret = ItemSpriteSheet.LOCKED_CHEST;
+				break;
+			case CRYSTAL_CHEST:
+				ret = ItemSpriteSheet.CRYSTAL_CHEST;
+				break;
+			case TOMB:
+				ret = ItemSpriteSheet.TOMB;
+				break;
+			case SKELETON:
+				ret = ItemSpriteSheet.BONES;
+				break;
+			case HIDDEN:
+				ret = ItemSpriteSheet.HIDDEN;
+				break;
+			default:
+				ret = 0;
 		}
+		return ret + ((Dungeon.depth - 1) / 5) * Assets.ITEMS_LENGTH;
 	}
 	
 	public ItemSprite.Glowing glowing() {
