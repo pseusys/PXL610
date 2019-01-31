@@ -104,7 +104,7 @@ public class Tengu extends Mob {
 		
 		yell(Babylon.get().getFromResources("mob_tengu_death"));
 
-		GameScene.show(new WndScript(Tengu.this, Babylon.get().getFromResources("mob_goo_plot")));
+		GameScene.show(new WndScript(Tengu.this, Babylon.get().getFromResources("mob_tengu_plot")));
 	}
 	
 	@Override
@@ -218,7 +218,7 @@ public class Tengu extends Mob {
 		@Override
 		public void finish() {
 			name = Babylon.get().getFromResources("weapon_button");
-			image = ItemSpriteSheet.BOOMERANG;
+			image = ItemSpriteSheet.BUTTON;
 
 			STR = 10;
 

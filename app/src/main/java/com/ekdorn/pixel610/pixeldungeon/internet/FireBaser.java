@@ -84,7 +84,7 @@ public class FireBaser {
 
     public static void invite(String code, OnVoidResult result) {
         if (PXL610.invited()) {
-            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_already_invited"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_alreadyinvited"), Toast.LENGTH_SHORT).show();
         } else if (code.equals(PXL610.user_name())) {
             Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_selfinvite"), Toast.LENGTH_SHORT).show();
         } else if (!code.equals("")) {
@@ -115,7 +115,7 @@ public class FireBaser {
                 PXL610.invited(true);
                 result.onResult();
                 if (code.equals(PXL610.user_name())) {
-                    Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_adding_done"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_addingdone"), Toast.LENGTH_SHORT).show();
                     loadBonus(PXL610.user_name());
                 } else {
                     Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_invited"), Toast.LENGTH_SHORT).show();
@@ -128,7 +128,7 @@ public class FireBaser {
                 if (code.equals(PXL610.user_name())) {
                     Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_error"), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_notvalid_code"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_notvalidcode"), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -141,7 +141,7 @@ public class FireBaser {
                 if (task.isSuccessful() && task.getResult().exists()) {
                     int bonus = ((Number) task.getResult().get(INVITATIONS)).intValue();
                     PXL610.bonus(bonus);
-                    Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("inviter_code_used"), bonus), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Game.instance, Utils.format(Babylon.get().getFromResources("inviter_codeused"), bonus), Toast.LENGTH_SHORT).show();
                 } else {
                     Log.w("TAG", "Error getting documents.", task.getException());
                     Toast.makeText(Game.instance, Babylon.get().getFromResources("inviter_error"), Toast.LENGTH_SHORT).show();

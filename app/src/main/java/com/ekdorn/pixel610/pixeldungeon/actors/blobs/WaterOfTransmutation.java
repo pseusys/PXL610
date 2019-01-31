@@ -219,6 +219,6 @@ public class WaterOfTransmutation extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return Babylon.get().getFromResources("desc_wat_trans");
+		return Babylon.get().getFromResources("levels_desc_well_trans");
 	}
 }

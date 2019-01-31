@@ -92,7 +92,7 @@ public class Assets {
 	public static final String BEE		= "bee.png";
 	public static final String MIMIC	= "mimic.png";
 
-	public static final int ITEMS_LENGTH	= 128;
+	public static final int ITEMS_LENGTH	= 144;
 	public static final String ITEMS = "items.png";
 	public static final String ITEMS_PRISON	= "items1.png";
 	public static final String ITEMS_CAVES	= "items.png";

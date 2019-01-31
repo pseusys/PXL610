@@ -49,7 +49,7 @@ public class WaterOfHealth extends WellWater {
 
 		Dungeon.hero.interrupt();
 	
-		GLog.p( Babylon.get().getFromResources("aff_wat_heal") );
+		GLog.p( Babylon.get().getFromResources("levels_desc_act_well_heal") );
 		
 		Journal.remove( Feature.WELL_OF_HEALTH );
 		
@@ -75,6 +75,6 @@ public class WaterOfHealth extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return Babylon.get().getFromResources("desc_wat_heal");
+		return Babylon.get().getFromResources("levels_desc_well_heal");
 	}
 }

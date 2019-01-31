@@ -66,7 +66,7 @@ public class WaterOfAwareness extends WellWater {
 
 		Dungeon.hero.interrupt();
 	
-		GLog.p( Babylon.get().getFromResources("aff_wat_awar") );
+		GLog.p( Babylon.get().getFromResources("levels_desc_act_well_awar") );
 		
 		Journal.remove( Feature.WELL_OF_AWARENESS );
 		
@@ -97,6 +97,6 @@ public class WaterOfAwareness extends WellWater {
 	
 	@Override
 	public String tileDesc() {
-		return Babylon.get().getFromResources("desc_wat_awar");
+		return Babylon.get().getFromResources("levels_desc_well_awar");
 	}
 }

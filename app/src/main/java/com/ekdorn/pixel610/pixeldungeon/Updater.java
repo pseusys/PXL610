@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Updater {
     public static void update(Context cntxt) {
-        Toast.makeText(cntxt, "Your app syncing...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(cntxt, Babylon.get().getFromResources("updater_syncing"), Toast.LENGTH_SHORT).show();
         //version 1.2 deepening
 
         /*File [] files = new File(cntxt.getApplicationInfo().dataDir + "/files").listFiles();
@@ -25,7 +25,7 @@ public class Updater {
 
         transferGames();
         // version...
-        Toast.makeText(cntxt, "Your app synced!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(cntxt, Babylon.get().getFromResources("updater_synced"), Toast.LENGTH_SHORT).show();
     }
 
     private static void transferGames() {

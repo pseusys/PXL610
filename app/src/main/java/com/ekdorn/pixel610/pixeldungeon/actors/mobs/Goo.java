@@ -205,6 +205,7 @@ public class Goo extends Mob {
 		Badges.validateBossSlain();
 		
 		yell(Babylon.get().getFromResources("mob_goo_death"));
+		GameScene.show(new WndScript(Goo.this, Babylon.get().getFromResources("mob_goo_plot")));
 	}
 	
 	@Override

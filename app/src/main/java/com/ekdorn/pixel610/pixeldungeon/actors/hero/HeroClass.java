@@ -22,7 +22,7 @@ import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.Badges;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.additional.GameMode;
-import com.ekdorn.pixel610.pixeldungeon.items.Invitation;
+import com.ekdorn.pixel610.pixeldungeon.items.Pen3D;
 import com.ekdorn.pixel610.pixeldungeon.items.TomeOfMastery;
 import com.ekdorn.pixel610.pixeldungeon.items.armor.ClothArmor;
 import com.ekdorn.pixel610.pixeldungeon.items.bags.Keyring;
@@ -36,17 +36,8 @@ import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.Knuckles;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.melee.ShortSword;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.Dart;
 import com.ekdorn.pixel610.pixeldungeon.items.weapon.missiles.Boomerang;
-import com.ekdorn.pixel610.pixeldungeon.plants.Dreamweed;
-import com.ekdorn.pixel610.pixeldungeon.plants.Earthroot;
-import com.ekdorn.pixel610.pixeldungeon.plants.Fadeleaf;
-import com.ekdorn.pixel610.pixeldungeon.plants.Firebloom;
-import com.ekdorn.pixel610.pixeldungeon.plants.Icecap;
-import com.ekdorn.pixel610.pixeldungeon.plants.Sorrowmoss;
-import com.ekdorn.pixel610.pixeldungeon.plants.Sungrass;
 import com.ekdorn.pixel610.pixeldungeon.ui.QuickSlot;
 import com.ekdorn.pixel610.utils.Bundle;
-
-import java.util.DuplicateFormatFlagsException;
 
 public enum HeroClass {
 
@@ -123,7 +114,7 @@ public enum HeroClass {
 			break;
 		}
 
-		if (PXL610.invited()) new Invitation().identify().collect();
+		if (PXL610.invited()) new Pen3D().identify().collect();
 		
 		hero.updateAwareness();
 	}

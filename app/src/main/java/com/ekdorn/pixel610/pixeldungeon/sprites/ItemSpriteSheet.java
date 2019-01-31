@@ -51,6 +51,7 @@ public class ItemSpriteSheet {
 	public static final int INCENDIARY_DART	= 108;
 	public static final int CURARE_DART		= 109;
 	public static final int JAVELIN			= 110;
+	public static final int BUTTON			= 128;
 	
 	// Armors
 	public static final int ARMOR_CLOTH		= 24;
@@ -162,14 +163,10 @@ public class ItemSpriteSheet {
 	public static final int HOLSTER	= 111;
 	public static final int KEYRING	= 126;
 	
-	// UNUSED
-	public static final int SPARK_UPGRADE	= 117;
-	public static final int SPARK_ENCHANT	= 118;
-	
 	// Misc
 	public static final int ANKH	= 1;
 	public static final int GOLD	= 14;
-	public static final int STYLUS	= 80;
+	public static final int PEN3D	= 80;
 	public static final int DEWDROP	= 81;
 	public static final int MASTERY	= 82;
 	public static final int TORCH	= 84;
@@ -180,4 +177,5 @@ public class ItemSpriteSheet {
 	public static final int WEIGHT	= 123;
 	public static final int BOMB	= 124;
 	public static final int HONEYPOT= 125;
+	public static final int BOOK    = 129;
 }
