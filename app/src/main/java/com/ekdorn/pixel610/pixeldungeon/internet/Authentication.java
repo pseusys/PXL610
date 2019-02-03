@@ -75,7 +75,7 @@ public class Authentication extends Dialog {
             @Override
             public void onClick(View v) {
                 main.getChildAt(0).setVisibility(View.GONE);
-                main.getChildAt(1).setVisibility(View.VISIBLE);
+                main.getChildAt(2).setVisibility(View.VISIBLE);
                 Authentication.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             }
         });
@@ -86,7 +86,7 @@ public class Authentication extends Dialog {
             @Override
             public void onClick(View v) {
                 main.getChildAt(0).setVisibility(View.GONE);
-                main.getChildAt(2).setVisibility(View.VISIBLE);
+                main.getChildAt(1).setVisibility(View.VISIBLE);
                 Authentication.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             }
         });
@@ -190,7 +190,7 @@ public class Authentication extends Dialog {
                 if (name.equals("")) {
                     getName.setError(Babylon.get().getFromResources("inviter_runtime_mustbefilled"));
                 } else if (password.equals("")) {
-                    getPassword.setError(Babylon.get().getFromResources("inviter_runtime_noemail"));
+                    getPassword.setError(Babylon.get().getFromResources("inviter_runtime_mustbefilled"));
                 } else if (name.contains("@") && name.contains(".")) {
 
                     FireBaser.findIdByEmail(name, new FireBaser.OnStringResult() {
