@@ -48,7 +48,7 @@ public class Rotberry extends Plant {
 		{
 			plantName = Babylon.get().getFromResources("plants_rotberry");
 			
-			name = Babylon.get().getFromResources("plants_seedof") + " " + plantName;
+			name = Babylon.get().getFromResources("plants_rotberry_seed");
 			image = ItemSpriteSheet.SEED_ROTBERRY;
 			
 			plantClass = Rotberry.class;
@@ -77,7 +77,7 @@ public class Rotberry extends Plant {
 		
 		@Override
 		public String desc() {
-			return Babylon.get().getFromResources("plants_rotberry_desc");
+			return Babylon.get().getFromResources("plants_rotberry_seed_desc");
 		}
 	}
 }
