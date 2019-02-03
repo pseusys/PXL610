@@ -118,10 +118,6 @@ public class Babylon {
         return resources.get(tag);
     }
 
-    public String getFromResources(String tag, int depth) {
-        return resources.get(tag + "_" + depth);
-    }
-
     public String getLanguageName() {
         return getFromResources("language_name");
     }

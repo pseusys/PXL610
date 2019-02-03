@@ -87,7 +87,7 @@ public enum HeroClass {
 				initOriginal( hero );
 
 				if (Badges.isUnlocked( masteryBadge() )) {
-					new TomeOfMastery().collect();
+					//new TomeOfMastery().collect();
 				}
 				break;
 

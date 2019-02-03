@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"/>
+
+    <TextView
+        android:id="@+id/login_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.075"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:text="Lorem ipsum dolor sit!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.025"/>
+
+    <TextView
+        android:id="@+id/login_getuid_text"
+        android:layout_width="match_parent"
+        android:layout_weight="0.05"
+        android:layout_height="0dp"
+        android:text="Amet"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+    <EditText
+        android:id="@+id/login_getuid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Consectetur" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.045"/>
+
+    <TextView
+        android:id="@+id/login_getpassword_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.05"
+        android:text="Adipiscing"
+        android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+    <EditText
+        android:id="@+id/login_getpassword"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Elit"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.395"/>
+
+    <Button
+        android:id="@+id/login_submittbutton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="Sed do eiusmod!" />
+
+</LinearLayout>

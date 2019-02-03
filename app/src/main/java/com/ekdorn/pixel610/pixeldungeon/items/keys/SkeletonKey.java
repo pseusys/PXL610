@@ -24,12 +24,22 @@ public class SkeletonKey extends Key {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("key_skeleton");
+		switch (depth) {
+			case 0:
+				name = Babylon.get().getFromResources("key_skeleton_0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("key_skeleton_1");
+				break;
+			default:
+				name = Babylon.get().getFromResources("key_skeleton_0");
+				break;
+		}
 		image = ItemSpriteSheet.SKELETON_KEY;
 	}
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("key_sceleton_desc");
+		return Babylon.get().getFromResources("key_skeleton_desc");
 	}
 }

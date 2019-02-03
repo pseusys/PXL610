@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/signin_primary"
+    android:weightSum="1">
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.03" />
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            app:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Lorem ipsum!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.03" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.3"
+            app:srcCompat="@drawable/ic_launcher" />
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.22" />
+
+        <Button
+            android:id="@+id/signin_button"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:text="Dolor sit amet" />
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.06" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:text="Consectetur adipiscing elit" />
+
+</LinearLayout>

@@ -31,7 +31,7 @@ public class CurareDart extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_curaredart", depth);
+		name = Babylon.get().getFromResources("weapon_curaredart");
 		image = ItemSpriteSheet.CURARE_DART;
 		
 		STR = 14;
@@ -64,7 +64,7 @@ public class CurareDart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_curaredart_desc", depth);
+		return Babylon.get().getFromResources("weapon_curaredart_desc");
 	}
 	
 	@Override

@@ -29,7 +29,7 @@ public class Tamahawk extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_tomahawk", depth);
+		name = Babylon.get().getFromResources("weapon_tomahawk");
 		image = ItemSpriteSheet.TOMAHAWK;
 		
 		STR = 17;
@@ -62,7 +62,7 @@ public class Tamahawk extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_tomahawk_desc", depth);
+		return Babylon.get().getFromResources("weapon_tomahawk_desc");
 	}
 	
 	@Override

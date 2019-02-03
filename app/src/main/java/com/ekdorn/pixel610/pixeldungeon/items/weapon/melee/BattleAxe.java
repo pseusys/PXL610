@@ -24,7 +24,26 @@ public class BattleAxe extends MeleeWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_axe", depth);
+		switch (depth) {
+			case 0:
+				name = Babylon.get().getFromResources("weapon_axe_0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("weapon_axe_1");
+				break;
+			case 2:
+				name = Babylon.get().getFromResources("weapon_axe_2");
+				break;
+			case 3:
+				name = Babylon.get().getFromResources("weapon_axe_3");
+				break;
+			case 4:
+				name = Babylon.get().getFromResources("weapon_axe_4");
+				break;
+            default:
+                name = Babylon.get().getFromResources("weapon_axe_0");
+                break;
+		}
 		image = ItemSpriteSheet.BATTLE_AXE;
 	}
 	
@@ -34,6 +53,19 @@ public class BattleAxe extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_axe_desc", depth);
+		switch (depth) {
+			case 0:
+				return Babylon.get().getFromResources("weapon_axe_desc_0");
+			case 1:
+				return Babylon.get().getFromResources("weapon_axe_desc_1");
+			case 2:
+				return Babylon.get().getFromResources("weapon_axe_desc_2");
+			case 3:
+				return Babylon.get().getFromResources("weapon_axe_desc_3");
+			case 4:
+				return Babylon.get().getFromResources("weapon_axe_desc_4");
+			default:
+				return Babylon.get().getFromResources("weapon_axe_desc_0");
+		}
 	}
 }

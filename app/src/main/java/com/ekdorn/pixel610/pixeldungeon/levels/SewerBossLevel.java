@@ -255,7 +255,9 @@ public class SewerBossLevel extends RegularLevel {
 	public String tileDesc( int tile ) {
 		switch (tile) {
 		case Terrain.EMPTY_DECO:
-			return Babylon.get().getFromResources("levels_sewer_empty");
+			return Babylon.get().getFromResources("levels_sewer_empty_desc");
+		case Terrain.BOOKSHELF:
+			return Babylon.get().getFromResources("levels_sewer_books_desc");
 		default:
 			return super.tileDesc( tile );
 		}

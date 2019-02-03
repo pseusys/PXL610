@@ -29,7 +29,7 @@ public class Javelin extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_javelin", depth);
+		name = Babylon.get().getFromResources("weapon_javelin");
 		image = ItemSpriteSheet.JAVELIN;
 		
 		STR = 15;
@@ -62,7 +62,7 @@ public class Javelin extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_javelin_desc", depth);
+		return Babylon.get().getFromResources("weapon_javelin_desc");
 	}
 	
 	@Override

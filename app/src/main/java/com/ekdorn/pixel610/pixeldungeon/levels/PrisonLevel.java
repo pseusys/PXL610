@@ -135,22 +135,78 @@ public class PrisonLevel extends RegularLevel {
 	@Override
 	public String tileName( int tile ) {
 		switch (tile) {
-		case Terrain.WATER:
-			return Babylon.get().getFromResources("levels_prison_water");
-		default:
-			return super.tileName( tile );
+			case Terrain.EMPTY:
+			case Terrain.EMPTY_SP:
+			case Terrain.EMPTY_DECO:
+			case Terrain.SECRET_TOXIC_TRAP:
+			case Terrain.SECRET_FIRE_TRAP:
+			case Terrain.SECRET_PARALYTIC_TRAP:
+			case Terrain.SECRET_POISON_TRAP:
+			case Terrain.SECRET_ALARM_TRAP:
+			case Terrain.SECRET_LIGHTNING_TRAP:
+				return Babylon.get().getFromResources("levels_prison_floor");
+			case Terrain.WATER:
+				return Babylon.get().getFromResources("levels_prison_water");
+			case Terrain.GRASS:
+				return Babylon.get().getFromResources("levels_prison_grass");
+			case Terrain.WALL:
+			case Terrain.WALL_DECO:
+			case Terrain.SECRET_DOOR:
+				return Babylon.get().getFromResources("levels_prison_wall");
+			case Terrain.EMBERS:
+				return Babylon.get().getFromResources("levels_prison_embers");
+			case Terrain.PEDESTAL:
+				return Babylon.get().getFromResources("levels_prison_pedestal");
+			case Terrain.BARRICADE:
+				return Babylon.get().getFromResources("levels_prison_barricade");
+			case Terrain.HIGH_GRASS:
+				return Babylon.get().getFromResources("levels_prison_highgrass");
+			case Terrain.SIGN:
+				return Babylon.get().getFromResources("levels_prison_sign");
+			case Terrain.WELL:
+				return Babylon.get().getFromResources("levels_prison_well");
+			case Terrain.EMPTY_WELL:
+				return Babylon.get().getFromResources("levels_prison_emptywell");
+			case Terrain.STATUE:
+				return Babylon.get().getFromResources("levels_prison_statue");
+			case Terrain.STATUE_SP:
+				return Babylon.get().getFromResources("levels_prison_statue_sp");
+			case Terrain.ALARM_TRAP:
+				return Babylon.get().getFromResources("levels_prison_alarmtrap");
+			case Terrain.LIGHTNING_TRAP:
+				return Babylon.get().getFromResources("levels_prison_lightningtrap");
+			case Terrain.GRIPPING_TRAP:
+				return Babylon.get().getFromResources("levels_prison_grippingtrap");
+			default:
+				return super.tileName( tile );
 		}
 	}
 	
 	@Override
 	public String tileDesc(int tile) {
 		switch (tile) {
-		case Terrain.EMPTY_DECO:
-			return Babylon.get().getFromResources("levels_prison_empty");
-		case Terrain.BOOKSHELF:
-			return Babylon.get().getFromResources("levels_prison_books");
-		default:
-			return super.tileDesc( tile );
+			case Terrain.BOOKSHELF:
+				return Babylon.get().getFromResources("levels_prison_books_desc");
+			case Terrain.EMPTY_DECO:
+			 	return Babylon.get().getFromResources("levels_prison_empty_desc");
+			case Terrain.EMBERS:
+				return Babylon.get().getFromResources("levels_prison_embers_desc");
+			case Terrain.HIGH_GRASS:
+				return Babylon.get().getFromResources("levels_prison_highgrass_desc");
+			case Terrain.BARRICADE:
+				return Babylon.get().getFromResources("levels_prison_barricade_desc");
+			case Terrain.SIGN:
+				return Babylon.get().getFromResources("levels_prison_sign_desc");
+			case Terrain.STATUE:
+				return Babylon.get().getFromResources("levels_prison_statue_desc");
+			case Terrain.STATUE_SP:
+				return Babylon.get().getFromResources("levels_prison_statue_sp_desc");
+			case Terrain.EMPTY_WELL:
+				return Babylon.get().getFromResources("levels_prison_emptywell_desc");
+			case Terrain.PEDESTAL:
+				return Babylon.get().getFromResources("levels_prison_pedestal_desc");
+			default:
+				return super.tileDesc( tile );
 		}
 	}
 	

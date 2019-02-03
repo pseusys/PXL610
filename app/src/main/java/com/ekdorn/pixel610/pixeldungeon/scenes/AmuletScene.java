@@ -48,7 +48,7 @@ public class AmuletScene extends PixelScene {
 		
 		BitmapTextMultiline text = null;
 		if (!noText) {
-			text = createMultiline( Babylon.get().getFromResources("amuletscene_text"), 8 );
+			text = createMultiline( Babylon.get().getFromResources("amuletscene_text"), 6 );
 			text.maxWidth = WIDTH;
 			text.measure();
 			add( text );

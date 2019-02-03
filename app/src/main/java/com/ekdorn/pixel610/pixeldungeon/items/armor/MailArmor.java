@@ -25,7 +25,26 @@ public class MailArmor extends Armor {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("armor_mail", depth);
+		switch (depth) {
+			case 0:
+				name = Babylon.get().getFromResources("armor_mail_0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("armor_mail_1");
+				break;
+			case 2:
+				name = Babylon.get().getFromResources("armor_mail_2");
+				break;
+			case 3:
+				name = Babylon.get().getFromResources("armor_mail_3");
+				break;
+			case 4:
+				name = Babylon.get().getFromResources("armor_mail_4");
+				break;
+			default:
+				name = Babylon.get().getFromResources("armor_mail_0");
+				break;
+		}
 		image = ItemSpriteSheet.ARMOR_MAIL;
 	}
 	
@@ -35,6 +54,19 @@ public class MailArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("armor_mail_desc", depth);
+		switch (depth) {
+			case 0:
+				return Babylon.get().getFromResources("armor_mail_desc_0");
+			case 1:
+				return Babylon.get().getFromResources("armor_mail_desc_1");
+			case 2:
+				return Babylon.get().getFromResources("armor_mail_desc_2");
+			case 3:
+				return Babylon.get().getFromResources("armor_mail_desc_3");
+			case 4:
+				return Babylon.get().getFromResources("armor_mail_desc_4");
+			default:
+				return Babylon.get().getFromResources("armor_mail_desc_0");
+		}
 	}
 }

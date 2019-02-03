@@ -100,7 +100,7 @@ public class Bestiary {
 			classes = new Class<?>[]{ Skeleton.class, Shaman.class, Thief.class, Swarm.class,   /*Bat.class*/ };
 			break;
 		case 9:
-			chances = new float[]{ 3, 3, 1, 1,   0.02f, /*0.01f*/ };
+			chances = new float[]{ 3, 3, 1, 1,   /*0.02f, 0.01f*/ };
 			classes = new Class<?>[]{ Skeleton.class, Shaman.class, Thief.class, Swarm.class,   /*Bat.class, Brute.class*/ };
 			break;
 			

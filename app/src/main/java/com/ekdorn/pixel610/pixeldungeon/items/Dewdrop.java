@@ -31,7 +31,26 @@ public class Dewdrop extends Item {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("item_dewdrop", depth);
+		switch (depth) {
+			case 0:
+				name = Babylon.get().getFromResources("item_dewdrop_0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("item_dewdrop_1");
+				break;
+			case 2:
+				name = Babylon.get().getFromResources("item_dewdrop_2");
+				break;
+			case 3:
+				name = Babylon.get().getFromResources("item_dewdrop_3");
+				break;
+			case 4:
+				name = Babylon.get().getFromResources("item_dewdrop_4");
+				break;
+			default:
+				name = Babylon.get().getFromResources("item_dewdrop_0");
+				break;
+		}
 		image = ItemSpriteSheet.DEWDROP;
 		
 		stackable = true;
@@ -70,6 +89,19 @@ public class Dewdrop extends Item {
 	
 	@Override
 	public String info() {
-		return Babylon.get().getFromResources("item_dewdrop_desc", depth);
+		switch (depth) {
+			case 0:
+				return Babylon.get().getFromResources("item_dewdrop_desc_0");
+			case 1:
+				return Babylon.get().getFromResources("item_dewdrop_desc_1");
+			case 2:
+				return Babylon.get().getFromResources("item_dewdrop_desc_2");
+			case 3:
+				return Babylon.get().getFromResources("item_dewdrop_desc_3");
+			case 4:
+				return Babylon.get().getFromResources("item_dewdrop_desc_4");
+			default:
+				return Babylon.get().getFromResources("item_dewdrop_desc_0");
+		}
 	}
 }

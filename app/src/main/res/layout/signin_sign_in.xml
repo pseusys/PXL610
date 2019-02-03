@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_account"
+    android:weightSum="1.155">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05" />
+
+        <TextView
+            android:id="@+id/signin_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.075"
+            android:text="Lorem ipsum dolor!"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.025" />
+
+        <TextView
+            android:id="@+id/signin_setuid_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:text="Sit amet"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+        <EditText
+            android:id="@+id/signin_setuid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="15sp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:hint="Consectetur" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.025" />
+
+        <TextView
+            android:id="@+id/signin_setinviter_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:text="Adipiscing elit"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+        <EditText
+            android:id="@+id/signin_setinviter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:ems="10"
+            android:inputType="text"
+            android:textSize="15sp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:hint="Sed do eiusmod"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.045" />
+
+        <TextView
+            android:id="@+id/signin_setemail_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:text="Tempor incididunt"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+        <EditText
+            android:id="@+id/signin_setemail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:textSize="15sp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:hint="Ut labore et dolore magna" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.045" />
+
+        <TextView
+            android:id="@+id/signin_setpassword_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:text="Aliqua..."
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+        <EditText
+            android:id="@+id/signin_setpassword"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textSize="15sp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:hint="Ut enim ad minim veniam" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.045" />
+
+        <TextView
+            android:id="@+id/signin_setconfirmation_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
+            android:text="Quis nostrud"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+        <EditText
+            android:id="@+id/signin_setconfirmation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textSize="15sp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:hint="Exercitation ullamco" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.045" />
+
+        <Button
+            android:id="@+id/signin_submitbuttom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:text="Laboris nisi ut" />
+
+</LinearLayout>

@@ -29,7 +29,7 @@ public class Boomerang extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_boomerang", depth);
+		name = Babylon.get().getFromResources("weapon_boomerang");
 		image = ItemSpriteSheet.BOOMERANG;
 		
 		STR = 10;

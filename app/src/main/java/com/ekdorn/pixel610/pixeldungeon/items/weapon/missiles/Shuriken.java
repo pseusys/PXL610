@@ -26,7 +26,7 @@ public class Shuriken extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_shuriken", depth);
+		name = Babylon.get().getFromResources("weapon_shuriken");
 		image = ItemSpriteSheet.SHURIKEN;
 		
 		STR = 13;
@@ -55,7 +55,7 @@ public class Shuriken extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_shuriken_desc", depth);
+		return Babylon.get().getFromResources("weapon_shuriken_desc");
 	}
 	
 	@Override

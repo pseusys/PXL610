@@ -24,7 +24,26 @@ public class Spear extends MeleeWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_spear", depth);
+		switch (depth) {
+			case 0:
+				name = Babylon.get().getFromResources("weapon_spear_0");
+				break;
+			case 1:
+				name = Babylon.get().getFromResources("weapon_spear_1");
+				break;
+			case 2:
+				name = Babylon.get().getFromResources("weapon_spear_2");
+				break;
+			case 3:
+				name = Babylon.get().getFromResources("weapon_spear_3");
+				break;
+			case 4:
+				name = Babylon.get().getFromResources("weapon_spear_4");
+				break;
+			default:
+				name = Babylon.get().getFromResources("weapon_spear_0");
+				break;
+		}
 		image = ItemSpriteSheet.SPEAR;
 	}
 	
@@ -34,6 +53,19 @@ public class Spear extends MeleeWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_spear_desc", depth);
+		switch (depth) {
+			case 0:
+				return Babylon.get().getFromResources("weapon_spear_desc_0");
+			case 1:
+				return Babylon.get().getFromResources("weapon_spear_desc_1");
+			case 2:
+				return Babylon.get().getFromResources("weapon_spear_desc_2");
+			case 3:
+				return Babylon.get().getFromResources("weapon_spear_desc_3");
+			case 4:
+				return Babylon.get().getFromResources("weapon_spear_desc_4");
+			default:
+				return Babylon.get().getFromResources("weapon_spear_desc_0");
+		}
 	}
 }

@@ -35,7 +35,7 @@ public class IncendiaryDart extends MissileWeapon {
 
 	@Override
 	public void finish() {
-		name = Babylon.get().getFromResources("weapon_incendiarydart", depth);
+		name = Babylon.get().getFromResources("weapon_incendiarydart");
 		image = ItemSpriteSheet.INCENDIARY_DART;
 		
 		STR = 12;
@@ -84,7 +84,7 @@ public class IncendiaryDart extends MissileWeapon {
 	
 	@Override
 	public String desc() {
-		return Babylon.get().getFromResources("weapon_incendiarydart_desc", depth);
+		return Babylon.get().getFromResources("weapon_incendiarydart_desc");
 	}
 	
 	@Override
