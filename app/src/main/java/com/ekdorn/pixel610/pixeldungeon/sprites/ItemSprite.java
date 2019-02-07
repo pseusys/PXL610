@@ -18,6 +18,7 @@
 package com.ekdorn.pixel610.pixeldungeon.sprites;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.ekdorn.pixel610.gltextures.TextureCache;
 import com.ekdorn.pixel610.noosa.Game;

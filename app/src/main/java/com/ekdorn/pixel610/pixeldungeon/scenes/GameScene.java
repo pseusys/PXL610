@@ -343,7 +343,7 @@ public class GameScene extends PixelScene {
 		
 		Actor.process();
 		
-		if (Dungeon.hero.ready && !Dungeon.hero.paralysed) {
+		if (Dungeon.hero.ready && !Dungeon.hero.paralysed && log != null) {
 			log.newLine();
 		}
 		

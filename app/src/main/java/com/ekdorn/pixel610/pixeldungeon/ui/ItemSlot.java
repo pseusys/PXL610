@@ -17,6 +17,8 @@
  */
 package com.ekdorn.pixel610.pixeldungeon.ui;
 
+import android.util.Log;
+
 import com.ekdorn.pixel610.noosa.BitmapText;
 import com.ekdorn.pixel610.noosa.ui.Button;
 import com.ekdorn.pixel610.pixeldungeon.Dungeon;
@@ -28,6 +30,8 @@ import com.ekdorn.pixel610.pixeldungeon.scenes.PixelScene;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSprite;
 import com.ekdorn.pixel610.pixeldungeon.sprites.ItemSpriteSheet;
 import com.ekdorn.pixel610.pixeldungeon.utils.Utils;
+
+import io.grpc.internal.LogExceptionRunnable;
 
 public class ItemSlot extends Button {
 
@@ -123,7 +127,7 @@ public class ItemSlot extends Button {
 			
 			active = true;
 			icon.visible = topLeft.visible = topRight.visible = bottomRight.visible = true;
-			
+
 			icon.view( item.image(), item.glowing() );
 			
 			topLeft.text( item.status()  );

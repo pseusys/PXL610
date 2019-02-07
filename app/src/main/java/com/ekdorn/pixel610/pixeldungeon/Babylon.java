@@ -40,7 +40,7 @@ public class Babylon {
 
     private HashMap<String, String> resources;
     private ArrayList<Locale> localisations = new ArrayList<>();
-    private Locale inUse = new Locale("ru");
+    private Locale inUse;
 
     public static Babylon get() {
         if (instance == null) {
@@ -55,13 +55,13 @@ public class Babylon {
         localisations.add(Locale.GERMAN);
         localisations.add(new Locale("la"));
 
-        /*String lock = PXL610.localisation();
+        String lock = PXL610.localisation();
 
         for (int i = 0; i < localisations.size(); i++) {
             if (lock.equals(localisations.get(i).getLanguage())) inUse = localisations.get(i);
-        }*/
+        }
 
-        inUse = new Locale("ru");
+        //inUse = new Locale("ru");
 
         load();
     }
@@ -86,32 +86,32 @@ public class Babylon {
     }
 
     public void updateLocale() {
-        /*Locale current = Locale.getDefault();
+        Locale current = Locale.getDefault();
 
         if (localisations.contains(current)) {
             PXL610.localisation(current.getLanguage());
             inUse = current;
-        } else {*/
+        } else {
             PXL610.localisation(inUse.getLanguage());
             inUse = new Locale("ru");
-        //}
+        }
         GLog.i("resources loaded");
     }
 
     public void changeLocale(int loc) {
-        /*int current = localisations.indexOf(inUse);
+        int current = localisations.indexOf(inUse);
 
         current += loc;
-        if (current > 1 3 in finale) {
+        if (current > 1) {
             current = 0;
         } else if (current < 0) {
-            current = 1 0 in finale;
+            current = 1;
         }
 
         inUse = localisations.get(current);
         PXL610.localisation(localisations.get(current).getLanguage());
 
-        load();*/
+        load();
     }
 
     public String getFromResources(String tag) {

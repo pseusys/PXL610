@@ -6,8 +6,8 @@ android {
         applicationId "com.ekdorn.pixel610"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 7
-        versionName "2.0 the deepening"
+        versionCode 8
+        versionName "2.01 the deepening"
         multiDexEnabled true
     }
     compileOptions {

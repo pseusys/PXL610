@@ -99,6 +99,11 @@ public class RankingsScene extends PixelScene {
 			showLocalRanking();
 		} else {
 			final Image busy = Icons.BUSY.get();
+			busy.origin.set( busy.width / 2, busy.height / 2 );
+			busy.angularSpeed = 720;
+			busy.x = (w - busy.width) / 2;
+			busy.y = (h - busy.height) / 2;
+			add( busy );
 			Handler mainHandler = new Handler(Looper.getMainLooper());
 			Runnable dialog = new Runnable() {
 				@Override
@@ -119,11 +124,6 @@ public class RankingsScene extends PixelScene {
 				}
 			};
 			mainHandler.post(dialog);
-			busy.origin.set( busy.width / 2, busy.height / 2 );
-			busy.angularSpeed = 720;
-			busy.x = (w - busy.width) / 2;
-			busy.y = (h - busy.height) / 2;
-			add( busy );
 		}
 		
 		ExitButton btnExit = new ExitButton();

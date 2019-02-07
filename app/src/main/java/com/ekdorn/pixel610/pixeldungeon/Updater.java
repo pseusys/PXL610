@@ -47,8 +47,8 @@ public class Updater {
                     File g = new File(Utils.format( OLD_AUTODEPTHS[i], j ));
                     g.delete();
                 }
-            } catch (IOException ioe) {
-                Log.d("TAG", "transferGames: " + ioe.getMessage());
+            } catch (Exception e) {
+                Log.d("TAG", "transferGames: " + e.getMessage());
             }
         }
         for (int i = 0; i < OLD_SAVES.length; i++) {
@@ -62,8 +62,8 @@ public class Updater {
                         File g = new File(Utils.format( OLD_DEPTHS[i], j , h ));
                         g.delete();
                     }
-                } catch (IOException ioe) {
-                    Log.d("TAG", "transferGames: " + ioe.getMessage());
+                } catch (Exception e) {
+                    Log.d("TAG", "transferGames: " + e.getMessage());
                 }
             }
         }

@@ -45,6 +45,7 @@ public class WandOfMagicMissile extends Wand {
 
 	@Override
 	public void finish() {
+		super.finish();
 		name = Babylon.get().getFromResources("wand_magicmissle");
 		image = ItemSpriteSheet.WAND_MAGIC_MISSILE;
 	}

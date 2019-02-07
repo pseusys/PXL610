@@ -34,7 +34,7 @@ public class MindVision extends FlavourBuff {
 	
 	@Override
 	public String toString() {
-		return Babylon.get().getFromResources("buff_mind.vision");
+		return Babylon.get().getFromResources("buff_mind_vision");
 	}
 
 	@Override

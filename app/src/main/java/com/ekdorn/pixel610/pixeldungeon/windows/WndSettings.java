@@ -58,8 +58,6 @@ public class WndSettings extends Window {
 	private RedButton btnZoomOut;
 	private RedButton btnZoomIn;
 
-	private static boolean name_id_toggle = true;
-
 	public WndSettings( boolean inGame ) {
 		super();
 
@@ -109,6 +107,7 @@ public class WndSettings extends Window {
 				}
 			};
 			add( btnLanguageBack.setRect( 0, 0, w, BTN_HEIGHT) );
+			btnLanguageBack.enable(false);
 
 			RedButton btnLanguageUp = new RedButton(TXT_UP) {
 				@Override
@@ -119,6 +118,7 @@ public class WndSettings extends Window {
 				}
 			};
 			add (btnLanguageUp.setRect( WIDTH - w, 0, w, BTN_HEIGHT) );
+			btnLanguageUp.enable(false);
 
 			RedButton btnLocalisation = new RedButton(Babylon.get().getLanguageName()) {
 				@Override

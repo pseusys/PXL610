@@ -30,25 +30,25 @@ public class Key extends Item {
 		stackable = false;
 	}
 	
-	public int depth;
+	public int door_depth;
 	
 	public Key() {
 		super();
-		depth = Dungeon.depth;
+		door_depth = Dungeon.depth;
 	}
 	
-	private static final String DEPTH = "depth";
+	private static final String DOOR_DEPTH = "door_depth";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
-		bundle.put( DEPTH, depth );
+		bundle.put( DOOR_DEPTH, door_depth );
 	}
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
-		depth = bundle.getInt( DEPTH );
+		door_depth = bundle.getInt( DOOR_DEPTH );
 	}
 	
 	@Override
@@ -63,6 +63,6 @@ public class Key extends Item {
 	
 	@Override
 	public String status() {
-		return depth + "\u007F";
+		return door_depth + "\u007F";
 	}
 }

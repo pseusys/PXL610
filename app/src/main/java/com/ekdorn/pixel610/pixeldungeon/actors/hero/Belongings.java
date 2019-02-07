@@ -110,7 +110,7 @@ public class Belongings implements Iterable<Item> {
 	public <T extends Key> T getKey( Class<T> kind, int depth ) {
 		
 		for (Item item : backpack) {
-			if (item.getClass() == kind && ((Key)item).depth == depth) {
+			if (item.getClass() == kind && ((Key)item).door_depth == depth) {
 				return (T)item;
 			}
 		}
@@ -123,7 +123,7 @@ public class Belongings implements Iterable<Item> {
 		IronKey.curDepthQuantity = 0;
 		
 		for (Item item : backpack) {
-			if (item instanceof IronKey && ((IronKey)item).depth == Dungeon.depth) {
+			if (item instanceof IronKey && ((IronKey)item).door_depth == Dungeon.depth) {
 				IronKey.curDepthQuantity++;
 			}
 		}
@@ -168,7 +168,7 @@ public class Belongings implements Iterable<Item> {
 	public void resurrect( int depth ) {
 		for (Item item : backpack.items.toArray( new Item[0])) {
 			if (item instanceof Key) {
-				if (((Key)item).depth == depth) {
+				if (((Key)item).door_depth == depth) {
 					item.detachAll( backpack );
 				}
 			} else if (item.unique) {
