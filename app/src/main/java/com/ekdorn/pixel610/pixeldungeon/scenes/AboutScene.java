@@ -19,6 +19,8 @@ package com.ekdorn.pixel610.pixeldungeon.scenes;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.ekdorn.pixel610.input.Touchscreen.Touch;
 import com.ekdorn.pixel610.noosa.BitmapTextMultiline;
@@ -29,14 +31,16 @@ import com.ekdorn.pixel610.noosa.TouchArea;
 import com.ekdorn.pixel610.pixeldungeon.Babylon;
 import com.ekdorn.pixel610.pixeldungeon.PXL610;
 import com.ekdorn.pixel610.pixeldungeon.effects.Flare;
+import com.ekdorn.pixel610.pixeldungeon.internet.GiftDialog;
 import com.ekdorn.pixel610.pixeldungeon.ui.Archs;
 import com.ekdorn.pixel610.pixeldungeon.ui.ExitButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Icons;
+import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
 
 public class AboutScene extends PixelScene {
 	
-	private static final String LNK = "www.instagram.com/ek.dorn";
+	private static final String LNK = "https://vk.com/classic.dungeon";
 
 	Image wata;
 	Image ek;
@@ -89,9 +93,10 @@ public class AboutScene extends PixelScene {
 		Nkg.y = text.y - (binY + ek.height)/2 - 8;
 		add( Nkg );
 
-		new Flare( 7, 40 ).color( 0x888888, true ).show( ek, 0 ).angularSpeed = +100;
-
-		System.out.println("CREATED");
+		new Flare( 7, 40 ).color( 0x888888, true ).show( ek, 0 ).angularSpeed = +50;
+		new Flare( 7, 40 ).color( 0x888888, true ).show( ek, 0 ).angularSpeed = -50;
+		new Flare( 7, 40 ).color( 0x228228, true ).show( Nkg, 0 ).angularSpeed = -100;
+		new Flare( 7, 40 ).color( 0x696969, true ).show( wata, 0 ).angularSpeed = +100;
 		
 		Archs archs = new Archs();
 		archs.setSize( Camera.main.width, Camera.main.height );
@@ -100,6 +105,22 @@ public class AboutScene extends PixelScene {
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos( Camera.main.width - btnExit.width(), 0 );
 		add( btnExit );
+
+		/*RedButton support = new RedButton("Make a gift") {
+			protected void onClick() {
+				Handler mainHandler = new Handler(Looper.getMainLooper());
+				Runnable dialog = new Runnable() {
+					@Override
+					public void run() {
+						new GiftDialog(Game.instance).show();
+					}
+				};
+				mainHandler.post(dialog);
+			}
+		};
+		support.setSize( (int) (Camera.main.width * 2 / 3), (int) (Camera.main.height / 16) );
+		support.setPos(align( (Camera.main.width - support.width()) / 2 ), align( link.y + 16 ));
+		add(support);*/
 		
 		fadeIn();
 	}

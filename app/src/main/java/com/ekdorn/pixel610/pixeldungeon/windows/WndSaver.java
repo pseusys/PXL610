@@ -155,14 +155,8 @@ public class WndSaver extends Window {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                        add( new WndError(Babylon.get().getFromResources("save_err_notsaved")) {
-                            public void onBackPressed() {
-                                super.onBackPressed();
-                                this.hide();
-                                WndSaver.this.hide();
-                            }
-                        } );
-                    }
+                            add( new WndError(Babylon.get().getFromResources("save_err_notsaved")));
+                        }
 
                     } else {
 
