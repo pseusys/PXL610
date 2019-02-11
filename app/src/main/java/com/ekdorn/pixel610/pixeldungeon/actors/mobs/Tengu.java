@@ -48,6 +48,7 @@ import com.ekdorn.pixel610.utils.Random;
 
 public class Tengu extends Mob {
 
+	private int stackCounter = 0;
 	public AiState DANCING = new Dancing();
 	
 	{
@@ -152,7 +153,7 @@ public class Tengu extends Mob {
 				pos += Level.NEIGHBOURS8[direction];
 			}
 
-			if (!(Actor.findChar( pos ) == null && (Level.passable[pos] || Level.avoid[pos]))) {
+			if (Level.passable[pos] && Actor.findChar( pos ) == null) {
 				pos = oldPos;
 
 				switch (direction) {
@@ -178,11 +179,20 @@ public class Tengu extends Mob {
 			}
 
 			if (pos != oldPos) {
-                if (enemyInFOV && canAttack( enemy )) attack();
-                heal(pos);
+				stackCounter = 0;
+				if (enemyInFOV && canAttack(enemy)) attack();
+				heal(pos);
+				return moveSprite(oldPos, pos);
 
-                return moveSprite(oldPos, pos);
+			} else if (stackCounter > 50) {
+				stackCounter = 0;
+				do {
+					pos = ((PrisonBossLevel) Dungeon.level).roomExit.random();
+				} while (Actor.findChar( pos ) == null);
+				return moveSprite(oldPos, pos);
+
             } else {
+				stackCounter++;
 			    return Tengu.this.state.act(enemyInFOV, justAlerted);
             }
 		}

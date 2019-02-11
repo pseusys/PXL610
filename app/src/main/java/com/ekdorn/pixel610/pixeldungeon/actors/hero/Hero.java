@@ -168,7 +168,7 @@ public class Hero extends Char {
 
 	public int STR() {
 		int prec = weakened ? STR - 2 : STR;
-		return (int) (prec * (1 + 0.05*PXL610.bonus()));
+		return (int) (prec + 0.2 * PXL610.bonus());
 	}
 
 	private static final String ATTACK		= "attackSkill";
@@ -244,7 +244,7 @@ public class Hero extends Char {
 	public int attackSkill( Char target ) {
 		
 		int bonus = 0;
-		bonus += 0.05*PXL610.bonus();
+		bonus += 0.1 * PXL610.bonus();
 
 		for (Buff buff : buffs( RingOfAccuracy.Accuracy.class )) {
 			bonus += ((RingOfAccuracy.Accuracy)buff).level;
@@ -266,7 +266,7 @@ public class Hero extends Char {
 	public int defenseSkill( Char enemy ) {
 		
 		int bonus = 0;
-        bonus += 0.05*PXL610.bonus();
+        bonus += 0.05 * PXL610.bonus();
 
 		for (Buff buff : buffs( RingOfEvasion.Evasion.class )) {
 			bonus += ((RingOfEvasion.Evasion)buff).level;
@@ -298,6 +298,7 @@ public class Hero extends Char {
 	@Override
 	public int dr() {
 		int dr = belongings.armor != null ? Math.max( belongings.armor.DR(), 0 ) : 0;
+		dr += 0.1 * PXL610.bonus();
 		Barkskin barkskin = buff( Barkskin.class );
 		if (barkskin != null) {
 			dr += barkskin.level();
@@ -1124,7 +1125,7 @@ public class Hero extends Char {
 	public int stealth() {
 		int stealth = super.stealth();
 		for (Buff buff : buffs( RingOfShadows.Shadows.class )) {
-			stealth += ((RingOfShadows.Shadows)buff).level;
+			stealth += ((RingOfShadows.Shadows)buff).level + 0.02 * PXL610.bonus();
 		}
 		return stealth;
 	}
@@ -1384,7 +1385,7 @@ public class Hero extends Char {
 	public void resurrect( int resetLevel ) {
 		
 		HP = HT;
-		Dungeon.gold = 0;
+		Dungeon.gold = 100 * PXL610.bonus();
 		exp = 0;
 		
 		belongings.resurrect( resetLevel );

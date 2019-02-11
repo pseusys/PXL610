@@ -112,7 +112,7 @@ public class RankingsScene extends PixelScene {
 					OnlineRatinger.INSTANCE.setListener(new OnlineRatinger.OnLoadedListener() {
 						@Override
 						public void scream() {
-							RankingsScene.this.remove(busy);
+							if (RankingsScene.this != null && RankingsScene.this.members.contains(busy)) RankingsScene.this.remove(busy);
 							loaded0 = true;
 						}
 

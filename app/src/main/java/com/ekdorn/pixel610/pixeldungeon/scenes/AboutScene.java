@@ -39,8 +39,6 @@ import com.ekdorn.pixel610.pixeldungeon.ui.RedButton;
 import com.ekdorn.pixel610.pixeldungeon.ui.Window;
 
 public class AboutScene extends PixelScene {
-	
-	private static final String LNK = "https://vk.com/classic.dungeon";
 
 	Image wata;
 	Image ek;
@@ -58,7 +56,7 @@ public class AboutScene extends PixelScene {
 		text.x = align( (Camera.main.width - text.width()) / 2 );
 		text.y = align( (Camera.main.height - text.height()) / 2 );
 		
-		BitmapTextMultiline link = createMultiline( LNK, 8 );
+		BitmapTextMultiline link = createMultiline( Babylon.get().getFromResources("about_link"), 8 );
 		link.maxWidth = Math.min( Camera.main.width, 120 );
 		link.measure();
 		link.hardlight( Window.TITLE_COLOR );
@@ -70,7 +68,7 @@ public class AboutScene extends PixelScene {
 		TouchArea hotArea = new TouchArea( link ) {
 			@Override
 			protected void onClick( Touch touch ) {
-				Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "http://" + LNK ) );
+				Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "http://" + Babylon.get().getFromResources("about_link") ) );
 				Game.instance.startActivity( intent );
 			}
 		};
